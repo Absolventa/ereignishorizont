@@ -1,5 +1,6 @@
 EventGirl::Application.routes.draw do
 
+  get "alarm_trigger/index"
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
