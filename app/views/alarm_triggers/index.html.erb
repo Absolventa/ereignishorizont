@@ -1,2 +1,22 @@
-<h1>AlarmTriggers#index</h1>
-<p>Find me in app/views/alarm_trigger/index.html.erb</p>
+<h1>Alarm Triggers</h1>
+
+
+<%= form_for :alarm_triggers do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </p>
+
+  <p>
+    <%= f.label :action %><br>
+    <%= f.select :action, [['SMS', 'sms'], ['Email', 'email'], ['Carrier Pidgeon', 'carrierpidgeon'], ['Message in a bottle', 'messageinabottle']] %>  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
