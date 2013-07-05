@@ -1,5 +1,7 @@
 EventGirl::Application.routes.draw do
 
+  resources :incoming_events
+
   get '/alarm_triggers' => 'alarm_triggers#index' 
   get '/alarm_triggers/show' => 'alarm_triggers#show'
   resources :users
