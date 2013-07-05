@@ -1,6 +1,7 @@
 EventGirl::Application.routes.draw do
 
   get '/alarm_triggers' => 'alarm_triggers#index' 
+  get '/alarm_triggers/show' => 'alarm_triggers#show'
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -8,7 +9,7 @@ EventGirl::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'users#index'
-  get '/registered_events' => 'pages#index'
+  get '/incoming_events' => 'incoming_events#index'
 
 
   # Example of regular route:
