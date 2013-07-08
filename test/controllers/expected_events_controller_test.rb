@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class IncomingEventTest < ActiveSupport::TestCase
+class ExpectedEventsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

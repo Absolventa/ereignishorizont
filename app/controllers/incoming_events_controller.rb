@@ -1,2 +1,0 @@
-class IncomingEventsController < ApplicationController
-end

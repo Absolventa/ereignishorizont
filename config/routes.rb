@@ -1,6 +1,6 @@
 EventGirl::Application.routes.draw do
 
-  resources :incoming_events
+  resources :expected_events
 
   get '/alarm_triggers' => 'alarm_triggers#index' 
   get '/alarm_triggers/show' => 'alarm_triggers#show'
@@ -11,7 +11,7 @@ EventGirl::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'users#index'
-  get '/incoming_events' => 'incoming_events#index'
+  get '/expected_events' => 'expected_events#index'
 
 
   # Example of regular route:

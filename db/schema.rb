@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20130705083557) do
 
-  create_table "incoming_events", force: true do |t|
+  create_table "expected_events", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
