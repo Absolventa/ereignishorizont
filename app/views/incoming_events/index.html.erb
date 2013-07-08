@@ -1,6 +1,6 @@
-<h1>Listing incoming_events</h1>
+<h1>Incoming Events</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Event</th>
@@ -24,4 +24,11 @@
 
 <br>
 
-<%= link_to 'New Incoming event', new_incoming_event_path %>
+<%= link_to 'New Incoming event', new_incoming_event_path , class: 'btn btn-success' %>
+
+<div class="pagination pagination-centered"> 
+	<ul>
+		<li class="disabled"><a href="#">&laquo;</a></li>
+		<li class="active"><a href="#">1</a></li>
+	</ul>
+</div>
