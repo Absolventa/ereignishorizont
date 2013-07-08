@@ -11,16 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130705083557) do
+ActiveRecord::Schema.define(version: 20130708134906) do
 
-  create_table "expected_events", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "incoming_events", force: true do |t|
+    t.text     "event"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

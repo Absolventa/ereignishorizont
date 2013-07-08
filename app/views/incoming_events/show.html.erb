@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @incoming_event.event %>
+</p>
+
+<%= link_to 'Edit', edit_incoming_event_path(@incoming_event) %> |
+<%= link_to 'Back', incoming_events_path %>

@@ -1,0 +1,27 @@
+<h1>Listing incoming_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @incoming_events.each do |incoming_event| %>
+      <tr>
+        <td><%= incoming_event.event %></td>
+        <td><%= link_to 'Show', incoming_event %></td>
+        <td><%= link_to 'Edit', edit_incoming_event_path(incoming_event) %></td>
+        <td><%= link_to 'Destroy', incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Incoming event', new_incoming_event_path %>
