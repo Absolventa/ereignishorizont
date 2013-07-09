@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130708134906) do
+ActiveRecord::Schema.define(version: 20130708160020) do
+
+  create_table "expected_events", force: true do |t|
+    t.text "event"
+  end
 
   create_table "incoming_events", force: true do |t|
     t.text     "event"
