@@ -29,7 +29,7 @@ class ExpectedEventsController < ApplicationController
   	@expected_event = ExpectedEvent.new(expected_event_params)
 
   	respond_to do |format|
-  		if @expected_events.save
+  		if @expected_event.save
   			format.html { redirect_to @expected_event, notice: 'Incoming event was successfully created'}
   			format.json { render action: 'show', status: :created, location: @expected_event }
   		else
