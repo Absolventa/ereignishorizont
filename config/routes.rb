@@ -4,6 +4,8 @@ EventGirl::Application.routes.draw do
 
   resources :expected_events
 
+  resources :alarm_triggers
+
   get '/alarm_triggers' => 'alarm_triggers#index' 
   get '/alarm_triggers/show' => 'alarm_triggers#show'
 
