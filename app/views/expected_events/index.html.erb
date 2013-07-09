@@ -1,2 +1,35 @@
 <h1>Expected Events</h1>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expected_events.each do |expected_event| %>
+      <tr>
+        <td><%= expected_event.event %></td>
+        <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, expected_event %></td>
+        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_expected_event_path(expected_event) %></td>
+        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Expected event', new_expected_event_path , class: 'btn btn-success' %>
+
+<div class="pagination pagination-centered"> 
+	<ul>
+		<li class="disabled"><a href="#">&laquo;</a></li>
+		<li class="active"><a href="#">1</a></li>
+	</ul>
+</div>
+
