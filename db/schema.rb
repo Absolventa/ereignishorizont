@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130709142039) do
+ActiveRecord::Schema.define(version: 20130710125416) do
 
   create_table "alarm_triggers", force: true do |t|
     t.string "title"
-    t.string "type"
+    t.string "nature"
     t.string "action"
   end
 
