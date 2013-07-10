@@ -1,7 +1,4 @@
-<h1>Alarm Triggers</h1>
-
-
-<%= form_for :alarm_triggers do |f| %>
+<%= form_for(@alarm_trigger) do |f| %>
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -16,7 +13,7 @@
     <%= f.label :action %><br>
     <%= f.select :action, [['SMS', 'sms'], ['Email', 'email'], ['Carrier Pidgeon', 'carrierpidgeon'], ['Message in a bottle', 'messageinabottle']] %>  </p>
 
-  <p>
+  <div class="actions">
     <%= f.submit %>
-  </p>
+  </div>
 <% end %>
