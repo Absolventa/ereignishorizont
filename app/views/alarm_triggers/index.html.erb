@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Type</th>
+      <th>Nature</th>
       <th>Action</th>
       <th></th>
       <th></th>
@@ -17,7 +17,7 @@
     <% @alarm_triggers.each do |alarm_trigger| %>
       <tr>
         <td><%= alarm_trigger.title %></td>
-        <td><%= alarm_trigger.type %></td>
+        <td><%= alarm_trigger.nature %></td>
         <td><%= alarm_trigger.action %></td>
 
         <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, alarm_trigger %></td>

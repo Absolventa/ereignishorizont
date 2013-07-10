@@ -1,5 +1,5 @@
 <%= form_for(@alarm_trigger) do |f| %>
-  <% if @alarm_trigger.errors.any? %>
+<% if @alarm_trigger.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@alarm_trigger.errors.count, "error") %> prohibited this alarm_trigger from being saved:</h2>
 
@@ -11,19 +11,22 @@
     </div>
   <% end %>
 
+
+
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </p>
  
   <p>
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= f.label :nature %><br>
+    <%= f.text_field :nature %>
   </p>
 
   <p>
     <%= f.label :action %><br>
-    <%= f.select :action, [['SMS', 'sms'], ['Email', 'email'], ['Carrier Pidgeon', 'carrierpidgeon'], ['Message in a bottle', 'messageinabottle']] %>  </p>
+    <%= f.select :action, [['SMS', 'sms'], ['Email', 'email'], ['Carrier Pidgeon', 'carrierpidgeon'], ['Message in a bottle', 'messageinabottle']] %>  
+  </p>
 
   <div class="actions">
     <%= f.submit %>

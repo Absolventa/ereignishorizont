@@ -1,4 +1,3 @@
 class AlarmTrigger < ActiveRecord::Base
-	validates_presence_of :title, :type
-
+	validates_presence_of :title, :nature
 end
