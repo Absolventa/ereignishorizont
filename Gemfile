@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# vim: ft=ruby
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -46,3 +48,7 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :test do
+  gem 'rspec-rails'
+end
