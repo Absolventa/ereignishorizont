@@ -1,28 +1,12 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to Event Girl!
 
-Things you may want to cover:
+Event Girl is an open event-logging system 
+with triggers/hooks to run arbitrary tasks when an event is 
+matched or not matched.  
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+It was proposed as a project for the Rails Girls Summer of Code. 
+Its two main contributors are the Rails Girls Susanne and Tam who 
+will be working on the project from July 2 - September 30, 2013
+at the ABSOLVENTA offices in Berlin.
