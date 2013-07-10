@@ -2,22 +2,21 @@
 
 <p>
   <b>Title:</b>
-  <%= @alarm_triggers.title %>
+  <%= @alarm_trigger.title %>
 </p>
 
 <p>
   <b>Type:</b>
-  <%= @alarm_triggers.type %>
+  <%= @alarm_trigger.type %>
 </p>
 
 <p>
   <b>Action:</b>
-  <%= @alarm_triggers.action %>
+  <%= @alarm_trigger.action %>
 </p>
 
 
-<%= link_to 'Edit', edit_alarm_triggers_path(@alarm_triggers), class: 'btn btn-warning'%>
+<%= link_to 'Edit', edit_alarm_trigger_path(@alarm_trigger), class: 'btn btn-warning'%>
 <%= link_to 'Back', alarm_triggers_path, class: 'btn btn-primary' %>
 
-<!-- this show file was abandoned on 04.07.2013. It doesn't work, and will be incorporated later! -->
 
