@@ -48,7 +48,7 @@ class AlarmTriggersController < ApplicationController
   def destroy
   	@alarm_trigger.destroy
   	respond_to do |format|
-  		format.html { redirect_to alarm_trigger_url }
+  		format.html { redirect_to alarm_triggers_url }
   		format.json { head :no_content }
   	end
   end
