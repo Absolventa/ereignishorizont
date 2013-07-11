@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://blattchat.com/demos/typeahead/js/bootstrap-typeahead.js"></script>
+
 <%= form_for(@alarm_trigger) do |f| %>
 <% if @alarm_trigger.errors.any? %>
     <div id="error_explanation">
@@ -15,9 +17,9 @@
 
   <p>
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :data => {:provide => "typeahead"} %>
   </p>
- 
+  
   <p>
     <%= f.label :nature %><br>
     <%= f.text_field :nature %>
@@ -32,3 +34,8 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script> 
+  var colors = ["red", "blue", "green", "yellow", "brown", "black"];
+  $('#alarm_trigger_title').typeahead({source: colors});
+</script>
