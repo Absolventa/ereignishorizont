@@ -3,18 +3,43 @@ class AlarmTriggersController < ApplicationController
   #buttons to show, edit, update and destroy only show up when 
   #someone has entered an expected event. 
 
+  respond_to :html, :json
+
   def index
-  	@alarm_triggers = AlarmTrigger.all
+    @alarm_triggers = AlarmTrigger.all
+  	#@alarm_triggers = AlarmTrigger.order('title asc').all
+    #respond_with @alarm_triggers
   end
+
   
   def show
   end
 
   def new
   	@alarm_trigger = AlarmTrigger.new
+
+    @expected_event_names = [
+      'standup_meeting_completed', 
+      'github_pull_success',
+      'reactor_meltdown',
+      'meteorite_incoming',
+      'bad_weather_forecast',
+      'impending_zombie_attack'
+    ].sort
+    respond_with @expected_event_names
   end
 
   def edit
+    #@expected_event_names = ExpectedEvent.all #! doesn't scale
+    @expected_event_names = [
+      'standup_meeting_completed', 
+      'github_pull_success',
+      'reactor_meltdown',
+      'meteorite_incoming',
+      'bad_weather_forecast',
+      'impending_zombie_attack'
+    ].sort
+    respond_with @expected_event_names
   end
 
   def create

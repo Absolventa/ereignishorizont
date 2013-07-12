@@ -3,6 +3,8 @@ class ExpectedEventsController < ApplicationController
   #buttons to show, edit, update and destroy only show up when 
   #someone has entered an expected event. 
 
+  #respond_to :html, :json
+
   #GET /expected_events
   #GET /expected_events.json
   def index
