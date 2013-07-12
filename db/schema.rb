@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130710125416) do
+ActiveRecord::Schema.define(version: 20130712152611) do
 
   create_table "alarm_triggers", force: true do |t|
-    t.string "title"
-    t.string "nature"
-    t.string "action"
+    t.string  "title"
+    t.string  "nature"
+    t.string  "action"
+    t.integer "expected_event_id"
   end
+
+  add_index "alarm_triggers", ["expected_event_id"], name: "index_alarm_triggers_on_expected_event_id"
 
   create_table "expected_events", force: true do |t|
     t.text "event"
