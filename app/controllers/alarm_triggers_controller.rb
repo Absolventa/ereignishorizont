@@ -7,6 +7,7 @@ class AlarmTriggersController < ApplicationController
 
   def index
     @alarm_triggers = AlarmTrigger.all
+    @expected_event_names
   	#@alarm_triggers = AlarmTrigger.order('title asc').all
     #respond_with @alarm_triggers
   end
@@ -85,7 +86,7 @@ class AlarmTriggersController < ApplicationController
     	end
 
     	def alarm_trigger_params
-      		params.require(:alarm_trigger).permit([:title, :nature, :action])
+      		params.require(:alarm_trigger).permit([:nature, :action])
     	end
 
 end
