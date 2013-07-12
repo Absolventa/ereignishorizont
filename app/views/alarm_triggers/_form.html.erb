@@ -15,8 +15,6 @@
 
   <p>
     <%= f.label :title %><br>
-
-    <%= f.text_field :title %>
     <%= select_tag "alarm_triggers", options_for_select(@expected_event_names), id: "simple-example" %>
   </p>
   
