@@ -18,28 +18,10 @@ class AlarmTriggersController < ApplicationController
 
   def new
   	@alarm_trigger = AlarmTrigger.new
-
-    @expected_event_names = [
-      'standup_meeting_completed', 
-      'github_pull_success',
-      'reactor_meltdown',
-      'meteorite_incoming',
-      'bad_weather_forecast',
-      'impending_zombie_attack'
-    ].sort
     respond_with @expected_event_names
   end
 
   def edit
-    #@expected_event_names = ExpectedEvent.all #! doesn't scale
-    @expected_event_names = [
-      'standup_meeting_completed', 
-      'github_pull_success',
-      'reactor_meltdown',
-      'meteorite_incoming',
-      'bad_weather_forecast',
-      'impending_zombie_attack'
-    ].sort
     respond_with @expected_event_names
   end
 
