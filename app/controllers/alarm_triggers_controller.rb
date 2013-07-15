@@ -69,7 +69,7 @@ class AlarmTriggersController < ApplicationController
     	end
 
     	def alarm_trigger_params
-      		params.require(:alarm_trigger).permit([:nature, :action])
+      		params.require(:alarm_trigger).permit([:nature, :action, :title, :expected_event_id])
     	end
 
 end
