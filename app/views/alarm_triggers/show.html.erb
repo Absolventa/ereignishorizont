@@ -5,6 +5,10 @@
   <%= @alarm_trigger.title %>
 </p>
 
+<b>Expected Event:</b>
+  <%= @alarm_trigger.expected_event.event if @alarm_trigger.expected_event %>
+</p>
+
 <p>
   <b>Nature:</b>
   <%= @alarm_trigger.nature %>
