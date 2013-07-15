@@ -2,9 +2,11 @@ EventGirl::Application.routes.draw do
 
   resources :incoming_events
 
-  resources :expected_events do
-    resources :alarm_triggers
-  end
+  resources :expected_events
+  
+  resources :alarm_triggers
+
+  
   #start from here on monday! we have to change the paths!
   #don't forget!!!
 
