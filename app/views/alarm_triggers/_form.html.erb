@@ -18,6 +18,9 @@
     <%= f.text_field :title %>
   </p>
 
+  <p>
+    <%= f.label :expected_event_id %><br>
+    <%= f.select :expected_event_id, ExpectedEvent.all.map{|exp_event| [exp_event.event, exp_event.id] } %>
   </p>
   
   <p>
