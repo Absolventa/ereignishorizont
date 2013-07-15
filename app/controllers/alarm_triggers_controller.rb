@@ -7,7 +7,8 @@ class AlarmTriggersController < ApplicationController
 
   def index
     @alarm_triggers = AlarmTrigger.all
-    @expected_event_names
+    #@alarm_triggers = AlarmTrigger.find(params[:expected_event_id])
+    #@expected_event_names
   	#@alarm_triggers = AlarmTrigger.order('title asc').all
     #respond_with @alarm_triggers
   end
