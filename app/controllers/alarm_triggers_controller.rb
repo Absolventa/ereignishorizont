@@ -6,7 +6,7 @@ class AlarmTriggersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @alarm_triggers = AlarmTrigger.all
+    @alarm_triggers = AlarmTrigger.includes(:expected_event).all
     #@alarm_triggers = AlarmTrigger.find(params[:expected_event_id])
     #@expected_event_names
   	#@alarm_triggers = AlarmTrigger.order('title asc').all
