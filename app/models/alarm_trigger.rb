@@ -1,4 +1,4 @@
 class AlarmTrigger < ActiveRecord::Base
 	validates_presence_of :nature
-	belongs_to :expected_events
+	belongs_to :expected_event
 end
