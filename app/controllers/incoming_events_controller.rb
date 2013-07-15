@@ -69,6 +69,6 @@ class IncomingEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incoming_event_params
-      params.require(:incoming_event).permit(:event)
+      params.require(:incoming_event).permit(:title)
     end
 end

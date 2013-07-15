@@ -1,3 +1,3 @@
 class IncomingEvent < ActiveRecord::Base
-	validates_presence_of :event
+	validates_presence_of :title
 end

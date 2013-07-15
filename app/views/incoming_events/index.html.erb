@@ -3,7 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Event</th>
+      <th>Title</th>
       <th></th>
       <th></th>
       <th></th>
@@ -13,7 +13,7 @@
   <tbody>
     <% @incoming_events.each do |incoming_event| %>
       <tr>
-        <td><%= incoming_event.event %></td>
+        <td><%= incoming_event.title %></td>
         <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, incoming_event %></td>
         <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_incoming_event_path(incoming_event) %></td>
         <td><%= link_to '<i class="icon-trash"></i>'.html_safe, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
