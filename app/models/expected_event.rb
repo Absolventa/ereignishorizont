@@ -3,4 +3,11 @@ class ExpectedEvent < ActiveRecord::Base
 
 	has_many :alarms
 	has_many :incoming_events
+
+	before_save :delete_white_spaces_from_title
+
+  private
+    def delete_white_spaces_from_title
+      self.title = self.title.strip
+    end
 end
