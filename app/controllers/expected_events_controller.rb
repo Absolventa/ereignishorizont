@@ -8,7 +8,8 @@ class ExpectedEventsController < ApplicationController
   #GET /expected_events
   #GET /expected_events.json
   def index
-  	@expected_events = ExpectedEvent.all
+    @expected_events = ExpectedEvent.includes(:incoming_events).all
+  	#@expected_events = ExpectedEvent.all IN CASE OF SELECT2 FAILURE
   end
   
   #GET /expected_events/1
@@ -23,6 +24,7 @@ class ExpectedEventsController < ApplicationController
 
   #GET /expected_events/1/edit
   def edit
+    respond_with @incoming_event_names
   end
 
   #POST /expected_events
@@ -74,7 +76,7 @@ class ExpectedEventsController < ApplicationController
 
     	# Never trust parameters from the scary internet, only allow the white list through.
     	def expected_event_params
-      		params.require(:expected_event).permit([:title])
+      		params.require(:expected_event).permit([:title, :incoming_event_title])
     	end
 
 end

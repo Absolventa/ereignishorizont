@@ -13,9 +13,16 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_area :title %>
+    <%= f.select :title, IncomingEvent.select('DISTINCT title').order('title').map(&:title) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#expected_event_title').select2();
+  });
+</script>
