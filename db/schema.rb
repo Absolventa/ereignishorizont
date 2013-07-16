@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716090457) do
+ActiveRecord::Schema.define(version: 20130716094803) do
 
   create_table "alarms", force: true do |t|
     t.string  "title"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20130716090457) do
     t.text     "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "expected_event_id"
   end
+
+  add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id"
 
 end
