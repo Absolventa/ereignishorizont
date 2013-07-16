@@ -4,7 +4,7 @@ EventGirl::Application.routes.draw do
 
   resources :expected_events
   
-  resources :alarm_triggers
+  resources :alarms
 
   
   #start from here on monday! we have to change the paths!

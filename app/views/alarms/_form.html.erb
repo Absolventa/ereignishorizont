@@ -1,10 +1,10 @@
-<%= form_for(@alarm_trigger) do |f| %>
-<% if @alarm_trigger.errors.any? %>
+<%= form_for(@alarm) do |f| %>
+<% if @alarm.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@alarm_trigger.errors.count, "error") %> prohibited this alarm_trigger from being saved:</h2>
+      <h2><%= pluralize(@alarm.errors.count, "error") %> prohibited this alarm from being saved:</h2>
 
       <ul>
-      <% @alarm_trigger.errors.full_messages.each do |msg| %>
+      <% @alarm.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -38,6 +38,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#alarm_trigger_expected_event_id').select2();
+    $('#alarm_expected_event_id').select2();
   });
 </script>

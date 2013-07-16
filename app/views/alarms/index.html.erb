@@ -1,0 +1,44 @@
+<h1>Alarms</h1>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Expected Event</th>
+      <th>Nature</th>
+      <th>Action</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alarms.each do |alarm| %>
+      <tr>
+        <td><%= alarm.title %></td>
+        <td>
+          <%= alarm.expected_event.title if alarm.expected_event %></td>
+        </td>
+        <td><%= alarm.nature %></td>
+        <td><%= alarm.action %></td>
+
+        <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, alarm %></td>
+        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_alarm_path(alarm) %></td>
+        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, alarm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Alarm', new_alarm_path , class: 'btn btn-success' %>
+
+<div class="pagination pagination-centered"> 
+  <ul>
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    <li class="active"><a href="#">1</a></li>
+  </ul>
+</div>
