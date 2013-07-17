@@ -2,9 +2,10 @@ EventGirl::Application.routes.draw do
 
   resources :incoming_events
 
-  resources :expected_events
-  
-  resources :alarms
+  resources :expected_events do
+    resources :alarms
+  end
+
 
   
   #start from here on monday! we have to change the paths!
