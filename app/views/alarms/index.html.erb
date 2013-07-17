@@ -24,9 +24,9 @@
         <td><%= alarm.nature %></td>
         <td><%= alarm.action %></td>
 
-        <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, alarm %></td>
-        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_alarm_path(alarm) %></td>
-        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, alarm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, [@expected_event, alarm] %></td>
+        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_expected_event_alarm_path(@expected_event, alarm) %></td>
+        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, [@expected_event, alarm], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,7 +34,7 @@
 
 <br>
 
-<%= link_to 'New Alarm', new_alarm_path , class: 'btn btn-success' %>
+<%= link_to 'New Alarm', new_expected_event_alarm_path(@expected_event) , class: 'btn btn-success' %>
 
 <div class="pagination pagination-centered"> 
   <ul>
