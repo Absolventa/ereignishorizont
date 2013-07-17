@@ -1,12 +1,15 @@
 class AlarmsController < ApplicationController
+
+  before_action :set_expected_event
   before_action :set_alarm, only: [:show, :edit, :update, :destroy]
+
   #buttons to show, edit, update and destroy only show up when 
   #someone has entered an expected event. 
 
   respond_to :html, :json
 
   def index
-    @alarms = Alarm.includes(:expected_event).all
+    @alarms = @expected_event.alarms
     #@alarm_triggers = AlarmTrigger.find(params[:expected_event_id])
     #@expected_event_names
   	#@alarm_triggers = AlarmTrigger.order('title asc').all
@@ -27,6 +30,7 @@ class AlarmsController < ApplicationController
   end
 
   def create
+    @alarm = @expected_event.alarms.build(params[:alarm])
   	@alarm = Alarm.new(alarm_params)
 
   	respond_to do |format|
@@ -44,7 +48,7 @@ class AlarmsController < ApplicationController
   def update
   	respond_to do |format|
   		if @alarm.update(alarm_params)
-  			format.html { redirect_to @alarm, notice: 'Alarm was successfully updated' }
+  			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully updated' }
   			format.json { head :no_content }
   		else
   			format.html { render action: 'edit' }
@@ -62,14 +66,18 @@ class AlarmsController < ApplicationController
   	end
   end
 
-	private
+	protected
    		
     	def set_alarm
-      		@alarm = Alarm.find(params[:id])
+      		@alarm = @expected_event.alarms.find(params[:id])
     	end
 
     	def alarm_params
-      		params.require(:alarm).permit([:nature, :action, :title, :expected_event_id])
+      		params.require(:alarm).permit([:nature, :action, :title])
     	end
+
+  def set_expected_event
+    @expected_event = ExpectedEvent.find(params[:expected_event_id])
+  end
 
 end
