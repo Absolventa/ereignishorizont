@@ -24,7 +24,7 @@ class ExpectedEventsController < ApplicationController
 
   #GET /expected_events/1/edit
   def edit
-    respond_with @incoming_event_names
+    #respond_with @incoming_event_names
   end
 
   #POST /expected_events
