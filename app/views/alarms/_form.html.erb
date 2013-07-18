@@ -16,10 +16,7 @@
     <%= f.text_field :title %>
   </p>
 
-  <p>
-    <%= f.label :expected_event_id %><br>
-    <%= f.select :expected_event_id, ExpectedEvent.all.map{|exp_event| [exp_event.title, exp_event.id] } %>
-  </p>
+
   
   <p>
     <%= f.label :nature %><br>
@@ -35,9 +32,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#alarm_expected_event_id').select2();
-  });
-</script>
