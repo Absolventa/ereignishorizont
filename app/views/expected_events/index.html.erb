@@ -14,7 +14,7 @@
 
   <tbody>
     <% @expected_events.each do |expected_event| %>
-      <tr>
+      <tr class ="success">
         <td><%= expected_event.title %></td>
         <td><%= expected_event.incoming_events.count if expected_event.incoming_events %></td> 
         <td><%= link_to "Alarms (#{expected_event.alarms.count})", expected_event_alarms_path(expected_event) %></td>

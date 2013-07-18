@@ -16,7 +16,7 @@
 
   <tbody>
     <% @alarms.each do |alarm| %>
-      <tr>
+      <tr class="error">
         <td><%= alarm.title %></td>
         <td>
           <%= alarm.expected_event.title if alarm.expected_event %></td>
@@ -34,7 +34,7 @@
 
 <br>
 
-<%= link_to 'New Alarm', new_expected_event_alarm_path(@expected_event) , class: 'btn btn-success' %>
+<%= link_to 'New Alarm', new_expected_event_alarm_path(@expected_event) , class: 'btn btn-warning' %>
 
 <div class="pagination pagination-centered"> 
   <ul>
