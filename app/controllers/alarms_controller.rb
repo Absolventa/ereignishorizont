@@ -35,7 +35,7 @@ class AlarmsController < ApplicationController
 
   	respond_to do |format|
   		if @alarm.save
-  			format.html { redirect_to @alarm, notice: 'Alarm was successfully created'}
+  			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
   			format.json { render action: 'show', status: :created, location: @alarm }
   		else
   			format.html { render action: 'new' }
