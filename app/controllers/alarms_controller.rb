@@ -30,8 +30,7 @@ class AlarmsController < ApplicationController
   end
 
   def create
-    @alarm = @expected_event.alarms.build(params[:alarm])
-  	@alarm = Alarm.new(alarm_params)
+    @alarm = @expected_event.alarms.build(alarm_params)
 
   	respond_to do |format|
   		if @alarm.save
