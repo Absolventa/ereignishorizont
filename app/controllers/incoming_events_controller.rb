@@ -15,6 +15,7 @@ class IncomingEventsController < ApplicationController
   # GET /incoming_events/new
   def new
     @incoming_event = IncomingEvent.new
+
   end
 
   # GET /incoming_events/1/edit
@@ -30,6 +31,7 @@ class IncomingEventsController < ApplicationController
       if @incoming_event.save
 
         # TODO Find expected event (if any) and make it do its stuff
+        @expected_event = ExpectedEvent.where(title: @incoming_event.title).first
         #@expected_event.alarm!
 
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }

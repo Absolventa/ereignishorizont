@@ -54,12 +54,12 @@ describe IncomingEventsController do
 
 		context 'with matching expected_event' do
 			it 'finds expected event by its title' do
-				expected_event = FactoryGirl.create(:expected_event)
-				post :create, incoming_event: { title: expected_event.title }
-				assigns(:expected_event).should eql expected_event
-				#expected_event.where(:incoming_event).should eql expected_event (Tam's attempt)
+				existing_event_expectation = FactoryGirl.create(:expected_event)
+				post :create, incoming_event: { title: existing_event_expectation.title }
+				assigns(:expected_event).should eql existing_event_expectation
+				pending "TODO run alarm triggers"
 			end
 		end
 	end
-
 end
+
