@@ -76,7 +76,7 @@ class ExpectedEventsController < ApplicationController
 
     	# Never trust parameters from the scary internet, only allow the white list through.
     	def expected_event_params
-      		params.require(:expected_event).permit([:title, :incoming_event_title])
+      		params.require(:expected_event).permit([:title])
     	end
 
 end
