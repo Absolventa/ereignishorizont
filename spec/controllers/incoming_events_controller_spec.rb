@@ -53,7 +53,12 @@ describe IncomingEventsController do
 		end
 
 		context 'with matching expected_event' do
-			pending
+			it 'finds expected event by its title' do
+				expected_event = FactoryGirl.create(:expected_event)
+				post :create, incoming_event: { title: expected_event.title }
+				assigns(:expected_event).should eql expected_event
+				#expected_event.where(:incoming_event).should eql expected_event (Tam's attempt)
+			end
 		end
 	end
 

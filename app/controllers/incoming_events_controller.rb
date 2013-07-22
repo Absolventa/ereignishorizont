@@ -28,6 +28,10 @@ class IncomingEventsController < ApplicationController
 
     respond_to do |format|
       if @incoming_event.save
+
+        # TODO Find expected event (if any) and make it do its stuff
+        #@expected_event.alarm!
+
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }
         format.json { render action: 'show', status: :created, location: @incoming_event }
       else

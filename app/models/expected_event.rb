@@ -6,6 +6,12 @@ class ExpectedEvent < ActiveRecord::Base
 
 	before_save :delete_white_spaces_from_title
 
+	def alarm!
+		alarms.each do |alarm|
+			alarm.run
+		end
+	end
+
   private
     def delete_white_spaces_from_title
       self.title = self.title.strip
