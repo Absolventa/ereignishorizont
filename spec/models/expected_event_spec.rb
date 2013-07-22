@@ -5,6 +5,10 @@ describe ExpectedEvent do
 	 it { should have_many :incoming_events }
 	 it { should validate_presence_of :title }
 
+	 it "has a valid factory" do
+	 	FactoryGirl.build(:expected_event).should be_valid
+	 end
+
 	 context 'validating title' do
 	 	it 'complains about illegal characters' do
 	 		expected_event = ExpectedEvent.new(title: 'bß€se')
