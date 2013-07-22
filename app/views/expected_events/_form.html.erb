@@ -13,9 +13,16 @@
 
 
   <div class="control-group">
-    <%= f.label :title, :class => "control-label" %>
+      <%= f.label :title, "Watch incoming event with name:", :class => "control-label" %>
     <div class="controls">
-    <%= f.select :title, IncomingEvent.select('DISTINCT title').order('title').map(&:title) %>
+      <%= f.text_field :title %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="available_incoming_event_titles" class="control-label">Or choose available</label>
+    <div class="controls">
+    <%= select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true %>
     </div>
   </div>
 
@@ -27,6 +34,10 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#expected_event_title').select2();
+    // $('#expected_event_title').select2();
+    $('#available_incoming_event_titles').change(function() {
+      $('#expected_event_title').val($(this).val());
+      $('#expected_event_title').focus();
+    });
   });
 </script>
