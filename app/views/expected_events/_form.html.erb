@@ -1,4 +1,4 @@
-<%= form_for(@expected_event) do |f| %>
+<%= form_for(@expected_event, :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
   <% if @expected_event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@expected_event.errors.count, "error") %> prohibited this expected_event from being saved:</h2>
@@ -11,10 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
+
+  <div class="control-group">
+    <%= f.label :title, :class => "control-label" %>
+    <div class="controls">
     <%= f.select :title, IncomingEvent.select('DISTINCT title').order('title').map(&:title) %>
+    </div>
   </div>
+
 
   <div class="form-actions">
     <%= f.submit :class => "btn btn-success" %>
