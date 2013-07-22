@@ -3,6 +3,9 @@ class Alarm < ActiveRecord::Base
   belongs_to :expected_event
 
   def run
+  	#self.pidgeon = 'Fly fly away'
   	# send pidgeon, sms,…
   end
+
+
 end
