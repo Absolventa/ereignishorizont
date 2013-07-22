@@ -53,4 +53,5 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end
