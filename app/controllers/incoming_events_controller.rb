@@ -2,20 +2,17 @@ class IncomingEventsController < ApplicationController
   before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
 
   # GET /incoming_events
-  # GET /incoming_events.json
   def index
     @incoming_events = IncomingEvent.all
   end
 
   # GET /incoming_events/1
-  # GET /incoming_events/1.json
   def show
   end
 
   # GET /incoming_events/new
   def new
     @incoming_event = IncomingEvent.new
-
   end
 
   # GET /incoming_events/1/edit
@@ -23,7 +20,6 @@ class IncomingEventsController < ApplicationController
   end
 
   # POST /incoming_events
-  # POST /incoming_events.json
   def create
     @incoming_event = IncomingEvent.new(incoming_event_params)
 
@@ -35,24 +31,19 @@ class IncomingEventsController < ApplicationController
         #@expected_event.alarm!
 
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @incoming_event }
       else
         format.html { render action: 'new' }
-        format.json { render json: @incoming_event.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /incoming_events/1
-  # PATCH/PUT /incoming_events/1.json
   def update
     respond_to do |format|
       if @incoming_event.update(incoming_event_params)
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @incoming_event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,7 +54,6 @@ class IncomingEventsController < ApplicationController
     @incoming_event.destroy
     respond_to do |format|
       format.html { redirect_to incoming_events_url }
-      format.json { head :no_content }
     end
   end
 
