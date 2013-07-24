@@ -2,6 +2,12 @@ class Alarm < ActiveRecord::Base
   validates :nature, :expected_event, presence: true
   belongs_to :expected_event
 
+  validates_presence_of :recipient_email, :if => :enters_email?
+
+  def enters_email?
+  	action == 'Email'
+  end
+
   def run
     ## Do stuff based on my nature
     #if action == 'email'
