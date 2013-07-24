@@ -34,7 +34,8 @@ class AlarmsController < ApplicationController
   def create
     @alarm = @expected_event.alarms.build(alarm_params)
 
-    AlarmMailer.run_alarm_email(@alarm).deliver #tam playing around
+    #tam playing around
+    AlarmMailer.run_alarm_email(@alarm).deliver 
 
   	respond_to do |format|
   		if @alarm.save
