@@ -3,8 +3,10 @@ class Alarm < ActiveRecord::Base
   belongs_to :expected_event
 
   def run
-  	#self.pidgeon = 'Fly fly away'
-  	# send pidgeon, sms,…
+    ## Do stuff based on my nature
+    # if nature == 'email'
+    #   AlarmMail.my_alarm_method(self).deliver
+    # ...
   end
 
 
