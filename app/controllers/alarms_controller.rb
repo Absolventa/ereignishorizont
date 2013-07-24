@@ -22,11 +22,13 @@ class AlarmsController < ApplicationController
 
   def new
   	@alarm = Alarm.new
-    respond_with @expected_event_names
   end
 
   def edit
-    respond_with @expected_event_names
+  end
+
+  def run
+    @alarm.run
   end
 
   def create
