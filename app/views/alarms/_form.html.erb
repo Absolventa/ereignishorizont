@@ -15,8 +15,6 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </p>
-
-
   
   <p>
     <%= f.label :nature %><br>
@@ -27,6 +25,10 @@
     <%= f.label :action %><br>
     <%= f.select :action, [['SMS', 'SMS'], ['Email', 'Email'], ['Carrier Pidgeon', 'Carrier Pidgeon'], ['Message in a Bottle', 'Message in a Bottle']] %>  
   </p>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
 
   <div class="actions">
     <%= f.submit %>
