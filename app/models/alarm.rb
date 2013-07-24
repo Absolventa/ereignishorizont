@@ -4,9 +4,10 @@ class Alarm < ActiveRecord::Base
 
   def run
     ## Do stuff based on my nature
-    # if nature == 'email'
-    #   AlarmMail.my_alarm_method(self).deliver
-    # ...
+    if action == 'email'
+    	AlarmMailer.alarm_email(alarm).deliver
+    #else
+    	#redirect_to expected_event_alarm_path
   end
 
 
