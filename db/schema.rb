@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130724115924) do
+ActiveRecord::Schema.define(version: 20130724151037) do
 
   create_table "alarms", force: true do |t|
     t.string  "title"
     t.string  "nature"
     t.string  "action"
     t.integer "expected_event_id"
-    t.string  "email"
+    t.string  "recipient_email"
   end
 
   add_index "alarms", ["expected_event_id"], name: "index_alarms_on_expected_event_id"
