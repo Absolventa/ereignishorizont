@@ -3,7 +3,7 @@ class AlarmMailer < ActionMailer::Base
 
   def run_alarm_email(alarm)
   	@alarm = alarm
-  	mail(:to => "tam.eastley@gmail.com", :subject => "Don't be alarmed!")
+  	mail(:to => "highwaytorails@gmail.com", :subject => "Don't be alarmed!")
   	#tam playing around
   end
 end
