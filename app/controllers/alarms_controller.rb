@@ -34,6 +34,8 @@ class AlarmsController < ApplicationController
   def create
     @alarm = @expected_event.alarms.build(alarm_params)
 
+    AlarmMailer.run_alarm_email(@alarm).deliver #tam playing around
+
   	respond_to do |format|
   		if @alarm.save
   			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
@@ -74,7 +76,7 @@ class AlarmsController < ApplicationController
     	end
 
     	def alarm_params
-      		params.require(:alarm).permit([:nature, :action, :title])
+      		params.require(:alarm).permit([:nature, :action, :title, :email])
     	end
 
   def set_expected_event
