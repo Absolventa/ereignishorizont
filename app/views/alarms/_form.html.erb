@@ -24,6 +24,11 @@
   <p>
     <%= f.label "If you want to get an email, please enter your address!" %><br>
     <%= f.text_field :recipient_email %>
+  </p>
+
+  <p>
+    <%= f.label "Add some custom text!" %><br>
+    <%= f.text_area :message %>
 
   <div class="actions">
     <%= f.submit %>
