@@ -1,5 +1,5 @@
 class Alarm < ActiveRecord::Base
-  validates :nature, :expected_event, presence: true
+  validates :expected_event, presence: true
   belongs_to :expected_event
 
   validates_presence_of :recipient_email, :if => :enters_email?
@@ -9,7 +9,7 @@ class Alarm < ActiveRecord::Base
   end
 
   def run
-    ## Do stuff based on my nature
+    ## Do stuff based on my action
     #if action == 'email'
     	#AlarmMailer.alarm_email(alarm).deliver
     #else

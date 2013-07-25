@@ -6,7 +6,6 @@
     <tr>
       <th>Title</th>
       <th>Expected Event</th>
-      <th>Nature</th>
       <th>Action</th>
       <th></th>
       <th></th>
@@ -21,7 +20,6 @@
         <td>
           <%= alarm.expected_event.title if alarm.expected_event %></td>
         </td>
-        <td><%= alarm.nature %></td>
         <td><%= alarm.action %></td>
 
         <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, [@expected_event, alarm] %></td>
