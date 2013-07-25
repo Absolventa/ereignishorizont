@@ -80,7 +80,7 @@ class AlarmsController < ApplicationController
     	end
 
     	def alarm_params
-      		params.require(:alarm).permit([:action, :title, :recipient_email])
+      		params.require(:alarm).permit([:action, :title, :recipient_email, :message])
     	end
 
   def set_expected_event
