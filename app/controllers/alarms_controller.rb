@@ -34,11 +34,14 @@ class AlarmsController < ApplicationController
   def create
     @alarm = @expected_event.alarms.build(alarm_params)
 
-    #tam playing around
-    AlarmMailer.run_alarm_email(@alarm).deliver 
-
   	respond_to do |format|
   		if @alarm.save
+        #UserMailer.welcome_message(@user).deliver
+        #UserMailer.email_confirmation(@user).deliver
+        #UserMailer.password_reset_request(@user).deliver
+
+        #tam playing around
+        AlarmMailer.event_expectation_matched(@alarm).deliver 
   			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
   			format.json { render action: 'show', status: :created, location: @alarm }
   		else
