@@ -3,7 +3,8 @@ class AlarmMailer < ActionMailer::Base
 
   def event_expectation_matched(alarm)
   	@alarm = alarm
+  	@expected_event = alarm.expected_event.title
   	mail(:to => alarm.recipient_email, :subject => "Don't be alarmed!")
-  	#tam playing around
+  	#mail call should always be at the end
   end
 end
