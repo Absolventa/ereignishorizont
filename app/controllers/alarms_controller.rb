@@ -41,7 +41,7 @@ class AlarmsController < ApplicationController
         #UserMailer.password_reset_request(@user).deliver
 
         #tam playing around
-        AlarmMailer.event_expectation_matched(@alarm).deliver 
+        AlarmMailer.event_expectation_matched(@alarm).deliver if @alarm.enters_email?
   			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
   			format.json { render action: 'show', status: :created, location: @alarm }
   		else
