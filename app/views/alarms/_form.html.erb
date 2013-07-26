@@ -17,12 +17,12 @@
   </p>
   
   <p>
-    <%= f.label :action %><br>
+    <%= f.label "Action" " (* required)" %><br>
     <%= f.select :action, [['Logger', 'Logger'], ['Email', 'Email']] %>  
   </p>
 
   <p>
-    <%= f.label "If you want to get an email, please enter your address!" %><br>
+    <%= f.label "If you want to get an email, please enter your address!" " (* required)"%><br>
     <%= f.text_field :recipient_email %>
   </p>
 
