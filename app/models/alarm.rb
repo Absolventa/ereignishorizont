@@ -11,17 +11,15 @@ class Alarm < ActiveRecord::Base
     action == 'Email'
   end
 
-  def enters_logger
+  def enters_logger?
     action == 'Logger'
   end
 
-  
+
   def run
     ## Do stuff based on my action
     #if action == 'email'
     	#AlarmMailer.alarm_email(alarm).deliver
-    #else
-    	#redirect_to expected_event_alarm_path
   end
 
 
