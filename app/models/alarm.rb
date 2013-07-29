@@ -21,8 +21,8 @@ class Alarm < ActiveRecord::Base
 
 
   def run
-    AlarmMailer.event_expectation_matched(@alarm).deliver if @alarm.enters_email?
-    logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if @alarm.enters_logger?
+    AlarmMailer.event_expectation_matched(self).deliver if enters_email?
+    logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if enters_logger?
     ## Do stuff based on my action
     #if action == 'email'
     	#AlarmMailer.event_expectation_matched(@alarm).deliver
