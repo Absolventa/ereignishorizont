@@ -35,8 +35,6 @@ class AlarmsController < ApplicationController
     @alarm = @expected_event.alarms.build(alarm_params)
   	respond_to do |format|
   		if @alarm.save
-        AlarmMailer.event_expectation_matched(@alarm).deliver if @alarm.enters_email?
-        logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if @alarm.enters_logger?
   			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
   			format.json { render action: 'show', status: :created, location: @alarm }
   		else
