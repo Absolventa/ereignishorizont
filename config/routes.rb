@@ -3,7 +3,9 @@ EventGirl::Application.routes.draw do
   resources :incoming_events
 
   resources :expected_events do
-    resources :alarms
+    resources :alarms do
+      get :run, :on => :member
+    end
   end
 
 
