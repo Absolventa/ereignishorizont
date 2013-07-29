@@ -42,7 +42,7 @@ class AlarmsController < ApplicationController
 
         #tam playing around
         AlarmMailer.event_expectation_matched(@alarm).deliver if @alarm.enters_email?
-        Rails.logger.info "#{Time.zone.now}: Alarm with ' ... ' " if @alarm.enters_logger?
+        logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if @alarm.enters_logger?
   			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
   			format.json { render action: 'show', status: :created, location: @alarm }
   		else
