@@ -27,8 +27,10 @@ class AlarmsController < ApplicationController
   def edit
   end
 
-  def run
+  def run #this is for email/logger purposes!!!
+    @alarm = Alarm.find(params[:id])
     @alarm.run
+    redirect_to expected_event_alarms_path(@expected_event)
   end
 
   def create
