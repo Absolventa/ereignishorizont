@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130725151633) do
+ActiveRecord::Schema.define(version: 20130730142343) do
 
   create_table "alarms", force: true do |t|
     t.string  "title"
@@ -35,5 +35,12 @@ ActiveRecord::Schema.define(version: 20130725151633) do
   end
 
   add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id"
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
