@@ -1,3 +1,7 @@
+#This file has a bunch of comments, but we want to leave them in 
+#here because they are helpful to us at the moment. 
+#These comments can be used to understand all controllers.
+
 class ExpectedEventsController < ApplicationController
   before_action :set_expected_event, only: [:show, :edit, :update, :destroy]
   #buttons to show, edit, update and destroy only show up when 
@@ -9,7 +13,6 @@ class ExpectedEventsController < ApplicationController
   #GET /expected_events.json
   def index
     @expected_events = ExpectedEvent.includes(:incoming_events).all
-  	#@expected_events = ExpectedEvent.all IN CASE OF SELECT2 FAILURE
   end
   
   #GET /expected_events/1
@@ -24,7 +27,6 @@ class ExpectedEventsController < ApplicationController
 
   #GET /expected_events/1/edit
   def edit
-    #respond_with @incoming_event_names
   end
 
   #POST /expected_events
@@ -35,10 +37,8 @@ class ExpectedEventsController < ApplicationController
   	respond_to do |format|
   		if @expected_event.save
   			format.html { redirect_to @expected_event, notice: 'Incoming event was successfully created'}
-  			format.json { render action: 'show', status: :created, location: @expected_event }
   		else
   			format.html { render action: 'new' }
-  			format.json { render json: @expected_event.errors, status: :unprocessable_entry }
   		end
   	end
   end
@@ -50,10 +50,8 @@ class ExpectedEventsController < ApplicationController
   	respond_to do |format|
   		if @expected_event.update(expected_event_params)
   			format.html { redirect_to @expected_event, notice: 'Expected event was successfully updated' }
-  			format.json { head :no_content }
   		else
   			format.html { render action: 'edit' }
-  			format.json { render json: @expected_event.errors, status: :unprocessable_entry }
   		end
   	end
   end
@@ -64,7 +62,6 @@ class ExpectedEventsController < ApplicationController
   	@expected_event.destroy
   	respond_to do |format|
   		format.html { redirect_to expected_events_url }
-  		format.json { head :no_content }
   	end
   end
 
