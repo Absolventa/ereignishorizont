@@ -1,5 +1,12 @@
 <h1>Alarms <i class="icon-bell-alt icon-large"></i></h1>
 
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">x</a>
+      <%= msg  %>
+    </div>
+  <% end %>
 
 <table class="table table-striped">
   <thead>
@@ -43,4 +50,5 @@
     <li class="disabled"><a href="#">&laquo;</a></li>
     <li class="active"><a href="#">1</a></li>
   </ul>
+</div>
 </div>

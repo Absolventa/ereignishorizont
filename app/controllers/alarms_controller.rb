@@ -31,6 +31,7 @@ class AlarmsController < ApplicationController
     @alarm = Alarm.find(params[:id])
     @alarm.run
     redirect_to expected_event_alarms_path(@expected_event)
+    flash[:notice] = "Alarm test successfully sent"
   end
 
   def create
