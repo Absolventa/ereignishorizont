@@ -1,5 +1,6 @@
 EventGirl::Application.routes.draw do
-
+  
+  resources :sessions
   resources :users
 
   resources :incoming_events
