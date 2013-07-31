@@ -23,7 +23,7 @@
 
   <tbody>
     <% @alarms.each do |alarm| %>
-      <tr class="error">
+      <tr class="warning">
         <td><%= alarm.title %></td>
         <td>
           <%= alarm.expected_event.title if alarm.expected_event %></td>
