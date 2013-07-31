@@ -22,10 +22,15 @@ class AlarmsController < ApplicationController
 
   def run #this is for email/logger purposes!!!
     @alarm = Alarm.find(params[:id])
-    @alarm.run
-    redirect_to expected_event_alarms_path(@expected_event)
-    flash[:notice] = "Alarm test successfully sent"
+    if @alarm.enters_email? or @alarm.enters_logger?
+      redirect_to expected_event_alarms_path(@expected_event)
+      flash[:notice] = "Alarm test successfully sent"
+    else
+      redirect_to expected_event_alarms_path(@expected_event)
+      flash[:error] = "Alarm test failed"
+    end
   end
+
 
   def create
     @alarm = @expected_event.alarms.build(alarm_params)
