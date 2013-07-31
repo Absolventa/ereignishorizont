@@ -58,7 +58,7 @@ class AlarmsController < ApplicationController
   def destroy
   	@alarm.destroy
   	respond_to do |format|
-  		format.html { redirect_to alarms_url }
+  		format.html { redirect_to expected_event_alarms_url }
   	end
   end
 
