@@ -22,6 +22,8 @@
                 <% if !current_user %>
                   <li><%= link_to "Sign In", new_user_path %></li>
                   <li><%= link_to "Log In", new_session_path %></li>
+                  <% else %>
+                  <li><%= link_to "Log Out", session_path("current"), method: "delete" %></li>
                 <% end %>
               <li><%= link_to "Expected Events", '/expected_events' %></li>
             </ul>
