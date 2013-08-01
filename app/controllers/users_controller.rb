@@ -15,7 +15,7 @@ respond_to :html
         flash[:notice] = "Zank u for signing up!"
       else
         render action: "new"
-        flash[:error] = "Your sign in sucked"
+        flash[:error] = "Your sign up sucked"
       end
       
   end
