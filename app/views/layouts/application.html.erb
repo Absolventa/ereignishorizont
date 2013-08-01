@@ -13,30 +13,19 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   </head>
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="navbar-inner">
-        <div class="container">
-          <%= link_to "Event Girl", '/', id: "logo" %>
-          <nav>
-            <ul class="nav pull-right">
-                <% if !current_user %>
-                  <li><%= link_to "Sign In", signup_path %></li>
-                  <li><%= link_to "Log In", login_path %></li>
-                  <% else %>
-                  <li><%= link_to "Log Out", logout_path %></li>
-                <% end %>
-              <li><%= link_to "Expected Events", '/expected_events' %></li>
-            </ul>
-          </nav>
-        </div>
+
+    <%= render 'layouts/nav' %>
+    
+      <div class="container">
+        
+        <% if current_user %>
+          Logged in as <%= current_user.email %>
+        <% end %> 
+
+        <%= yield %>
+
       </div>
-    </header>
-    <div class="container">
-      <% if current_user %>
-        Logged in as <%= current_user.email %>
-      <% end %> 
-      <%= yield %>
-    </div>
+
     <%=yield :js%>
   </body>
 </html>
