@@ -22,7 +22,8 @@ EventGirl::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'incoming_events#index'
+  #root 'incoming_events#index'
+  root 'sessions#new'
   #get '/expected_events' => 'expected_events#index'
 
 
