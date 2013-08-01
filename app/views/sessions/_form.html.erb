@@ -1,0 +1,22 @@
+<%= form_tag(sessions_path, {:class => "form-horizontal"}) do |f| %>
+	
+    <div class="control-group">
+    	<%= label_tag :email, "Email", :class => "control-label" %>
+    	<div class="controls">
+      	<%= text_field_tag :email, params[:email] %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= label_tag :password, "Password", :class => "control-label" %>
+      <div class="controls">
+      	<%= password_field_tag :password %>
+      </div>
+    </div>
+
+  <div class="form-actions">
+  	<%= submit_tag "Log In", :class => "btn btn-info" %>
+  </div>
+
+
+<% end %>
