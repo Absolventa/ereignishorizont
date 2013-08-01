@@ -1,5 +1,9 @@
 EventGirl::Application.routes.draw do
-  
+
+  get 'signup' => 'users#new'
+  get 'login' => 'sessions#new'
+  get 'logout' => 'sessions#destroy'
+
   resources :sessions
   resources :users
 
@@ -10,11 +14,6 @@ EventGirl::Application.routes.draw do
       get :run, :on => :member
     end
   end
-
-
-  
-  #start from here on monday! we have to change the paths!
-  #don't forget!!!
 
   #get '/alarm_triggers' => 'alarm_triggers#index' 
   #get '/alarm_triggers/show' => 'alarm_triggers#show'
