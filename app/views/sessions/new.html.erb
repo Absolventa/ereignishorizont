@@ -1,23 +1,11 @@
-<h1>Log In</h1>
-
-<%= form_tag(sessions_path, {:class => "form-horizontal"}) do |f| %>
-	  
-  <div class="control-group">
-  	<%= label_tag :email, "Email", :class => "control-label" %>
-  	<div class="controls">
-    	<%= text_field_tag :email, params[:email] %>
+<div class="container-custom">
+  <div class="row">
+    <div class="span4">
+      <img src="https://f.cloud.github.com/assets/4237285/855647/b3b3bbc8-f52b-11e2-892b-2cad134523e7.jpg", class="img-circle">
     </div>
-  </div>
+ 
 
-  <div class="control-group">
-    <%= label_tag :password, "Password", :class => "control-label" %>
-    <div class="controls">
-    	<%= password_field_tag :password %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-  	<%= submit_tag "Log In", :class => "btn btn-info" %>
-  </div>
-
-<% end %>
+  <div class="span8"><h1>Log In</h1>
+    <%= render 'form' %>
+   </div>
+</div>

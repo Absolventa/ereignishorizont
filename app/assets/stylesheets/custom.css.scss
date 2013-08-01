@@ -1,5 +1,6 @@
 @import "bootstrap" ;
 
+
 /* universal */
 
 html {
@@ -87,4 +88,8 @@ p {
   color: #fff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
   -webkit-font-smoothing: antialiased;
+}
+
+.container-custom {
+  padding-top: 150px;
 }
