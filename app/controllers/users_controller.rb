@@ -11,6 +11,7 @@ respond_to :html
       
       if @user.save
         redirect_to root_url
+        session[:user_id] = @user.id
         flash[:notice] = "Zank u for signing up!"
       else
         render action: "new"
