@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+#how do we add an email validation to the session? There is no model!
+
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
