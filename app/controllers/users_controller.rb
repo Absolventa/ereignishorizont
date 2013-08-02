@@ -10,7 +10,7 @@ respond_to :html
     @user = User.new(user_params)
       
       if @user.save
-        redirect_to root_url
+        redirect_to incoming_events_path
         session[:user_id] = @user.id
         flash[:notice] = "Zank u for signing up!"
       else
