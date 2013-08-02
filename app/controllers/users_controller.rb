@@ -22,6 +22,23 @@ respond_to :html
       
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User successfully updated' }
+      else
+        format.html { render action: 'edit'}
+      end
+    end
+  end
+
+
 
   private
 
