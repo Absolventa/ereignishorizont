@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authorize, only: [:show, :edit, :update]
+
 respond_to :html
 
   def new
