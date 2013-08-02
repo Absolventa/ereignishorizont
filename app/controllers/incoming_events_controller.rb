@@ -1,5 +1,6 @@
 class IncomingEventsController < ApplicationController
   before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
+  before_action :authorize
 
   def index
     @incoming_events = IncomingEvent.all

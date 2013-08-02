@@ -3,7 +3,9 @@
 #These comments can be used to understand all controllers.
 
 class ExpectedEventsController < ApplicationController
+
   before_action :set_expected_event, only: [:show, :edit, :update, :destroy]
+  before_action :authorize
   #buttons to show, edit, update and destroy only show up when 
   #someone has entered an expected event. 
 

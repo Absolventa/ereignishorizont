@@ -1,5 +1,6 @@
 class AlarmsController < ApplicationController
 
+  before_action :authorize
   before_action :set_expected_event
   before_action :set_alarm, only: [:show, :edit, :update, :destroy]
 
