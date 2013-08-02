@@ -1,8 +1,18 @@
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">x</a>
+      <%= msg  %>
+    </div>
+  <% end %>
+</div>
+
 <div class="container-custom">
   <div class="row">
     <div class="span4">
       <img src="https://f.cloud.github.com/assets/4237285/855647/b3b3bbc8-f52b-11e2-892b-2cad134523e7.jpg", class="img-circle">
     </div>
+
  
 
   <div class="span8"><h1>Log In</h1>
