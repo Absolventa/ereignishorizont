@@ -22,10 +22,10 @@
           Logged in as <%= current_user.email %>
         <% end %> 
 
+        <%= render 'layouts/footer' %>
+
         <%= yield %>
 
-          <%= render 'layouts/footer' %>
-          
       </div>
 
     <%=yield :js%>
