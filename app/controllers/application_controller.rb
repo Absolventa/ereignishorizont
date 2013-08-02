@@ -14,4 +14,9 @@ class ApplicationController < ActionController::Base
     # expression is evaluated. (See Tobi's email) 
   end
   helper_method :current_user
+
+  def authorize
+    redirect_to root_url, alert: "Not authorized" if current_user.nil?
+  end
+
 end
