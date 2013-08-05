@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize, only: [:show, :edit, :update]
 
 respond_to :html
@@ -23,9 +24,7 @@ respond_to :html
   end
 
   def show
-  end
-
-  def edit
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def update
@@ -41,6 +40,10 @@ respond_to :html
 
 
   private
+
+      def set_user
+        @user = current_user
+      end
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
