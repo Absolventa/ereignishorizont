@@ -2,8 +2,8 @@
 
 <p>
 	<b>Email:</b>
-
+  <%= @current_user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path, class: "btn btn-custom" %>
+<%= link_to 'Edit', edit_user_path(@current_user), class: "btn btn-custom"%> |
+<%= link_to 'Back', incoming_events_path, class: "btn btn-custom" %>
