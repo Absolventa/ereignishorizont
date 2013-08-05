@@ -8,4 +8,10 @@ FactoryGirl.define do
   	title 'my event title'
   end
 
+  factory :user do
+  	sequence(:email) { |n| "johndoe#{n}@example.com"}
+  	password 'foobarbaz'
+  	password_confirmation 'foobarbaz'
+  end
+
 end
