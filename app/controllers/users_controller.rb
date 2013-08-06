@@ -14,7 +14,7 @@ respond_to :html
       
       if @user.save
         redirect_to incoming_events_path
-        session[:user_id] = @user.id
+        cookies[:auth_token] = @user.auth_token
         flash[:notice] = "Zank u for signing up!"
       else
         render action: "new"
@@ -24,7 +24,7 @@ respond_to :html
   end
 
   def show
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by_auth_token( cookies[:auth_token]) if cookies[:auth_token]
   end
 
   def update
@@ -46,7 +46,7 @@ respond_to :html
       end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation, :auth_token)
     end
 end
 
