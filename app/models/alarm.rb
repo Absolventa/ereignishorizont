@@ -1,4 +1,6 @@
 class Alarm < ActiveRecord::Base
+  ACTIONS = %w( Email Logger )
+
   validates :expected_event, presence: true
   belongs_to :expected_event
 
@@ -6,7 +8,7 @@ class Alarm < ActiveRecord::Base
                               presence: true,
                               if: :enters_email?
 
- validates_inclusion_of :action, in: %w( Email Logger)
+ validates_inclusion_of :action, in: ACTIONS
     #we're not entirely sure if this is working/is correct. Do we have to 
     #do something in the browser/try to change it in the browser to see if
     #it is secure against external hacks? HELP!
@@ -19,15 +21,9 @@ class Alarm < ActiveRecord::Base
     action == 'Logger'
   end
 
-  # def recipient_email_to_current_email
-  #   recipient_email == current_user.email
-  # end
-
 
   def run
     AlarmMailer.event_expectation_matched(self).deliver if enters_email?
     logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if enters_logger?
   end
-
-
 end
