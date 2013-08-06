@@ -5,10 +5,10 @@
       <nav>
         <ul class="nav pull-right">
             <li><%= link_to "Expected Events", expected_events_path %></li>
-            <li><%= link_to "Profile", user_path(current_user) %>
             <% if !current_user %>
               <li><%= link_to "Sign Up", signup_path %></li>
               <% else %>
+              <li><%= link_to "Profile", user_path(current_user) %></li>
               <li><%= link_to "Log Out", logout_path %></li>
             <% end %>
         </ul>
