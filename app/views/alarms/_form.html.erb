@@ -23,7 +23,11 @@
 
   <p>
     <%= f.label "If you want to get an email, please enter your address!" " (* required)"%><br>
-      <%= f.input :recipient_email, :input_html => { :value => params[:current_user] } %>
+      <% if @alarm.recipient_email %>
+        <%= f.text_field :recipient_email %>
+      <% else %>
+        <%= f.text_field :recipient_email, :value => current_user.email %>
+      <% end %>
   </p>
 
   <p>
