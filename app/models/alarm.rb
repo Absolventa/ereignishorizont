@@ -19,6 +19,10 @@ class Alarm < ActiveRecord::Base
     action == 'Logger'
   end
 
+  # def recipient_email_to_current_email
+  #   recipient_email == current_user.email
+  # end
+
 
   def run
     AlarmMailer.event_expectation_matched(self).deliver if enters_email?
