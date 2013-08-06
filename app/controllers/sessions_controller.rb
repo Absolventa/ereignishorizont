@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 
+  skip_before_action :authorize, :except => [:destroy]
 #how do we add an email validation to the session? There is no model!
 
   def new
