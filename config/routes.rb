@@ -1,11 +1,13 @@
 EventGirl::Application.routes.draw do
 
+  get "password_resets/new"
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
 
   resources :sessions
   resources :users
+  resources :password_resets
 
   resources :incoming_events
 
