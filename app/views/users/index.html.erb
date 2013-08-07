@@ -1,0 +1,49 @@
+<h1>Users <i class="icon-female icon-large"></i></h1>
+
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">x</a>
+      <%= msg  %>
+    </div>
+  <% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Email</th>
+      <th>Date created</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="warning">
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at %></td>
+
+        <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, user %></td>
+        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_user_path(@user) %></td>
+        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', signup_path, class: 'btn btn-warning' %>
+
+<div class="pagination pagination-centered"> 
+  <ul>
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    <li class="active"><a href="#">1</a></li>
+  </ul>
+</div>
+</div>
