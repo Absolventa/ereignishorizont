@@ -1,7 +1,7 @@
 EventGirl::Application.routes.draw do
 
   get "password_resets/new"
-  get 'signup' => 'users#new'
+  #get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
 
