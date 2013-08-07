@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
 
+ 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize
 
 respond_to :html
 
-def index
-  @users = User.all
-end
+  def index
+    @users = User.all
+    
+  end
 
   def new
     @user = User.new
@@ -44,12 +46,20 @@ end
 
   private
 
-      def set_user
-        @user = current_user
-      end
+    #def set_user
+    #  @user = current_user
+    #end
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :auth_token)
+    end
+
+    def set_user
+      if current_user.admin?
+        @user = User.find(params[:id])
+      else
+        @user = current_user
+      end
     end
 end
 
