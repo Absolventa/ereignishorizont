@@ -6,8 +6,11 @@ class UsersController < ApplicationController
 respond_to :html
 
   def index
-    @users = User.all
-    
+    if current_user.admin?
+      @users = User.all
+    else
+      redirect_to incoming_events_path, alert: "Not authorized"
+    end   
   end
 
   def new
