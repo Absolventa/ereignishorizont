@@ -1,4 +1,5 @@
 EventGirl::Application.routes.draw do
+  root 'sessions#new'
 
   get "password_resets/new"
   #get 'signup' => 'users#new'
@@ -17,6 +18,7 @@ EventGirl::Application.routes.draw do
     end
   end
 
+
   #get '/alarm_triggers' => 'alarm_triggers#index' 
   #get '/alarm_triggers/show' => 'alarm_triggers#show'
 
@@ -25,7 +27,7 @@ EventGirl::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #root 'incoming_events#index'
-  root 'sessions#new'
+
   #get '/expected_events' => 'expected_events#index'
 
 
