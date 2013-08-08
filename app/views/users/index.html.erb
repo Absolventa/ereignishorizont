@@ -28,7 +28,7 @@
         <td><%= user.created_at %></td>
 
         <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, user %></td>
-        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_user_path(@user) %></td>
+        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_user_path(user) %></td>
         <td><%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
       </tr>
