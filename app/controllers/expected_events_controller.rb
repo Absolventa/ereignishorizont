@@ -4,8 +4,9 @@
 
 class ExpectedEventsController < ApplicationController
 
+  helper_method :sort_column, :sort_direction
   before_action :set_expected_event, only: [:show, :edit, :update, :destroy]
-  #before_action :authorize
+ 
   #buttons to show, edit, update and destroy only show up when 
   #someone has entered an expected event. 
 
@@ -14,7 +15,7 @@ class ExpectedEventsController < ApplicationController
   #GET /expected_events
   #GET /expected_events.json
   def index
-    @expected_events = ExpectedEvent.includes(:incoming_events).all
+    @expected_events = ExpectedEvent.includes(:incoming_events).order(sort_column + ' ' + sort_direction)
   end
   
   #GET /expected_events/1
@@ -77,5 +78,13 @@ class ExpectedEventsController < ApplicationController
     	def expected_event_params
       		params.require(:expected_event).permit([:title])
     	end
+
+      def sort_column
+        ExpectedEvent.column_names.include?(params[:sort]) ? params[:sort] : "title"
+      end
+
+      def sort_direction
+        %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+      end
 
 end

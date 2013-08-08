@@ -1,9 +1,10 @@
 class IncomingEventsController < ApplicationController
+  
+  helper_method :sort_column, :sort_direction
   before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
-  #before_action :authorize
 
   def index
-    @incoming_events = IncomingEvent.all
+    @incoming_events = IncomingEvent.order(sort_column + ' ' + sort_direction)
   end
 
   def show
@@ -51,6 +52,7 @@ class IncomingEventsController < ApplicationController
   end
 
   private
+
     def set_incoming_event
       @incoming_event = IncomingEvent.find(params[:id])
     end
@@ -58,4 +60,14 @@ class IncomingEventsController < ApplicationController
     def incoming_event_params
       params.require(:incoming_event).permit(:title)
     end
+
+    def sort_column
+      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "title" 
+    end
+
+    def sort_direction
+      %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+
 end

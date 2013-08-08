@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
- 
+  helper_method :sort_column, :sort_direction
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-respond_to :html
+  respond_to :html
 
   def index
     if current_user.admin?
-      @users = User.all
+      @users = User.order(sort_column + ' ' + sort_direction)
     else
       redirect_to incoming_events_path, alert: "Not authorized"
     end   
@@ -55,10 +55,6 @@ respond_to :html
 
   private
 
-    #def set_user
-    #  @user = current_user
-    #end
-
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :auth_token)
     end
@@ -70,6 +66,16 @@ respond_to :html
         @user = current_user
       end
     end
+
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : "email" 
+    end
+
+    def sort_direction
+      %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+
 end
 
 
