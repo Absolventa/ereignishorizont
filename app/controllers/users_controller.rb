@@ -64,11 +64,11 @@ class UsersController < ApplicationController
     end
 
     def set_user
-      if current_user.admin?
-        @user = User.find(params[:id])
-      else
-        @user = current_user
-      end
+      @user = if current_user.admin?
+                User.find(params[:id])
+              else
+                current_user
+              end
     end
 
     def sort_column
