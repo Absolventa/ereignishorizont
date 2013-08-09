@@ -3,6 +3,10 @@ require 'spec_helper'
 describe IncomingEventsController do
 	render_views
 
+  before do
+    controller.class.skip_before_action :authorize
+  end
+
 	describe 'GET index' do
 		it "renders all incoming events" do
 			incoming_event = FactoryGirl.create(:incoming_event)
