@@ -64,4 +64,51 @@ describe UsersController do
     end
   end
 
+  describe 'POST create' do
+    context 'as admin' do
+      it 'creates a new record from valid params' do
+        pending
+      end
+      it "renders 'new' template for invalid params" do
+        pending
+      end
+    end
+    context 'as normal user' do
+      it 'redirects to incoming_events#index' do
+        pending
+      end
+    end
+  end
+
+  describe 'PUT update' do
+    context 'as admin' do
+      it 'updates other user and redirects' do
+        pending
+      end
+      it "fails to update other user and renders 'edit' template" do
+        pending
+      end
+    end
+    context 'as normal user' do
+      it 'updates current user' do
+        pending
+      end
+      it "fails to update current user and renderfs 'edit' template" do
+        pending
+      end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    context 'as admin' do
+      it 'destroys other user' do
+        pending
+      end
+    end
+    context 'as normal user' do
+      it 'redirects to users#show' do
+        pending
+      end
+    end
+  end
 end
