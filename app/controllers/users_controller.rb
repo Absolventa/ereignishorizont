@@ -10,16 +10,20 @@ class UsersController < ApplicationController
       @users = User.order(sort_column + ' ' + sort_direction)
     else
       redirect_to incoming_events_path, alert: "Not authorized"
-    end   
+    end
   end
 
   def new
-    @user = User.new
+    if current_user.admin?
+      @user = User.new
+    else
+      redirect_to user_path(current_user), alert: "Not authorized"
+    end
   end
 
   def create
     @user = User.new(user_params)
-      
+
       if @user.save
         redirect_to incoming_events_path
         cookies[:auth_token] = @user.auth_token
@@ -28,7 +32,7 @@ class UsersController < ApplicationController
         render action: "new"
         flash[:error] = "Your sign up sucked"
       end
-      
+
   end
 
   def show
@@ -68,7 +72,7 @@ class UsersController < ApplicationController
     end
 
     def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : "email" 
+      User.column_names.include?(params[:sort]) ? params[:sort] : "email"
     end
 
     def sort_direction
