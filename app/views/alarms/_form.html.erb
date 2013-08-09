@@ -22,12 +22,24 @@
   </p>
 
   <p>
-    <%= f.label "If you want to get an email, please enter your address!" " (* required)"%><br>
+      <%= f.label "Is this the right email address?" %><br>
       <% if @alarm.recipient_email %>
         <%= f.text_field :recipient_email %>
       <% else %>
         <%= f.text_field :recipient_email, :value => current_user.email %>
       <% end %>
+
+      <!-- Tam trying to fix issue #8 -->
+      <%# if @alarm.enters_email? && @alarm.recipient_email %>
+        <%#= f.label "Is this the right email address?" " (* required)"%><br>
+        <%#= f.text_field :recipient_email, :value => current_user.email %>
+      <%# else %>
+      <%# if @alarm.enters_logger? %>
+        <%#= f.label "Please leave this box blank!" %><br>
+        <%#= f.text_field %>
+      <%# end %>
+      <%# end %>
+
   </p>
 
   <p>
