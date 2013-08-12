@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130807100910) do
+ActiveRecord::Schema.define(version: 20130812150753) do
 
   create_table "alarms", force: true do |t|
     t.string  "title"
@@ -24,7 +24,19 @@ ActiveRecord::Schema.define(version: 20130807100910) do
   add_index "alarms", ["expected_event_id"], name: "index_alarms_on_expected_event_id"
 
   create_table "expected_events", force: true do |t|
-    t.text "title"
+    t.text    "title"
+    t.boolean "weekday_0"
+    t.boolean "weekday_1"
+    t.boolean "weekday_2"
+    t.boolean "weekday_3"
+    t.boolean "weekday_4"
+    t.boolean "weekday_5"
+    t.boolean "weekday_6"
+    t.boolean "forward"
+    t.boolean "backward"
+    t.integer "final_hour"
+    t.date    "started_at"
+    t.date    "ended_at"
   end
 
   create_table "incoming_events", force: true do |t|
@@ -32,6 +44,7 @@ ActiveRecord::Schema.define(version: 20130807100910) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "expected_event_id"
+    t.datetime "tracked_at"
   end
 
   add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id"
