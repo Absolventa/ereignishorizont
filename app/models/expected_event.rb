@@ -18,6 +18,18 @@ class ExpectedEvent < ActiveRecord::Base
 		end
 	end
 
+  def selected_weekdays
+    selected_weekdays = ""
+    selected_weekdays += " Mon" if self.weekday_0 == true
+    selected_weekdays += " Tue" if self.weekday_1 == true
+    selected_weekdays += " Wed" if self.weekday_2 == true
+    selected_weekdays += " Thu" if self.weekday_3 == true
+    selected_weekdays += " Fri" if self.weekday_4 == true
+    selected_weekdays += " Sat" if self.weekday_5 == true
+    selected_weekdays += " Sun" if self.weekday_6 == true
+    selected_weekdays
+  end
+
   private
     def delete_white_spaces_from_title
       self.title = self.title.strip
