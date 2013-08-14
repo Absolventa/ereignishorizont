@@ -1,5 +1,6 @@
 <%= form_for(@expected_event, :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
   <% if @expected_event.errors.any? %>
+
     <div id="error_explanation">
       <h2><%= pluralize(@expected_event.errors.count, "error") %> prohibited this expected_event from being saved:</h2>
 
@@ -9,7 +10,7 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %> 
 
 
   <div class="control-group">
@@ -61,11 +62,25 @@
     <%= f.check_box :weekday_6, :id => "inlineCheckbox7" %>
   </div>
 
+<p>
+  <div class="checkbox inline">
+    <%= f.label :forward, "Forward", :class => "checkbox inline" %>
+    <%= f.check_box :forward %>
+  </div>
+
+  <div class="checkbox inline">
+    <%= f.label :backward, "Backward", :class => "checkbox inline" %>
+    <%= f.check_box :backward %>
+  </div>
+</p>
 
   <div class="form-actions">
     <%= f.submit :class => "btn btn-success" %>
   </div>
+
 <% end %>
+
+
 
 <script type="text/javascript">
   $(document).ready(function() {
