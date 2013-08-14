@@ -30,6 +30,13 @@ class ExpectedEvent < ActiveRecord::Base
     selected_weekdays
   end
 
+  def matching_direction
+    matching_direction = ""
+    matching_direction += " forward" if self.forward == true
+    matching_direction += " backward" if self.backward == true
+    matching_direction 
+  end
+
   private
     def delete_white_spaces_from_title
       self.title = self.title.strip
