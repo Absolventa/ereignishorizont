@@ -8,8 +8,8 @@ class ExpectedEvent < ActiveRecord::Base
 	before_save :delete_white_spaces_from_title
 
   scope :active, -> { where("started_at < ?", Time.now).where("ended_at > ?", Time.now) }
-  scope :forward_matching, -> { where(forward_matching: true) }
-  scope :backward_matching, -> { where(backward_matching: true)}
+  #scope :forward_matching, -> { where(forward_matching: true) }
+  #scope :backward_matching, -> { where(backward_matching: true)}
 
 
 	def alarm!
@@ -30,11 +30,12 @@ class ExpectedEvent < ActiveRecord::Base
     selected_weekdays
   end
 
-  def matching_direction
-    matching_direction = ""
-    matching_direction += " forward" if self.forward == true
-    matching_direction += " backward" if self.backward == true
-    matching_direction 
+  def event_matching_direction
+    if self.matching_direction == true
+      event_matching_direction = "Forward"
+    elsif self.matching_direction == false
+      event_matching_direction = "Backward"
+    end
   end
 
   private
