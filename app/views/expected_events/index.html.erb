@@ -23,7 +23,7 @@
         <td><%= expected_event.incoming_events.count if expected_event.incoming_events %></td>
         <td><%= link_to "Alarms (#{expected_event.alarms.count})", expected_event_alarms_path(expected_event) %></td>
         <td><%= expected_event.selected_weekdays %></td>
-        <td><%= expected_event.matching_direction %></td>
+        <td><%= expected_event.event_matching_direction %></td>
         <td></td>
         <td></td>
         <td></td>
