@@ -76,7 +76,7 @@ class ExpectedEventsController < ApplicationController
 
     	# Never trust parameters from the scary internet, only allow the white list through.
     	def expected_event_params
-      		params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2, :weekday_3, :weekday_4, :weekday_5, :weekday_6, :forward, :backward])
+      		params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2, :weekday_3, :weekday_4, :weekday_5, :weekday_6, :matching_direction])
     	end
 
       def sort_column
