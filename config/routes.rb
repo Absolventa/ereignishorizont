@@ -1,5 +1,5 @@
 EventGirl::Application.routes.draw do
-  root 'sessions#new'
+  root 'incoming_events#index'
 
   get "password_resets/new"
   #get 'signup' => 'users#new'
