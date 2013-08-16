@@ -149,26 +149,11 @@ footer ul li {
   width: 50px;
 }
 
-/* Expected Event Date Checkboxes */
+/* Expected Event Form */
 
-.choose_event{
-  border: 2px solid grey;
-  border-radius: 10px;
-  margin: 50px;
-  padding: 10px;
+.line-separator{
+  height:1px;
+  background:#717171;
+  margin: 20px;
+
 }
-
-.weekdays{
-  border: 2px solid grey;
-  border-radius: 10px;
-  margin: 50px;
-  padding: 10px;
-}
-
-.matching_direction{
-  border: 2px solid grey;
-  border-radius: 10px;
-  margin: 50px;
-  padding: 10px;
-}
-
