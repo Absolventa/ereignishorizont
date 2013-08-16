@@ -22,17 +22,20 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    if current_user.admin?
+      @user = User.new(user_params)
 
       if @user.save
-        redirect_to incoming_events_path
+        redirect_to users_path
         cookies[:auth_token] = @user.auth_token
         flash[:notice] = "Zank u for signing up!"
       else
         render action: "new"
         flash[:error] = "Your sign up sucked"
       end
-
+    else
+      redirect_to root_path, alert: "Not authorized"
+    end
   end
 
   def show
