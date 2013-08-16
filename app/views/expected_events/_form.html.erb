@@ -12,7 +12,7 @@
     </div>
   <% end %> 
 
-
+<div class="choose_event">
   <div class="control-group">
       <%= f.label :title, "Watch incoming event with name:", :class => "control-label" %>
     <div class="controls">
@@ -26,48 +26,77 @@
     <%= select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true %>
     </div>
   </div>
+</div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_0, "Monday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_0, :id => "inlineCheckbox1" %>
-  </div>
+<div class="weekdays">
+  <div class="row">
+    <div class="span3">
+      <div class="control-group">
+        <%= f.label :weekday_0, "Monday", :class => "control-label" %>
+        <div class="controls">
+          <%= f.check_box :weekday_0, :id => "inlineCheckbox1" %>
+        </div>
+      </div>
+   
+      <div class="control-group">
+        <%= f.label :weekday_1, "Tuesday", :class => "control-label" %>
+        <div class="controls">
+         <%= f.check_box :weekday_1, :id => "inlineCheckbox2" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_1, "Tuesday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_1, :id => "inlineCheckbox2" %>
-  </div>
+    <div class="span3">
+      <div class="control-group">
+        <%= f.label :weekday_2, "Wednesday", :class => "control-label" %>
+        <div class="controls">
+          <%= f.check_box :weekday_2, :id => "inlineCheckbox3" %>
+        </div>
+      </div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_2, "Wednesday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_2, :id => "inlineCheckbox3" %>
-  </div>
+      <div class="control-group">
+        <%= f.label :weekday_3, "Thursday", :class => "control-label" %>
+        <div class="controls">
+          <%= f.check_box :weekday_3, :id => "inlineCheckbox4" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_3, "Thursday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_3, :id => "inlineCheckbox4" %>
-  </div>
+    <div class="span3">
+      <div class="control-group">
+        <%= f.label :weekday_4, "Friday", :class => "control-label" %>
+        <div class="controls">
+          <%= f.check_box :weekday_4, :id => "inlineCheckbox5" %>
+        </div>
+      </div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_4, "Friday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_4, :id => "inlineCheckbox5" %>
-  </div>
+      <div class="control-group">
+        <%= f.label :weekday_5, "Saturday", :class => "control-label" %>
+        <div class="controls">
+          <%= f.check_box :weekday_5, :id => "inlineCheckbox6" %>
+        </div>
+      </div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_5, "Saturday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_5, :id => "inlineCheckbox6" %>
+      <div class="control-group">
+        <%= f.label :weekday_6, "Sunday", :class => "control-label" %>
+        <div class="controls">
+          <%= f.check_box :weekday_6, :id => "inlineCheckbox7" %>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="checkbox inline">
-    <%= f.label :weekday_6, "Sunday", :class => "checkbox inline" %>
-    <%= f.check_box :weekday_6, :id => "inlineCheckbox7" %>
-  </div>
 
- 
-  <div class="checkbox inline">
-    <%= f.label :matching_direction %>
-    <%= f.radio_button :matching_direction, true %> Forward
-    <%= f.radio_button :matching_direction, false %> Backward
-  </div>
+<div class="matching_direction"> 
+    <div class="control-group">
+      <%= f.label :matching_direction, "Matching Direction:", :class => "control-label" %>
+      <div class="controls">
+        <%= f.radio_button :matching_direction, true %> Forward
+        <%= f.radio_button :matching_direction, false %> Backward
+      </div>
+    </div>
+</div>
  
 
   <div class="form-actions">

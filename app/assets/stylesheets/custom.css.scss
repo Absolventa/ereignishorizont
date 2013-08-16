@@ -106,6 +106,7 @@ footer ul li {
   margin-left: 10px;
 }
 
+
 /* Susanne and Tam custom */
 
 .btn-custom {
@@ -129,6 +130,7 @@ footer ul li {
   padding-top: 150px;
 }
 
+
 /* Expected Event Table columns */
 
 .extitle{
@@ -146,3 +148,27 @@ footer ul li {
 .matching direction{
   width: 50px;
 }
+
+/* Expected Event Date Checkboxes */
+
+.choose_event{
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin: 50px;
+  padding: 10px;
+}
+
+.weekdays{
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin: 50px;
+  padding: 10px;
+}
+
+.matching_direction{
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin: 50px;
+  padding: 10px;
+}
+
