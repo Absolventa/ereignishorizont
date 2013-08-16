@@ -28,7 +28,7 @@ before_action :redirect_if_logged_in, :only => [:new, :create]
 private
 
   def redirect_if_logged_in
-    redirect_to(incoming_events_path) if current_user
+    redirect_to(root_path) if current_user
   end
 end
 
