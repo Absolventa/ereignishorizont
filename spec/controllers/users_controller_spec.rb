@@ -66,16 +66,30 @@ describe UsersController do
 
   describe 'POST create' do
     context 'as admin' do
+
+      before do
+        User.any_instance.stub(:admin?).and_return(true)
+      end
+
       it 'creates a new record from valid params' do
-        pending
+        attributes = FactoryGirl.attributes_for(:user)
+        expect do
+          post :create, user: attributes
+        end.to change{User.count}.by(1)
+        expect(response).to redirect_to users_path
       end
       it "renders 'new' template for invalid params" do
-        pending
+        expect do
+          post :create, user: {email:""}
+        end.not_to change{User.count}
+        expect(response).to render_template 'new'
       end
     end
     context 'as normal user' do
-      it 'redirects to incoming_events#index' do
-        pending
+      it 'redirects to root_path' do
+        post :create
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eql "Not authorized"
       end
     end
   end
