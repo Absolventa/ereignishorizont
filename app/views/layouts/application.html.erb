@@ -12,25 +12,30 @@
     <![endif]-->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   </head>
+
   <body>
+    <div id="wrap">
 
-    <%= render 'layouts/nav' %>
-    
-      <div class="container">
-        
-        <% if current_user %>
-          Logged in as <%= current_user.email %>
-        <% end %> 
+      <%= render 'layouts/nav' %>
+          
+        <div class="container">
+              
+          <% if current_user %>
+            Logged in as <%= current_user.email %>
+          <% end %> 
 
+          <div id="push"></div>
+                  
+              
+
+              <%= yield %>
+
+        </div>
         <%= render 'layouts/footer' %>
+    </div>    
 
-        <%= yield %>
-
-      </div>
-
-    <%=yield :js%>
-
-     <br> 
+          <%=yield :js%>
+ 
 
   
   </body>
