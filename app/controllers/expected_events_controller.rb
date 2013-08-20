@@ -16,6 +16,8 @@ class ExpectedEventsController < ApplicationController
   #GET /expected_events.json
   def index
     @expected_events = ExpectedEvent.includes(:incoming_events).order(sort_column + ' ' + sort_direction)
+    # @active = ExpectedEvent.where("started_at < ?", Time.now).where("ended_at > ?", Time.now)
+
   end
   
   #GET /expected_events/1

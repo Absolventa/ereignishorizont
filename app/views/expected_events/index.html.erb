@@ -24,7 +24,7 @@
         <td class ='alarms'><%= link_to "(#{expected_event.alarms.count})", expected_event_alarms_path(expected_event) %></td>
         <td class ='weekday'><%= expected_event.selected_weekdays %></td>
         <td class ='direction'><%= expected_event.event_matching_direction %></td>
-        <td class ='active'></td>
+        <td class ='active'><%= expected_event.activity_status %></td>
         <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, expected_event %></td>
         <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_expected_event_path(expected_event) %></td>
         <td><%= link_to '<i class="icon-trash"></i>'.html_safe, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
