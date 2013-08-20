@@ -101,6 +101,21 @@
           </div>
         </div>
 
+  <h4> Select Dates </h4>
+    <div class="line-separator"></div>
+      <div class="control-group">
+        <%= f.label "Start Date", :class => "control-label" %>
+        <div class="controls">
+          <%= date_select :expected_events, :started_at %>
+        </div>
+      </div>
+
+      <div class="control-group">
+          <%= f.label "End Date", :class => "control-label" %>
+        <div class="controls">
+          <%= date_select :expected_events, :ended_at %>
+        </div>
+      </div>
  
 
   <div class="form-actions">
