@@ -46,9 +46,9 @@ class ExpectedEvent < ActiveRecord::Base
 
   def activity_status
     if active?
-      activity_status = "active"
+      "active"
     else
-      activity_status = "inactive"
+      "inactive"
     end
   end
 
