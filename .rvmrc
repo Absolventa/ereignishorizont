@@ -1,3 +1,0 @@
-rvm use 2.0.0-p247
-
-rvm --create gemset use $(basename $(pwd))
