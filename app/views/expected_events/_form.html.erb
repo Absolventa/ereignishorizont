@@ -106,14 +106,14 @@
       <div class="control-group">
         <%= f.label "Start Date", :class => "control-label" %>
         <div class="controls">
-          <%= date_select :expected_event, :started_at %>
+          <%= f.text_field :started_at %>
         </div>
       </div>
 
       <div class="control-group">
           <%= f.label "End Date", :class => "control-label" %>
         <div class="controls">
-          <%= date_select :expected_event, :ended_at %>
+          <%= f.text_field :ended_at %>
         </div>
       </div>
 
@@ -134,6 +134,8 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+  //     $('#expected_event_started_at').datepicker({ dateFormat: "yy-mm-dd" });
+  // $('#expected_event_ended_at').datepicker({ dateFormat: "yy-mm-dd" });
     // $('#expected_event_title').select2();
     $('#available_incoming_event_titles').change(function() {
       $('#expected_event_title').val($(this).val());
