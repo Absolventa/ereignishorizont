@@ -1,4 +1,4 @@
-== README
+== README {<img src="https://codeclimate.com/github/Absolventa/event_girl.png" />}[https://codeclimate.com/github/Absolventa/event_girl]
 
 Welcome to Event Girl!
 
