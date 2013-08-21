@@ -12,7 +12,7 @@
     </div>
   <% end %> 
 
-  <h4> Select Expected Event </h4>
+  <h4>Select Expected Event</h4>
     <div class="line-separator"></div>
       <div class="control-group">
           <%= f.label :title, "Watch incoming event with name:", :class => "control-label" %>
@@ -30,7 +30,7 @@
  
 
 
-  <h4> Select Weekday(s) </h4>
+  <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
       <div class="row">
         <div class="span3">
@@ -91,17 +91,17 @@
         </div>
       </div>
 
-    <h4>Select Matching Direction </h4>
-      <div class="line-separator"></div>
-        <div class="control-group">
-          <%= f.label :matching_direction, "Matching Direction:", :class => "control-label" %>
-          <div class="controls">
-            <%= f.radio_button :matching_direction, true %> Forward
-            <%= f.radio_button :matching_direction, false %> Backward
-          </div>
+  <h4>Select Matching Direction</h4>
+    <div class="line-separator"></div>
+      <div class="control-group">
+        <%= f.label :matching_direction, "Matching Direction:", :class => "control-label" %>
+        <div class="controls">
+          <%= f.radio_button :matching_direction, true %> Forward
+          <%= f.radio_button :matching_direction, false %> Backward
         </div>
+      </div>
 
-  <h4> Select Dates </h4>
+  <h4>Select Dates</h4>
     <div class="line-separator"></div>
       <div class="control-group">
         <%= f.label "Start Date", :class => "control-label" %>
@@ -116,16 +116,21 @@
           <%= date_select :expected_event, :ended_at %>
         </div>
       </div>
- 
+
+  <h4>Final Hour</h4>
+    <div class="line-separator"></div>
+      <div class="control-group">
+        <%= f.label :final_hour, :class => "control-label" %>
+        <div class="controls">
+          <%= f.select :final_hour, (1..24) %>
+        </div>
+      </div>
 
   <div class="form-actions">
     <%= f.submit :class => "btn btn-success" %>
   </div>
 
 <% end %>
-
-
-
 
 <script type="text/javascript">
   $(document).ready(function() {
