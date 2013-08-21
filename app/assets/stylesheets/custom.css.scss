@@ -155,7 +155,7 @@ footer ul li {
 /* Expected Event Table columns */
 
 .extitle{
-  width: 250px;
+  width: 200px;
 }
 
 .count {
@@ -163,11 +163,19 @@ footer ul li {
 }
 
 .weekday{
-  width: 250px;
+  width: 200px;
 }
 
-.matching direction{
-  width: 50px;
+.direction{
+  width: 25px;
+}
+
+.active {
+  width: 10px;
+}
+
+.final_hour {
+  width: 25px;
 }
 
 /* Expected Event Form */
