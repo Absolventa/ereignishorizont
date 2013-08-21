@@ -134,9 +134,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-  //     $('#expected_event_started_at').datepicker({ dateFormat: "yy-mm-dd" });
-  // $('#expected_event_ended_at').datepicker({ dateFormat: "yy-mm-dd" });
-    // $('#expected_event_title').select2();
+    $('#expected_event_title').select2();
     $('#available_incoming_event_titles').change(function() {
       $('#expected_event_title').val($(this).val());
       $('#expected_event_title').focus();
