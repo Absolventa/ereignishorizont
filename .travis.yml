@@ -1,4 +1,6 @@
 language: ruby
 rvm: 2.0
-before_script: 'bundle exec rake db:migrate RAILS_ENV=test'
+before_script:
+  - 'cp config/config.yml.example config/config.yml' 
+  - 'bundle exec rake db:migrate RAILS_ENV=test'
 script: 'bundle exec rspec spec'
