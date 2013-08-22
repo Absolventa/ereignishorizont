@@ -4,3 +4,10 @@ before_script:
   - 'cp config/config.yml.example config/config.yml' 
   - 'bundle exec rake db:migrate RAILS_ENV=test'
 script: 'bundle exec rspec spec'
+
+notifications:
+  email:
+    - tam.eastley@gmail.com
+    - susanne.dewein@gmail.com
+    - carp@hacksocke.de
+    - felix@mohnert.de
