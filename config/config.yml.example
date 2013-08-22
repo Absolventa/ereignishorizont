@@ -1,5 +1,6 @@
 defaults: &defaults
   url_scheme: http
+  mail_from: event_girl@example.com
 
 development:
   <<: *defaults
