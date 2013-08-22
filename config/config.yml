@@ -1,0 +1,14 @@
+defaults: &defaults
+  url_scheme: http
+
+development:
+  <<: *defaults
+  host: example.com
+
+test:
+  <<: *defaults
+  host: test.host
+
+production:
+  host: your.production.host
+  url_scheme: https
