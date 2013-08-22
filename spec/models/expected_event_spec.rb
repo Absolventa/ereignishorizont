@@ -4,6 +4,7 @@ describe ExpectedEvent do
 	 it { should have_many :alarms }
 	 it { should have_many :incoming_events }
 	 it { should validate_presence_of :title }
+	 it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
 
 	 it "has a valid factory" do
 	 	FactoryGirl.build(:expected_event).should be_valid
