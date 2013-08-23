@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    redirect_to root_url, alert: "Not authorized" unless logged_in?
+    redirect_to login_path, alert: "Not authorized" unless logged_in?
   end
 
 end
