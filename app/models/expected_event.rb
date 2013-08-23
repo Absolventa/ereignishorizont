@@ -5,7 +5,7 @@ class ExpectedEvent < ActiveRecord::Base
 	has_many :alarms
 	has_many :incoming_events
 
-	before_save :delete_white_spaces_from_title
+	before_validation :delete_white_spaces_from_title
 
   validates_inclusion_of :final_hour, in: 1..24 
 
@@ -56,6 +56,6 @@ class ExpectedEvent < ActiveRecord::Base
 
   private
     def delete_white_spaces_from_title
-      self.title = self.title.strip
+      self.title = self.title.strip if self.title
     end
 end
