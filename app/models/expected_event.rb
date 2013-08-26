@@ -21,7 +21,7 @@ class ExpectedEvent < ActiveRecord::Base
 		end
 	end
 
-  def selected_weekdays
+   def selected_weekdays
     selected_weekdays = ""
     selected_weekdays += " Mon" if self.weekday_0 == true
     selected_weekdays += " Tue" if self.weekday_1 == true

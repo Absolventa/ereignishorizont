@@ -48,6 +48,24 @@ describe ExpectedEvent do
 			subject.ended_at = nil
 			expect(subject).not_to be_active
 		end
-
 	end
+
+	describe "selected_weekdays" do
+		it 'adds name if selected weekday is true' do
+			 subject.weekday_0 = true
+			 expect(subject.selected_weekdays).to eql " Mon"
+		end
+
+		it 'does not add name if selected weekday is false' do
+			subject.weekday_0 = false
+			expect(subject.selected_weekdays).not_to eql " Mon"
+		end
+
+		it 'does not add incorrect selected weekday name' do
+			subject.weekday_0 = true
+			expect(subject.selected_weekdays).not_to eql " Tue"
+		end
+	end
+
+
 end
