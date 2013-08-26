@@ -8,6 +8,8 @@ class ExpectedEvent < ActiveRecord::Base
 	before_validation :delete_white_spaces_from_title
 
   validates_inclusion_of :final_hour, in: 1..24 
+  #TODO not needed for forward matching?
+
 
   #scope :active, -> { where("started_at < ?", Time.now).where("ended_at > ?", Time.now) }
   #scope :forward_matching, -> { where(forward_matching: true) }
