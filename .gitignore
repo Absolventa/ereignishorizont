@@ -17,3 +17,4 @@
 
 # Ignore application-specific config files
 config/config.yml
+coverage/**/*
