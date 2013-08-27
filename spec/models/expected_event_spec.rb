@@ -57,18 +57,18 @@ describe ExpectedEvent do
 
 		it 'adds name if selected weekday is true' do
 			 subject.weekday_0 = true
-			 expect(subject.selected_weekdays).to eql " Mon"
+			 expect(subject.selected_weekdays).to eql "Mon"
 		end
 
 		it 'does not add name if selected weekday is false' do
 			subject.weekday_0 = false
-			expect(subject.selected_weekdays).not_to eql " Mon"
+			expect(subject.selected_weekdays).not_to eql "Mon"
 		end
 
 		it 'adds more than one selected weekday' do
 			subject.weekday_6 = true
 			subject.weekday_0 = true
-			expect(subject.selected_weekdays).to eql " Mon Sun"
+			expect(subject.selected_weekdays).to eql "Mon Sun"
 		end
 	end
 

@@ -22,15 +22,23 @@ class ExpectedEvent < ActiveRecord::Base
 	end
 
    def selected_weekdays
-    selected_weekdays = ""
-    selected_weekdays += " Mon" if self.weekday_0
-    selected_weekdays += " Tue" if self.weekday_1
-    selected_weekdays += " Wed" if self.weekday_2
-    selected_weekdays += " Thu" if self.weekday_3
-    selected_weekdays += " Fri" if self.weekday_4
-    selected_weekdays += " Sat" if self.weekday_5
-    selected_weekdays += " Sun" if self.weekday_6
-    selected_weekdays
+    selected_weekdays = []
+    selected_weekdays << "Mon" if self.weekday_0
+    selected_weekdays << "Tue" if self.weekday_1
+    selected_weekdays << "Wed" if self.weekday_2
+    selected_weekdays << "Thu" if self.weekday_3
+    selected_weekdays << "Fri" if self.weekday_4
+    selected_weekdays << "Sat" if self.weekday_5
+    selected_weekdays << "Sun" if self.weekday_6
+    selected_weekdays.join(" ")
+
+    # daynames = Date::ABBR_DAYNAMES.dup
+    # daynames = daynames[1..-1] << daynames[0]
+
+    # (0..6).map{|i| "weekday_#{i}" }.each_with_index do |weekday, index|
+    #   selected_weekdays << daynames[index] if self.send(weekday)
+    # end
+    # selected_weekdays.join(" ")
   end
 
   def event_matching_direction
