@@ -25,21 +25,21 @@ class ExpectedEvent < ActiveRecord::Base
 
    def selected_weekdays
     selected_weekdays = ""
-    selected_weekdays += " Mon" if self.weekday_0 == true
-    selected_weekdays += " Tue" if self.weekday_1 == true
-    selected_weekdays += " Wed" if self.weekday_2 == true
-    selected_weekdays += " Thu" if self.weekday_3 == true
-    selected_weekdays += " Fri" if self.weekday_4 == true
-    selected_weekdays += " Sat" if self.weekday_5 == true
-    selected_weekdays += " Sun" if self.weekday_6 == true
+    selected_weekdays += " Mon" if self.weekday_0
+    selected_weekdays += " Tue" if self.weekday_1
+    selected_weekdays += " Wed" if self.weekday_2
+    selected_weekdays += " Thu" if self.weekday_3
+    selected_weekdays += " Fri" if self.weekday_4
+    selected_weekdays += " Sat" if self.weekday_5
+    selected_weekdays += " Sun" if self.weekday_6
     selected_weekdays
   end
 
   def event_matching_direction
-    if self.matching_direction == true
-      event_matching_direction = "Forward"
+    if self.matching_direction
+      "Forward"
     elsif self.matching_direction == false
-      event_matching_direction = "Backward"
+      "Backward"
     end
   end
 

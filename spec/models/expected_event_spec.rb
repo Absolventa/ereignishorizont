@@ -50,7 +50,7 @@ describe ExpectedEvent do
 		end
 	end
 
-	describe "selected_weekdays" do
+	describe "#selected_weekdays" do
 		it 'returns an empty string if no day selected' do
 			expect(subject.selected_weekdays).to eql ""
 		end
@@ -70,6 +70,31 @@ describe ExpectedEvent do
 			subject.weekday_0 = true
 			expect(subject.selected_weekdays).to eql " Mon Sun"
 		end
+	end
+
+	describe "#event_matching_direction" do
+		it 'returns "Forward" if true' do
+			subject.matching_direction = true
+			expect(subject.event_matching_direction).to eql "Forward"
+		end
+
+		it 'returns "Backward" if false' do
+			subject.matching_direction = false
+			expect(subject.event_matching_direction).to eql "Backward"
+		end
+	end
+
+	describe "#activity_status" do
+		it 'returns "active" if event is ongoing' do
+			subject.stub(:active?).and_return(true)
+			expect(subject.activity_status).to eql "active"
+		end
+
+		it 'returns "inactive" if event is not ongoing' do
+			subject.stub(:active?).and_return(false)
+			expect(subject.activity_status).to eql "inactive"
+		end
+
 	end
 
 
