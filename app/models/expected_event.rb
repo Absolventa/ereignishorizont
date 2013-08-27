@@ -18,9 +18,7 @@ class ExpectedEvent < ActiveRecord::Base
 
 
 	def alarm!
-		alarms.each do |alarm|
-			alarm.run
-		end
+		alarms.each { |alarm| alarm.run }
 	end
 
    def selected_weekdays

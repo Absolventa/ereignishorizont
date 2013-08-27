@@ -94,8 +94,19 @@ describe ExpectedEvent do
 			subject.stub(:active?).and_return(false)
 			expect(subject.activity_status).to eql "inactive"
 		end
-
 	end
 
+	describe '#alarm!' do
+		it 'does nothing when no alarms exist' do
+			Alarm.any_instance.should_not_receive(:run)
+			subject.alarm!
+		end
 
+		it 'calls the run method on each alarm' do
+			alarm = Alarm.new
+			alarm.should_receive(:run)
+			subject.alarms = [alarm]
+			subject.alarm!
+		end
+	end
 end
