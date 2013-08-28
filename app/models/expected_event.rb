@@ -23,13 +23,13 @@ class ExpectedEvent < ActiveRecord::Base
 
    def selected_weekdays
     selected_weekdays = []
-    selected_weekdays << "Mon" if self.weekday_0
-    selected_weekdays << "Tue" if self.weekday_1
-    selected_weekdays << "Wed" if self.weekday_2
-    selected_weekdays << "Thu" if self.weekday_3
-    selected_weekdays << "Fri" if self.weekday_4
-    selected_weekdays << "Sat" if self.weekday_5
-    selected_weekdays << "Sun" if self.weekday_6
+    selected_weekdays << "Sun" if self.weekday_0
+    selected_weekdays << "Mon" if self.weekday_1
+    selected_weekdays << "Tue" if self.weekday_2
+    selected_weekdays << "Wed" if self.weekday_3
+    selected_weekdays << "Thu" if self.weekday_4
+    selected_weekdays << "Fri" if self.weekday_5
+    selected_weekdays << "Sat" if self.weekday_6
     selected_weekdays.join(" ")
 
     # daynames = Date::ABBR_DAYNAMES.dup
@@ -60,6 +60,11 @@ class ExpectedEvent < ActiveRecord::Base
     else
       "inactive"
     end
+  end
+
+  def weekday_checker
+    Date.today.wday
+    
   end
 
   private
