@@ -109,4 +109,16 @@ describe ExpectedEvent do
 			subject.alarm!
 		end
 	end
+
+	describe '#weekdays' do
+		it 'returns a list of seven false values' do
+			expect(subject.weekdays).to eql [false, false, false, false, false, false, false]
+		end
+
+		it 'returns a boolean value for each weekday' do
+			subject.weekday_1 = true
+			subject.weekday_6 = true
+			expect(subject.weekdays).to eql [false, true, false, false, false, false, true]
+		end
+	end
 end

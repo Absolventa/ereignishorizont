@@ -66,6 +66,17 @@ class ExpectedEvent < ActiveRecord::Base
     Date.today.wday
     
   end
+  def weekdays
+    weekdays = []
+    weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans
+    weekdays << !!self.weekday_1
+    weekdays << !!self.weekday_2
+    weekdays << !!self.weekday_3
+    weekdays << !!self.weekday_4
+    weekdays << !!self.weekday_5
+    weekdays << !!self.weekday_6
+    weekdays
+  end
 
   private
     def delete_white_spaces_from_title
