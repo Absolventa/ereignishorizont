@@ -21,7 +21,17 @@ class ExpectedEvent < ActiveRecord::Base
 		alarms.each { |alarm| alarm.run }
 	end
 
-   def selected_weekdays
+  # (0..6).each do |weekday_index|
+
+  #   # dynamically define method
+
+  #   define_method "hurray_for_weekday_#{weekday_index}!" do
+  #     puts "hurray" if self.send("weekday_#{weekday_index}")
+  #   end
+
+  # end
+
+  def selected_weekdays
     selected_weekdays = []
     selected_weekdays << "Sun" if self.weekday_0
     selected_weekdays << "Mon" if self.weekday_1
