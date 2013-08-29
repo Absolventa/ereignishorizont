@@ -144,4 +144,13 @@ describe ExpectedEvent do
 			end
 		end
  	end
-end
+
+ 	describe '#active_today?'
+ 		it 'returns todays true if current weekday selected' do
+ 			new_time = Time.local(2013, 8, 28, 12, 0, 0)
+ 			Timecop.freeze(new_time)
+ 			Time.stub(:now)
+ 			subject.weekday_3 = true
+			expect(subject.active_today?).to eql subject.weekday_3
+ 		end
+ 	end
