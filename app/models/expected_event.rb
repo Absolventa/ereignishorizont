@@ -77,7 +77,11 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def deadline #date and time together
-    
+    if weekday_checker
+      Time.zone.now.beginning_of_day + final_hour.hours
+    else 
+      Time.zone.now.beginning_of_day
+    end
   end
 
   def weekdays
