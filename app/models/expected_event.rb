@@ -31,6 +31,7 @@ class ExpectedEvent < ActiveRecord::Base
 
   # end
 
+  # Assigns weekday names to numbered days of the week
   def selected_weekdays
     selected_weekdays = []
     selected_weekdays << "Sun" if self.weekday_0
@@ -59,6 +60,7 @@ class ExpectedEvent < ActiveRecord::Base
     end
   end
 
+  # Determines whether an event is active based on its date
   def active?
     return false unless self.started_at and self.ended_at
     self.started_at < Time.now and self.ended_at > Time.now
@@ -74,16 +76,21 @@ class ExpectedEvent < ActiveRecord::Base
 
   def weekday_checker
     self.send("weekday_#{Date.today.wday}")
+  # Returns true or false if the current weekday is checked
   end
 
   def deadline #date and time together
     if weekday_checker
+  # Adds todays date (active_today?) and time (final_hour)
+  # together to make a datetime object
       Time.zone.now.beginning_of_day + final_hour.hours
     else 
       Time.zone.now.beginning_of_day
     end
   end
 
+  # Returns an array of seven true/false values for each selected
+  # or not selected day of the week
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans
