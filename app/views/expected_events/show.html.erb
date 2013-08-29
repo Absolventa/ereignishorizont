@@ -10,25 +10,25 @@
 <p>
 	<strong>Selected Weekday(s): </strong>
 	<% if @expected_event.weekday_0.present? %>
-		Monday
+		Sunday
 	<% end %>
 	<% if @expected_event.weekday_1.present? %>
-		Tuesday
+		Monday
 	<% end %>
 		<% if @expected_event.weekday_2.present? %>
-		Wednesday
+		Tuesday
 	<% end %>
 	<% if @expected_event.weekday_3.present? %>
-		Thursday
+		Wednesday
 	<% end %>
 	<% if @expected_event.weekday_4.present? %>
-		Friday
+		Thursday
 	<% end %>
 	<% if @expected_event.weekday_5.present? %>
-		Saturday
+		Friday
 	<% end %>
 	<% if @expected_event.weekday_6.present? %>
-		Sunday
+		Saturday
 	<% end %>
 </p>
 
