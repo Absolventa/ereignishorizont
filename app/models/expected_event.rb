@@ -7,7 +7,7 @@ class ExpectedEvent < ActiveRecord::Base
 
 	before_validation :delete_white_spaces_from_title
 
-  validates_inclusion_of :final_hour, in: 1..24 
+  validates_inclusion_of :final_hour, in: 1..24
   #TODO not needed for forward matching?
 
 
@@ -75,17 +75,17 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   # Returns true or false if the current weekday is checked
-  def active_today?
-    weekdays[Date.today.wday] 
+  def checked_today?
+    weekdays[Date.today.wday]
     #self.send("weekday_#{Date.today.wday}")
   end
 
   # Adds todays date (active_today?) and time (final_hour)
   # together to make a datetime object
   def deadline
-    if active_today?
+    if checked_today?
       Time.zone.now.beginning_of_day + final_hour.hours
-    else 
+    else
       Time.zone.now.beginning_of_day
     end
   end
