@@ -145,19 +145,19 @@ describe ExpectedEvent do
 		end
  	end
 
- 	describe '#active_today?'
- 		it 'returns todays true if current weekday selected' do
+ 	describe '#active_today?' do
+    before do
  			new_time = Time.local(2013, 8, 28, 12, 0, 0) # That'd be a wednesday
  			Timecop.freeze(new_time)
  			Time.stub(:now)
+    end
+ 		it 'returns todays true if current weekday selected' do
  			subject.weekday_3 = true
 			expect(subject).to be_active_today
  		end
     it 'returns false' do
- 			new_time = Time.local(2013, 8, 28, 12, 0, 0) # That'd be a wednesday
- 			Timecop.freeze(new_time)
- 			Time.stub(:now)
  			subject.weekday_3 = false
 			expect(subject).not_to be_active_today
     end
  	end
+end
