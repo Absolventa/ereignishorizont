@@ -73,9 +73,13 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def weekday_checker
-    Date.today.wday
+    self.send("weekday_#{Date.today.wday}")
+  end
+
+  def deadline #date and time together
     
   end
+
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans

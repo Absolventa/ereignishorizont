@@ -121,4 +121,27 @@ describe ExpectedEvent do
 			expect(subject.weekdays).to eql [false, true, false, false, false, false, true]
 		end
 	end
+
+	describe '#deadline' do
+		context 'with current weekday activated' do
+			it 'returns a datetime representing today at noon' do
+				expected_date = Time.zone.now.beginning_of_day + 12.hours
+				subject.final_hour = 12
+				subject.weekday_0 = true
+				subject.weekday_1 = true
+				subject.weekday_2 = true
+				subject.weekday_3 = true
+				subject.weekday_4 = true
+				subject.weekday_5 = true
+				subject.weekday_6 = true
+				expect(subject.deadline).to eql expected_date
+			end
+		end
+		context 'with current weekday deactivated' do
+			it 'returns the beginning of the current day' do
+				expected_date = Time.zone.now.beginning_of_day
+				expect(subject.deadline).to eql expected_date
+			end
+		end
+ 	end
 end
