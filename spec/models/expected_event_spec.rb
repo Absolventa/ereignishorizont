@@ -41,7 +41,7 @@ describe ExpectedEvent do
 			subject.started_at = 2.days.ago
 			subject.ended_at = 1.day.ago
 			expect(subject).not_to be_active
-		end 
+		end
 
 		it 'returns false if either time is not set' do
 			subject.started_at = nil
@@ -147,10 +147,10 @@ describe ExpectedEvent do
 
  	describe '#active_today?'
  		it 'returns todays true if current weekday selected' do
- 			new_time = Time.local(2013, 8, 28, 12, 0, 0)
+ 			new_time = Time.local(2013, 8, 28, 12, 0, 0) # That'd be a wednesday
  			Timecop.freeze(new_time)
  			Time.stub(:now)
  			subject.weekday_3 = true
-			expect(subject.active_today?).to eql subject.weekday_3
+			expect(subject).to be_active_today
  		end
  	end
