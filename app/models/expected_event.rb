@@ -86,6 +86,8 @@ class ExpectedEvent < ActiveRecord::Base
     if weekday_checker
   # Adds todays date (active_today?) and time (final_hour)
   # together to make a datetime object
+  def deadline
+    if active_today?
       Time.zone.now.beginning_of_day + final_hour.hours
     else 
       Time.zone.now.beginning_of_day
