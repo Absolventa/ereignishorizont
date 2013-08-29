@@ -77,6 +77,9 @@ class ExpectedEvent < ActiveRecord::Base
   def weekday_checker
     self.send("weekday_#{Date.today.wday}")
   # Returns true or false if the current weekday is checked
+  def active_today?
+    weekdays[Date.today.wday] 
+    #self.send("weekday_#{Date.today.wday}")
   end
 
   def deadline #date and time together
