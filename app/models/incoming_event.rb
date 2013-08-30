@@ -5,6 +5,10 @@ class IncomingEvent < ActiveRecord::Base
 
 	before_save :delete_white_spaces_from_title
 
+  scope :before_deadline, -> { where("created_at < ?", ExpectedEvent.deadline) }
+  scope :matching_title, -> { where(ExpectedEvent.title == IncomingEvent.title) }
+  scope :tracked, -> { where(IncomingEvent.tracked_at == nil) }
+  # TODO are these right?
   private
     def delete_white_spaces_from_title
       self.title = self.title.strip
