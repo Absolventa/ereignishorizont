@@ -10,11 +10,12 @@ class ExpectedEvent < ActiveRecord::Base
   validates_inclusion_of :final_hour, in: 1..24
   #TODO not needed for forward matching?
 
-
-  #scope :active, -> { where("started_at < ?", Time.now).where("ended_at > ?", Time.now) }
-  #scope :forward_matching, -> { where(forward_matching: true) }
-  #scope :backward_matching, -> { where(backward_matching: true)}
-  #scopes are like normal methods, just different syntax
+  scope :active, -> { where("started_at < ?", Time.now).where("ended_at > ?", Time.now) }
+  scope :forward, -> { where(forward: true) }
+  scope :backward, -> { where(backward: true) }
+  scope :today, -> { where(checked_today?: true) }
+  # scope :our_backward_matcher -> { where(active.today.backward) } <- not working and don't know how to fix it
+  # TODO are these right?
 
 
 	def alarm!
