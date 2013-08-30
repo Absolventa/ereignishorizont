@@ -9,6 +9,11 @@ class IncomingEvent < ActiveRecord::Base
   scope :matching_title, -> { where(ExpectedEvent.title == IncomingEvent.title) }
   scope :tracked, -> { where(IncomingEvent.tracked_at == nil) }
   # TODO are these right?
+
+  def track! #exclamation point saves it for you
+    tracked_at = Time.zone.now
+  end
+
   private
     def delete_white_spaces_from_title
       self.title = self.title.strip
