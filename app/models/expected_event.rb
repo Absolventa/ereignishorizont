@@ -11,12 +11,11 @@ class ExpectedEvent < ActiveRecord::Base
   #TODO not needed for forward matching?
 
   scope :active, -> { where("started_at < ?", Time.now).where("ended_at > ?", Time.now) }
-  scope :forward, -> { where(forward: true) }
-  scope :backward, -> { where(backward: true) }
-  scope :today, -> { where(checked_today?: true) }
-  # scope :our_backward_matcher -> { where(active.today.backward) } <- not working and don't know how to fix it
-  # TODO are these right?
+  scope :forward, -> { where(matching_direction: true) }
+  scope :backward, -> { where(matching_direction: false) }
+  scope :today, -> { where("weekday_#{Date.today.wday}" => true) }
 
+  scope :our_backward_matcher, -> { active.today.backward }
 
 	def alarm!
 		alarms.each { |alarm| alarm.run }
