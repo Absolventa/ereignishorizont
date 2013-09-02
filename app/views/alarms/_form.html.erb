@@ -31,7 +31,7 @@
       <% if @alarm.recipient_email %>
         <%= f.text_field :recipient_email %>
       <% else %>
-        <%#= f.text_field :recipient_email, :value => current_user.email %>
+        <%= f.text_field :recipient_email, :value => current_user.email %>
       <% end %>
     </div>
   </div>
