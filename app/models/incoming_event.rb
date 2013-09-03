@@ -5,12 +5,11 @@ class IncomingEvent < ActiveRecord::Base
 
 	before_save :delete_white_spaces_from_title
 
-  # scope :matching_title, -> { where("title = ?", ExpectedEvent.new.title) }
-  # scope :tracked, -> { where(IncomingEvent.tracked_at == nil) }
-  # TODO are these right?
+  scope :not_tracked, -> { where(tracked_at: nil) }
 
-  def track! #exclamation point saves it for you
-    tracked_at = Time.zone.now
+  def track!
+    self.tracked_at = Time.zone.now
+    save
   end
 
   private
@@ -18,4 +17,3 @@ class IncomingEvent < ActiveRecord::Base
       self.title = self.title.strip
     end
 end
-
