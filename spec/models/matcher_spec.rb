@@ -2,30 +2,9 @@ require 'spec_helper'
 
 describe Matcher do
 
-  context 'checking for Expected Event scopes' do
-    it 'only considers Expected Events that are active' do
-      pending
-    end
-
-    it 'only considers Expected Events that are valid today' do
-      pending
-    end
-
-    it 'only considers Expected Events that are backward matching' do
-      pending
-    end
-  end
-
   context 'matching Incoming Events' do
-    it 'only considers Incoming Events that have not been tracked yet' do
-      pending
-    end
 
     it 'only considers Incoming Events that have same title as an Expected Event' do
-      pending
-    end
-
-    it 'only considers Incoming Events  created today' do
       pending
     end
 
