@@ -161,4 +161,22 @@ describe ExpectedEvent do
       expect(subject).not_to be_checked_today
     end
   end
+
+  context 'with scopes' do
+  	it 'has an active scope' do
+  		expect(ExpectedEvent.active).to be_kind_of ActiveRecord::Relation
+  	end
+
+  	it 'has a forward scope' do
+  		expect(ExpectedEvent.forward).to be_kind_of ActiveRecord::Relation
+  	end
+
+  	it 'has a backward scope' do
+  		expect(ExpectedEvent.backward).to be_kind_of ActiveRecord::Relation
+  	end
+
+  	it 'has a today scope' do
+  		expect(ExpectedEvent.today).to be_kind_of ActiveRecord::Relation
+  	end
+  end
 end
