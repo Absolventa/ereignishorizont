@@ -5,9 +5,8 @@ class IncomingEvent < ActiveRecord::Base
 
 	before_save :delete_white_spaces_from_title
 
-  scope :before_deadline, -> { where("created_at < ?", ExpectedEvent.deadline) }
-  scope :matching_title, -> { where(ExpectedEvent.title == IncomingEvent.title) }
-  scope :tracked, -> { where(IncomingEvent.tracked_at == nil) }
+  # scope :matching_title, -> { where("title = ?", ExpectedEvent.new.title) }
+  # scope :tracked, -> { where(IncomingEvent.tracked_at == nil) }
   # TODO are these right?
 
   def track! #exclamation point saves it for you
