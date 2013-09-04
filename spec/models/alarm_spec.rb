@@ -6,7 +6,11 @@ describe Alarm do
     it { should belong_to :expected_event }
     it { should validate_presence_of :expected_event }
   	it { should allow_value("a@b.com").for(:recipient_email) }
-    
+
+    it "has a valid factory" do
+      FactoryGirl.build(:alarm).should be_valid
+    end
+
     it 'allows available values from the constant' do
       Alarm::ACTIONS.each do |v|
         should allow_value(v).for(:action)

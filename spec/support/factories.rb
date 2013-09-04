@@ -1,5 +1,11 @@
 FactoryGirl.define do
 
+  factory :alarm do
+    action 'Email'
+  	sequence(:recipient_email) { |n| "johndoe#{n}@example.com"}
+    expected_event
+  end
+
   factory :expected_event do
   	title 'my event title'
     final_hour 15
