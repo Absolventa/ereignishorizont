@@ -6,7 +6,11 @@ describe Alarm do
     it { should belong_to :expected_event }
     it { should validate_presence_of :expected_event }
   	it { should allow_value("a@b.com").for(:recipient_email) }
-    
+
+    it "has a valid factory" do
+      FactoryGirl.build(:alarm).should be_valid
+    end
+
     it 'allows available values from the constant' do
       Alarm::ACTIONS.each do |v|
         should allow_value(v).for(:action)
@@ -23,30 +27,38 @@ describe Alarm do
   context "the dropdown menu" do
     it 'assigns the value "Email" to action if Email is chosen' do
       subject.action = "Email"
-      expect(subject.action).to eql "Email"
+      expect(subject.enters_email?).to be_true
     end
 
-    it 'does not assigns the value "Email" to action if Email is not chosen' do
+    it 'does not assign the value "Email" to action if Email is not chosen' do
       subject.action = "Logger"
-      expect(subject.action).not_to eql "Email"
+      expect(subject.enters_logger?).to be_true
     end
 
     it 'assigns the value "Logger" to action if Logger is chosen' do
       subject.action = "Logger"
-      expect(subject.action).to eql "Logger"
+      expect(subject.enters_logger?).to be_true
     end
 
     it 'does not assigns the value "Logger" to action if Logger is not chosen' do
       subject.action = "Email"
-      expect(subject.action).not_to eql "Logger"
+      expect(subject.enters_email?).to be_true
     end
   end
 
   context "#run" do
-    it 'sends an email alarm if Email chosen' do
-      subject.action = "Email"
-      pending
+    it 'sends an email when email is selected' do
+      subject = FactoryGirl.build(:alarm)
+      subject.stub(:enters_email?).and_return(true)
+      expect do
+        subject.run
+      end.to change { ActionMailer::Base.deliveries.size }.by(1)
+    end
+
+    it 'sends a logger message when logger is selected' do
+      Rails.logger.should_receive(:info)
+      subject.stub(:enters_logger?).and_return(true)
+      subject.run
     end
   end
-
 end
