@@ -22,7 +22,11 @@ describe Matcher do
     end
 
     it 'sends an alarm if an event is not matched' do
-      pending
+      subject.stub(:incoming_events_for).and_return([])
+      subject.stub(:expected_events).and_return([expected_event])
+
+      expected_event.should_receive(:alarm!)
+      subject.run
     end
   end
 

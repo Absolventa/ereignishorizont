@@ -24,7 +24,7 @@ class Matcher
       # end
 
       incoming_events_for(expected_event).each(&:track!)
-      #expected_event.alarm! if incoming_events_for(expected_events).empty?
+      expected_event.alarm! if incoming_events_for(expected_events).empty?
       # TODO return value?
     end
   end
