@@ -175,8 +175,17 @@ describe ExpectedEvent do
   		expect(ExpectedEvent.backward).to be_kind_of ActiveRecord::Relation
   	end
 
-  	it 'has a today scope' do
-  		expect(ExpectedEvent.today).to be_kind_of ActiveRecord::Relation
-  	end
+  	describe ".scope" do
+	  	it 'has a today scope' do
+	  		expect(ExpectedEvent.today).to be_kind_of ActiveRecord::Relation
+	  	end
+
+	  	it 'finds an expected event among the today scope' do
+	  		expected_event = FactoryGirl.build(:expected_event)
+	  		expected_event = activate_current_weekday_for! expected_event
+	  		expect(ExpectedEvent.today).to include expected_event
+	  	end
+	  end
   end
+
 end

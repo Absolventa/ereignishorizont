@@ -13,7 +13,7 @@ class ExpectedEvent < ActiveRecord::Base
   scope :active, -> { where("started_at < :q AND ended_at > :q", q: Time.zone.now)}
   scope :forward, -> { where(matching_direction: true) }
   scope :backward, -> { where(matching_direction: false) }
-  scope :today, -> { where("? IS TRUE", "weekday_#{Date.today.wday}") }
+  scope :today, -> { where("weekday_#{Date.today.wday}" => true) }
 
   # scope :our_backward_matcher, -> { active.today.backward }
 
