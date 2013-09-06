@@ -55,15 +55,15 @@ describe Matcher do
 
   context '#incoming_events_for' do
 
-
     it 'finds untracked active incoming event whose title matches' do
+      # FIXME Test should be independent of run time
+      # This will break when run between 23:01 and midnight
+      expected_event.final_hour = Time.zone.now.hour + 1
       activate_current_weekday_for! expected_event
 
       incoming_event.tracked_at = nil
       incoming_event.title = expected_event.title
       incoming_event.save
-
-      Timecop.freeze(expected_event.deadline - 15.minutes)
 
       expect(subject.incoming_events_for(expected_event)).to include incoming_event
     end
