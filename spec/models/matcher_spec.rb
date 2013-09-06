@@ -13,7 +13,7 @@ describe Matcher do
 
       expected_event = FactoryGirl.build(:active_expected_event)
       expected_event.matching_direction = false
-      expected_event.save
+      expected_event = activate_current_weekday_for! expected_event
 
       subject.stub(:incoming_events_for).and_return([incoming_event])
 
