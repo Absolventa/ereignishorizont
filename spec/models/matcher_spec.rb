@@ -27,24 +27,24 @@ describe Matcher do
   end
 
   context '#expected_events' do
-    let(:active_event) do
+    let(:active_backward_event_for_today) do
       FactoryGirl.build(:active_expected_event).tap do |expected_event|
         activate_current_weekday_for expected_event
       end
     end
 
     it 'includes all active today backward events' do
-      active_event.matching_direction = false
-      active_event.save
+      active_backward_event_for_today.matching_direction = false
+      active_backward_event_for_today.save
 
-      expect(subject.expected_events.find_by_id(active_event.id)).to be_present
+      expect(subject.expected_events).to include active_backward_event_for_today
     end
 
     it 'excludes all active today forward events' do
-      active_event.matching_direction = true
-      active_event.save
+      active_backward_event_for_today.matching_direction = true
+      active_backward_event_for_today.save
 
-      expect(subject.expected_events.find_by_id(active_event.id)).not_to be_present
+      expect(subject.expected_events).not_to include active_backward_event_for_today
     end
 
     it 'delivers empty relation when no expected_event is present' do
