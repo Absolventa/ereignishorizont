@@ -149,7 +149,6 @@ describe ExpectedEvent do
     before do
       new_time = Time.local(2013, 8, 28, 12, 0, 0) # That'd be a wednesday
       Timecop.freeze(new_time)
-      Time.stub(:now)
     end
 
     it 'returns todays true if current weekday selected' do
