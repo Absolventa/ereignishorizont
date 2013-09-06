@@ -9,6 +9,11 @@ FactoryGirl.define do
   factory :expected_event do
   	title 'my event title'
     final_hour 15
+
+    factory :active_expected_event do
+      started_at 2.days.ago
+      ended_at 2.days.from_now
+    end
   end
 
   factory :incoming_event do
