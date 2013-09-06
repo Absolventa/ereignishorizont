@@ -94,21 +94,42 @@ describe UsersController do
     end
   end
 
-  describe 'PUT update' do
+  describe 'PATCH update' do
     context 'as admin' do
-      it 'updates other user and redirects' do
-        pending
+      before do
+        User.any_instance.stub(:admin?).and_return(true)
       end
+
+      it 'successfully updates other user and redirects' do
+        other_user = FactoryGirl.create(:user)
+        User.any_instance.stub(:valid?).and_return(true)
+        patch :update, id: other_user.to_param, user: { email: '' }
+        expect(flash[:notice]).not_to be_blank
+        expect(response).to redirect_to user_path(other_user)
+      end
+
       it "fails to update other user and renders 'edit' template" do
-        pending
+        other_user = FactoryGirl.create(:user)
+        User.any_instance.stub(:valid?).and_return(false)
+        patch :update, id: other_user.to_param, user: { email: '' }
+        expect(flash[:notice]).to be_blank
+        expect(response).to render_template 'edit'
       end
     end
-    context 'as normal user' do
+
+    context 'as a normal user' do
       it 'updates current user' do
-        pending
+        User.any_instance.stub(:valid?).and_return(true)
+        patch :update, id: @user.to_param, user: { email: '' }
+        expect(flash[:notice]).not_to be_blank
+        expect(response).to redirect_to user_path(@user)
       end
-      it "fails to update current user and renderfs 'edit' template" do
-        pending
+
+      it "fails to update current user and renders 'edit' template" do
+        User.any_instance.stub(:valid?).and_return(false)
+        patch :update, id: @user.to_param, user: { email: '' }
+        expect(flash[:notice]).to be_blank
+        expect(response).to render_template 'edit'
       end
     end
   end
