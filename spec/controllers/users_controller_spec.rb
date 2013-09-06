@@ -146,12 +146,24 @@ describe UsersController do
   describe 'DELETE destroy' do
     context 'as admin' do
       it 'destroys other user' do
-        pending
+        other_user = FactoryGirl.create(:user)
+        User.any_instance.stub(:admin?).and_return(true)
+        expect do
+          delete :destroy, id: other_user.to_param
+        end.to change{User.count}.by(-1)
+        expect(flash[:notice]).not_to be_blank
+        expect(response).to redirect_to users_path
       end
     end
+
     context 'as normal user' do
-      it 'redirects to users#show' do
-        pending
+      it 'redirects to users#index' do
+        User.any_instance.stub(:valid?).and_return(false)
+        expect do
+          delete :destroy, id: 'does-not-matter'
+        end.not_to change{User.count}
+        expect(flash[:alert]).to eql 'Not authorized'
+        expect(response).to redirect_to users_path
       end
     end
   end
