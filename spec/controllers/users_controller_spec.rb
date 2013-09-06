@@ -94,21 +94,51 @@ describe UsersController do
     end
   end
 
-  describe 'PUT update' do
+  describe 'PATCH update' do
     context 'as admin' do
-      it 'updates other user and redirects' do
-        pending
+      before do
+        User.any_instance.stub(:admin?).and_return(true)
       end
+
+      it 'successfully updates other user and redirects' do
+        other_user = FactoryGirl.create(:user)
+        User.any_instance.stub(:valid?).and_return(true)
+        patch :update, id: other_user.to_param, user: { email: '' }
+        expect(flash[:notice]).not_to be_blank
+        expect(response).to redirect_to user_path(other_user)
+      end
+
       it "fails to update other user and renders 'edit' template" do
-        pending
+        other_user = FactoryGirl.create(:user)
+        User.any_instance.stub(:valid?).and_return(false)
+        patch :update, id: other_user.to_param, user: { email: '' }
+        expect(flash[:notice]).to be_blank
+        expect(response).to render_template 'edit'
       end
     end
-    context 'as normal user' do
+
+    context 'as a normal user' do
       it 'updates current user' do
-        pending
+        User.any_instance.stub(:valid?).and_return(true)
+        expect do
+          patch :update, id: @user.to_param, user: { email: 'foo@bar.com' }
+        end.to change{ @user.reload.email }
+        expect(flash[:notice]).not_to be_blank
+        expect(response).to redirect_to user_path(@user)
       end
-      it "fails to update current user and renderfs 'edit' template" do
-        pending
+
+      it 'tries to update other user but silently updates current user instead' do
+        User.any_instance.stub(:valid?).and_return(true)
+        expect do
+          patch :update, id: 'does-not-matter', user: { email: 'foo@bar.com' }
+        end.to change{ @user.reload.email }
+      end
+
+      it "fails to update current user and renders 'edit' template" do
+        User.any_instance.stub(:valid?).and_return(false)
+        patch :update, id: @user.to_param, user: { email: '' }
+        expect(flash[:notice]).to be_blank
+        expect(response).to render_template 'edit'
       end
     end
   end
@@ -116,12 +146,24 @@ describe UsersController do
   describe 'DELETE destroy' do
     context 'as admin' do
       it 'destroys other user' do
-        pending
+        other_user = FactoryGirl.create(:user)
+        User.any_instance.stub(:admin?).and_return(true)
+        expect do
+          delete :destroy, id: other_user.to_param
+        end.to change{User.count}.by(-1)
+        expect(flash[:notice]).not_to be_blank
+        expect(response).to redirect_to users_path
       end
     end
+
     context 'as normal user' do
-      it 'redirects to users#show' do
-        pending
+      it 'redirects to users#index' do
+        User.any_instance.stub(:valid?).and_return(false)
+        expect do
+          delete :destroy, id: 'does-not-matter'
+        end.not_to change{User.count}
+        expect(flash[:alert]).to eql 'Not authorized'
+        expect(response).to redirect_to users_path
       end
     end
   end
