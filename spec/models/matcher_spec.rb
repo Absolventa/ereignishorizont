@@ -21,7 +21,7 @@ describe Matcher do
       expect(incoming_event.reload.tracked_at).not_to be_nil
     end
 
-    it 'sends an Alarm if an Event is not matched' do
+    it 'sends an alarm if an event is not matched' do
       pending
     end
   end
@@ -31,6 +31,10 @@ describe Matcher do
       FactoryGirl.build(:active_expected_event).tap do |expected_event|
         activate_current_weekday_for expected_event
       end
+    end
+
+    it 'returns an empty list when no expected events are present' do
+      expect(subject.expected_events).to be_empty
     end
 
     it 'includes all active today backward events' do
