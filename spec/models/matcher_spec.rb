@@ -68,20 +68,5 @@ describe Matcher do
       expect(subject.incoming_events_for(expected_event)).to include incoming_event
     end
 
-    it 'only considers Incoming Events that have not been tracked' do
-      pending
-    end
-
-    it 'only considers Incoming Events that have the same title as Expected Event' do
-      pending
-    end
-
-    it 'only considers Incoming Events that have been created today' do
-      pending
-    end
-
-    it 'only considers Incoming events that have been created before the deadline' do
-      pending
-    end
   end
 end
