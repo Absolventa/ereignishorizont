@@ -51,24 +51,23 @@ describe Matcher do
       expect(subject.expected_events).not_to include active_backward_event_for_today
     end
 
-    it 'delivers empty relation when no expected_event is present' do
-     pending
-    end
-
-    it 'checks that an Expected Event is checked for today' do
-      pending
-    end
-
-    it 'checks that an Expected Event is set to backward' do
-      pending
-    end
-
-    it 'checks for an Expected Event' do
-      pending
-    end
   end
 
   context '#incoming_events_for' do
+
+
+    it 'finds untracked active incoming event whose title matches' do
+      activate_current_weekday_for! expected_event
+
+      incoming_event.tracked_at = nil
+      incoming_event.title = expected_event.title
+      incoming_event.save
+
+      Timecop.freeze(expected_event.deadline - 15.minutes)
+
+      expect(subject.incoming_events_for(expected_event)).to include incoming_event
+    end
+
     it 'only considers Incoming Events that have not been tracked' do
       pending
     end
