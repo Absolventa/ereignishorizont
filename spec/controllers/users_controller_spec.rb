@@ -120,9 +120,18 @@ describe UsersController do
     context 'as a normal user' do
       it 'updates current user' do
         User.any_instance.stub(:valid?).and_return(true)
-        patch :update, id: @user.to_param, user: { email: '' }
+        expect do
+          patch :update, id: @user.to_param, user: { email: 'foo@bar.com' }
+        end.to change{ @user.reload.email }
         expect(flash[:notice]).not_to be_blank
         expect(response).to redirect_to user_path(@user)
+      end
+
+      it 'tries to update other user but silently updates current user instead' do
+        User.any_instance.stub(:valid?).and_return(true)
+        expect do
+          patch :update, id: 'does-not-matter', user: { email: 'foo@bar.com' }
+        end.to change{ @user.reload.email }
       end
 
       it "fails to update current user and renders 'edit' template" do
