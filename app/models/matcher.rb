@@ -15,27 +15,28 @@
 
 # end
 
-class Matcher2
+class Matcher
   def run
+
     expected_events.each do |expected_event|
-        # incoming_events_for(expected_event).each do |incoming_event|
-        #   incoming_event.track!
-        # end
-        incoming_events_for(expected_event).each(&:track!)
-        expected_event.alarm! if incoming_events.empty?
-        # TODO return value?
-      end
+      # incoming_events_for(expected_event).each do |incoming_event|
+      #   incoming_event.track!
+      # end
+
+      incoming_events_for(expected_event).each(&:track!)
+      #expected_event.alarm! if incoming_events_for(expected_events).empty?
+      # TODO return value?
     end
   end
 
   def expected_events
-    ExpectedEvent.active.today.backward
+    #ExpectedEvent.active.today.backward
+    ExpectedEvent.active.backward
   end
 
   def incoming_events_for expected_event
     IncomingEvent.not_tracked.
       where(title: expected_event.title).
       where("created_at > ? AND created_at <= ?", Time.zone.now.beginning_of_day, expected_event.deadline)
-    end
-
+  end
 end
