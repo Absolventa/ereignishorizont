@@ -30,8 +30,7 @@ class Matcher
   end
 
   def expected_events
-    #ExpectedEvent.active.today.backward
-    ExpectedEvent.active.backward
+    ExpectedEvent.active.today.backward
   end
 
   def incoming_events_for expected_event
