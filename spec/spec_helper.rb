@@ -4,6 +4,17 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+# run with "COVERAGE=true bundle exec rake spec"
+if ENV["COVERAGE"]
+  SimpleCov.start 'rails' do
+    add_filter '/spec'
+    add_group "Models", "app/models"
+    add_group "Controllers", "app/controllers"
+    coverage_dir File.join("coverage", Time.now.strftime("%Y%m%d-%H%M%S"))
+    SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
+  end
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -20,6 +31,12 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+
+  config.after do
+    Timecop.return
+  end
+
+  config.include ExpectedEventSpecHelper
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

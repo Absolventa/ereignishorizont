@@ -106,6 +106,27 @@ footer ul li {
   margin-left: 10px;
 }
 
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 60px;
+}
+
+.footer-line-separator{
+  height:1px;
+  background:#DCDCDC;
+  margin: 5px, 5px, 5px, 0px;
+}
+
 /* Susanne and Tam custom */
 
 .btn-custom {
@@ -127,4 +148,40 @@ footer ul li {
 
 .container-custom {
   padding-top: 150px;
+}
+
+
+/* Expected Event Table columns */
+
+.extitle{
+  width: 200px;
+}
+
+.count {
+  width: 10px;
+}
+
+.weekday{
+  width: 200px;
+}
+
+.direction{
+  width: 25px;
+}
+
+.active {
+  width: 10px;
+}
+
+.final_hour {
+  width: 25px;
+}
+
+/* Expected Event Form */
+
+.line-separator{
+  height:1px;
+  background:#717171;
+  margin: 20px;
+
 }

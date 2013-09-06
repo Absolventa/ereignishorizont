@@ -1,5 +1,5 @@
 class AlarmMailer < ActionMailer::Base
-  default from: "susanne_and_tam@awesome.de"
+  default from: APP_CONFIG[:mail_from]
 
   def event_expectation_matched(alarm)
   	@alarm = alarm

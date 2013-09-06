@@ -1,9 +1,64 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Your Event</h1>
+
 <p>
   <strong>Title:</strong>
   <%= @expected_event.title %>
 </p>
 
-<%= link_to 'Edit', edit_expected_event_path(@expected_event) %> |
+<p>
+	<strong>Selected Weekday(s): </strong>
+	<% if @expected_event.weekday_0.present? %>
+		Sunday
+	<% end %>
+	<% if @expected_event.weekday_1.present? %>
+		Monday
+	<% end %>
+		<% if @expected_event.weekday_2.present? %>
+		Tuesday
+	<% end %>
+	<% if @expected_event.weekday_3.present? %>
+		Wednesday
+	<% end %>
+	<% if @expected_event.weekday_4.present? %>
+		Thursday
+	<% end %>
+	<% if @expected_event.weekday_5.present? %>
+		Friday
+	<% end %>
+	<% if @expected_event.weekday_6.present? %>
+		Saturday
+	<% end %>
+</p>
+
+<p>
+	<strong>Matching Direction:</strong>
+		<% if @expected_event.matching_direction == true %>
+			Forward
+		<% end %>
+		<% if @expected_event.matching_direction == false %>
+			Backward
+		<% end %>
+</p>
+
+<p>
+	<strong>Selected Dates:</strong>
+		<%= @expected_event.activity_status.titleize %>
+</p>
+<p>
+	<strong>Started at:</strong>
+		<%= @expected_event.started_at %>
+</p>
+<p>
+	<strong>Ended at:</strong>
+		<%= @expected_event.ended_at %>
+</p>	
+		
+<p>
+	<strong>Final Hour:</strong>
+		<%= @expected_event.final_hour %>
+</p>
+
+<%= link_to 'Edit', edit_expected_event_path(@expected_event) %>
 <%= link_to 'Back', expected_events_path, class: "btn btn-custom" %>

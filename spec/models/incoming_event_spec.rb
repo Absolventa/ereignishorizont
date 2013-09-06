@@ -22,4 +22,23 @@ describe IncomingEvent do
 	 		incoming_event.title.should == 'bose'
 	 	end
 	 end
+
+	 context 'with scopes' do
+	 	it 'has a not tracked scope' do
+	 		expect(IncomingEvent.not_tracked).to be_kind_of ActiveRecord::Relation
+	 	end
+	 end
+
+	describe '#track!' do
+		it 'assigns the current time' do
+			subject.track!
+			expect(subject.tracked_at).not_to be_nil
+		end
+
+		it 'saves the record' do
+			incoming_event = FactoryGirl.build(:incoming_event)
+			incoming_event.track!
+			expect(incoming_event).to be_persisted
+		end
+	end
 end

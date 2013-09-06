@@ -16,6 +16,8 @@ class ExpectedEventsController < ApplicationController
   #GET /expected_events.json
   def index
     @expected_events = ExpectedEvent.includes(:incoming_events).order(sort_column + ' ' + sort_direction)
+    # @active = ExpectedEvent.where("started_at < ?", Time.now).where("ended_at > ?", Time.now)
+
   end
   
   #GET /expected_events/1
@@ -76,7 +78,10 @@ class ExpectedEventsController < ApplicationController
 
     	# Never trust parameters from the scary internet, only allow the white list through.
     	def expected_event_params
-      		params.require(:expected_event).permit([:title])
+      		params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2, 
+            :weekday_3, :weekday_4, :weekday_5, :weekday_6, 
+            :matching_direction, :started_at, :ended_at, :date_select,
+            :final_hour])
     	end
 
       def sort_column
