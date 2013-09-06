@@ -63,7 +63,7 @@ class ExpectedEvent < ActiveRecord::Base
   # Determines whether an event is active based on its date
   def active?
     return false unless self.started_at and self.ended_at
-    self.started_at < Time.now and self.ended_at > Time.now
+    self.started_at < Time.zone.now and self.ended_at > Time.zone.now
   end
 
   def activity_status
