@@ -27,9 +27,13 @@ describe Matcher do
   end
 
   context '#expected_events' do
-    let(:active_event) { FactoryGirl.build(:active_expected_event) }
+    let(:active_event) do
+      FactoryGirl.build(:active_expected_event).tap do |expected_event|
+        activate_current_weekday_for expected_event
+      end
+    end
+
     it 'includes all active today backward events' do
-      active_event.update_attribute("weekday_#{Date.today.wday}".to_sym, true)
       active_event.matching_direction = false
       active_event.save
 
@@ -37,7 +41,6 @@ describe Matcher do
     end
 
     it 'excludes all active today forward events' do
-      active_event.update_attribute("weekday_#{Date.today.wday}".to_sym, true)
       active_event.matching_direction = true
       active_event.save
 
