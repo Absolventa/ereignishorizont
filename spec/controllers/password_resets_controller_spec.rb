@@ -28,4 +28,20 @@ describe PasswordResetsController do
       expect(flash[:notice]).to eql "Password reset instructions sent."
     end
   end
+
+  describe 'GET edit' do
+    it 'returns a hard error when email reset token is unknown' do
+      expect do
+        get :edit, id: "qwerty"
+      end.to raise_exception ActiveRecord::RecordNotFound
+    end
+
+    it 'finds user by reset token renders the edit template' do
+      user = FactoryGirl.create(:user, password_reset_token: 'qwerty')
+      get :edit, id: "qwerty"
+      expect(response).to be_success
+      expect(response).to render_template 'edit'
+      expect(assigns(:user)).to eql user
+    end
+  end
 end
