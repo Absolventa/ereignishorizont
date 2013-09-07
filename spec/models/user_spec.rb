@@ -25,6 +25,8 @@ require 'spec_helper'
 			end
 		end
 
+    # OPTIMIZE This does not not necessarily test the validations on #password.
+    # The record could be invalid for many other reasons (CZ)
 		context 'validating password' do
 			it "is invalid without a password" do
 				FactoryGirl.build(:user, password: nil).should_not be_valid
