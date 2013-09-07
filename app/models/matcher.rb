@@ -17,12 +17,7 @@
 
 class Matcher
   def run
-
     expected_events.each do |expected_event|
-      # incoming_events_for(expected_event).each do |incoming_event|
-      #   incoming_event.track!
-      # end
-
       incoming_events_for(expected_event).each(&:track!)
       expected_event.alarm! if incoming_events_for(expected_events).empty?
       # TODO return value?
