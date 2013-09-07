@@ -38,6 +38,34 @@ require 'spec_helper'
 		end
 	end
 
+  describe '#send_password_reset' do
+    let(:user) { FactoryGirl.build(:user) }
+
+    it 'saves the record without validating it' do
+      user.should_receive(:save!).with(validate: false)
+      user.send_password_reset
+    end
+
+    it 'sets the password_reset_token' do
+      expect do
+        user.send_password_reset
+      end.to change{ user.password_reset_token }
+    end
+
+    it 'sends an email' do
+      expect do
+        user.send_password_reset
+      end.to change{ ActionMailer::Base.deliveries.size }.by(1)
+      expect(ActionMailer::Base.deliveries.last.to).to include user.email
+    end
+
+    it 'tracks the time of the password reset request' do
+      expect do
+        user.send_password_reset
+      end.to change{ user.password_reset_sent_at }
+    end
+  end
+
 		#These do not work because they are testing the wrong thing!
 			# it "should be valid with long enough password" do
 			# 	FactoryGirl.build(:user, password: "12345678").should be_valid
