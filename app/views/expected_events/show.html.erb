@@ -22,7 +22,7 @@
 					</tr>
 					<% end %>
 				</table>
-	
+
 				<table class="table table-striped">
 					<tr>
 						<td><strong>Title:</strong></td>
@@ -60,7 +60,7 @@
 					<tr>
 						<td><strong>Matching Direction:</strong></td>
 						<td><% if @expected_event.matching_direction%>
-									Forward 
+									Forward
 								<% end %>
 								<% if @expected_event.matching_direction == false %>
 									Backward
@@ -80,7 +80,7 @@
 						<td><%= @expected_event.final_hour%></td>
 					</tr>
 					<tr>
-						<td><strong>Alarms:</strong></td>
+						<td><strong>Alarms (click to see):</strong></td>
 						<td><%= link_to "(#{@expected_event.alarms.count})", expected_event_alarms_path(@expected_event) %></td>
 					</tr>
 				</table>
@@ -88,5 +88,5 @@
 		<div class="span1"></div>
 	</div>
 
-<%= link_to 'Edit', edit_expected_event_path(@expected_event), class: 'btn btn-success' %>
-<%= link_to 'Back', expected_events_path, class: "btn btn-custom" %>
+<%= link_to 'Edit', edit_expected_event_path(@expected_event), class: 'btn btn-custom-success' %>
+<%= link_to 'Back', expected_events_path, class: "btn btn-custom-back" %>
