@@ -10,7 +10,7 @@
       <% end %>
       </ul>
     </div>
-  <% end %> 
+  <% end %>
 
   <h4>Select Expected Event</h4>
     <div class="line-separator"></div>
@@ -27,7 +27,7 @@
         <%= select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true %>
         </div>
       </div>
- 
+
   <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
       <div class="row">
@@ -38,7 +38,7 @@
               <%= f.check_box :weekday_0, :id => "inlineCheckbox1" %>
             </div>
           </div>
-       
+
           <div class="control-group">
             <%= f.label :weekday_1, "Monday", :class => "control-label" %>
             <div class="controls">
@@ -146,7 +146,6 @@
 
   <div class="form-actions">
     <%= f.submit :class => "btn btn-success" %>
-  </div>
 
 <% end %>
 
