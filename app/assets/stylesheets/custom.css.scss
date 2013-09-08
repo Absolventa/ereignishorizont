@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  padding-top: 10px;
+  padding-top: 80px;
 }
 
 section {
@@ -76,55 +76,20 @@ p {
 /* footer */
 
 footer {
-  margin-top: 45px;
+  margin-top: 15px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #999;
-  position: fixed; 
-  bottom: 40px; 
-}
+  border-top: 1px solid grayMediumLight;
+  color: grayLight;
 
-footer a {
-  color: #d3414a;
-}
+  .footer-line-separator{
+  height: 3px;
+  background: #DCDCDC;
+  margin: 10px
+  }
 
-footer a:hover {
-  color: #f6ebeb;
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 10px;
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-  height: 60px;
-}
-
-.footer-line-separator{
-  height:1px;
-  background:#DCDCDC;
-  margin: 5px, 5px, 5px, 0px;
+  .footer-container {
+  padding: 35px 0 30px;
+  }
 }
 
 /* Susanne and Tam custom */
