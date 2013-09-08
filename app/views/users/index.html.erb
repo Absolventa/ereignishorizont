@@ -16,7 +16,6 @@
       <th><%= sortable "created_at", "Date created" %></th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -24,10 +23,8 @@
     <% @users.each do |user| %>
       <tr class="warning">
         <td><%= user.id %></td>
-        <td><%= user.email %></td>
+        <td><%= link_to user.email, user %></td>
         <td><%= user.created_at %></td>
-
-        <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, user %></td>
         <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_user_path(user) %></td>
         <td><%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
@@ -40,7 +37,7 @@
 
 <%= link_to 'New User', new_user_path, class: 'btn btn-warning' %>
 
-<!-- TO DO: Fix the pagination so that there can only be about 10 users listed on a page -->
+<!-- TODO: Fix the pagination so that there can only be about 10 users listed on a page -->
 
 <div class="pagination pagination-centered"> 
   <ul>
