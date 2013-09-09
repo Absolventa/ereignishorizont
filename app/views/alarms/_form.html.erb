@@ -1,4 +1,4 @@
-<%= form_for [@expected_event, @alarm] do |f| %>
+<%= form_for([@expected_event, @alarm], :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
 <% if @alarm.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@alarm.errors.count, "error") %> prohibited this alarm from being saved:</h2>
@@ -11,23 +11,30 @@
     </div>
   <% end %>
 
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
-  
-  <p>
-    <%= f.label "Action" " (* required)" %><br>
-    <%= f.select :action, [['Logger', 'Logger'], ['Email', 'Email']] %>  
-  </p>
+  <div class="control-group">
+    <%= f.label :title, "Title:", :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title %>
+    </div>
+  </div>
 
-  <p>
-      <%= f.label "Is this the right email address?" %><br>
+  <div class="control-group">
+    <%= f.label "Action" " (* required):", :class => "control-label" %>
+    <div class="controls">
+      <%= f.select :action, [['Logger', 'Logger'], ['Email', 'Email']] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label "Is this the right email address?:", :class => "control-label" %>
+    <div class="controls">
       <% if @alarm.recipient_email %>
         <%= f.text_field :recipient_email %>
       <% else %>
         <%= f.text_field :recipient_email, :value => current_user.email %>
       <% end %>
+    </div>
+  </div>
 
       <!-- Tam trying to fix issue #8 -->
       <%# if @alarm.enters_email? && @alarm.recipient_email %>
@@ -40,13 +47,14 @@
       <%# end %>
       <%# end %>
 
-  </p>
 
-  <p>
-    <%= f.label "Add some custom text!" %><br>
-    <%= f.text_area :message %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="control-group">
+    <%= f.label "Add some custom text!:", :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :message, class: "input-xxlarge" %>
+    </div>
   </div>
+
+  <div class="form-actions">
+    <%= f.submit :class => "btn-custom-success" %>
 <% end %>

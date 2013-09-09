@@ -10,7 +10,7 @@
       <% end %>
       </ul>
     </div>
-  <% end %> 
+  <% end %>
 
   <h4>Select Expected Event</h4>
     <div class="line-separator"></div>
@@ -27,45 +27,41 @@
         <%= select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true %>
         </div>
       </div>
- 
-
 
   <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
       <div class="row">
-        <div class="span3">
+        <div class="span2">
           <div class="control-group">
             <%= f.label :weekday_0, "Sunday", :class => "control-label" %>
             <div class="controls">
               <%= f.check_box :weekday_0, :id => "inlineCheckbox1" %>
             </div>
           </div>
-       
+
           <div class="control-group">
             <%= f.label :weekday_1, "Monday", :class => "control-label" %>
             <div class="controls">
              <%= f.check_box :weekday_1, :id => "inlineCheckbox2" %>
             </div>
           </div>
-        </div>
 
-        <div class="span3">
           <div class="control-group">
             <%= f.label :weekday_2, "Tuesday", :class => "control-label" %>
             <div class="controls">
               <%= f.check_box :weekday_2, :id => "inlineCheckbox3" %>
             </div>
           </div>
-
-          <div class="control-group">
-            <%= f.label :weekday_3, "Wednesday", :class => "control-label" %>
-            <div class="controls">
-              <%= f.check_box :weekday_3, :id => "inlineCheckbox4" %>
-            </div>
-          </div>
         </div>
 
-        <div class="span3">
+          <div class="span2">
+            <div class="control-group">
+              <%= f.label :weekday_3, "Wednesday", :class => "control-label" %>
+              <div class="controls">
+                <%= f.check_box :weekday_3, :id => "inlineCheckbox4" %>
+              </div>
+            </div>
+
           <div class="control-group">
             <%= f.label :weekday_4, "Thursday", :class => "control-label" %>
             <div class="controls">
@@ -79,9 +75,7 @@
               <%= f.check_box :weekday_5, :id => "inlineCheckbox6" %>
             </div>
           </div>
-        </div>
 
-        <div class="span3">
           <div class="control-group">
             <%= f.label :weekday_6, "Saturday", :class => "control-label" %>
             <div class="controls">
@@ -89,15 +83,30 @@
             </div>
           </div>
         </div>
+
+        <div class="span2"></div>
+
+        <div class="span6 explanation">
+          <div class="control-group">
+            <em>(If no weekdays are checked, the event will be considered inactive)</em>
+          </div>
+        </div>
       </div>
 
   <h4>Select Matching Direction</h4>
     <div class="line-separator"></div>
-      <div class="control-group">
-        <%= f.label :matching_direction, "Matching Direction:", :class => "control-label" %>
-        <div class="controls">
-          <%= f.radio_button :matching_direction, true %> Forward
-          <%= f.radio_button :matching_direction, false %> Backward
+      <div class="row">
+        <div class="span1"></div>
+        <div class="span5">
+          <div class="control-group">
+            <%= f.radio_button :matching_direction, true %> Forward
+            <%= f.radio_button :matching_direction, false %> Backward
+          </div>
+        </div>
+        <div class="span6 explanation">
+          <div class="control-group">
+            <em>(<strong>Forward</strong> denotes that an alarm is expected if event is found, <strong>backward</strong> denotes that an alarm is expected if the event is not found)</em>
+          </div>
         </div>
       </div>
 
@@ -119,16 +128,24 @@
 
   <h4>Final Hour</h4>
     <div class="line-separator"></div>
-      <div class="control-group">
-        <%= f.label :final_hour, :class => "control-label" %>
-        <div class="controls">
-          <%= f.select :final_hour, (1..24) %>
+      <div class="row">
+        <div class="span6">
+          <div class="control-group">
+            <%= f.label :final_hour, :class => "control-label" %>
+            <div class="controls">
+              <%= f.select :final_hour, (1..24) %>
+            </div>
+          </div>
+        </div>
+        <div class="span6 explanation">
+          <div class="control-group">
+            <em>(Denotes the latest possible hour the event is expected. Only required for backward matching events.)</em>
+          </div>
         </div>
       </div>
 
   <div class="form-actions">
-    <%= f.submit :class => "btn btn-success" %>
-  </div>
+    <%= f.submit :class => "btn btn-custom-success" %>
 
 <% end %>
 

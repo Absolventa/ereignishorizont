@@ -1,9 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">x</a>
+      <%= msg  %>
+    </div>
+  <% end %>
+</div>
 
-<p>
-	<b>Email:</b>
-  <%= @user.email %>
-</p>
+<h1>Profile</h1>
 
-<%= link_to 'Edit', edit_user_path(@user), class: "btn btn-custom"%> |
-<%= link_to 'Back', users_path, class: "btn btn-custom" %>
+
+	<div class="row">
+		<div class="span3"></div>
+			<div class="span6 event-description">
+				<dl class="dl-horizontal">
+						<dt><strong>Email:</strong></dt>
+						<dd><%= @user.email %></dd>
+				</dl>
+			</div>
+		<div class="span3"></div>
+	</div>
+
+
+	<%= link_to 'Edit', edit_user_path(@user), class: "btn btn-custom-success"%>
+	<%= link_to 'Back', users_path, class: "btn btn-custom-back" %>
+
+
