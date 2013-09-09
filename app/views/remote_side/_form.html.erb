@@ -1,0 +1,6 @@
+<%= simple_form_for(@remote_side) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :api_token %>
+  <%= f.button :submit %>
+<% end %>
