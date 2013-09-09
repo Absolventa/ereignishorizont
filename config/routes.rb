@@ -2,13 +2,13 @@ EventGirl::Application.routes.draw do
   root 'incoming_events#index'
 
   get "password_resets/new"
-  #get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
 
   resources :sessions
   resources :users
   resources :password_resets
+  resources :remote_sides
 
   resources :incoming_events
 
@@ -18,17 +18,11 @@ EventGirl::Application.routes.draw do
     end
   end
 
-
-  #get '/alarm_triggers' => 'alarm_triggers#index' 
-  #get '/alarm_triggers/show' => 'alarm_triggers#show'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   #root 'incoming_events#index'
-
-  #get '/expected_events' => 'expected_events#index'
 
 
   # Example of regular route:
@@ -65,7 +59,7 @@ EventGirl::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
