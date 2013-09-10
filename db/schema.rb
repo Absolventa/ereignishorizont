@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130909143500) do
+ActiveRecord::Schema.define(version: 20130910084735) do
 
   create_table "alarms", force: true do |t|
     t.string  "title"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20130909143500) do
   add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id"
 
   create_table "remote_sides", force: true do |t|
-    t.string   "title"
+    t.string   "name"
     t.string   "api_token"
     t.datetime "created_at"
     t.datetime "updated_at"
