@@ -1,9 +1,10 @@
 class RemoteSide < ActiveRecord::Base
 
-  validates :name, presence: true, format: { with: /\A[a-z0-9\s]+\Z/i }
+  validates :name, presence: true
   validates_uniqueness_of :name
-  before_create :generate_api_token
-  has_many :incoming_event
+  before_validation :generate_api_token, on: :create
+  has_many :incoming_events
+  validates_presence_of :api_token
 
   private
 
