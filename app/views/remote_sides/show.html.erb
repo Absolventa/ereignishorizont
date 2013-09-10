@@ -7,15 +7,23 @@
   <% end %>
 </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @remote_side.name %>
-</p>
+<div class="row">
+    <div class="span1"></div>
+      <div class="span10 event-description">
 
-<p>
-  <strong>API token:</strong>
-  <%= @remote_side.api_token %>
-</p>
+        <table class="table table-striped">
+          <tr>
+            <td><strong>Name:</strong></td>
+            <td><%= @remote_side.name %></td>
+          </tr>
+          <tr>
+            <td><strong>API token:</strong></td>
+            <td><%= @remote_side.api_token %></td>
+          </tr>
+        </table>
+      </div>
+    <div class="span1"></div>
+  </div>
 
 <%= link_to 'Edit', edit_remote_side_path(@remote_side), class: "btn btn-custom-success" %>
 <%= link_to 'Back', remote_sides_path, class: "btn btn-custom-back" %>
