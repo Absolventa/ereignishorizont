@@ -2,6 +2,7 @@ class IncomingEvent < ActiveRecord::Base
 	validates :title, presence: true, format: { with: /\A[a-z0-9\s]+\Z/i }
 
 	belongs_to :expected_event
+  belongs_to :remote_side
 
 	before_save :delete_white_spaces_from_title
 
