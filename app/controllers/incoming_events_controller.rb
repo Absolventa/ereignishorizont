@@ -1,5 +1,8 @@
 class IncomingEventsController < ApplicationController
-  
+
+  # TODO - we need this as a step inbetween the remote side and the user - a machine can create an incoming event
+  #skip_before_action :login_required, only: :create
+
   helper_method :sort_column, :sort_direction
   before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
 
@@ -25,12 +28,16 @@ class IncomingEventsController < ApplicationController
   def create
     @incoming_event = IncomingEvent.new(incoming_event_params)
 
+    # when api token present: assign corresponding remote site
+
     respond_to do |format|
       if @incoming_event.save
 
         # TODO Find expected event (if any) and make it do its stuff <- Carsten
-        @expected_event = ExpectedEvent.where(title: @incoming_event.title).first
-        #@expected_event.alarm! <- Carsten
+        # TODO this test fails, we need to add a new spec/adjust it to incorporate forward scope
+        @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
+        # @expected_event.alarm! if @expected_event # <- Carsten
+
 
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }
       else
@@ -67,7 +74,7 @@ class IncomingEventsController < ApplicationController
     end
 
     def sort_column
-      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "title" 
+      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "title"
     end
 
     def sort_direction
