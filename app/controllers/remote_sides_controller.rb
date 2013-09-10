@@ -1,6 +1,5 @@
 class RemoteSidesController < ApplicationController
 
-
   before_action :set_remote_side, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   respond_to :html
