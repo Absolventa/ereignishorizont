@@ -1,6 +1,8 @@
 class RemoteSidesController < ApplicationController
 
-  # before_action :set_remote_side, only [:show, :edit, :update, :destroy, :new]
+
+  #before_action :set_remote_side, only [:show, :edit, :update, :destroy, :new]
+  helper_method :sort_column, :sort_direction
   respond_to :html
 
   def index
@@ -52,6 +54,14 @@ private
   end
 
   def remote_side_params
-    params.require(:remote_side).permit([:title, :api_token])
+    params.require(:remote_side).permit([:name, :api_token])
+  end
+
+  def sort_column
+    RemoteSide.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+
+  def sort_direction
+    %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
   end
 end
