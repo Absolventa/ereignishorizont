@@ -8,6 +8,11 @@ class IncomingEventsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @incoming_event.to_xml }
+      format.json { render json: @incoming_event.to_json }
+    end
   end
 
   def new
