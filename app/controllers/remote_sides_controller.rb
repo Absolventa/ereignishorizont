@@ -1,7 +1,7 @@
 class RemoteSidesController < ApplicationController
 
 
-  #before_action :set_remote_side, only [:show, :edit, :update, :destroy, :new]
+  before_action :set_remote_side, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   respond_to :html
 
@@ -43,7 +43,7 @@ class RemoteSidesController < ApplicationController
   def destroy
     @remote_side.destroy
     respond_to do |format|
-      format.html { redirect_to remote_side_url }
+      format.html { redirect_to remote_sides_url }
     end
   end
 
