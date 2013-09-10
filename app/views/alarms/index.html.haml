@@ -1,12 +1,12 @@
-%h1
-  Alarms
-  %i.icon-bell-alt.icon-large
-
 .container
   - flash.each do |name, msg|
     %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
       %a.close{"data-dismiss" => "alert"} x
       = msg
+
+%h1
+  Alarms
+  %i.icon-bell-alt.icon-large
 
 %table.table.table-striped
   %thead

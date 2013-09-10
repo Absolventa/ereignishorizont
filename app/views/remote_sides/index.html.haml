@@ -1,11 +1,11 @@
-%h1
-  Remote Side
-
 .container
   - flash.each do |name, msg|
     %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
       %a.close{"data-dismiss" => "alert"} x
       = msg
+
+%h1
+  Remote Side
 
 %table.table.table-striped
   %thead
