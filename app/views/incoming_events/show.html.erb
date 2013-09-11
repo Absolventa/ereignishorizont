@@ -1,9 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">x</a>
+      <%= msg  %>
+    </div>
+  <% end %>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @incoming_event.title %>
-</p>
+<div class="row">
+    <div class="span1"></div>
+      <div class="span10 event-description">
 
-<%= link_to 'Edit', edit_incoming_event_path(@incoming_event), class: "btn btn-success" %>
-<%= link_to 'Back', incoming_events_path, class: "btn btn-custom" %>
+        <table class="table table-striped">
+          <tr>
+            <td><strong>Title:</strong></td>
+            <td><%= @incoming_event.title %></td>
+          </tr>
+        </table>
+      </div>
+    <div class="span1"></div>
+</div>
+
+<%= link_to 'Edit', edit_incoming_event_path(@incoming_event), class: "btn btn-custom-success" %>
+<%= link_to 'Back', incoming_events_path, class: "btn btn-custom-back" %>
