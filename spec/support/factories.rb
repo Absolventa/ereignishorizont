@@ -27,4 +27,7 @@ FactoryGirl.define do
   	password_confirmation { password }
   end
 
+  factory :remote_side do
+    sequence(:name) { |n| "my remote side#{n}" }
+  end
 end

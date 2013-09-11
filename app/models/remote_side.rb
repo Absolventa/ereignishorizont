@@ -2,9 +2,9 @@ class RemoteSide < ActiveRecord::Base
 
   validates :name, presence: true
   validates_uniqueness_of :name
-  before_validation :generate_api_token, on: :create
   has_many :incoming_events
   validates_presence_of :api_token
+  before_validation :generate_api_token, on: :create
 
   private
 
