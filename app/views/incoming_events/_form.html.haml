@@ -1,0 +1,4 @@
+= simple_form_for(@incoming_event) do |f|
+  = f.error_notification
+  = f.input :title
+  = f.button :submit, "Create Incoming Event", class: 'btn btn-custom-success'
