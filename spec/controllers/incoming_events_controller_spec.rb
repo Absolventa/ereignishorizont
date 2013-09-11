@@ -56,7 +56,7 @@ describe IncomingEventsController do
 			end
 		end
 
-		context 'with matching expected_event' do
+		context 'with forward matching expected_event' do
 			it 'finds expected event by its title' do
 				existing_event_expectation = FactoryGirl.create(:expected_event)
 				post :create, incoming_event: { title: existing_event_expectation.title }

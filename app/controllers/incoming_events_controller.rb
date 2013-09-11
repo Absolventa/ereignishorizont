@@ -34,7 +34,6 @@ class IncomingEventsController < ApplicationController
       if @incoming_event.save
 
         # TODO Find expected event (if any) and make it do its stuff <- Carsten
-        # TODO this test fails, we need to add a new spec/adjust it to incorporate forward scope
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
         # @expected_event.alarm! if @expected_event # <- Carsten
 

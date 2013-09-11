@@ -9,6 +9,7 @@ FactoryGirl.define do
   factory :expected_event do
   	title 'my event title'
     final_hour 15
+    matching_direction true
 
     factory :active_expected_event do
       started_at 2.days.ago
