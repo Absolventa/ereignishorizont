@@ -1,10 +1,11 @@
 class IncomingEventsController < ApplicationController
 
   # TODO - we need this as a step inbetween the remote side and the user - a machine can create an incoming event
-  #skip_before_action :login_required, only: :create
+  skip_before_action :authorize, only: :create
 
   helper_method :sort_column, :sort_direction
   before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
+  before_action :restrict_access, only: :create
 
   def index
     @incoming_events = IncomingEvent.order(sort_column + ' ' + sort_direction)
@@ -27,6 +28,8 @@ class IncomingEventsController < ApplicationController
 
   def create
     @incoming_event = IncomingEvent.new(incoming_event_params)
+    remote_side = RemoteSide.find_by_api_token(params[:api_token])
+    @incoming_event.remote_side_id = remote_side.id
 
     # when api token present: assign corresponding remote site
 
@@ -78,6 +81,12 @@ class IncomingEventsController < ApplicationController
 
     def sort_direction
       %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def restrict_access
+      authenticate_or_request_with_http_token do |token, options|
+      RemoteSide.api_token.exists?(api_token: token)
+      end
     end
 
 
