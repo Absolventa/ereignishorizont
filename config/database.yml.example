@@ -1,23 +1,23 @@
-defaults: &defaults
+development:
   adapter: postgresql
   encoding: unicode
+  database: event_girl_development
   pool: 5
-  username: <%= ENV['USER'] %>
+  username: your_username
   password:
 
-development:
-  <<: *defaults
-  database: event_girl_development
-
 test:
-  <<: *defaults
+  adapter: postgresql
+  encoding: unicode
   database: event_girl_test
-  min_messages: WARNING
+  pool: 5
+  username: your_username
+  password:
 
 production:
-  <<: *defaults
+  adapter: postgresql
+  encoding: unicode
   database: event_girl_production
-
-staging:
-  <<: *defaults
-  database: event_girl_development
+  pool: 5
+  username: your_username
+  password:
