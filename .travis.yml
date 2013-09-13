@@ -1,7 +1,8 @@
 language: ruby
 rvm: 2.0
 before_script:
-  - 'cp config/config.yml.example config/config.yml' 
+  - 'cp config/config.yml.example config/config.yml'
+  - psql -c 'create database event_girl_test' -U postgres
   - 'bundle exec rake db:migrate RAILS_ENV=test'
 script: 'bundle exec rspec spec'
 
