@@ -85,14 +85,14 @@ class IncomingEventsController < ApplicationController
     end
 
     def restrict_access
-      if format_request?
+      if remote_side_request?
         render nothing: true, status: :forbidden unless remote_side
       else
         authorize
       end
     end
 
-    def format_request?
+    def remote_side_request?
       request.format.xml? || request.format.json?
     end
 
