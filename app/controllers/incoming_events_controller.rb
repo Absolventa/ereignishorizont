@@ -1,11 +1,11 @@
 class IncomingEventsController < ApplicationController
 
-  # TODO - we need this as a step inbetween the remote side and the user - a machine can create an incoming event
-  skip_before_action :authorize, only: :create
+  skip_before_action :authorize,  only: :create
+  before_action :restrict_access, only: :create
+
+  before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
 
   helper_method :sort_column, :sort_direction
-  before_action :set_incoming_event, only: [:show, :edit, :update, :destroy]
-  before_action :restrict_access, only: :create
 
   def index
     @incoming_events = IncomingEvent.order(sort_column + ' ' + sort_direction)
@@ -14,8 +14,6 @@ class IncomingEventsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.xml { render xml: @incoming_event.to_xml }
-      format.json { render json: @incoming_event.to_json }
     end
   end
 
@@ -27,11 +25,9 @@ class IncomingEventsController < ApplicationController
   end
 
   def create
+    #when api token present: assign corresponding remote site
     @incoming_event = IncomingEvent.new(incoming_event_params)
-    remote_side = RemoteSide.find_by_api_token(params[:api_token])
-    @incoming_event.remote_side_id = remote_side.id
-
-    # when api token present: assign corresponding remote site
+    #@incoming_event.remote_side_id = remote_side.id if remote_side
 
     respond_to do |format|
       if @incoming_event.save
@@ -40,9 +36,12 @@ class IncomingEventsController < ApplicationController
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
         # @expected_event.alarm! if @expected_event # <- Carsten
 
-
+        format.json { render json: @incoming_event.to_json, status: :created }
+        format.xml  { render xml:  @incoming_event.to_xml,  status: :created }
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }
       else
+        format.json { render json: @incoming_event.errors.to_json, status: :unprocessable_entity }
+        format.xml  { render xml:  @incoming_event.errors.to_xml,  status: :unprocessable_entity }
         format.html { render action: 'new' }
       end
     end
@@ -80,14 +79,23 @@ class IncomingEventsController < ApplicationController
     end
 
     def sort_direction
-      %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     def restrict_access
-      authenticate_or_request_with_http_token do |token, options|
-      RemoteSide.api_token.exists?(api_token: token)
+      if remote_side_request?
+        render nothing: true, status: :forbidden unless remote_side
+      else
+        authorize
       end
     end
 
+    def remote_side_request?
+      request.format.xml? || request.format.json?
+    end
+
+    def remote_side
+      @remote_side ||= RemoteSide.find_by_api_token(params[:api_token])
+    end
 
 end
