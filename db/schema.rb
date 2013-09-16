@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20130910135030) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "alarms", force: true do |t|
     t.string  "title"
     t.string  "action"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20130910135030) do
     t.text    "message"
   end
 
-  add_index "alarms", ["expected_event_id"], name: "index_alarms_on_expected_event_id"
+  add_index "alarms", ["expected_event_id"], name: "index_alarms_on_expected_event_id", using: :btree
 
   create_table "expected_events", force: true do |t|
     t.text    "title"
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20130910135030) do
     t.integer  "remote_side_id"
   end
 
-  add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id"
+  add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id", using: :btree
 
   create_table "remote_sides", force: true do |t|
     t.string   "name"
