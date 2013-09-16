@@ -5,7 +5,7 @@ describe IncomingEventsController do
 
 	context 'as html format' do
 	  before do
-	    controller.class.skip_before_action :authorize
+	  	controller.stub(:logged_in?).and_return(true)
 	  end
 
 		describe 'GET index' do
@@ -68,20 +68,48 @@ describe IncomingEventsController do
 		end
 	end
 
+	context 'without being logged in' do
+		describe 'POST create' do
+			it 'requires log in' do
+				expect do
+					post :create, incoming_event: FactoryGirl.attributes_for(:incoming_event)
+				end.not_to change{ IncomingEvent.count }
+				expect(response).to redirect_to login_path
+				expect(flash[:alert]).to eql 'Not authorized'
+			end
+		end
+	end
+
 	context 'as xml request' do
 		describe 'POST create' do
-			it 'creates a new record' do
-				expect do
-					post :create, incoming_event: { title: "my title" }, format: :xml
-				end.to change{ IncomingEvent.count }.by(1)
-				expect(response.code).to eql "201"
+			context 'with valid api token' do
+				let(:api_token) { FactoryGirl.create(:remote_side).api_token }
+
+				it 'creates a new record' do
+					expect do
+						post :create, incoming_event: { title: "my title" }, api_token: api_token, format: :xml
+					end.to change{ IncomingEvent.count }.by(1)
+					expect(response.code).to eql "201"
+				end
+
+				it 'fails to create record' do
+					expect do
+						post :create, incoming_event: { title: " " }, api_token: api_token, format: :xml
+					end.not_to change{ IncomingEvent.count }
+					expect(response.code).to eql "422"
+				end
+			end
+		end
+
+		context 'with invalid api token' do
+			it 'returns unauthorized (401) when an api token is not provided' do
+				post :create, format: :xml
+				expect(response).to be_forbidden
 			end
 
-			it 'fails to create record' do
-				expect do
-					post :create, incoming_event: { title: " " }, format: :xml
-				end.not_to change{ IncomingEvent.count }
-				expect(response.code).to eql "422"
+			it 'returns unauthorized (401) when an api token is incorrect' do
+				post :create, api_token: "asdfghjkl", format: :xml
+				expect(response).to be_forbidden
 			end
 		end
 	end
