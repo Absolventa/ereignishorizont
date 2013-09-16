@@ -114,5 +114,39 @@ describe IncomingEventsController do
 		end
 	end
 
+	context 'as json request' do
+		describe 'POST create' do
+			context 'with valid api token' do
+				let(:api_token) { FactoryGirl.create(:remote_side).api_token }
+
+				it 'creates a new record' do
+					expect do
+						post :create, incoming_event: { title: "my title" }, api_token: api_token, format: :json
+					end.to change{ IncomingEvent.count }.by(1)
+					expect(response.code).to eql "201"
+				end
+
+				it 'fails to create record' do
+					expect do
+						post :create, incoming_event: { title: " " }, api_token: api_token, format: :json
+					end.not_to change{ IncomingEvent.count }
+					expect(response.code).to eql "422"
+				end
+			end
+		end
+
+		context 'with invalid api token' do
+			it 'returns unauthorized (401) when an api token is not provided' do
+				post :create, format: :json
+				expect(response).to be_forbidden
+			end
+
+			it 'returns unauthorized (401) when an api token is incorrect' do
+				post :create, api_token: "asdfghjkl", format: :json
+				expect(response).to be_forbidden
+			end
+		end
+	end
+
 end
 

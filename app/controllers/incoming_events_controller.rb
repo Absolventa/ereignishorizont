@@ -31,7 +31,6 @@ class IncomingEventsController < ApplicationController
     #@incoming_event.remote_side_id = remote_side.id
 
     respond_to do |format|
-      #format.json { render xml: @incoming_event.to_json }
       if @incoming_event.save
 
 
@@ -39,10 +38,11 @@ class IncomingEventsController < ApplicationController
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
         # @expected_event.alarm! if @expected_event # <- Carsten
 
-
+        format.json { render json: @incoming_event.to_json, status: :created }
         format.xml { render xml: @incoming_event.to_xml, status: :created }
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }
       else
+        format.json { render json: @incoming_event.errors.to_json, status: :unprocessable_entity }
         format.xml { render xml: @incoming_event.errors.to_xml, status: :unprocessable_entity }
         format.html { render action: 'new' }
       end
@@ -85,15 +85,15 @@ class IncomingEventsController < ApplicationController
     end
 
     def restrict_access
-      if xml_request?
+      if format_request?
         render nothing: true, status: :forbidden unless remote_side
       else
         authorize
       end
     end
 
-    def xml_request?
-      request.format.xml?
+    def format_request?
+      request.format.xml? || request.format.json?
     end
 
     def remote_side
