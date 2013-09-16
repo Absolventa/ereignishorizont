@@ -64,6 +64,23 @@ describe IncomingEventsController do
 				pending "TODO run alarm triggers"
 			end
 		end
+
+		context 'as xml request' do
+			it 'creates a new record' do
+				expect do
+					post :create, incoming_event: { title: "my title" }, format: :xml
+				end.to change{ IncomingEvent.count }.by(1)
+				expect(response.code).to eql "201"
+			end
+
+			it 'fails to create record' do
+				expect do
+					post :create, incoming_event: { title: " " }, format: :xml
+				end.not_to change{ IncomingEvent.count }
+				expect(response.code).to eql "422"
+			end
+		end
+
 	end
 end
 
