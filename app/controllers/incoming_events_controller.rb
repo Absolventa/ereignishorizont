@@ -86,11 +86,7 @@ class IncomingEventsController < ApplicationController
 
     def restrict_access
       if xml_request?
-        if @remote_side = RemoteSide.find_by_api_token(params[:api_token])
-          # pass
-        else
-          render nothing: true, status: :forbidden
-        end
+        render nothing: true, status: :forbidden unless remote_side
       else
         authorize
       end
@@ -98,6 +94,10 @@ class IncomingEventsController < ApplicationController
 
     def xml_request?
       request.format.xml?
+    end
+
+    def remote_side
+      @remote_side ||= RemoteSide.find_by_api_token(params[:api_token])
     end
 
 end
