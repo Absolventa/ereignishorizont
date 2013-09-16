@@ -27,23 +27,21 @@ class IncomingEventsController < ApplicationController
   def create
     #when api token present: assign corresponding remote site
     @incoming_event = IncomingEvent.new(incoming_event_params)
-    #remote_side = RemoteSide.find_by_api_token(params[:api_token])
-    #@incoming_event.remote_side_id = remote_side.id
+    #@incoming_event.remote_side_id = remote_side.id if remote_side
 
     respond_to do |format|
       if @incoming_event.save
-
 
         # TODO Find expected event (if any) and make it do its stuff <- Carsten
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
         # @expected_event.alarm! if @expected_event # <- Carsten
 
         format.json { render json: @incoming_event.to_json, status: :created }
-        format.xml { render xml: @incoming_event.to_xml, status: :created }
+        format.xml  { render xml:  @incoming_event.to_xml,  status: :created }
         format.html { redirect_to @incoming_event, notice: 'Incoming event was successfully created.' }
       else
         format.json { render json: @incoming_event.errors.to_json, status: :unprocessable_entity }
-        format.xml { render xml: @incoming_event.errors.to_xml, status: :unprocessable_entity }
+        format.xml  { render xml:  @incoming_event.errors.to_xml,  status: :unprocessable_entity }
         format.html { render action: 'new' }
       end
     end
