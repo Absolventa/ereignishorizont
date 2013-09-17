@@ -31,13 +31,13 @@
   <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
       <div class="row">
-        <div class="span2">
+        <div class="span3">
           <div class="control-group">
-            <%= f.label :weekday_0, "Sunday", :class => "control-label" %>
-            <div class="controls">
-              <%= f.check_box :weekday_0, :id => "inlineCheckbox1" %>
+              <%= f.label :weekday_0, "Sunday", :class => "control-label" %>
+              <div class="controls">
+                <%= f.check_box :weekday_0, :id => "inlineCheckbox0" %>
+              </div>
             </div>
-          </div>
 
           <div class="control-group">
             <%= f.label :weekday_1, "Monday", :class => "control-label" %>
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-          <div class="span2">
+          <div class="span3">
             <div class="control-group">
               <%= f.label :weekday_3, "Wednesday", :class => "control-label" %>
               <div class="controls">
@@ -83,8 +83,6 @@
             </div>
           </div>
         </div>
-
-        <div class="span2"></div>
 
         <div class="span6 explanation">
           <div class="control-group">
