@@ -84,6 +84,16 @@ describe IncomingEventsController do
 		context "as #{format} request" do
 			describe 'POST create' do
 				context 'with valid api token' do
+					context 'assigns remote side to incoming event' do
+						let(:remote_side) { FactoryGirl.create(:remote_side) }
+							it 'assigns corresponding remote side' do
+								post :create, incoming_event: { title: "my title" }, api_token: remote_side.api_token, format: :xml
+								assigns(:incoming_event).reload.remote_side.should eql remote_side
+							end
+						end
+				end
+
+				context 'with valid api token' do
 					let(:api_token) { FactoryGirl.create(:remote_side).api_token }
 
 					it 'creates a new record' do
