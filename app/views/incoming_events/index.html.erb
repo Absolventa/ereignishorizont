@@ -23,8 +23,8 @@
       <tr>
         <td><%= link_to incoming_event.title, incoming_event %></td>
         <td><%= incoming_event.tracked_at %></td>
-        <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_incoming_event_path(incoming_event) %></td>
-        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="nolink"><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_incoming_event_path(incoming_event) %></td>
+        <td class="nolink"><%= link_to '<i class="icon-trash"></i>'.html_safe, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -20,8 +20,8 @@
       %tr
         %td= link_to remote_side.name, remote_side
         %td= remote_side.api_token
-        %td= link_to '<i class="icon-pencil"></i>'.html_safe, edit_remote_side_path(remote_side)
-        %td= link_to '<i class="icon-trash"></i>'.html_safe, remote_side, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.nolink= link_to '<i class="icon-pencil"></i>'.html_safe, edit_remote_side_path(remote_side)
+        %td.nolink= link_to '<i class="icon-trash"></i>'.html_safe, remote_side, method: :delete, data: { confirm: 'Are you sure?' }
 
 = link_to 'New Remote Side', new_remote_side_path(@remote_side) , class: 'btn btn-custom-success'
 = link_to 'Back', remote_sides_path , class: 'btn btn-custom-back'

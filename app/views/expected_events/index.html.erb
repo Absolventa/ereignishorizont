@@ -1,3 +1,11 @@
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">x</a>
+      <%= msg  %>
+    </div>
+  <% end %>
+
 <h1>Expected Events <i class="icon-calendar-empty icon-large"></i></h1>
 
 <table class="table table-striped" data-provides="rowlink">
@@ -16,11 +24,11 @@
     <% @expected_events.each do |expected_event| %>
       <tr class ="success">
         <td><%= link_to expected_event.title, expected_event %></td>
-        <td><%= link_to "(#{expected_event.alarms.count})", expected_event_alarms_path(expected_event) %></td>
+        <td class="nolink"><%= link_to "(#{expected_event.alarms.count})", expected_event_alarms_path(expected_event) %></td>
         <td><%= expected_event.event_matching_direction %></td>
         <td><%= expected_event.activity_status.titleize %></td>
-        <td><%= link_to icon_pencil, edit_expected_event_path(expected_event) %></td>
-        <td><%= link_to '<i class="icon-trash"></i>'.html_safe, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="nolink"><%= link_to icon_pencil, edit_expected_event_path(expected_event) %></td>
+        <td class="nolink"><%= link_to '<i class="icon-trash"></i>'.html_safe, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
