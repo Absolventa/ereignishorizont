@@ -1,14 +1,14 @@
-#This file has a bunch of comments, but we want to leave them in 
-#here because they are helpful to us at the moment. 
+#This file has a bunch of comments, but we want to leave them in
+#here because they are helpful to us at the moment.
 #These comments can be used to understand all controllers.
 
 class ExpectedEventsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
   before_action :set_expected_event, only: [:show, :edit, :update, :destroy]
- 
-  #buttons to show, edit, update and destroy only show up when 
-  #someone has entered an expected event. 
+
+  #buttons to show, edit, update and destroy only show up when
+  #someone has entered an expected event.
 
   #respond_to :html, :json
 
@@ -19,7 +19,7 @@ class ExpectedEventsController < ApplicationController
     # @active = ExpectedEvent.where("started_at < ?", Time.now).where("ended_at > ?", Time.now)
 
   end
-  
+
   #GET /expected_events/1
   #GET /expected_events/1.json
   def show
@@ -41,7 +41,7 @@ class ExpectedEventsController < ApplicationController
 
   	respond_to do |format|
   		if @expected_event.save
-  			format.html { redirect_to @expected_event, notice: 'Incoming event was successfully created'}
+  			format.html { redirect_to @expected_event, notice: 'Expected event was successfully created'}
   		else
   			format.html { render action: 'new' }
   		end
@@ -78,8 +78,8 @@ class ExpectedEventsController < ApplicationController
 
     	# Never trust parameters from the scary internet, only allow the white list through.
     	def expected_event_params
-      		params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2, 
-            :weekday_3, :weekday_4, :weekday_5, :weekday_6, 
+      		params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2,
+            :weekday_3, :weekday_4, :weekday_5, :weekday_6,
             :matching_direction, :started_at, :ended_at, :date_select,
             :final_hour])
     	end
