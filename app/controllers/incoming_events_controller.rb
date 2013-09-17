@@ -34,7 +34,7 @@ class IncomingEventsController < ApplicationController
 
         # TODO Find expected event (if any) and make it do its stuff <- Carsten
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
-        # @expected_event.alarm! if @expected_event # <- Carsten
+        @expected_event.alarm! if @expected_event
 
         format.json { render json: @incoming_event.to_json, status: :created }
         format.xml  { render xml:  @incoming_event.to_xml,  status: :created }
