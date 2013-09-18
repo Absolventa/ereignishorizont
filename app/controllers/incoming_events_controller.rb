@@ -1,5 +1,6 @@
 class IncomingEventsController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token, if: :remote_side_request?
   skip_before_action :authorize,  only: :create
   before_action :restrict_access, only: :create
 
