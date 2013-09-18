@@ -10,7 +10,7 @@ class AlarmsController < ApplicationController
     @alarms = @expected_event.alarms.order(sort_column + ' ' + sort_direction)
   end
 
-  
+
   def show
   end
 
@@ -32,7 +32,6 @@ class AlarmsController < ApplicationController
      redirect_to expected_event_alarms_path(@expected_event)
   end
 
-
   def create
     @alarm = @expected_event.alarms.build(alarm_params)
   	respond_to do |format|
@@ -44,7 +43,6 @@ class AlarmsController < ApplicationController
   	end
   end
 
-
   def update
   	respond_to do |format|
   		if @alarm.update(alarm_params)
@@ -55,7 +53,6 @@ class AlarmsController < ApplicationController
   	end
   end
 
- 
   def destroy
   	@alarm.destroy
   	respond_to do |format|
@@ -64,7 +61,7 @@ class AlarmsController < ApplicationController
   end
 
 	protected
-   		
+
     	def set_alarm
       		@alarm = @expected_event.alarms.find(params[:id])
     	end
@@ -78,7 +75,7 @@ class AlarmsController < ApplicationController
       end
 
       def sort_column
-        Alarm.column_names.include?(params[:sort]) ? params[:sort] : "title" 
+        Alarm.column_names.include?(params[:sort]) ? params[:sort] : "title"
       end
 
       def sort_direction
