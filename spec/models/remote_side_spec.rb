@@ -30,5 +30,4 @@ describe RemoteSide do
     subject.valid?
     expect(subject.api_token).to eql 'def'
   end
-
 end

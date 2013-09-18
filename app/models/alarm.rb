@@ -8,10 +8,7 @@ class Alarm < ActiveRecord::Base
                               presence: true,
                               if: :enters_email?
 
- validates_inclusion_of :action, in: ACTIONS
-    #we're not entirely sure if this is working/is correct. Do we have to 
-    #do something in the browser/try to change it in the browser to see if
-    #it is secure against external hacks? HELP!
+  validates_inclusion_of :action, in: ACTIONS
 
   def enters_email?
     action == 'Email'
@@ -20,7 +17,6 @@ class Alarm < ActiveRecord::Base
   def enters_logger?
     action == 'Logger'
   end
-
 
   def run
     AlarmMailer.event_expectation_matched(self).deliver if enters_email?

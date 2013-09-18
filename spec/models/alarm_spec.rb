@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Alarm do
 
   context "Validations" do
+
     it { should belong_to :expected_event }
     it { should validate_presence_of :expected_event }
   	it { should allow_value("a@b.com").for(:recipient_email) }

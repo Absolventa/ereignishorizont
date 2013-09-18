@@ -1,28 +1,29 @@
 require 'spec_helper'
 
 describe ExpectedEvent do
-	 it { should have_many :alarms }
-	 it { should have_many :incoming_events }
-	 it { should validate_presence_of :title }
-	 it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
 
-	 it "has a valid factory" do
-	 	FactoryGirl.build(:expected_event).should be_valid
-	 end
+	it { should have_many :alarms }
+	it { should have_many :incoming_events }
+	it { should validate_presence_of :title }
+	it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
 
-	 context 'validating title' do
-	 	it 'complains about illegal characters' do
-	 		expected_event = ExpectedEvent.new(title: 'bß€se')
-	 		expected_event.valid?
-	 		expected_event.should have(1).error_on(:title)
-	 	end
+	it "has a valid factory" do
+		FactoryGirl.build(:expected_event).should be_valid
+	end
 
-	 	it 'removes trailing white spaces before save' do
-	 		expected_event = ExpectedEvent.new(title: ' bose    ')
-	 		expected_event.save
-	 		expected_event.title.should == 'bose'
-	 	end
-	 end
+	context 'validating title' do
+		it 'complains about illegal characters' do
+			expected_event = ExpectedEvent.new(title: 'bß€se')
+			expected_event.valid?
+			expected_event.should have(1).error_on(:title)
+		end
+
+	it 'removes trailing white spaces before save' do
+		expected_event = ExpectedEvent.new(title: ' bose    ')
+		expected_event.save
+		expected_event.title.should == 'bose'
+		end
+	end
 
 	describe "#active?" do
 		it 'returns true if current time is between start date and end date' do
@@ -56,8 +57,8 @@ describe ExpectedEvent do
 		end
 
 		it 'adds name if selected weekday is true' do
-			 subject.weekday_0 = true
-			 expect(subject.selected_weekdays).to eql "Sun"
+			subject.weekday_0 = true
+			expect(subject.selected_weekdays).to eql "Sun"
 		end
 
 		it 'does not add name if selected weekday is false' do
@@ -137,6 +138,7 @@ describe ExpectedEvent do
 				expect(subject.deadline).to eql expected_date
 			end
 		end
+
 		context 'with current weekday deactivated' do
 			it 'returns the beginning of the current day' do
 				expected_date = Time.zone.now.beginning_of_day
@@ -155,6 +157,7 @@ describe ExpectedEvent do
       subject.weekday_3 = true
       expect(subject).to be_checked_today
     end
+
     it 'returns false' do
       subject.weekday_3 = false
       expect(subject).not_to be_checked_today
@@ -186,5 +189,4 @@ describe ExpectedEvent do
 	  	end
 	  end
   end
-
 end

@@ -71,6 +71,5 @@ describe Matcher do
 
       expect(subject.incoming_events_for(expected_event)).to include incoming_event
     end
-
   end
 end

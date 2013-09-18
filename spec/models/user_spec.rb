@@ -65,16 +65,3 @@ require 'spec_helper'
       end.to change{ user.password_reset_sent_at }
     end
   end
-
-		#These do not work because they are testing the wrong thing!
-			# it "should be valid with long enough password" do
-			# 	FactoryGirl.build(:user, password: "12345678").should be_valid
-			# end
-
-			# it "should not be valid with short password" do
-			# 	FactoryGirl.build(:user, password: "1234567").should_not be_valid
-			# end
-
-			# it "should not be valid with a really long password" do
-			# 	FactoryGirl.build(:user, password: "123456789012345678901").should_not be_valid
-			# end
