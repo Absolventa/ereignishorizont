@@ -16,12 +16,23 @@ at the ABSOLVENTA offices in Berlin.
 Incoming events require an API token. It can be obtained by
 creating a ``RemoteSide`` record.
 
-Example for registering an event:
+Example for registering an event using JSON:
 
+    API_TOKEN=a2ade3bd297bf93a039b06b8560ab193
     curl -i -X POST \
       -H 'Content-type: application/json' \
       -d '{
         "incoming_event": { "title": "my event identifier"},
-        "api_token": "a2ade3bd297bf93a039b06b8560ab193"
+        "api_token": "$API_TOKEN"
       }' \
       http://localhost:3000/incoming_events.json
+
+
+Example for registering an event using XML:
+
+    API_TOKEN=a2ade3bd297bf93a039b06b8560ab193
+    curl -i -X POST \
+      -H 'Content-type: application/xml' \
+      -d '<incoming_event><title>xml formatted</title></incoming_event>' \
+      http://localhost:3000/incoming_events.xml?api_token=$API_TOKEN
+
