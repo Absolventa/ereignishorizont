@@ -10,3 +10,18 @@ It was proposed as a project for the Rails Girls Summer of Code.
 Its two main contributors are the Rails Girls Susanne and Tam who 
 will be working on the project from July 2 - September 30, 2013
 at the ABSOLVENTA offices in Berlin.
+
+### Client Access
+
+Incoming events require an API token. It can be obtained by
+creating a ``RemoteSide`` record.
+
+Example for registering an event:
+
+    curl -i -X POST \
+      -H 'Content-type: application/json' \
+      -d '{
+        "incoming_event": { "title": "my event identifier"},
+        "api_token": "a2ade3bd297bf93a039b06b8560ab193"
+      }' \
+      http://localhost:3000/incoming_events.json
