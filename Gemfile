@@ -30,6 +30,7 @@ gem 'jquery-turbolinks'
 gem 'simple_form'
 
 gem 'haml'
+gem 'actionpack-xml_parser'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

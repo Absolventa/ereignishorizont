@@ -10,6 +10,8 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    actionpack-xml_parser (1.0.0)
+      actionpack (>= 4.0.0.rc1, < 4.1)
     activemodel (4.0.0)
       activesupport (= 4.0.0)
       builder (~> 3.1.0)
@@ -152,6 +154,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-xml_parser
   bcrypt-ruby (~> 3.0.0)
   bootstrap-sass (~> 2.3.2.0)
   coffee-rails (~> 4.0.0)
