@@ -1,4 +1,4 @@
-== README {<img src="https://codeclimate.com/github/Absolventa/event_girl.png" />}[https://codeclimate.com/github/Absolventa/event_girl] {<img src="https://travis-ci.org/Absolventa/event_girl.png?branch=master" alt="Build Status" />}[https://travis-ci.org/Absolventa/event_girl]
+## README [![Code Climate](https://codeclimate.com/github/Absolventa/event_girl.png)](https://codeclimate.com/github/Absolventa/event_girl) [![Build Status](https://travis-ci.org/Absolventa/event_girl.png?branch=master)](https://travis-ci.org/Absolventa/event_girl)
 
 Welcome to Event Girl!
 
