@@ -26,7 +26,7 @@
         %td= alarm.expected_event.title if alarm.expected_event
         %td= alarm.action
         %td.nolink= link_to icon_pencil, edit_expected_event_alarm_path(@expected_event, alarm)
-        %td.nolink= link_to '<i class="icon-trash"></i>'.html_safe, [@expected_event, alarm], method: :delete, data: { confirm: 'Are you sure?' }
+        %td.nolink= link_to icon_trash, [@expected_event, alarm], method: :delete, data: { confirm: 'Are you sure?' }
         %td.nolink= link_to 'Test', run_expected_event_alarm_path(@expected_event, alarm), class: 'btn btn-mini btn-custom-show'
 
 %br

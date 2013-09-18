@@ -7,6 +7,10 @@ module ApplicationHelper
   end
 
   def icon_pencil
-     '<i class="icon-pencil"></i>'.html_safe
+    '<i class="icon-pencil"></i>'.html_safe
+  end
+
+  def icon_trash
+    '<i class="icon-trash"></i>'.html_safe
   end
 end

@@ -25,9 +25,8 @@
         <td><%= user.id %></td>
         <td><%= link_to user.email, user %></td>
         <td><%= user.created_at %></td>
-        <td class="nolink"><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_user_path(user) %></td>
-        <td class="nolink"><%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
+        <td class="nolink"><%= link_to icon_pencil, edit_user_path(user) %></td>
+        <td class="nolink"><%= link_to icon_trash, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -47,5 +46,4 @@
     <li class="active"><a href="#">3</a></li>
     <li class="active"><a href="#">4</a></li>
   </ul>
-</div>
 </div>
