@@ -8,17 +8,19 @@
 </div>
 
 <div class="row">
-    <div class="span1"></div>
-      <div class="span10 event-description">
+  <div class="span1"></div>
+    <div class="span10 event-description">
 
-        <table class="table table-striped">
-          <tr>
-            <td><strong>Title:</strong></td>
-            <td><%= @incoming_event.title %></td>
-          </tr>
-        </table>
-      </div>
+      <table class="table table-striped">
+        <tr>
+          <td><strong>Title:</strong></td>
+          <td><%= @incoming_event.title %></td>
+        </tr>
+      </table>
+    </div>
+
     <div class="span1"></div>
+
 </div>
 
 <%= link_to 'Edit', edit_incoming_event_path(@incoming_event), class: "btn btn-custom-success" %>

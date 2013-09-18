@@ -15,28 +15,22 @@
 
   <body>
     <div id="wrap">
-
       <%= render 'layouts/nav' %>
-          
+
         <div class="container">
-              
           <% if current_user %>
             Logged in as <%= current_user.email %>
-          <% end %> 
+          <% end %>
 
           <div id="push"></div>
-                  
-              
-
               <%= yield %>
-
         </div>
-        <%= render 'layouts/footer' %>
-    </div>    
 
-          <%=yield :js%>
- 
+      <%= render 'layouts/footer' %>
 
-  
+    </div>
+
+      <%=yield :js%>
+
   </body>
 </html>
