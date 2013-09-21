@@ -18,4 +18,6 @@ EventGirl::Application.routes.draw do
     end
   end
 
+  post '/' => 'incoming_events#create'
+
 end
