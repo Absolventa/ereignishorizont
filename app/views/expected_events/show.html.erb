@@ -79,11 +79,12 @@
 						<td><strong>Final Hour:</strong></td>
 						<td><%= @expected_event.final_hour%></td>
 					</tr>
-					<tr>
-						<td><strong>Alarms (click to see):</strong></td>
-						<td><%= link_to "(#{@expected_event.alarms.count})", expected_event_alarms_path(@expected_event) %></td>
-					</tr>
-				</table>
+					</table>
+
+					<table class="table">
+						<td><%= link_to "This event has #{@expected_event.alarms.count} Alarms", expected_event_alarms_path(@expected_event), class: "btn btn-block btn-custom-show"%></td>
+					</table>
+
 		</div>
 		<div class="span1"></div>
 	</div>
