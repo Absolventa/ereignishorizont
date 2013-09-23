@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910135030) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20130923170930) do
 
   create_table "alarms", force: true do |t|
-    t.string  "title"
-    t.string  "action"
-    t.integer "expected_event_id"
-    t.string  "recipient_email"
-    t.text    "message"
+    t.string   "title"
+    t.string   "action"
+    t.integer  "expected_event_id"
+    t.string   "recipient_email"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "alarms", ["expected_event_id"], name: "index_alarms_on_expected_event_id", using: :btree
