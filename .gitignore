@@ -12,7 +12,6 @@
 /tmp
 
 # Ignore application-specific config files
-config/config.yml
 config/database.yml
 coverage/**/*
 .DS_Store

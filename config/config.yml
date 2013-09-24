@@ -1,0 +1,15 @@
+defaults: &defaults
+  url_scheme: http
+  mail_from: event_girl@example.com
+
+development:
+  <<: *defaults
+  host: example.com
+
+test:
+  <<: *defaults
+  host: test.host
+
+production:
+  host: eventgirl-staging.herokuapp.com
+  url_scheme: https
