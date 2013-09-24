@@ -1,13 +1,5 @@
 <h1>Users <i class="icon-female icon-large"></i></h1>
 
-<div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-      <a class="close" data-dismiss="alert">x</a>
-      <%= msg  %>
-    </div>
-  <% end %>
-
 <table class="table table-striped" data-provides="rowlink">
   <thead>
     <tr>
@@ -36,7 +28,7 @@
 
 <%= link_to 'New User', new_user_path, class: 'btn btn-custom-success' %>
 
-<!-- TODO: Fix the pagination so that there can only be about 10 users listed on a page -->
+<!-- TODO Fix the pagination so that there can only be about 10 users listed on a page -->
 
 <div class="pagination pagination-centered">
   <ul>

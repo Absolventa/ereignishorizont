@@ -1,12 +1,3 @@
-<div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-      <a class="close" data-dismiss="alert">x</a>
-      <%= msg  %>
-    </div>
-  <% end %>
-</div>
-
 <div class="row">
   <div class="span1"></div>
     <div class="span10 event-description">
@@ -85,7 +76,7 @@
           <td><%= link_to "This event has #{@expected_event.alarms.count} Alarms", expected_event_alarms_path(@expected_event), class: "btn btn-block btn-custom-show"%></td>
         </table>
 
-  </div>
+    </div>
   <div class="span1"></div>
 </div>
 

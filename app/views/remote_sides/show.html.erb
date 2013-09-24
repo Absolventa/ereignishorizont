@@ -1,32 +1,23 @@
-<div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-      <a class="close" data-dismiss="alert">x</a>
-      <%= msg  %>
-    </div>
-  <% end %>
-</div>
-
 <div class="row">
 
   <div class="span1"></div>
 
-    <div class="span10 event-description">
-      <table class="table table-striped">
-        <tr>
-          <td><strong>Name:</strong></td>
-          <td><%= @remote_side.name %></td>
-        </tr>
-        <tr>
-          <td><strong>API token:</strong></td>
-          <td><%= @remote_side.api_token %></td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="span1"></div>
-
+  <div class="span10 event-description">
+    <table class="table table-striped">
+      <tr>
+        <td><strong>Name:</strong></td>
+        <td><%= @remote_side.name %></td>
+      </tr>
+      <tr>
+        <td><strong>API token:</strong></td>
+        <td><%= @remote_side.api_token %></td>
+      </tr>
+    </table>
   </div>
+
+  <div class="span1"></div>
+
+</div>
 
 <%= link_to 'Edit', edit_remote_side_path(@remote_side), class: "btn btn-custom-success" %>
 <%= link_to 'Back', remote_sides_path, class: "btn btn-custom-back" %>
