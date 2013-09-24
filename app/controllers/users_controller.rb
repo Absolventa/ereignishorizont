@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
       if @user.save
         redirect_to users_path
-        cookies[:auth_token] = @user.auth_token
+        cookies[:auth_token] ||= @user.auth_token
         flash[:notice] = "Zank u for signing up!"
       else
         render action: "new"
