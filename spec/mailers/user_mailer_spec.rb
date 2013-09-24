@@ -22,5 +22,4 @@ describe UserMailer do
       mail.body.encoded.should match(url)
     end
   end
-
 end

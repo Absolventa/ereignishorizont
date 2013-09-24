@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe SessionsController do
-
-  
   context "as logged in user" do
 		before do
   		@user = FactoryGirl.create(:user, admin: false)
@@ -16,5 +14,4 @@ describe SessionsController do
     	end
   	end
 	end
-
 end

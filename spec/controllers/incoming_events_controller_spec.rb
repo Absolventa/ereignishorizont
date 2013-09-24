@@ -90,7 +90,7 @@ describe IncomingEventsController do
 								post :create, incoming_event: { title: "my title" }, api_token: remote_side.api_token, format: :xml
 								assigns(:incoming_event).reload.remote_side.should eql remote_side
 							end
-						end
+					end
 				end
 
 				context 'with valid api token' do

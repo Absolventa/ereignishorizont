@@ -54,7 +54,6 @@ describe Matcher do
 
       expect(subject.expected_events).not_to include active_backward_event_for_today
     end
-
   end
 
   context '#incoming_events_for' do

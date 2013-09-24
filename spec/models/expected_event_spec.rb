@@ -18,10 +18,10 @@ describe ExpectedEvent do
 			expected_event.should have(1).error_on(:title)
 		end
 
-	it 'removes trailing white spaces before save' do
-		expected_event = ExpectedEvent.new(title: ' bose    ')
-		expected_event.save
-		expected_event.title.should == 'bose'
+		it 'removes trailing white spaces before save' do
+			expected_event = ExpectedEvent.new(title: ' bose    ')
+			expected_event.save
+			expected_event.title.should == 'bose'
 		end
 	end
 
