@@ -27,7 +27,7 @@ class ExpectedEventsController < ApplicationController
 
   #GET /expected_events/new
   def new
-  	@expected_event = ExpectedEvent.new
+    @expected_event = ExpectedEvent.new
   end
 
   #GET /expected_events/1/edit
@@ -37,59 +37,60 @@ class ExpectedEventsController < ApplicationController
   #POST /expected_events
   #POST /expected_events.json
   def create
-  	@expected_event = ExpectedEvent.new(expected_event_params)
+    @expected_event = ExpectedEvent.new(expected_event_params)
 
-  	respond_to do |format|
-  		if @expected_event.save
-  			format.html { redirect_to @expected_event, notice: 'Expected event was successfully created'}
-  		else
-  			format.html { render action: 'new' }
-  		end
-  	end
+    respond_to do |format|
+      if @expected_event.save
+        format.html { redirect_to @expected_event, notice: 'Expected event was successfully created'}
+      else
+        format.html { render action: 'new' }
+      end
+    end
   end
 
   #PATCH/PUT /expected_events/1
   #PATCH/PUT /expected_events/1.json
 
   def update
-  	respond_to do |format|
-  		if @expected_event.update(expected_event_params)
-  			format.html { redirect_to @expected_event, notice: 'Expected event was successfully updated' }
-  		else
-  			format.html { render action: 'edit' }
-  		end
-  	end
+    respond_to do |format|
+      if @expected_event.update(expected_event_params)
+        format.html { redirect_to @expected_event, notice: 'Expected event was successfully updated' }
+      else
+        format.html { render action: 'edit' }
+      end
+    end
   end
 
   # DELETE /expected_events/1
   # DELETE /expected_events/1.json
   def destroy
-  	@expected_event.destroy
-  	respond_to do |format|
-  		format.html { redirect_to expected_events_url }
-  	end
+    @expected_event.destroy
+    respond_to do |format|
+      format.html { redirect_to expected_events_url }
+    end
   end
 
-	private
-   		# Use callbacks to share common setup or constraints between actions.
-    	def set_expected_event
-      	@expected_event = ExpectedEvent.find(params[:id])
-    	end
+  private
 
-    	# Never trust parameters from the scary internet, only allow the white list through.
-    	def expected_event_params
-    		params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2,
-          :weekday_3, :weekday_4, :weekday_5, :weekday_6,
-          :matching_direction, :started_at, :ended_at, :date_select,
-          :final_hour])
-    	end
+   # Use callbacks to share common setup or constraints between actions.
+  def set_expected_event
+    @expected_event = ExpectedEvent.find(params[:id])
+  end
 
-      def sort_column
-        ExpectedEvent.column_names.include?(params[:sort]) ? params[:sort] : "title"
-      end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def expected_event_params
+    params.require(:expected_event).permit([:title, :weekday_0, :weekday_1, :weekday_2,
+      :weekday_3, :weekday_4, :weekday_5, :weekday_6,
+      :matching_direction, :started_at, :ended_at, :date_select,
+      :final_hour])
+  end
 
-      def sort_direction
-        %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
-      end
+  def sort_column
+    ExpectedEvent.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+
+  def sort_direction
+    %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end

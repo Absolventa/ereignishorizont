@@ -9,18 +9,16 @@
 
 <h1>Profile</h1>
 
-	<div class="row">
-		<div class="span3"></div>
-			<div class="span6 event-description">
-				<dl class="dl-horizontal">
-					<dt><strong>Email:</strong></dt>
-					<dd><%= @user.email %></dd>
-				</dl>
-			</div>
-		<div class="span3"></div>
-	</div>
+<div class="row">
+  <div class="span3"></div>
+    <div class="span6 event-description">
+      <dl class="dl-horizontal">
+        <dt><strong>Email:</strong></dt>
+        <dd><%= @user.email %></dd>
+      </dl>
+    </div>
+  <div class="span3"></div>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-custom-success"%>
 <%= link_to 'Back', users_path, class: "btn btn-custom-back" %>
-
-

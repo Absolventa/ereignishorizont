@@ -1,11 +1,11 @@
 class ExpectedEvent < ActiveRecord::Base
-	validates :title, presence: true, format: { with: /\A[a-z0-9\s]+\Z/i }
+  validates :title, presence: true, format: { with: /\A[a-z0-9\s]+\Z/i }
   validates_uniqueness_of :title
 
-	has_many :alarms
-	has_many :incoming_events
+  has_many :alarms
+  has_many :incoming_events
 
-	before_validation :delete_white_spaces_from_title
+  before_validation :delete_white_spaces_from_title
 
   validates_inclusion_of :final_hour, in: 1..24
   #TODO not needed for forward matching?
@@ -17,9 +17,9 @@ class ExpectedEvent < ActiveRecord::Base
 
   # scope :our_backward_matcher, -> { active.today.backward }
 
-	def alarm!
-		alarms.each { |alarm| alarm.run }
-	end
+  def alarm!
+    alarms.each { |alarm| alarm.run }
+  end
 
   # (0..6).each do |weekday_index|
 
@@ -105,7 +105,9 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   private
-    def delete_white_spaces_from_title
-      self.title = self.title.strip if self.title
-    end
+
+  def delete_white_spaces_from_title
+    self.title = self.title.strip if self.title
+  end
+
 end

@@ -15,7 +15,7 @@ class AlarmsController < ApplicationController
   end
 
   def new
-  	@alarm = Alarm.new
+    @alarm = Alarm.new
   end
 
   def edit
@@ -34,52 +34,52 @@ class AlarmsController < ApplicationController
 
   def create
     @alarm = @expected_event.alarms.build(alarm_params)
-  	respond_to do |format|
-  		if @alarm.save
-  			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
-  		else
-  			format.html { render action: 'new' }
-  		end
-  	end
+    respond_to do |format|
+      if @alarm.save
+        format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
+      else
+        format.html { render action: 'new' }
+      end
+    end
   end
 
   def update
-  	respond_to do |format|
-  		if @alarm.update(alarm_params)
-  			format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully updated' }
-  		else
-  			format.html { render action: 'edit' }
-  		end
-  	end
+    respond_to do |format|
+      if @alarm.update(alarm_params)
+        format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully updated' }
+      else
+        format.html { render action: 'edit' }
+      end
+    end
   end
 
   def destroy
-  	@alarm.destroy
-  	respond_to do |format|
-  		format.html { redirect_to expected_event_alarms_url }
-  	end
+    @alarm.destroy
+    respond_to do |format|
+      format.html { redirect_to expected_event_alarms_url }
+    end
   end
 
-	protected
+  protected
 
-    	def set_alarm
-      		@alarm = @expected_event.alarms.find(params[:id])
-    	end
+  def set_alarm
+    @alarm = @expected_event.alarms.find(params[:id])
+  end
 
-    	def alarm_params
-      		params.require(:alarm).permit([:action, :title, :recipient_email, :message])
-    	end
+  def alarm_params
+    params.require(:alarm).permit([:action, :title, :recipient_email, :message])
+  end
 
-      def set_expected_event
-          @expected_event = ExpectedEvent.find(params[:expected_event_id])
-      end
+  def set_expected_event
+    @expected_event = ExpectedEvent.find(params[:expected_event_id])
+  end
 
-      def sort_column
-        Alarm.column_names.include?(params[:sort]) ? params[:sort] : "title"
-      end
+  def sort_column
+    Alarm.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
 
-      def sort_direction
-        %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
-      end
+  def sort_direction
+    %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end
