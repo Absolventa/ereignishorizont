@@ -26,14 +26,11 @@ class IncomingEventsController < ApplicationController
   end
 
   def create
-    #when api token present: assign corresponding remote site
     @incoming_event = IncomingEvent.new(incoming_event_params)
     @incoming_event.remote_side_id = remote_side.id if remote_side
 
     respond_to do |format|
       if @incoming_event.save
-
-        # TODO Find expected event (if any) and make it do its stuff <- Carsten
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
         @expected_event.alarm! if @expected_event
 

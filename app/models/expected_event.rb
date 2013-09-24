@@ -8,14 +8,12 @@ class ExpectedEvent < ActiveRecord::Base
   before_validation :delete_white_spaces_from_title
 
   validates_inclusion_of :final_hour, in: 1..24
-  #TODO not needed for forward matching?
+  # TODO not needed for forward matching?
 
   scope :active, -> { where("started_at < :q AND ended_at > :q", q: Time.zone.now)}
   scope :forward, -> { where(matching_direction: true) }
   scope :backward, -> { where(matching_direction: false) }
   scope :today, -> { where("weekday_#{Date.today.wday}" => true) }
-
-  # scope :our_backward_matcher, -> { active.today.backward }
 
   def alarm!
     alarms.each { |alarm| alarm.run }
@@ -31,7 +29,6 @@ class ExpectedEvent < ActiveRecord::Base
 
   # end
 
-  # Assigns weekday names to numbered days of the week
   def selected_weekdays
     selected_weekdays = []
     selected_weekdays << "Sun" if self.weekday_0
@@ -60,7 +57,6 @@ class ExpectedEvent < ActiveRecord::Base
     end
   end
 
-  # Determines whether an event is active based on its date
   def active?
     return false unless self.started_at and self.ended_at
     self.started_at < Time.zone.now and self.ended_at > Time.zone.now
@@ -74,14 +70,11 @@ class ExpectedEvent < ActiveRecord::Base
     end
   end
 
-  # Returns true or false if the current weekday is checked
   def checked_today?
     weekdays[Date.today.wday]
     #self.send("weekday_#{Date.today.wday}")
   end
 
-  # Adds todays date (active_today?) and time (final_hour)
-  # together to make a datetime object
   def deadline
     if checked_today?
       Time.zone.now.beginning_of_day + final_hour.hours
@@ -90,8 +83,6 @@ class ExpectedEvent < ActiveRecord::Base
     end
   end
 
-  # Returns an array of seven true/false values for each selected
-  # or not selected day of the week
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans

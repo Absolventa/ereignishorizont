@@ -1,5 +1,5 @@
 <%= form_for([@expected_event, @alarm], :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
-<% if @alarm.errors.any? %>
+  <% if @alarm.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@alarm.errors.count, "error") %> prohibited this alarm from being saved:</h2>
 
@@ -35,18 +35,6 @@
       <% end %>
     </div>
   </div>
-
-      <!-- Tam trying to fix issue #8 -->
-      <%# if @alarm.enters_email? && @alarm.recipient_email %>
-        <%#= f.label "Is this the right email address?" " (* required)"%><br>
-        <%#= f.text_field :recipient_email, :value => current_user.email %>
-      <%# else %>
-      <%# if @alarm.enters_logger? %>
-        <%#= f.label "Please leave this box blank!" %><br>
-        <%#= f.text_field %>
-      <%# end %>
-      <%# end %>
-
 
   <div class="control-group">
     <%= f.label "Add some custom text!:", :class => "control-label" %>

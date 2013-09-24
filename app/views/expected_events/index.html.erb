@@ -1,46 +1,47 @@
 <div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-      <a class="close" data-dismiss="alert">x</a>
-      <%= msg  %>
-    </div>
-  <% end %>
-
-<h1>Expected Events <i class="icon-calendar-empty icon-large"></i></h1>
-
-<table class="table table-striped" data-provides="rowlink">
-  <thead>
-    <tr>
-      <th><%= sortable "title" %></th>
-      <th>Alarms</th>
-      <th><%= sortable "matching_direction", "Matching Direction" %></th>
-      <th>Activity</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @expected_events.each do |expected_event| %>
-      <tr class ="success">
-        <td><%= link_to expected_event.title, expected_event %></td>
-        <td class="nolink"><%= link_to "Alarms: #{expected_event.alarms.count}", expected_event_alarms_path(expected_event), class: 'btn btn-mini btn-custom-show' %></td>
-        <td><%= expected_event.event_matching_direction %></td>
-        <td><%= expected_event.activity_status.titleize %></td>
-        <td class="nolink"><%= link_to icon_pencil, edit_expected_event_path(expected_event) %></td>
-        <td class="nolink"><%= link_to icon_trash, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+        <a class="close" data-dismiss="alert">x</a>
+        <%= msg  %>
+      </div>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+  <h1>Expected Events <i class="icon-calendar-empty icon-large"></i></h1>
 
-<%= link_to 'New Expected event', new_expected_event_path , class: 'btn btn-custom-success' %>
+  <table class="table table-striped" data-provides="rowlink">
+    <thead>
+      <tr>
+        <th><%= sortable "title" %></th>
+        <th>Alarms</th>
+        <th><%= sortable "matching_direction", "Matching Direction" %></th>
+        <th>Activity</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
 
-<div class="pagination pagination-centered">
-  <ul>
-    <li class="disabled"><a href="#">&laquo;</a></li>
-    <li class="active"><a href="#">1</a></li>
-  </ul>
+    <tbody>
+      <% @expected_events.each do |expected_event| %>
+        <tr class ="success">
+          <td><%= link_to expected_event.title, expected_event %></td>
+          <td class="nolink"><%= link_to "Alarms: #{expected_event.alarms.count}", expected_event_alarms_path(expected_event), class: 'btn btn-mini btn-custom-show' %></td>
+          <td><%= expected_event.event_matching_direction %></td>
+          <td><%= expected_event.activity_status.titleize %></td>
+          <td class="nolink"><%= link_to icon_pencil, edit_expected_event_path(expected_event) %></td>
+          <td class="nolink"><%= link_to icon_trash, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Expected event', new_expected_event_path , class: 'btn btn-custom-success' %>
+
+  <div class="pagination pagination-centered">
+    <ul>
+      <li class="disabled"><a href="#">&laquo;</a></li>
+      <li class="active"><a href="#">1</a></li>
+    </ul>
+  </div>
 </div>

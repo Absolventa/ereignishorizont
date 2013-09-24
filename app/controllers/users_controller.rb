@@ -60,8 +60,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   private
 
     def user_params
@@ -85,5 +83,3 @@ class UsersController < ApplicationController
     end
 
 end
-
-

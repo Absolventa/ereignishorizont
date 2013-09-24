@@ -10,7 +10,6 @@ class AlarmsController < ApplicationController
     @alarms = @expected_event.alarms.order(sort_column + ' ' + sort_direction)
   end
 
-
   def show
   end
 
@@ -21,7 +20,7 @@ class AlarmsController < ApplicationController
   def edit
   end
 
-  def run #this is for email/logger purposes!!!
+  def run
     @alarm = Alarm.find(params[:id])
     @alarm.run
     if @alarm.enters_email? or @alarm.enters_logger?

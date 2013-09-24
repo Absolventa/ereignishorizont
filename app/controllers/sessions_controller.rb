@@ -3,8 +3,6 @@ class SessionsController < ApplicationController
 skip_before_action :authorize 
 before_action :redirect_if_logged_in, :only => [:new, :create]  
 
-#how do we add an email validation to the session? There is no model!
-
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])

@@ -11,7 +11,7 @@ class RemoteSide < ActiveRecord::Base
   def generate_api_token
     begin
       self.api_token = SecureRandom.hex
-    end while self.class.exists?(api_token: api_token) # this line takes care of uniqueness of api_token
+    end while self.class.exists?(api_token: api_token)
   end
 
 end
