@@ -16,21 +16,22 @@
   <body>
     <div id="wrap">
       <%= render 'layouts/nav' %>
-
-        <div class="container">
-          <% if current_user %>
-            Logged in as <%= current_user.email %>
-          <% end %>
-
-          <div id="push"></div>
-              <%= yield %>
+      <div class="container">
+        <% if current_user %>
+          Logged in as <%= current_user.email %>
+        <% end %>
+        <% flash.each do |name, msg| %>
+          <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+            <a class="close" data-dismiss="alert">x</a>
+            <%= msg  %>
+          </div>
+        <% end %>
+        <div id="push"></div>
+          <%= yield %>
         </div>
-
+      </div>
       <%= render 'layouts/footer' %>
-
     </div>
-
       <%=yield :js%>
-
   </body>
 </html>

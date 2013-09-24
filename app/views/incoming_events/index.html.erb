@@ -1,44 +1,35 @@
-<div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-      <a class="close" data-dismiss="alert">x</a>
-      <%= msg  %>
-    </div>
-  <% end %>
+  <h1>Incoming Events</h1>
 
-<h1>Incoming Events</h1>
-
-<table class="table table-striped" data-provides="rowlink">
-  <thead>
-    <tr>
-      <th><%= sortable "title" %></th>
-      <th><%= sortable "tracked_at", "Tracked At" %></th>
-      <th><%= sortable "created_at", "Created At" %></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @incoming_events.each do |incoming_event| %>
+  <table class="table table-striped" data-provides="rowlink">
+    <thead>
       <tr>
-        <td><%= link_to incoming_event.title, incoming_event %></td>
-        <td><%= incoming_event.tracked_at %></td>
-        <td><%= incoming_event.created_at %></td>
-        <td class="nolink"><%= link_to icon_pencil, edit_incoming_event_path(incoming_event) %></td>
-        <td class="nolink"><%= link_to icon_trash, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th><%= sortable "title" %></th>
+        <th><%= sortable "tracked_at", "Tracked At" %></th>
+        <th><%= sortable "created_at", "Created At" %></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @incoming_events.each do |incoming_event| %>
+        <tr>
+          <td><%= link_to incoming_event.title, incoming_event %></td>
+          <td><%= incoming_event.tracked_at %></td>
+          <td><%= incoming_event.created_at %></td>
+          <td class="nolink"><%= link_to icon_pencil, edit_incoming_event_path(incoming_event) %></td>
+          <td class="nolink"><%= link_to icon_trash, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Incoming event', new_incoming_event_path , class: 'btn btn-custom-success' %>
+  <%= link_to 'New Incoming event', new_incoming_event_path , class: 'btn btn-custom-success' %>
 
-<div class="pagination pagination-centered">
-	<ul>
-		<li class="disabled"><a href="#">&laquo;</a></li>
-		<li class="active"><a href="#">1</a></li>
-	</ul>
+  <div class="pagination pagination-centered">
+  	<ul>
+  		<li class="disabled"><a href="#">&laquo;</a></li>
+  		<li class="active"><a href="#">1</a></li>
+  	</ul>
+  </div>
 </div>
