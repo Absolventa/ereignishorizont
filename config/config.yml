@@ -13,3 +13,4 @@ test:
 production:
   host: eventgirl-staging.herokuapp.com
   url_scheme: https
+  mail_from: event_girl@example.com
