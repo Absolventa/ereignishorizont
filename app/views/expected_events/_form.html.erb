@@ -21,8 +21,10 @@
       </div>
     </div>
 
+    <h5>OR</h5>
+
     <div class="control-group">
-      <label for="available_incoming_event_titles" class="control-label">Or choose available</label>
+      <label for="available_incoming_event_titles" class="control-label">Choose available</label>
       <div class="controls">
       <%= select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true %>
       </div>
@@ -91,19 +93,19 @@
       </div>
     </div>
 
-  <h4>Select Matching Direction</h4>
+  <h4>Select Notification</h4>
     <div class="line-separator"></div>
     <div class="row">
       <div class="span1"></div>
       <div class="span5">
         <div class="control-group">
-          <%= f.radio_button :matching_direction, true %> Forward
-          <%= f.radio_button :matching_direction, false %> Backward
+          <%= f.radio_button :matching_direction, true %> Please send an alarm when event is found
+
         </div>
       </div>
-      <div class="span6 explanation">
+      <div class="span6">
         <div class="control-group">
-          <em>(<strong>Forward</strong> denotes that an alarm is expected if event is found, <strong>backward</strong> denotes that an alarm is expected if the event is not found)</em>
+          <%= f.radio_button :matching_direction, false %> Please send an alarm when event is <strong>not</strong> found
         </div>
       </div>
     </div>
