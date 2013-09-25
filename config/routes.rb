@@ -9,6 +9,7 @@ EventGirl::Application.routes.draw do
   resources :users
   resources :password_resets
   resources :remote_sides
+  resources :welcome_pages
 
   resources :incoming_events
 
