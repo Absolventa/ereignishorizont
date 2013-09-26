@@ -20,5 +20,5 @@ if Rails.env.production? or Rails.env.staging?
   ActionMailer::Base.delivery_method = :smtp
 elsif Rails.env.development?
   ActionMailer::Base.delivery_method = :sendmail
-  Mail.register_interceptor(MailInterceptor)
+  #Mail.register_interceptor(MailInterceptor)
 end
