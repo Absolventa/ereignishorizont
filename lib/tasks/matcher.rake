@@ -1,7 +1,7 @@
 desc "Matcher Class"
-  task :matcher => :environment do
-    matcher = Matcher.new
-    #puts matcher.inspect
-    matcher.run
-    puts "Matcher has run!"
-  end
+task :matcher => :environment do
+  matcher = Matcher.new
+  matcher.run
+  # Matcher.new.run
+  puts "Matcher has run!"
+end
