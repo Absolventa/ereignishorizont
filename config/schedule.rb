@@ -1,7 +1,7 @@
 set :output, "#{path}/log/cron.log"
 
 every '10 0-23 * * *' do
-  runner "Matcher.run"
+  runner "Matcher.new.run"
 end
 
 # Use this file to easily define all of your cron jobs.
