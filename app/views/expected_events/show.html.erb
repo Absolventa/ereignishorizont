@@ -49,12 +49,12 @@
           </td>
         </tr>
         <tr>
-          <td><strong>Matching Direction:</strong></td>
+          <td><strong>Notification:</strong></td>
           <td><% if @expected_event.matching_direction%>
-                Forward
+                alarm sent when found
               <% end %>
               <% if @expected_event.matching_direction == false %>
-                Backward
+                alarm sent when <strong>not</strong> found
               <% end %>
           </td>
         </tr>
