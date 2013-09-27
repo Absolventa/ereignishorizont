@@ -27,7 +27,6 @@ class UsersController < ApplicationController
 
       if @user.save
         redirect_to users_path
-        cookies[:auth_token] ||= @user.auth_token
         flash[:notice] = "User #{@user.email} created."
       else
         render action: "new"
