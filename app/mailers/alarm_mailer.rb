@@ -5,7 +5,7 @@ class AlarmMailer < ActionMailer::Base
     @alarm = alarm
     @expected_event = alarm.expected_event.title
     @message = alarm.message
-    mail(:to => alarm.recipient_email, :subject => "Don't be alarmed!")
+    mail(:to => alarm.recipient_email, :subject => alarm.title)
     #mail call should always be at the end
   end
 end
