@@ -51,9 +51,9 @@ class ExpectedEvent < ActiveRecord::Base
 
   def event_matching_direction
     if self.matching_direction
-      "Forward"
+      "when found"
     else
-      "Backward"
+      "when not found"
     end
   end
 
