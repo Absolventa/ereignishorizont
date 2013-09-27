@@ -49,6 +49,12 @@ describe ExpectedEvent do
 			subject.ended_at = nil
 			expect(subject).not_to be_active
 		end
+
+    it 'returns true if both start and end date are set to today' do
+      subject.started_at = Date.today
+      subject.ended_at = Date.today
+      expect(subject).to be_active
+    end
 	end
 
 	describe "#selected_weekdays" do
