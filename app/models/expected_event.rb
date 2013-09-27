@@ -57,6 +57,14 @@ class ExpectedEvent < ActiveRecord::Base
     end
   end
 
+  def event_matching_direction_for_email
+    if self.matching_direction
+      "found"
+    else
+      "not found"
+    end
+  end
+
   def active?
     return false unless self.started_at and self.ended_at
     self.started_at <= Time.zone.now and self.ended_at > Time.zone.now

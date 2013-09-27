@@ -74,14 +74,14 @@ describe ExpectedEvent do
 	end
 
 	describe "#event_matching_direction" do
-		it 'returns "Forward" if true' do
+		it 'returns "when found" if true' do
 			subject.matching_direction = true
-			expect(subject.event_matching_direction).to eql "Forward"
+			expect(subject.event_matching_direction).to eql "when found"
 		end
 
-		it 'returns "Backward" if false' do
+		it 'returns "when not found" if false' do
 			subject.matching_direction = false
-			expect(subject.event_matching_direction).to eql "Backward"
+			expect(subject.event_matching_direction).to eql "when not found"
 		end
 	end
 
