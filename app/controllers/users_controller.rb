@@ -27,11 +27,10 @@ class UsersController < ApplicationController
 
       if @user.save
         redirect_to users_path
-        cookies[:auth_token] ||= @user.auth_token
-        flash[:notice] = "Zank u for signing up!"
+        flash[:notice] = "User #{@user.email} created."
       else
         render action: "new"
-        flash[:error] = "Your sign up sucked"
+        flash[:error] = "Admin privileges required."
       end
     else
       redirect_to root_path, alert: "Not authorized"
