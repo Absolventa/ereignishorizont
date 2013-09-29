@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     if current_user.admin?
-      @users = User.order(sort_column + ' ' + sort_direction)
+      @users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per_page(10)
     else
       redirect_to incoming_events_path, alert: "Not authorized"
     end

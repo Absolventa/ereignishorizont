@@ -10,6 +10,7 @@ class IncomingEventsController < ApplicationController
 
   def index
     @incoming_events = IncomingEvent.order(sort_column + ' ' + sort_direction)
+      .page(params[:page]).per_page(10)
   end
 
   def show

@@ -8,6 +8,7 @@ class AlarmsController < ApplicationController
 
   def index
     @alarms = @expected_event.alarms.order(sort_column + ' ' + sort_direction)
+      .page(params[:page]).per_page(10)
   end
 
   def show

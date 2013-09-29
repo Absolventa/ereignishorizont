@@ -24,11 +24,6 @@
   </tbody>
 </table>
 
-<%= link_to 'New Incoming event', new_incoming_event_path , class: 'btn btn-custom-success' %>
+<%= will_paginate @incoming_events %>
 
-<div class="pagination pagination-centered">
-	<ul>
-		<li class="disabled"><a href="#">&laquo;</a></li>
-		<li class="active"><a href="#">1</a></li>
-	</ul>
-</div>
+<%= link_to 'New Incoming event', new_incoming_event_path , class: 'btn btn-custom-success' %>
