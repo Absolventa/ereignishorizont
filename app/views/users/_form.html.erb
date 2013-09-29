@@ -19,13 +19,21 @@
   </div>
 
   <div class="control-group">
+    <%= label_tag :send_invitation, 'Send invitation', class: 'control-label' %>
+    <div class="controls">
+      <%= check_box_tag :send_invitation, "1", params[:send_invitation] == '1' %>
+      <div class="help-block">Emails an invitation link and allows user to send password herself.</div>
+    </div>
+  </div>
+
+  <div class="control-group password">
     <%= f.label :password, :class => "control-label" %>
     <div class="controls">
       <%= f.password_field :password %>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group password">
     <%= f.label :password_confirmation, :class => "control-label" %>
     <div class="controls">
       <%= f.password_field :password_confirmation %>

@@ -9,10 +9,21 @@ class UserMailer < ActionMailer::Base
   #   en.user_mailer.password_reset.subject
   #
   def password_reset(user)
-    @url = edit_password_reset_url(
+    @url = password_reset_url(user)
+    mail to: user.email, subject: "[event_girl] Password reset"
+  end
+
+  def account_creation(user)
+    @url = password_reset_url(user)
+    mail to: user.email, subject: "[event_girl] Account created"
+  end
+
+  private
+
+  def password_reset_url(user)
+    edit_password_reset_url(
       user.password_reset_token,
       protocol: APP_CONFIG[:url_scheme]
     )
-    mail to: user.email, subject: "[event_girl] Password reset"
   end
 end

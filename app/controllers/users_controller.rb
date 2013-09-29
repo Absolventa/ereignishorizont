@@ -25,12 +25,23 @@ class UsersController < ApplicationController
     if current_user.admin?
       @user = User.new(user_params)
 
+      # OPTIMIZE: Move this into the User model
+      if params[:send_invitation] == '1'
+        @user.password = @user.password_confirmation = SecureRandom.hex(16)
+        @user.generate_token(:password_reset_token)
+        @user.password_reset_sent_at = Time.zone.now
+      end
+
       if @user.save
         redirect_to users_path
-        flash[:notice] = "User #{@user.email} created."
+        if params[:send_invitation] == '1'
+          UserMailer.account_creation(@user).deliver
+          flash[:notice] = "Invitation to user #{@user.email} sent."
+        else
+          flash[:notice] = "User #{@user.email} created."
+        end
       else
         render action: "new"
-        flash[:error] = "Admin privileges required."
       end
     else
       redirect_to root_path, alert: "Not authorized"
