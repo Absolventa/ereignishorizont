@@ -30,7 +30,6 @@ class UsersController < ApplicationController
         flash[:notice] = "User #{@user.email} created."
       else
         render action: "new"
-        flash[:error] = "Admin privileges required."
       end
     else
       redirect_to root_path, alert: "Not authorized"
