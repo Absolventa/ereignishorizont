@@ -14,11 +14,11 @@
   <tbody>
     <% @users.each do |user| %>
       <tr class="warning">
-        <td><%= user.id %></td>
-        <td><%= link_to user.email, user %></td>
-        <td><%= user.created_at %></td>
-        <td class="nolink"><%= link_to icon_pencil, edit_user_path(user) %></td>
-        <td class="nolink"><%= link_to icon_trash, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="number"><%= user.id %></td>
+        <td class="title"><%= link_to user.email, user %></td>
+        <td class="created-at"><%= user.created_at %></td>
+        <td class="nolink glyph"><%= link_to icon_pencil, edit_user_path(user) %></td>
+        <td class="nolink glyph"><%= link_to icon_trash, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -14,11 +14,11 @@
   <tbody>
     <% @incoming_events.each do |incoming_event| %>
       <tr>
-        <td><%= link_to incoming_event.title, incoming_event %></td>
-        <td><%= incoming_event.tracked_at %></td>
-        <td><%= incoming_event.created_at %></td>
-        <td class="nolink"><%= link_to icon_pencil, edit_incoming_event_path(incoming_event) %></td>
-        <td class="nolink"><%= link_to icon_trash, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="title"><%= link_to incoming_event.title, incoming_event %></td>
+        <td class="created-at"><%= incoming_event.tracked_at %></td>
+        <td class="created-at"><%= incoming_event.created_at %></td>
+        <td class="nolink glyph"><%= link_to icon_pencil, edit_incoming_event_path(incoming_event) %></td>
+        <td class="nolink glyph"><%= link_to icon_trash, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

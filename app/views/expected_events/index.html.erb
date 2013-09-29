@@ -15,12 +15,12 @@
   <tbody>
     <% @expected_events.each do |expected_event| %>
       <tr class ="success">
-        <td><%= link_to expected_event.title, expected_event %></td>
-        <td class="nolink"><%= link_to "Alarms: #{expected_event.alarms.count}", expected_event_alarms_path(expected_event), class: 'btn btn-mini btn-custom-show' %></td>
-        <td><%= expected_event.event_matching_direction %></td>
-        <td><%= expected_event.activity_status.titleize %></td>
-        <td class="nolink"><%= link_to icon_pencil, edit_expected_event_path(expected_event) %></td>
-        <td class="nolink"><%= link_to icon_trash, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="title"><%= link_to expected_event.title, expected_event %></td>
+        <td class="nolink alarms"><%= link_to "Alarms: #{expected_event.alarms.count}", expected_event_alarms_path(expected_event), class: 'btn btn-mini btn-custom-show' %></td>
+        <td class="notification"><%= expected_event.event_matching_direction %></td>
+        <td class="activity"><%= expected_event.activity_status.titleize %></td>
+        <td class="nolink glyph"><%= link_to icon_pencil, edit_expected_event_path(expected_event) %></td>
+        <td class="nolink glyph"><%= link_to icon_trash, expected_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

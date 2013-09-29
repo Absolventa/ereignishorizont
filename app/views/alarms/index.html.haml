@@ -1,6 +1,5 @@
 %h1
-  Alarms for
-  = @expected_event.title
+  Alarms
   %i.icon-bell-alt.icon-large
 
 %table.table.table-striped{"data-provides" => "rowlink"}
@@ -17,12 +16,12 @@
   %tbody
     - @alarms.each do |alarm|
       %tr.warning
-        %td= link_to alarm.title, [@expected_event, alarm]
-        %td= alarm.expected_event.title if alarm.expected_event
-        %td= alarm.action
-        %td.nolink= link_to icon_pencil, edit_expected_event_alarm_path(@expected_event, alarm)
-        %td.nolink= link_to icon_trash, [@expected_event, alarm], method: :delete, data: { confirm: 'Are you sure?' }
-        %td.nolink= link_to 'Test', run_expected_event_alarm_path(@expected_event, alarm), class: 'btn btn-mini btn-custom-show'
+        %td.title= link_to alarm.title, [@expected_event, alarm]
+        %td.subtitle= alarm.expected_event.title if alarm.expected_event
+        %td.action= alarm.action
+        %td.nolink.glyph= link_to icon_pencil, edit_expected_event_alarm_path(@expected_event, alarm)
+        %td.nolink.glyph= link_to icon_trash, [@expected_event, alarm], method: :delete, data: { confirm: 'Are you sure?' }
+        %td.nolink.glyph= link_to 'Test', run_expected_event_alarm_path(@expected_event, alarm), class: 'btn btn-mini btn-custom-show'
 %br
 
 
