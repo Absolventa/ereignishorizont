@@ -67,24 +67,37 @@ describe UsersController do
   describe 'POST create' do
     context 'as admin' do
 
+      let(:attributes) { FactoryGirl.attributes_for(:user) }
+
       before do
         User.any_instance.stub(:admin?).and_return(true)
       end
 
       it 'creates a new record from valid params' do
-        attributes = FactoryGirl.attributes_for(:user)
         expect do
           post :create, user: attributes
         end.to change{User.count}.by(1)
         expect(response).to redirect_to users_path
       end
+
       it "renders 'new' template for invalid params" do
         expect do
           post :create, user: {email:""}
         end.not_to change{User.count}
         expect(response).to render_template 'new'
       end
+
+      it 'sends an email invitation if checked' do
+        email = attributes[:email]
+        expect do
+          post :create, user: { email: email }, send_invitation: '1'
+        end.to change { ActionMailer::Base.deliveries.size }.by(1)
+        expect(assigns(:user).password_reset_token).not_to be_nil
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail.to).to include email
+      end
     end
+
     context 'as normal user' do
       it 'redirects to root_path' do
         post :create
