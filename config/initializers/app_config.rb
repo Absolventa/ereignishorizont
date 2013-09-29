@@ -1,12 +1,17 @@
 # configure me in config/config.yml
 config_file = File.join(Rails.root, 'config', 'config.yml')
-begin
-  erb_config = ERB.new(File.read(config_file)).result
-rescue Errno::ENOENT => e
-  $stderr.puts "Could not find config file '#{config_file}'"
-  exit 1
-end
-APP_CONFIG = (YAML.load(erb_config)[Rails.env] rescue {}).symbolize_keys
+
+env_config  = if File.exists? config_file
+                erb_config = ERB.new(File.read(config_file)).result
+                (YAML.load(erb_config)[Rails.env] rescue {}).symbolize_keys
+              else
+                {
+                  host:       ENV['EVENT_GIRL_HOST']       || 'eventgirl.example.com',
+                  url_scheme: ENV['EVENT_GIRL_URL_SCHEME'] || 'https',
+                  mail_from:  ENV['EVENT_GIRL_MAIL_FROM']  || 'event_girl@example.com'
+                }
+              end
+APP_CONFIG = env_config.freeze
 
 if Rails.env.production? or Rails.env.staging?
   ActionMailer::Base.smtp_settings = {
