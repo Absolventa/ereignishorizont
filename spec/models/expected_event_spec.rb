@@ -5,7 +5,13 @@ describe ExpectedEvent do
   it { should have_many :alarms }
   it { should have_many :incoming_events }
   it { should validate_presence_of :title }
+  #it { should ensure_inclusion_of(:matching_direction).in_array([true false]) }
+  # seems to be a shoulda bug, does not work
   it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
+
+  it { should allow_value(true).for(:matching_direction) }
+  it { should allow_value(false).for(:matching_direction) }
+  it { should_not allow_value(nil).for(:matching_direction) }
 
   it "has a valid factory" do
     FactoryGirl.build(:expected_event).should be_valid
