@@ -24,6 +24,8 @@ gem 'simple_form'
 gem 'select2-rails'
 gem 'haml'
 
+gem 'will_paginate'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
