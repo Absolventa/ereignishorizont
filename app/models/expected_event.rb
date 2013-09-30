@@ -4,6 +4,7 @@ class ExpectedEvent < ActiveRecord::Base
   validates_uniqueness_of :title
 
   has_many :alarms
+  has_many :alarm_notifications
   has_many :incoming_events
 
   before_validation :delete_white_spaces_from_title
