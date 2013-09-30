@@ -121,6 +121,15 @@ describe ExpectedEvent do
       subject.alarms = [alarm]
       subject.alarm!
     end
+
+    it 'creates an AlarmNotification' do
+      subject = FactoryGirl.create(:expected_event)
+      expect do
+        subject.alarm!
+      end.to change { AlarmNotification.count }.by(1)
+      alarm_notification = AlarmNotification.last
+      expect(alarm_notification.expected_event).to eql subject
+    end
   end
 
   describe '#weekdays' do

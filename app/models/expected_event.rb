@@ -18,6 +18,7 @@ class ExpectedEvent < ActiveRecord::Base
 
   def alarm!
     alarms.each { |alarm| alarm.run }
+    AlarmNotification.create(expected_event: self)
   end
 
   # (0..6).each do |weekday_index|
