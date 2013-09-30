@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923170930) do
+ActiveRecord::Schema.define(version: 20130930091129) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "alarm_notifications", force: true do |t|
+    t.integer  "expected_event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "alarm_notifications", ["expected_event_id"], name: "index_alarm_notifications_on_expected_event_id", using: :btree
 
   create_table "alarms", force: true do |t|
     t.string   "title"

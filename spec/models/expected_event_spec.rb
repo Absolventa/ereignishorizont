@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ExpectedEvent do
 
   it { should have_many :alarms }
+  it { should have_many :alarm_notifications }
   it { should have_many :incoming_events }
   it { should validate_presence_of :title }
   #it { should ensure_inclusion_of(:matching_direction).in_array([true false]) }
@@ -120,6 +121,15 @@ describe ExpectedEvent do
       alarm.should_receive(:run)
       subject.alarms = [alarm]
       subject.alarm!
+    end
+
+    it 'creates an AlarmNotification' do
+      subject = FactoryGirl.create(:expected_event)
+      expect do
+        subject.alarm!
+      end.to change { AlarmNotification.count }.by(1)
+      alarm_notification = AlarmNotification.last
+      expect(alarm_notification.expected_event).to eql subject
     end
   end
 
