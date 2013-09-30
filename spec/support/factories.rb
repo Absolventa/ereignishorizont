@@ -7,6 +7,10 @@ FactoryGirl.define do
     title 'Title'
   end
 
+  factory :alarm_notification do
+    expected_event
+  end
+
   factory :expected_event do
   	title 'my event title'
     final_hour 15
