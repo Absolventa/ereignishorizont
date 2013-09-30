@@ -1,5 +1,5 @@
 class IncomingEvent < ActiveRecord::Base
-  validates :title, presence: true, format: { with: /\A[a-z0-9\s-]+\w+\Z/i }
+  validates :title, presence: true, format: { with: /\A[a-z0-9\s_-]+\Z/i }
 
   belongs_to :expected_event
   belongs_to :remote_side
