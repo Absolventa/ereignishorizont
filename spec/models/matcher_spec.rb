@@ -54,6 +54,29 @@ describe Matcher do
 
       expect(subject.expected_events).not_to include active_backward_event_for_today
     end
+
+    it 'returns only events without an alarm notification from today' do
+      active_backward_event_for_today.matching_direction = false
+      active_backward_event_for_today.save
+      FactoryGirl.create(
+        :alarm_notification, expected_event: active_backward_event_for_today
+      )
+      expect(subject.expected_events).not_to include active_backward_event_for_today
+    end
+
+    it 'returns an active event that has an alarm notification for yesterday' do
+      active_backward_event_for_today.matching_direction = false
+      active_backward_event_for_today.save
+
+      Timecop.travel(1.day.ago)
+      FactoryGirl.create(
+        :alarm_notification, expected_event: active_backward_event_for_today
+      )
+
+      Timecop.return
+      expect(subject.expected_events).to include active_backward_event_for_today
+
+    end
   end
 
   context '#incoming_events_for' do

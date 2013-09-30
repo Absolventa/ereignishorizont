@@ -27,7 +27,9 @@ class Matcher
   end
 
   def expected_events
-    ExpectedEvent.active.today.backward
+    ExpectedEvent.active.today.backward.
+      reject{|event| event.alarm_notifications.today.any? }
+      # OPTIMIZE: Transform #reject into a proper where statement
   end
 
   def incoming_events_for expected_event
