@@ -15,14 +15,7 @@ at the [ABSOLVENTA](http://www.absolventa.de) offices in Berlin.
 
 Also found on [event-girl.herokuapp.com](event-girl.herokuapp.com)
 
-## INSTALL
 
-`gem install event_girl_client`
-
-(More info about Event Girl's corresponding gem can
-be found [here](https://github.com/Absolventa/event_girl_client))
-
-There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
 ### FEATURES
 
@@ -53,6 +46,15 @@ Example for registering an event using XML:
       -H 'Content-type: application/xml' \
       -d '<incoming_event><title>xml formatted</title></incoming_event>' \
       http://localhost:3000/incoming_events.xml?api_token=$API_TOKEN
+      
+To use the corresponding gem:
+
+`gem install event_girl_client`
+
+(More info about Event Girl's corresponding gem can
+be found [here](https://github.com/Absolventa/event_girl_client))
+
+There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
 ### CONTRIBUTORS
 
