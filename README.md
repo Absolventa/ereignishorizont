@@ -2,16 +2,34 @@
 
 Welcome to Event Girl!
 
+## DESCRIPTION
+
 Event Girl is an open event-logging system 
 with triggers/hooks to run arbitrary tasks when an event is 
 matched or not matched.  
 
-It was proposed as a project for the Rails Girls Summer of Code. 
+It was proposed as a project for the [Rails Girls Summer of Code](http://railsgirlssummerofcode.org/). 
 Its two main contributors are the Rails Girls Susanne and Tam who 
-will be working on the project from July 2 - September 30, 2013
-at the ABSOLVENTA offices in Berlin.
+worked on the project from July 2 - September 30, 2013
+at the [ABSOLVENTA](http://www.absolventa.de) offices in Berlin.
 
-### Client Access
+Also found on [event-girl.herokuapp.com](event-girl.herokuapp.com)
+
+## INSTALL
+
+`gem install event_girl_client`
+
+(More info about Event Girl's corresponding gem can
+be found [here](https://github.com/Absolventa/event_girl_client))
+
+There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
+
+### FEATURES
+
+- Track events
+- Receive an email about if your event of choice occurred or not
+
+### CLIENT ACCESS
 
 Incoming events require an API token. It can be obtained by
 creating a ``RemoteSide`` record.
@@ -36,3 +54,9 @@ Example for registering an event using XML:
       -d '<incoming_event><title>xml formatted</title></incoming_event>' \
       http://localhost:3000/incoming_events.xml?api_token=$API_TOKEN
 
+### CONTRIBUTORS
+
+- [Susanne Dewein](https://github.com/FrauBienenstich)
+- [Tam Eastley](https://github.com/berlintam)
+- [Carsten Zimmermann](https://github.com/carpodaster)
+- [Tobias Pfeiffer](https://github.com/PragTob)
