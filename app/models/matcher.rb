@@ -19,7 +19,9 @@ class Matcher
   def run
     expected_events.each do |expected_event|
       incoming_events_for(expected_event).each(&:track!)
-      expected_event.alarm! if incoming_events_for(expected_event).empty?
+      if incoming_events_for(expected_event).empty? and deadline_exceeded?(expected_event)
+        expected_event.alarm!
+      end
       # TODO return value?
     end
   end
@@ -33,4 +35,11 @@ class Matcher
       where(title: expected_event.title).
       where("created_at > ? AND created_at <= ?", Time.zone.now.beginning_of_day, expected_event.deadline)
   end
+
+  private
+
+  def deadline_exceeded? expected_event
+    Time.zone.now > expected_event.deadline
+  end
+
 end
