@@ -74,7 +74,7 @@ class IncomingEventsController < ApplicationController
     end
 
     def sort_column
-      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "title"
+      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "created_at DESC"
     end
 
     def sort_direction
