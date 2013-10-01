@@ -3,8 +3,8 @@ class ExpectedEvent < ActiveRecord::Base
   validates :matching_direction, inclusion: { in: [true, false] }
   validates_uniqueness_of :title
 
-  has_many :alarms
-  has_many :alarm_notifications
+  has_many :alarms, dependent: :destroy
+  has_many :alarm_notifications, dependent: :destroy
   has_many :incoming_events
 
   before_validation :delete_white_spaces_from_title

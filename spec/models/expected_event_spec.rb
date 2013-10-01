@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ExpectedEvent do
 
-  it { should have_many :alarms }
-  it { should have_many :alarm_notifications }
+  it { should have_many(:alarms).dependent(:destroy) }
+  it { should have_many(:alarm_notifications).dependent(:destroy) }
   it { should have_many :incoming_events }
   it { should validate_presence_of :title }
   #it { should ensure_inclusion_of(:matching_direction).in_array([true false]) }
