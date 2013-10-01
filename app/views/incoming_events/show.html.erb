@@ -8,6 +8,14 @@
         <th>Title:</th>
         <td><%= @incoming_event.title %></td>
       </tr>
+      <tr>
+        <th>Remote Side:</th>
+        <td>
+          <% if @incoming_event.remote_side %>
+            <%= link_to @incoming_event.remote_side.name, @incoming_event.remote_side %>
+          <% end %>
+        </td>
+      </tr>
     </table>
   </div>
 
