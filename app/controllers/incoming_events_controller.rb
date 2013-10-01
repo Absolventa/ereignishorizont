@@ -74,11 +74,11 @@ class IncomingEventsController < ApplicationController
     end
 
     def sort_column
-      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "created_at DESC"
+      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "DESC"
     end
 
     def restrict_access
