@@ -1,5 +1,6 @@
 language: ruby
-rvm: 2.0
+rvm:
+  - '2.0.0'
 before_script:
   - 'cp config/config.yml.example config/config.yml'
   - 'cp config/database.yml.example config/database.yml'
