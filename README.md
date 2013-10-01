@@ -2,7 +2,7 @@
 
 Welcome to Event Girl!
 
-## DESCRIPTION
+## Description
 
 Event Girl is an open event-logging system 
 with triggers/hooks to run arbitrary tasks when an event is 
@@ -17,14 +17,14 @@ Also found on [event-girl.herokuapp.com](event-girl.herokuapp.com)
 
 
 
-### FEATURES
+### Features
 
 - Track events
 - Receive an email about if your event of choice occurred or not
 
-### CLIENT ACCESS
+### Client access
 
-Incoming events require an API token. It can be obtained by
+incoming events require an API token. It can be obtained by
 creating a ``RemoteSide`` record.
 
 Example for registering an event using JSON:
@@ -56,7 +56,7 @@ be found [here](https://github.com/Absolventa/event_girl_client))
 
 There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
-### CONTRIBUTORS
+### Contributors
 
 - [Susanne Dewein](https://github.com/FrauBienenstich)
 - [Tam Eastley](https://github.com/berlintam)
