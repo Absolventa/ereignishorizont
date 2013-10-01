@@ -22,6 +22,20 @@ Also found on [event-girl.herokuapp.com](event-girl.herokuapp.com)
 - Track events
 - Receive an email about if your event of choice occurred or not
 
+### Installation
+Download the code (or fork / clone locally). To host your instance
+on Heroku, you need:
+
+1. a database
+2. a scheduler that runs ``rake matcher`` once per hour
+
+### Configuration
+
+The app can be configured using ``EVENT_GIRL_*`` environment variables
+or, alternatively, a ``config/config.yml`` file. See ``config/initializers/app_config.rb``
+for details and default values.
+
+
 ### Client access
 
 incoming events require an API token. It can be obtained by
