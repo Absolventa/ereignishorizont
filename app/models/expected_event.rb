@@ -1,5 +1,5 @@
 class ExpectedEvent < ActiveRecord::Base
-  validates :title, presence: true, format: { with: /\A[a-z0-9\s]+\Z/i }
+  validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
   validates :matching_direction, inclusion: { in: [true, false] }
   validates_uniqueness_of :title
 
