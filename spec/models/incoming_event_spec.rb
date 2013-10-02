@@ -5,6 +5,11 @@ describe IncomingEvent do
 	it { should validate_presence_of :title }
 	it { should belong_to :expected_event }
 
+  it 'defines its allowed title format' do
+    expected = /\A[a-z0-9\s_\.-]+\Z/i
+    expect(described_class::FORMAT).to eql expected
+  end
+
 	it "has a valid factory" do
 		FactoryGirl.build(:incoming_event).should be_valid
 	end
