@@ -2,11 +2,13 @@ require 'spec_helper'
 
 describe Matcher do
 
+  subject { described_class }
+
   let(:expected_event) { FactoryGirl.create(:expected_event) }
   let(:incoming_event) { FactoryGirl.build(:incoming_event) }
   let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event, tracked_at: nil) }
 
-  context '#run' do
+  describe '.run' do
 
     it 'tracks a matching Incoming Event' do
       expected_event = FactoryGirl.build(:active_expected_event)
@@ -45,7 +47,7 @@ describe Matcher do
 
   end
 
-  context '#expected_events' do
+  describe '.expected_events' do
     let(:active_backward_event_for_today) do
       FactoryGirl.build(:active_expected_event).tap do |expected_event|
         activate_current_weekday_for expected_event
@@ -94,7 +96,7 @@ describe Matcher do
     end
   end
 
-  context '#incoming_events_for' do
+  describe '.incoming_events_for' do
 
     it 'finds untracked active incoming event whose title matches' do
       # FIXME Test should be independent of run time

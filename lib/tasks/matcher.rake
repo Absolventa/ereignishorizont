@@ -1,7 +1,5 @@
-desc "Matcher Class"
+desc "Runs the Matcher, checking event expectations"
 task :matcher => :environment do
-  matcher = Matcher.new
-  matcher.run
-  # Matcher.new.run
-  puts "Matcher has run!"
+  Matcher.run
+  Rails.logger.info "#{Time.zone.now.to_s(:db)} - Matcher task has run"
 end
