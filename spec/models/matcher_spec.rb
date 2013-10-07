@@ -22,6 +22,7 @@ describe Matcher do
     end
 
     it 'sends an alarm if an event is not matched' do
+      expected_event.stub(:deadline_exceeded?).and_return(true)
       subject.stub(:incoming_events_for).and_return([])
       subject.stub(:expected_events).and_return([expected_event])
 

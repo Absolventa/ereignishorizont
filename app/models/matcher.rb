@@ -21,12 +21,8 @@ class Matcher
 
   private
 
-  def deadline_exceeded? expected_event
-    Time.zone.now > expected_event.deadline
-  end
-
   def run_alarms_for expected_event
-    if incoming_events_for(expected_event).empty? and deadline_exceeded?(expected_event)
+    if incoming_events_for(expected_event).empty? and expected_event.deadline_exceeded?
       expected_event.alarm!
     end
   end
