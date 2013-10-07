@@ -34,6 +34,22 @@ describe IncomingEvent do
     end
   end
 
+  describe '#recently_created?' do
+    it 'returns false if not created at all' do
+      expect(subject.recently_created?).to eql false
+    end
+
+    it 'returns true if created less than an hour ago' do
+      subject.created_at = 59.minutes.ago
+      expect(subject.recently_created?).to eql true
+    end
+
+    it 'returns false if created more than an hour ago' do
+      subject.created_at = 61.minutes.ago
+      expect(subject.recently_created?).to eql false
+    end
+  end
+
   describe '#track!' do
     it 'assigns the current time' do
       subject.track!

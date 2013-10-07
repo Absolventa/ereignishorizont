@@ -11,6 +11,10 @@ class IncomingEvent < ActiveRecord::Base
 
   scope :not_tracked, -> { where(tracked_at: nil) }
 
+  def recently_created?
+    created_at.present? && created_at > 1.hour.ago
+  end
+
   def track!
     self.tracked_at = Time.zone.now
     save
