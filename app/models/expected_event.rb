@@ -94,6 +94,11 @@ class ExpectedEvent < ActiveRecord::Base
     end
   end
 
+  def deadline_exceeded?
+    return false if matching_direction
+    Time.zone.now > deadline
+  end
+
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans

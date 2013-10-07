@@ -169,6 +169,23 @@ describe ExpectedEvent do
     end
   end
 
+  describe '#deadline_exceeded?' do
+    it 'returns false for all forward expectations' do
+      subject.matching_direction = true
+      expect(subject.deadline_exceeded?).to eql false
+    end
+
+    it 'returns true' do
+      subject.stub(:deadline).and_return(1.minute.ago)
+      expect(subject.deadline_exceeded?).to eql true
+    end
+
+    it 'returns false' do
+      subject.stub(:deadline).and_return(1.minute.from_now)
+      expect(subject.deadline_exceeded?).to eql false
+    end
+  end
+
   describe '#checked_today?' do
     before do
       new_time = Time.local(2013, 8, 28, 12, 0, 0) # That'd be a wednesday

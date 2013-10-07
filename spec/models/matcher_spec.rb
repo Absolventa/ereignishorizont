@@ -4,30 +4,45 @@ describe Matcher do
 
   let(:expected_event) { FactoryGirl.create(:expected_event) }
   let(:incoming_event) { FactoryGirl.build(:incoming_event) }
+  let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event, tracked_at: nil) }
 
   context '#run' do
 
     it 'tracks a matching Incoming Event' do
-      incoming_event.tracked_at = nil
-      incoming_event.save
-
       expected_event = FactoryGirl.build(:active_expected_event)
       expected_event.matching_direction = false
       expected_event = activate_current_weekday_for! expected_event
 
-      subject.stub(:incoming_events_for).and_return([incoming_event])
+      subject.stub(:incoming_events_for).and_return([untracked_incoming_event])
 
       subject.run
-      expect(incoming_event.reload.tracked_at).not_to be_nil
+      expect(untracked_incoming_event.reload.tracked_at).not_to be_nil
     end
 
     it 'sends an alarm if an event is not matched' do
+      expected_event.stub(:deadline_exceeded?).and_return(true)
       subject.stub(:incoming_events_for).and_return([])
       subject.stub(:expected_events).and_return([expected_event])
 
       expected_event.should_receive(:alarm!)
       subject.run
     end
+
+    it 'does not sound an alarm if matching incoming event was detected' do
+      Timecop.travel(Time.zone.now.beginning_of_day + 1.hour)
+
+      expected_event = FactoryGirl.build(:active_expected_event)
+      expected_event.final_hour = 10
+      expected_event.title = untracked_incoming_event.title
+      expected_event.matching_direction = false
+      activate_current_weekday_for! expected_event
+
+      ExpectedEvent.any_instance.should_not_receive(:alarm!)
+
+      Timecop.travel(Time.zone.now.beginning_of_day + 11.hours)
+      subject.run
+    end
+
   end
 
   context '#expected_events' do
