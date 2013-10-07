@@ -18,10 +18,8 @@
 class Matcher
   def run
     expected_events.each do |expected_event|
-      incoming_events_for(expected_event).each(&:track!)
-      if incoming_events_for(expected_event).empty? and deadline_exceeded?(expected_event)
-        expected_event.alarm!
-      end
+      track_incoming_events_for expected_event
+      run_alarms_for expected_event
       # TODO return value?
     end
   end
@@ -42,6 +40,16 @@ class Matcher
 
   def deadline_exceeded? expected_event
     Time.zone.now > expected_event.deadline
+  end
+
+  def run_alarms_for expected_event
+    if incoming_events_for(expected_event).empty? and deadline_exceeded?(expected_event)
+      expected_event.alarm!
+    end
+  end
+
+  def track_incoming_events_for expected_event
+    incoming_events_for(expected_event).each(&:track!)
   end
 
 end
