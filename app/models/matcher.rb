@@ -23,7 +23,7 @@ class Matcher
 
   def run_alarms_for expected_event
     if incoming_events_for(expected_event).empty? and expected_event.deadline_exceeded?
-      expected_event.alarm!
+      expected_event.alarm! # unless incoming_event came in during the last hour?
     end
   end
 
