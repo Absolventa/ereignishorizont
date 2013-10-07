@@ -27,6 +27,22 @@ describe Matcher do
       expected_event.should_receive(:alarm!)
       subject.run
     end
+
+    it 'does not sound an alarm if matching incoming event was detected' do
+      Timecop.travel(Time.zone.now.beginning_of_day + 1.hour)
+
+      expected_event = FactoryGirl.build(:active_expected_event)
+      expected_event.final_hour = 10
+      expected_event.title = untracked_incoming_event.title
+      expected_event.matching_direction = false
+      activate_current_weekday_for! expected_event
+
+      ExpectedEvent.any_instance.should_not_receive(:alarm!)
+
+      Timecop.travel(Time.zone.now.beginning_of_day + 11.hours)
+      subject.run
+    end
+
   end
 
   context '#expected_events' do
