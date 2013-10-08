@@ -10,8 +10,9 @@ class Matcher
 
     def expected_events
       ExpectedEvent.active.today.backward.
-        reject{|event| event.alarm_notifications.today.any? }
-        # OPTIMIZE: Transform #reject into a proper where statement
+        select do |event|
+          event.alarm_notifications.today.empty? && event.deadline_exceeded?
+        end
     end
 
     def incoming_events_for expected_event
@@ -23,9 +24,7 @@ class Matcher
     private
 
     def run_alarms_for expected_event
-      if incoming_events_for(expected_event).empty? and expected_event.deadline_exceeded?
-        expected_event.alarm!
-      end
+      expected_event.alarm! if incoming_events_for(expected_event).empty?
     end
 
     def track_incoming_events_for expected_event
