@@ -3,7 +3,6 @@ class Matcher
     def run
       expected_events.each do |expected_event|
         run_alarms_for expected_event
-        track_incoming_events_for expected_event
       end
     end
 
@@ -15,8 +14,7 @@ class Matcher
     end
 
     def incoming_events_for expected_event
-      IncomingEvent.not_tracked.
-        where(title: expected_event.title).
+      IncomingEvent.where(title: expected_event.title).
         where("created_at > ? AND created_at <= ?", Time.zone.now.beginning_of_day, expected_event.deadline)
     end
 
@@ -24,10 +22,6 @@ class Matcher
 
     def run_alarms_for expected_event
       expected_event.alarm! if incoming_events_for(expected_event).empty?
-    end
-
-    def track_incoming_events_for expected_event
-      incoming_events_for(expected_event).each(&:track!)
     end
   end
 end
