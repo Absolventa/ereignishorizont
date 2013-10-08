@@ -15,7 +15,7 @@ class Matcher
 
     def incoming_events_for expected_event
       IncomingEvent.where(title: expected_event.title).
-        where("created_at > ? AND created_at <= ?", Time.zone.now.beginning_of_day, expected_event.deadline)
+        created_today_before(expected_event.deadline)
     end
 
     private
