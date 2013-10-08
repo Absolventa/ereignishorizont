@@ -4,7 +4,6 @@ class Matcher
       expected_events.each do |expected_event|
         run_alarms_for expected_event
         track_incoming_events_for expected_event
-        # TODO return value?
       end
     end
 
