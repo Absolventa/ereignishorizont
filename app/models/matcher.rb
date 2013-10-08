@@ -1,9 +1,7 @@
 class Matcher
   class << self
     def run
-      expected_events.each do |expected_event|
-        run_alarms_for expected_event
-      end
+      expected_events.each {|expected_event| run_alarms_for expected_event }
     end
 
     def expected_events
