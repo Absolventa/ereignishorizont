@@ -70,7 +70,7 @@ class IncomingEventsController < ApplicationController
     end
 
     def incoming_event_params
-      params.require(:incoming_event).permit(:title)
+      params.require(:incoming_event).permit(:title, :content)
     end
 
     def sort_column
