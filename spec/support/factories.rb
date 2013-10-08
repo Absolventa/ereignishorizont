@@ -13,7 +13,7 @@ FactoryGirl.define do
 
   factory :expected_event do
   	title 'my event title'
-    final_hour 15
+    final_hour { 1.hour.from_now.hour }
     matching_direction true
 
     factory :active_expected_event do
