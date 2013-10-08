@@ -2,18 +2,17 @@ class Matcher
   class << self
     def run
       expected_events.each do |expected_event|
-        if expected_event.deadline_exceeded?
-          run_alarms_for expected_event
-          track_incoming_events_for expected_event
-        end
+        run_alarms_for expected_event
+        track_incoming_events_for expected_event
         # TODO return value?
       end
     end
 
     def expected_events
       ExpectedEvent.active.today.backward.
-        reject{|event| event.alarm_notifications.today.any? }
-        # OPTIMIZE: Transform #reject into a proper where statement
+        reject do |event|
+          event.alarm_notifications.today.any? && !event.deadline_exceeded?
+        end
     end
 
     def incoming_events_for expected_event
