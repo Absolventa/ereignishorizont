@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930091129) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20131008135427) do
 
   create_table "alarm_notifications", force: true do |t|
     t.integer  "expected_event_id"
@@ -56,7 +53,6 @@ ActiveRecord::Schema.define(version: 20130930091129) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "expected_event_id"
-    t.datetime "tracked_at"
     t.integer  "remote_side_id"
   end
 
