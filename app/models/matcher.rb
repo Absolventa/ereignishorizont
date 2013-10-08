@@ -2,8 +2,10 @@ class Matcher
   class << self
     def run
       expected_events.each do |expected_event|
-        run_alarms_for expected_event
-        track_incoming_events_for expected_event
+        if expected_event.deadline_exceeded?
+          run_alarms_for expected_event
+          track_incoming_events_for expected_event
+        end
         # TODO return value?
       end
     end

@@ -15,6 +15,7 @@ describe Matcher do
       expected_event.matching_direction = false
       expected_event = activate_current_weekday_for! expected_event
 
+      ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
       subject.stub(:incoming_events_for).and_return([untracked_incoming_event])
 
       subject.run
