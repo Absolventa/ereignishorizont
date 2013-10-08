@@ -8,6 +8,13 @@ describe Matcher do
   let(:incoming_event) { FactoryGirl.build(:incoming_event) }
   let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event, tracked_at: nil) }
 
+  let(:active_backward_event_for_today) do
+    FactoryGirl.build(:active_expected_event).tap do |expected_event|
+      expected_event.matching_direction = false
+      activate_current_weekday_for expected_event
+    end
+  end
+
   describe '.run' do
 
     it 'tracks a matching Incoming Event' do
@@ -48,12 +55,6 @@ describe Matcher do
   end
 
   describe '.expected_events' do
-    let(:active_backward_event_for_today) do
-      FactoryGirl.build(:active_expected_event).tap do |expected_event|
-        activate_current_weekday_for expected_event
-      end
-    end
-
     it 'returns an empty list when no expected events are present' do
       expect(subject.expected_events).to be_empty
     end
