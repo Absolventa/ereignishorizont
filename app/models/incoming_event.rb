@@ -9,13 +9,6 @@ class IncomingEvent < ActiveRecord::Base
 
   before_save :delete_white_spaces_from_title
 
-  scope :not_tracked, -> { where(tracked_at: nil) }
-
-  def track!
-    self.tracked_at = Time.zone.now
-    save
-  end
-
   private
 
   def delete_white_spaces_from_title
