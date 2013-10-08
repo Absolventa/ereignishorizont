@@ -10,8 +10,8 @@ class Matcher
 
     def expected_events
       ExpectedEvent.active.today.backward.
-        reject do |event|
-          event.alarm_notifications.today.any? && !event.deadline_exceeded?
+        select do |event|
+          event.alarm_notifications.today.empty? || event.deadline_exceeded?
         end
     end
 
