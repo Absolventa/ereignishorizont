@@ -6,7 +6,7 @@ describe Matcher do
 
   let(:expected_event) { FactoryGirl.create(:active_expected_event) }
   let(:incoming_event) { FactoryGirl.build(:incoming_event) }
-  let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event, tracked_at: nil) }
+  let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event) }
 
   let(:active_backward_event_for_today) do
     expected_event.tap do |expected_event|
@@ -16,15 +16,6 @@ describe Matcher do
   end
 
   describe '.run' do
-
-    it 'tracks a matching Incoming Event' do
-      active_backward_event_for_today.save
-      stub_deadline_exceeded!
-      subject.stub(:incoming_events_for).and_return([untracked_incoming_event])
-
-      subject.run
-      expect(untracked_incoming_event.reload.tracked_at).not_to be_nil
-    end
 
     it 'sends an alarm if an event is not matched' do
       subject.stub(:incoming_events_for).and_return([])
@@ -100,13 +91,12 @@ describe Matcher do
 
   describe '.incoming_events_for' do
 
-    it 'finds untracked active incoming event whose title matches' do
+    it 'finds active incoming event whose title matches' do
       # FIXME Test should be independent of run time
       # This will break when run between 23:01 and midnight
       active_backward_event_for_today.final_hour = Time.zone.now.hour + 1
       active_backward_event_for_today.save
 
-      incoming_event.tracked_at = nil
       incoming_event.title = active_backward_event_for_today.title
       incoming_event.save
 
