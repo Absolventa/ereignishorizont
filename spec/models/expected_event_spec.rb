@@ -64,28 +64,6 @@ describe ExpectedEvent do
     end
   end
 
-  describe "#selected_weekdays" do
-    it 'returns an empty string if no day selected' do
-      expect(subject.selected_weekdays).to eql ""
-    end
-
-    it 'adds name if selected weekday is true' do
-      subject.weekday_0 = true
-      expect(subject.selected_weekdays).to eql "Sun"
-    end
-
-    it 'does not add name if selected weekday is false' do
-      subject.weekday_0 = false
-      expect(subject.selected_weekdays).not_to eql "Sun"
-    end
-
-    it 'adds more than one selected weekday' do
-      subject.weekday_6 = true
-      subject.weekday_0 = true
-      expect(subject.selected_weekdays).to eql "Sun Sat"
-    end
-  end
-
   describe "#event_matching_direction" do
     it 'returns "when found" if true' do
       subject.matching_direction = true
