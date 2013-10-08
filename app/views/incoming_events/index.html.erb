@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th><%= sortable "title" %></th>
-      <th><%= sortable "tracked_at", "Tracked At" %></th>
       <th><%= sortable "created_at", "Created At" %></th>
       <th>Origin</th>
       <th></th>
@@ -16,7 +15,6 @@
     <% @incoming_events.each do |incoming_event| %>
       <tr>
         <td class="title"><%= link_to incoming_event.title, incoming_event %></td>
-        <td class="created-at"><%= incoming_event.tracked_at %></td>
         <td class="created-at"><%= incoming_event.created_at %></td>
         <td><%= incoming_event.remote_side.try(:name) %></td>
         <td class="nolink glyph"><%= link_to icon_pencil, edit_incoming_event_path(incoming_event) %></td>
