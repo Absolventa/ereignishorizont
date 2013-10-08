@@ -25,9 +25,7 @@ class Matcher
     private
 
     def run_alarms_for expected_event
-      if incoming_events_for(expected_event).empty?
-        expected_event.alarm!
-      end
+      expected_event.alarm! if incoming_events_for(expected_event).empty?
     end
 
     def track_incoming_events_for expected_event
