@@ -23,7 +23,6 @@ describe Matcher do
     end
 
     it 'sends an alarm if an event is not matched' do
-      expected_event.stub(:deadline_exceeded?).and_return(true)
       subject.stub(:incoming_events_for).and_return([])
       subject.stub(:expected_events).and_return([expected_event])
 
@@ -59,9 +58,10 @@ describe Matcher do
       expect(subject.expected_events).to be_empty
     end
 
-    it 'includes all active today backward events' do
+    it 'includes all active today backward events whose deadline is exceeded and that have not been alarmed yet' do
       active_backward_event_for_today.matching_direction = false
       active_backward_event_for_today.save
+      ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
 
       expect(subject.expected_events).to include active_backward_event_for_today
     end
@@ -73,27 +73,37 @@ describe Matcher do
       expect(subject.expected_events).not_to include active_backward_event_for_today
     end
 
-    it 'returns only events without an alarm notification from today' do
+    it 'excludes all active today backward events whose deadline has not been exceeded' do
       active_backward_event_for_today.matching_direction = false
       active_backward_event_for_today.save
-      FactoryGirl.create(
-        :alarm_notification, expected_event: active_backward_event_for_today
-      )
+      ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(false)
+
       expect(subject.expected_events).not_to include active_backward_event_for_today
     end
 
-    it 'returns an active event that has an alarm notification for yesterday' do
-      active_backward_event_for_today.matching_direction = false
-      active_backward_event_for_today.save
+    context 'with alarm notification check' do
+      it 'excludes events with an alarm notification from today' do
+        active_backward_event_for_today.matching_direction = false
+        active_backward_event_for_today.save
+        FactoryGirl.create(
+          :alarm_notification, expected_event: active_backward_event_for_today
+        )
+        expect(subject.expected_events).not_to include active_backward_event_for_today
+      end
 
-      Timecop.travel(1.day.ago)
-      FactoryGirl.create(
-        :alarm_notification, expected_event: active_backward_event_for_today
-      )
+      it 'returns an active event that has an alarm notification for yesterday' do
+        active_backward_event_for_today.matching_direction = false
+        active_backward_event_for_today.save
+        ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
 
-      Timecop.return
-      expect(subject.expected_events).to include active_backward_event_for_today
+        Timecop.travel(1.day.ago)
+        FactoryGirl.create(
+          :alarm_notification, expected_event: active_backward_event_for_today
+        )
 
+        Timecop.return
+        expect(subject.expected_events).to include active_backward_event_for_today
+      end
     end
   end
 
