@@ -25,7 +25,7 @@ class Matcher
     private
 
     def run_alarms_for expected_event
-      if incoming_events_for(expected_event).empty? and expected_event.deadline_exceeded?
+      if incoming_events_for(expected_event).empty?
         expected_event.alarm!
       end
     end
