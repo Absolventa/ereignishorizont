@@ -15,7 +15,7 @@ describe Matcher do
       expected_event.matching_direction = false
       expected_event = activate_current_weekday_for! expected_event
 
-      ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
+      stub_deadline_exceeded! true
       subject.stub(:incoming_events_for).and_return([untracked_incoming_event])
 
       subject.run
@@ -61,7 +61,7 @@ describe Matcher do
     it 'includes all active today backward events whose deadline is exceeded and that have not been alarmed yet' do
       active_backward_event_for_today.matching_direction = false
       active_backward_event_for_today.save
-      ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
+      stub_deadline_exceeded! true
 
       expect(subject.expected_events).to include active_backward_event_for_today
     end
@@ -76,7 +76,7 @@ describe Matcher do
     it 'excludes all active today backward events whose deadline has not been exceeded' do
       active_backward_event_for_today.matching_direction = false
       active_backward_event_for_today.save
-      ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(false)
+      stub_deadline_exceeded! false
 
       expect(subject.expected_events).not_to include active_backward_event_for_today
     end
@@ -94,7 +94,7 @@ describe Matcher do
       it 'returns an active event that has an alarm notification for yesterday' do
         active_backward_event_for_today.matching_direction = false
         active_backward_event_for_today.save
-        ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
+        stub_deadline_exceeded! true
 
         Timecop.travel(1.day.ago)
         FactoryGirl.create(
@@ -121,5 +121,9 @@ describe Matcher do
 
       expect(subject.incoming_events_for(expected_event)).to include incoming_event
     end
+  end
+
+  def stub_deadline_exceeded! value
+    ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(value)
   end
 end
