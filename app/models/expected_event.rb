@@ -22,16 +22,6 @@ class ExpectedEvent < ActiveRecord::Base
     AlarmNotification.create(expected_event: self)
   end
 
-  # (0..6).each do |weekday_index|
-
-  #   # dynamically define method
-
-  #   define_method "hurray_for_weekday_#{weekday_index}!" do
-  #     puts "hurray" if self.send("weekday_#{weekday_index}")
-  #   end
-
-  # end
-
   def selected_weekdays
     selected_weekdays = []
     selected_weekdays << "Sun" if self.weekday_0
@@ -42,14 +32,6 @@ class ExpectedEvent < ActiveRecord::Base
     selected_weekdays << "Fri" if self.weekday_5
     selected_weekdays << "Sat" if self.weekday_6
     selected_weekdays.join(" ")
-
-    # daynames = Date::ABBR_DAYNAMES.dup
-    # daynames = daynames[1..-1] << daynames[0]
-
-    # (0..6).map{|i| "weekday_#{i}" }.each_with_index do |weekday, index|
-    #   selected_weekdays << daynames[index] if self.send(weekday)
-    # end
-    # selected_weekdays.join(" ")
   end
 
   def event_matching_direction
@@ -83,7 +65,6 @@ class ExpectedEvent < ActiveRecord::Base
 
   def checked_today?
     weekdays[Date.today.wday]
-    #self.send("weekday_#{Date.today.wday}")
   end
 
   def deadline
