@@ -28,7 +28,7 @@ class IncomingEventsController < ApplicationController
 
   def create
     @incoming_event = IncomingEvent.new(incoming_event_params)
-    @incoming_event.remote_side_id = remote_side.id if remote_side
+    @incoming_event.remote_side = remote_side
 
     respond_to do |format|
       if @incoming_event.save
