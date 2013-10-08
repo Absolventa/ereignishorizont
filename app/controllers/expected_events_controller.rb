@@ -6,8 +6,6 @@ class ExpectedEventsController < ApplicationController
   def index
     @expected_events = ExpectedEvent.includes(:incoming_events).order(sort_column + ' ' + sort_direction)
       .page(params[:page]).per_page(10)
-    # @active = ExpectedEvent.where("started_at < ?", Time.now).where("ended_at > ?", Time.now)
-
   end
 
   def show

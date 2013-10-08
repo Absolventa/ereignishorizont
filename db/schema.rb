@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008135427) do
+ActiveRecord::Schema.define(version: 20131008154408) do
 
   create_table "alarm_notifications", force: true do |t|
     t.integer  "expected_event_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20131008135427) do
     t.datetime "updated_at"
     t.integer  "expected_event_id"
     t.integer  "remote_side_id"
+    t.text     "content"
   end
 
   add_index "incoming_events", ["expected_event_id"], name: "index_incoming_events_on_expected_event_id", using: :btree

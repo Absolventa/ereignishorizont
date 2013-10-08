@@ -9,6 +9,10 @@
         <td><%= @incoming_event.title %></td>
       </tr>
       <tr>
+        <th><%= IncomingEvent.human_attribute_name(:content) %></th>
+        <td><%= @incoming_event.content %></td>
+      </tr>
+      <tr>
         <th>Remote Side:</th>
         <td>
           <% if @incoming_event.remote_side %>
