@@ -65,36 +65,36 @@ class IncomingEventsController < ApplicationController
 
   private
 
-    def set_incoming_event
-      @incoming_event = IncomingEvent.find(params[:id])
-    end
+  def set_incoming_event
+    @incoming_event = IncomingEvent.find(params[:id])
+  end
 
-    def incoming_event_params
-      params.require(:incoming_event).permit(:title, :content)
-    end
+  def incoming_event_params
+    params.require(:incoming_event).permit(:title, :content)
+  end
 
-    def sort_column
-      IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-    end
+  def sort_column
+    IncomingEvent.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
 
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "DESC"
-    end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "DESC"
+  end
 
-    def restrict_access
-      if remote_side_request?
-        render nothing: true, status: :forbidden unless remote_side
-      else
-        authorize
-      end
+  def restrict_access
+    if remote_side_request?
+      render nothing: true, status: :forbidden unless remote_side
+    else
+      authorize
     end
+  end
 
-    def remote_side_request?
-      request.format.xml? || request.format.json?
-    end
+  def remote_side_request?
+    request.format.xml? || request.format.json?
+  end
 
-    def remote_side
-      @remote_side ||= RemoteSide.find_by_api_token(params[:api_token])
-    end
+  def remote_side
+    @remote_side ||= RemoteSide.find_by_api_token(params[:api_token])
+  end
 
 end
