@@ -4,12 +4,12 @@ describe Matcher do
 
   subject { described_class }
 
-  let(:expected_event) { FactoryGirl.create(:expected_event) }
+  let(:expected_event) { FactoryGirl.create(:active_expected_event) }
   let(:incoming_event) { FactoryGirl.build(:incoming_event) }
   let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event, tracked_at: nil) }
 
   let(:active_backward_event_for_today) do
-    FactoryGirl.build(:active_expected_event).tap do |expected_event|
+    expected_event.tap do |expected_event|
       expected_event.matching_direction = false
       activate_current_weekday_for expected_event
     end
