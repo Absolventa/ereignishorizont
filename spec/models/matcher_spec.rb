@@ -6,7 +6,7 @@ describe Matcher do
 
   let(:expected_event) { FactoryGirl.create(:active_expected_event) }
   let(:incoming_event) { FactoryGirl.build(:incoming_event) }
-  let(:untracked_incoming_event) { FactoryGirl.create(:incoming_event) }
+  let(:incoming_event) { FactoryGirl.create(:incoming_event) }
 
   let(:active_backward_event_for_today) do
     expected_event.tap do |expected_event|
@@ -30,7 +30,7 @@ describe Matcher do
 
       expected_event = active_backward_event_for_today
       expected_event.final_hour = 10
-      expected_event.title = untracked_incoming_event.title
+      expected_event.title = incoming_event.title
 
       ExpectedEvent.any_instance.should_not_receive(:alarm!)
 
