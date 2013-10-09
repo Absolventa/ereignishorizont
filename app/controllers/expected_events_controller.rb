@@ -61,11 +61,11 @@ class ExpectedEventsController < ApplicationController
   end
 
   def sort_column
-    ExpectedEvent.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    ExpectedEvent.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def sort_direction
-    %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc]. include?(params[:direction]) ? params[:direction] : "DESC"
   end
 
 end
