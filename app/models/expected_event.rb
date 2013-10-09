@@ -39,8 +39,9 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def active?
-    return true if self.started_at.nil? and self.ended_at.nil?
-    self.started_at < Time.zone.now and (self.ended_at.nil? || Time.zone.now <= self.ended_at.end_of_day)
+    return false if started_at.nil? and ended_at
+    return true if started_at.nil? and ended_at.nil?
+    started_at < Time.zone.now and (ended_at.nil? || Time.zone.now <= ended_at.end_of_day)
   end
 
   def activity_status

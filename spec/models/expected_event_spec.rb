@@ -77,6 +77,12 @@ describe ExpectedEvent do
       end
     end
 
+    it 'handles semantically wrong input' do
+      subject.started_at = nil
+      subject.ended_at = 1.day.from_now
+      expect(subject).not_to be_active
+    end
+
   end
 
   describe "#event_matching_direction" do
