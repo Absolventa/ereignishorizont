@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th><%= sortable "title" %></th>
-      <th>Hour</th>
+      <th><%= sortable 'final_hour', 'Hour' %></th>
       <th>Alarms</th>
       <th>Alarmed</th>
       <th><%= sortable "matching_direction", "Notify when" %></th>
@@ -18,9 +18,12 @@
   <tbody>
     <% @expected_events.each do |expected_event| %>
       <tr class ="success">
-        <td class="title"><%= link_to expected_event.title, expected_event %></td>
+        <td class="title">
+          <%= link_to expected_event.title, expected_event %><br>
+          <small>Weekdays: <%= selected_weekdays(expected_event) %></small>
+        </td>
         <td class="final-hour"><%= expected_event.final_hour unless expected_event.matching_direction %></td>
-        <td class="nolink alarms"><%= link_to "Alarms: #{expected_event.alarms.count}", expected_event_alarms_path(expected_event), class: 'btn btn-mini btn-custom-show' %></td>
+        <td class="nolink alarms"><%= link_to expected_event.alarms.count, expected_event_alarms_path(expected_event), class: 'btn btn-mini btn-custom-show' %></td>
         <td><%= l expected_event.last_alarm_at, format: :short if expected_event.last_alarm_at %></td>
         <td class="notification"><%= expected_event.event_matching_direction.gsub('when ', '') %></td>
         <td class="activity"><%= expected_event.activity_status.titleize %></td>
