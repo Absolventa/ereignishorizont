@@ -51,17 +51,32 @@ describe ExpectedEvent do
       expect(subject).not_to be_active
     end
 
-    it 'returns false if either time is not set' do
-      subject.started_at = nil
-      subject.ended_at = nil
-      expect(subject).not_to be_active
-    end
-
     it 'returns true if both start and end date are set to today' do
       subject.started_at = Date.today
       subject.ended_at = Date.today
       expect(subject).to be_active
     end
+
+    context 'with open end date' do
+      it 'returns true if neither start not end is set' do
+        subject.started_at = nil
+        subject.ended_at = nil
+        expect(subject).to be_active
+      end
+
+      it 'returns true if current date is after start date' do
+        subject.started_at = 1.day.ago
+        subject.ended_at = nil
+        expect(subject).to be_active
+      end
+
+      it 'returns false if current date is before start date' do
+        subject.started_at = 1.day.from_now
+        subject.ended_at = nil
+        expect(subject).not_to be_active
+      end
+    end
+
   end
 
   describe "#event_matching_direction" do
