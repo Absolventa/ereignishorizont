@@ -247,6 +247,7 @@ describe ExpectedEvent do
     end
 
     it 'returns the created_at of the most recent alarm notification' do
+      Timecop.freeze
       last_alarm = expected_event.alarm_notifications.create
       expect(expected_event.last_alarm_at).to eql last_alarm.created_at
     end
