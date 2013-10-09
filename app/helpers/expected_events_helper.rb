@@ -11,6 +11,8 @@ module ExpectedEventsHelper
     selected_weekdays << "Sat" if expected_event.weekday_6
     if selected_weekdays.size == 7
       'all'
+    elsif selected_weekdays[0..-1] == %w(Mon Tue Wed Thu Fri)
+      'workdays'
     else
       selected_weekdays.join(" ")
     end

@@ -30,5 +30,12 @@ describe ExpectedEventsHelper do
       end
       expect(helper.selected_weekdays(expected_event)).to eql "all"
     end
+
+    it "returns 'workdays' when Mo..Fr are selected" do
+      1.upto(5).each do |n|
+        expected_event.send("weekday_#{n}=", true)
+      end
+      expect(helper.selected_weekdays(expected_event)).to eql "workdays"
+    end
   end
 end
