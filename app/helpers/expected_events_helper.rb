@@ -9,7 +9,10 @@ module ExpectedEventsHelper
     selected_weekdays << "Thu" if expected_event.weekday_4
     selected_weekdays << "Fri" if expected_event.weekday_5
     selected_weekdays << "Sat" if expected_event.weekday_6
-    if selected_weekdays.size == 7
+
+    if selected_weekdays.empty?
+      'none'
+    elsif selected_weekdays.size == 7
       'all'
     elsif selected_weekdays[0..-1] == %w(Mon Tue Wed Thu Fri)
       'workdays'
