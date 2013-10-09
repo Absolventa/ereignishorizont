@@ -25,28 +25,7 @@
         </tr>
         <tr>
           <td><strong>Selected Weekday(s):</strong></td>
-          <td><% if @expected_event.weekday_0.present? %>
-                Sunday
-              <% end %>
-              <% if @expected_event.weekday_1.present? %>
-                Monday
-              <% end %>
-                <% if @expected_event.weekday_2.present? %>
-                Tuesday
-              <% end %>
-              <% if @expected_event.weekday_3.present? %>
-                Wednesday
-              <% end %>
-              <% if @expected_event.weekday_4.present? %>
-                Thursday
-              <% end %>
-              <% if @expected_event.weekday_5.present? %>
-                Friday
-              <% end %>
-              <% if @expected_event.weekday_6.present? %>
-                Saturday
-              <% end %>
-          </td>
+          <td><%= selected_weekdays(@expected_event) %></td>
         </tr>
         <tr>
           <td><strong>Notification:</strong></td>
