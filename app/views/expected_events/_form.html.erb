@@ -33,9 +33,15 @@
   <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
     <div class="row">
+      <div class="control-group span3">
+        <button id="toggle_weekday_selection">Toggle all</button>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="span3">
         <% 0.upto(6).each do |n| %>
-          <div class="control-group">
+          <div class="control-group weekday-selection">
             <%= f.label "weekday_#{n}", Date::DAYNAMES[n], :class => "control-label" %>
             <div class="controls">
               <%= f.check_box "weekday_#{n}" %>
