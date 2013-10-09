@@ -33,61 +33,28 @@
   <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
     <div class="row">
-      <div class="span3">
-        <div class="control-group">
-          <%= f.label :weekday_0, "Sunday", :class => "control-label" %>
-          <div class="controls">
-            <%= f.check_box :weekday_0, :id => "inlineCheckbox0" %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <%= f.label :weekday_1, "Monday", :class => "control-label" %>
-          <div class="controls">
-           <%= f.check_box :weekday_1, :id => "inlineCheckbox2" %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <%= f.label :weekday_2, "Tuesday", :class => "control-label" %>
-          <div class="controls">
-            <%= f.check_box :weekday_2, :id => "inlineCheckbox3" %>
-          </div>
-        </div>
+      <div class="control-group span3">
+        <button id="toggle_weekday_selection">Toggle all</button>
       </div>
+    </div>
 
+    <div class="row">
       <div class="span3">
-        <div class="control-group">
-          <%= f.label :weekday_3, "Wednesday", :class => "control-label" %>
-          <div class="controls">
-            <%= f.check_box :weekday_3, :id => "inlineCheckbox4" %>
+        <% 0.upto(6).each do |n| %>
+          <div class="control-group weekday-selection">
+            <%= f.label "weekday_#{n}", Date::DAYNAMES[n], :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box "weekday_#{n}" %>
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
-          <%= f.label :weekday_4, "Thursday", :class => "control-label" %>
-          <div class="controls">
-            <%= f.check_box :weekday_4, :id => "inlineCheckbox5" %>
+          <% if n == 3 %>
           </div>
-        </div>
+          <div class="span3">
+          <% end %>
 
-        <div class="control-group">
-          <%= f.label :weekday_5, "Friday", :class => "control-label" %>
-          <div class="controls">
-            <%= f.check_box :weekday_5, :id => "inlineCheckbox6" %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <%= f.label :weekday_6, "Saturday", :class => "control-label" %>
-          <div class="controls">
-            <%= f.check_box :weekday_6, :id => "inlineCheckbox7" %>
-          </div>
-        </div>
-      </div>
-
-      <div class="span6 explanation">
-        <div class="control-group">
+        <% end %>
+        <div class="control-group span6 explanation">
           <em>(If no weekdays are checked, the event will be considered inactive)</em>
         </div>
       </div>
