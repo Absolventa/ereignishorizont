@@ -19,7 +19,7 @@
     <% @expected_events.each do |expected_event| %>
       <tr class ="success">
         <td class="title">
-          <%= link_to expected_event.title, expected_event %><br>
+          <tt><%= link_to expected_event.title, expected_event %></tt><br>
           <small>Weekdays: <%= selected_weekdays(expected_event) %></small>
         </td>
         <td class="final-hour"><%= expected_event.final_hour unless expected_event.matching_direction %></td>
