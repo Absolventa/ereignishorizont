@@ -51,17 +51,38 @@ describe ExpectedEvent do
       expect(subject).not_to be_active
     end
 
-    it 'returns false if either time is not set' do
-      subject.started_at = nil
-      subject.ended_at = nil
-      expect(subject).not_to be_active
-    end
-
     it 'returns true if both start and end date are set to today' do
       subject.started_at = Date.today
       subject.ended_at = Date.today
       expect(subject).to be_active
     end
+
+    context 'with open end date' do
+      it 'returns true if neither start not end is set' do
+        subject.started_at = nil
+        subject.ended_at = nil
+        expect(subject).to be_active
+      end
+
+      it 'returns true if current date is after start date' do
+        subject.started_at = 1.day.ago
+        subject.ended_at = nil
+        expect(subject).to be_active
+      end
+
+      it 'returns false if current date is before start date' do
+        subject.started_at = 1.day.from_now
+        subject.ended_at = nil
+        expect(subject).not_to be_active
+      end
+    end
+
+    it 'handles semantically wrong input' do
+      subject.started_at = nil
+      subject.ended_at = 1.day.from_now
+      expect(subject).not_to be_active
+    end
+
   end
 
   describe "#event_matching_direction" do
@@ -182,8 +203,20 @@ describe ExpectedEvent do
   end
 
   context 'with scopes' do
-    it 'has an active scope' do
-      expect(ExpectedEvent.active).to be_kind_of ActiveRecord::Relation
+    describe '.active' do
+      it 'has an active scope' do
+        expect(ExpectedEvent.active).to be_kind_of ActiveRecord::Relation
+      end
+
+      it 'includes record without start and end dates' do
+        expected_event = FactoryGirl.create(:expected_event, started_at: nil, ended_at: nil)
+        expect(described_class.active).to include expected_event
+      end
+
+      it 'includes record with a start date but without an end date' do
+        expected_event = FactoryGirl.create(:expected_event, started_at: 1.day.ago, ended_at: nil)
+        expect(described_class.active).to include expected_event
+      end
     end
 
     it 'has a forward scope' do
