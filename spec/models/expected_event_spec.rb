@@ -203,8 +203,20 @@ describe ExpectedEvent do
   end
 
   context 'with scopes' do
-    it 'has an active scope' do
-      expect(ExpectedEvent.active).to be_kind_of ActiveRecord::Relation
+    describe '.active' do
+      it 'has an active scope' do
+        expect(ExpectedEvent.active).to be_kind_of ActiveRecord::Relation
+      end
+
+      it 'includes record without start and end dates' do
+        expected_event = FactoryGirl.create(:expected_event, started_at: nil, ended_at: nil)
+        expect(described_class.active).to include expected_event
+      end
+
+      it 'includes record with a start date but without an end date' do
+        expected_event = FactoryGirl.create(:expected_event, started_at: 1.day.ago, ended_at: nil)
+        expect(described_class.active).to include expected_event
+      end
     end
 
     it 'has a forward scope' do
