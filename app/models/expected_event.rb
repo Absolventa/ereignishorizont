@@ -75,6 +75,11 @@ class ExpectedEvent < ActiveRecord::Base
     Time.zone.now > deadline
   end
 
+  def last_alarm_at
+    last_alarm = alarm_notifications.order(:created_at).last
+    last_alarm.created_at if last_alarm
+  end
+
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans

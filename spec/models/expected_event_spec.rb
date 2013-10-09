@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ExpectedEvent do
+  let(:expected_event) { FactoryGirl.create(:expected_event) }
 
   it { should have_many(:alarms).dependent(:destroy) }
   it { should have_many(:alarm_notifications).dependent(:destroy) }
@@ -237,6 +238,17 @@ describe ExpectedEvent do
         expected_event = activate_current_weekday_for! expected_event
         expect(ExpectedEvent.today).to include expected_event
       end
+    end
+  end
+
+  describe '#last_alarm_at' do
+    it 'returns nil when no alarm has been sent yet' do
+      expect(subject.last_alarm_at).to be_nil
+    end
+
+    it 'returns the created_at of the most recent alarm notification' do
+      last_alarm = expected_event.alarm_notifications.create
+      expect(expected_event.last_alarm_at).to eql last_alarm.created_at
     end
   end
 end
