@@ -60,19 +60,24 @@
       </div>
     </div>
 
-  <h4>Select Notification</h4>
+  <h4>Select Notification Type</h4>
     <div class="line-separator"></div>
     <div class="row">
       <div class="span1"></div>
       <div class="span5">
         <div class="control-group">
-          <%= f.radio_button :matching_direction, true %> Please send an alarm when event is found
-
+          <label class="radio">
+            <%= f.radio_button :matching_direction, false %>
+            Send an alarm when event is <strong>not</strong> found
+          </label>
         </div>
       </div>
       <div class="span6">
         <div class="control-group">
-          <%= f.radio_button :matching_direction, false %> Please send an alarm when event is <strong>not</strong> found
+          <label class="radio">
+            <%= f.radio_button :matching_direction, true %>
+            Send an alarm when event is found
+          </label>
         </div>
       </div>
     </div>
