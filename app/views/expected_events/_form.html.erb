@@ -118,15 +118,6 @@
 
   <div class="form-actions">
     <%= f.submit :class => "btn btn-custom-success" %>
+  </div>
 
 <% end %>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#available_incoming_event_titles').change(function() {
-      $('#expected_event_title').val($(this).val());
-      $('#expected_event_title').focus();
-    });
-  });
-</script>
-

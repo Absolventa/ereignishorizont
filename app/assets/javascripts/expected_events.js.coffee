@@ -7,3 +7,7 @@ $(document).ready ->
     selector = '.weekday-selection input[type=checkbox]'
     $(selector).each ->
       $(this).prop('checked', !$(this).prop('checked'))
+
+  $('#available_incoming_event_titles').change ->
+    $('#expected_event_title').val($(this).val())
+    $('#expected_event_title').focus()
