@@ -4,7 +4,6 @@ class Alarm < ActiveRecord::Base
   has_many :alarm_mappings, dependent: :destroy
   has_many :expected_events, through: :alarm_mappings
 
-  validates :expected_event, presence: true
   validates :recipient_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true,
                               if: :enters_email?
