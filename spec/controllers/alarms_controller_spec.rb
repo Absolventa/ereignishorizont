@@ -25,4 +25,12 @@ describe AlarmsController do
       expect(response).to render_template :show
     end
   end
+
+  describe 'GET run' do
+    it 'sounds an alarm and redirects' do
+      Alarm.any_instance.should_receive(:run)
+      get :run, id: alarm.to_param
+      expect(response).to redirect_to alarms_path
+    end
+  end
 end
