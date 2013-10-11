@@ -18,7 +18,7 @@
       <%= render 'layouts/nav' %>
       <div class="container">
         <% if current_user %>
-          Logged in as <%= current_user.email %>
+          <p class="text-right">Logged in as <%= current_user.email %></p>
         <% end %>
         <% flash.each do |name, msg| %>
           <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
