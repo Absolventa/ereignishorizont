@@ -82,22 +82,6 @@
       </div>
     </div>
 
-  <h4>Select Dates</h4>
-    <div class="line-separator"></div>
-    <div class="control-group">
-      <%= f.label "Start Date", :class => "control-label" %>
-      <div class="controls">
-        <%= f.text_field :started_at %>
-      </div>
-    </div>
-
-    <div class="control-group">
-        <%= f.label "End Date", :class => "control-label" %>
-      <div class="controls">
-        <%= f.text_field :ended_at %>
-      </div>
-    </div>
-
   <h4>Final Hour</h4>
     <div class="line-separator"></div>
     <div class="row">
@@ -113,6 +97,22 @@
         <div class="control-group">
           <em>(Denotes the latest possible hour the event is expected. Only required for backward matching events.)</em>
         </div>
+      </div>
+    </div>
+
+  <h4>Select Dates</h4>
+    <div class="line-separator"></div>
+    <div class="control-group">
+      <%= f.label "Start Date", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :started_at %>
+      </div>
+    </div>
+
+    <div class="control-group">
+        <%= f.label "End Date", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :ended_at %>
       </div>
     </div>
 
