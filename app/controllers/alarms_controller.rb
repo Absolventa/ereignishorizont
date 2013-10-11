@@ -1,13 +1,12 @@
 class AlarmsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
-  before_action :set_expected_event
   before_action :set_alarm, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @alarms = @expected_event.alarms.order(sort_column + ' ' + sort_direction)
+    @alarms = Alarm.order(sort_column + ' ' + sort_direction)
       .page(params[:page]).per_page(10)
   end
 
@@ -68,10 +67,6 @@ class AlarmsController < ApplicationController
 
   def alarm_params
     params.require(:alarm).permit([:action, :title, :recipient_email, :message])
-  end
-
-  def set_expected_event
-    @expected_event = ExpectedEvent.find(params[:expected_event_id])
   end
 
   def sort_column
