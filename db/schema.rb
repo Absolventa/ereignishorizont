@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009173032) do
+ActiveRecord::Schema.define(version: 20131011074330) do
 
   create_table "alarm_notifications", force: true do |t|
     t.integer  "expected_event_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20131009173032) do
     t.boolean  "weekday_4"
     t.boolean  "weekday_5"
     t.boolean  "weekday_6"
-    t.boolean  "matching_direction"
+    t.string   "matching_direction"
     t.integer  "final_hour"
     t.date     "started_at"
     t.date     "ended_at"
