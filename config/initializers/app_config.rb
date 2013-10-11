@@ -7,7 +7,7 @@ env_config  = if File.exists? config_file
               else
                 {
                   host:       ENV['EVENT_GIRL_HOST']       || 'eventgirl.example.com',
-                  url_scheme: ENV['EVENT_GIRL_URL_SCHEME'] || 'https',
+                  url_scheme: ENV['EVENT_GIRL_URL_SCHEME'] || 'http',
                   mail_from:  ENV['EVENT_GIRL_MAIL_FROM']  || 'event_girl@example.com'
                 }
               end
@@ -23,6 +23,11 @@ if Rails.env.production? or Rails.env.staging?
     domain:         'heroku.com'
   }
   ActionMailer::Base.delivery_method = :smtp
+
+  EventGirl::Application.configure do
+    config.force_ssl = APP_CONFIG[:url_scheme] == 'https'
+  end
+
 elsif Rails.env.development?
   ActionMailer::Base.delivery_method = :sendmail
   #Mail.register_interceptor(MailInterceptor)
