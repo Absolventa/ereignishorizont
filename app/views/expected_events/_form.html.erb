@@ -67,7 +67,7 @@
       <div class="span5">
         <div class="control-group">
           <label class="radio">
-            <%= f.radio_button :matching_direction, false %>
+            <%= f.radio_button :matching_direction, 'backward' %>
             Send an alarm when event is <strong>not</strong> found
           </label>
         </div>
@@ -75,7 +75,7 @@
       <div class="span6">
         <div class="control-group">
           <label class="radio">
-            <%= f.radio_button :matching_direction, true %>
+            <%= f.radio_button :matching_direction, 'forward' %>
             Send an alarm when event is found
           </label>
         </div>

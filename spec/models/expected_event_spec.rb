@@ -7,12 +7,9 @@ describe ExpectedEvent do
   it { should have_many(:alarm_notifications).dependent(:destroy) }
   it { should have_many :incoming_events }
   it { should validate_presence_of :title }
-  #it { should ensure_inclusion_of(:matching_direction).in_array([true false]) }
-  # seems to be a shoulda bug, does not work
+  it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
   it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
 
-  it { should allow_value(true).for(:matching_direction) }
-  it { should allow_value(false).for(:matching_direction) }
   it { should_not allow_value(nil).for(:matching_direction) }
 
   it "has a valid factory" do
@@ -88,12 +85,12 @@ describe ExpectedEvent do
 
   describe "#event_matching_direction" do
     it 'returns "when found" if true' do
-      subject.matching_direction = true
+      subject.matching_direction = 'forward'
       expect(subject.event_matching_direction).to eql "when found"
     end
 
     it 'returns "when not found" if false' do
-      subject.matching_direction = false
+      subject.matching_direction = 'backward'
       expect(subject.event_matching_direction).to eql "when not found"
     end
   end
@@ -171,7 +168,7 @@ describe ExpectedEvent do
 
   describe '#deadline_exceeded?' do
     it 'returns false for all forward expectations' do
-      subject.matching_direction = true
+      subject.matching_direction = 'forward'
       expect(subject.deadline_exceeded?).to eql false
     end
 
