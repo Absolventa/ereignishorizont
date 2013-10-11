@@ -49,18 +49,24 @@ describe Alarm do
   end
 
   context "#run" do
+    let(:expected_event) { FactoryGirl.build(:expected_event) }
+
+    it 'requires an expected_event as argument' do
+      expect(subject.method(:run).arity).to eql 1
+    end
+
     it 'sends an email when email is selected' do
       subject = FactoryGirl.build(:alarm)
       subject.stub(:enters_email?).and_return(true)
       expect do
-        subject.run
+        subject.run expected_event
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
 
     it 'sends a logger message when logger is selected' do
       Rails.logger.should_receive(:info)
       subject.stub(:enters_logger?).and_return(true)
-      subject.run
+      subject.run expected_event
     end
   end
 end
