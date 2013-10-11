@@ -32,10 +32,10 @@ class AlarmsController < ApplicationController
   end
 
   def create
-    @alarm = @expected_event.alarms.build(alarm_params)
+    @alarm = Alarm.new(alarm_params)
     respond_to do |format|
       if @alarm.save
-        format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
+        format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully created'}
       else
         format.html { render action: 'new' }
       end
@@ -45,7 +45,7 @@ class AlarmsController < ApplicationController
   def update
     respond_to do |format|
       if @alarm.update(alarm_params)
-        format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully updated' }
+        format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully updated' }
       else
         format.html { render action: 'edit' }
       end

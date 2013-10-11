@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', expected_event_alarm_path(@expected_event, @alarm), class: "btn btn-custom-show" %>
-<%= link_to 'Back', expected_event_alarm_path, class: "btn btn-custom-back" %>
+<%= link_to 'Show', @alarm, class: "btn btn-custom-show" %>
+<%= link_to 'Back', alarms_path, class: "btn btn-custom-back" %>
