@@ -1,6 +1,6 @@
 class ExpectedEvent < ActiveRecord::Base
   validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
-  validates :matching_direction, inclusion: { in: [true, false] }
+  validates :matching_direction, inclusion: { in: %w(backward forward) }
   validates_uniqueness_of :title
 
   has_many :alarms, dependent: :destroy
