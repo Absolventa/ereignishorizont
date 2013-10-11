@@ -6,7 +6,6 @@ describe Alarm do
 
     it { should have_many(:alarm_mappings).dependent(:destroy) }
     it { should have_many(:expected_events).through :alarm_mappings}
-    it { should validate_presence_of :expected_event }
   	it { should allow_value("a@b.com").for(:recipient_email) }
 
     it "has a valid factory" do
