@@ -1,7 +1,10 @@
 class Alarm < ActiveRecord::Base
   ACTIONS = ["Email", "Logger"]
 
-  belongs_to :expected_event
+  belongs_to :expected_event # TODO remove
+
+  has_many :alarm_mappings
+  has_many :expected_events, through: :alarm_mappings
 
   validates :expected_event, presence: true
   validates :recipient_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
