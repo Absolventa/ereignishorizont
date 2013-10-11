@@ -75,12 +75,13 @@ describe PasswordResetsController do
         user
       end
 
-      it 'updates the password' do
+      it 'updates the password and logs user in' do
         expect do
           patch :update, id: user.password_reset_token, user: passwords
         end.to change{ user.reload.password_digest }
         expect(response).to redirect_to root_path
         expect(flash[:notice]).not_to be_blank
+        expect(cookies[:auth_token]).to eql user.auth_token
       end
 
       it 'fails to update user and renders edit' do
