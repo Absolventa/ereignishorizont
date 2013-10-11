@@ -12,7 +12,7 @@ class ExpectedEventsController < ApplicationController
   end
 
   def new
-    @expected_event = ExpectedEvent.new
+    @expected_event = ExpectedEvent.new(matching_direction: false)
   end
 
   def edit
