@@ -1,9 +1,9 @@
 class Alarm < ActiveRecord::Base
   ACTIONS = ["Email", "Logger"]
 
-  validates :expected_event, presence: true
   belongs_to :expected_event
 
+  validates :expected_event, presence: true
   validates :recipient_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true,
                               if: :enters_email?
