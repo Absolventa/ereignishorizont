@@ -19,8 +19,8 @@ class ExpectedEvent < ActiveRecord::Base
       OR (started_at IS NULL AND ended_at IS NULL)
     EOFSQL
   end
-  scope :forward,  -> { where(matching_direction: true) }
-  scope :backward, -> { where(matching_direction: false) }
+  scope :forward,  -> { where(matching_direction: 'forward') }
+  scope :backward, -> { where(matching_direction: 'backward') }
   scope :today,    -> { where("weekday_#{Date.today.wday}" => true) }
 
   def alarm!
@@ -29,7 +29,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def event_matching_direction
-    if self.matching_direction
+    if self.matching_direction == 'forward'
       "when found"
     else
       "when not found"
@@ -37,7 +37,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def event_matching_direction_for_email
-    if self.matching_direction
+    if self.matching_direction == 'forward'
       "found"
     else
       "not found"
@@ -71,7 +71,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def deadline_exceeded?
-    return false if matching_direction
+    return false if matching_direction == 'forward'
     Time.zone.now > deadline
   end
 

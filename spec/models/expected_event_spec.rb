@@ -85,12 +85,12 @@ describe ExpectedEvent do
 
   describe "#event_matching_direction" do
     it 'returns "when found" if true' do
-      subject.matching_direction = true
+      subject.matching_direction = 'forward'
       expect(subject.event_matching_direction).to eql "when found"
     end
 
     it 'returns "when not found" if false' do
-      subject.matching_direction = false
+      subject.matching_direction = 'backward'
       expect(subject.event_matching_direction).to eql "when not found"
     end
   end
@@ -168,7 +168,7 @@ describe ExpectedEvent do
 
   describe '#deadline_exceeded?' do
     it 'returns false for all forward expectations' do
-      subject.matching_direction = true
+      subject.matching_direction = 'forward'
       expect(subject.deadline_exceeded?).to eql false
     end
 

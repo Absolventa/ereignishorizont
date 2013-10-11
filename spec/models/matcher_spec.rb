@@ -10,7 +10,7 @@ describe Matcher do
 
   let(:active_backward_event_for_today) do
     expected_event.tap do |expected_event|
-      expected_event.matching_direction = false
+      expected_event.matching_direction = 'backward'
       activate_current_weekday_for expected_event
     end
   end
@@ -54,7 +54,7 @@ describe Matcher do
 
     it 'excludes all active today forward events' do
       forward_event = active_backward_event_for_today
-      forward_event.matching_direction = true
+      forward_event.matching_direction = 'forward'
       forward_event.save
 
       expect(subject.expected_events).not_to include forward_event
