@@ -5,7 +5,7 @@ describe Alarm do
   context "Validations" do
 
     it { should belong_to :expected_event }
-    it { should have_many :alarm_mappings }
+    it { should have_many(:alarm_mappings).dependent(:destroy) }
     it { should have_many(:expected_events).through :alarm_mappings}
     it { should validate_presence_of :expected_event }
   	it { should allow_value("a@b.com").for(:recipient_email) }

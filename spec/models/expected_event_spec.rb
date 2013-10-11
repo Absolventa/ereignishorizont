@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ExpectedEvent do
   let(:expected_event) { FactoryGirl.create(:expected_event) }
 
-  it { should have_many(:alarm_mappings) }
+  it { should have_many(:alarm_mappings).dependent(:destroy) }
   it { should have_many(:alarms).through(:alarm_mappings) }
   it { should have_many(:alarm_notifications).dependent(:destroy) }
   it { should have_many :incoming_events }
