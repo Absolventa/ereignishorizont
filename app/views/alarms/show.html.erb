@@ -7,8 +7,14 @@
         <td><%= @alarm.title %></td>
       </tr>
       <tr>
-        <td><strong>Expected Event:</strong></td>
-        <td><%= @alarm.expected_event.title if @alarm.expected_event %></td>
+        <td><strong>Used By:</strong></td>
+        <td>
+          <ul>
+            <% @alarm.expected_events.each do |expected_event| %>
+              <li><%= link_to expected_event.title, expected_event %></li>
+            <% end %>
+          </ul>
+        </td>
       </tr>
       <tr>
         <td><strong>Action:</strong></td>
@@ -27,5 +33,5 @@
   <div class="span1"></div>
 </div>
 
-<%= link_to 'Edit', edit_expected_event_alarm_path(@expected_event, @alarm), class: 'btn btn-custom-success'%>
-<%= link_to 'Back', expected_event_alarms_path, class: 'btn btn-custom-back' %>
+<%= link_to 'Edit', [:edit, @alarm], class: 'btn btn-custom-success'%>
+<%= link_to 'Back', alarms_path, class: 'btn btn-custom-back' %>

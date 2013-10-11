@@ -62,7 +62,7 @@ class AlarmsController < ApplicationController
   protected
 
   def set_alarm
-    @alarm = @expected_event.alarms.find(params[:id])
+    @alarm = Alarm.find(params[:id])
   end
 
   def alarm_params
