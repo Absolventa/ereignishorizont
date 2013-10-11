@@ -1,8 +1,6 @@
 class Alarm < ActiveRecord::Base
   ACTIONS = ["Email", "Logger"]
 
-  belongs_to :expected_event # TODO remove
-
   has_many :alarm_mappings, dependent: :destroy
   has_many :expected_events, through: :alarm_mappings
 
