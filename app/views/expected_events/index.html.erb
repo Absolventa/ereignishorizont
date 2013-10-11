@@ -1,5 +1,7 @@
 <h1>Expected Events <i class="icon-calendar icon-large"></i></h1>
 
+<%= link_to 'New event expectation', new_expected_event_path , class: 'btn btn-custom-success' %>
+
 <table class="table table-striped" data-provides="rowlink">
   <thead>
     <tr>
@@ -36,5 +38,3 @@
 </table>
 
 <%= will_paginate @expected_events %>
-
-<%= link_to 'New Expected event', new_expected_event_path , class: 'btn btn-custom-success' %>
