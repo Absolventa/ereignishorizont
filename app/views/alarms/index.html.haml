@@ -15,7 +15,7 @@
   %tbody
     - @alarms.each do |alarm|
       %tr.warning
-        %td.title= link_to alarm.title, [@expected_event, alarm]
+        %td.title= link_to alarm.title, alarm
         %td.action= alarm.action
         %td.nolink.glyph= link_to icon_pencil, [:edit, alarm]
         %td.nolink.glyph= link_to icon_trash, alarm, method: :delete, data: { confirm: 'Are you sure?' }
