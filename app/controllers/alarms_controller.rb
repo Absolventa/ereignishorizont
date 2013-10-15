@@ -70,7 +70,7 @@ class AlarmsController < ApplicationController
   end
 
   def sort_column
-    Alarm.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    Alarm.column_names.include?(params[:sort]) ? params[:sort] : "alarms.title"
   end
 
   def sort_direction
