@@ -16,6 +16,14 @@ describe AlarmsController do
       expect(response).to be_success
       expect(response).to render_template :index
     end
+
+    it 'filters by assigned expected_event' do
+      expected_event = FactoryGirl.create(:expected_event)
+      alarm.expected_events << expected_event
+      FactoryGirl.create(:alarm)
+      get :index, expected_event_id: expected_event.id
+      expect(assigns(:alarms).to_a).to eql [alarm]
+    end
   end
 
   describe 'GET show' do

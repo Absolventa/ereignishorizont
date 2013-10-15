@@ -1,13 +1,11 @@
 class AlarmsController < ApplicationController
 
-  helper_method :sort_column, :sort_direction
+  helper_method :alarms, :sort_column, :sort_direction
   before_action :set_alarm, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @alarms = Alarm.order(sort_column + ' ' + sort_direction)
-      .page(params[:page]).per_page(10)
   end
 
   def show
@@ -75,6 +73,16 @@ class AlarmsController < ApplicationController
 
   def sort_direction
     %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def alarms
+    @alarms ||= begin
+                  scope = Alarm.order(sort_column + ' ' + sort_direction)
+                  if params[:expected_event_id]
+                    scope = scope.includes(:expected_events).where('expected_events.id' => params[:expected_event_id])
+                  end
+                  scope.page(params[:page]).per_page(10)
+                end
   end
 
 end
