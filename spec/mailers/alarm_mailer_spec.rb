@@ -10,7 +10,7 @@ describe AlarmMailer do
         mailer.deliver
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
       mail = ActionMailer::Base.deliveries.last
-      expect(mail.subject).to eql alarm.title
+      expect(mail.subject).to eql "#{alarm.title}: #{event.title}"
       expect(mail.from).to eql [APP_CONFIG[:mail_from]]
       expect(mail.to).to eql [alarm.recipient_email]
     end

@@ -6,7 +6,7 @@ class AlarmMailer < ActionMailer::Base
     @expected_event = expected_event.title
     @message = alarm.message
     @matched = expected_event.event_matching_direction_for_email
-    mail(:to => alarm.recipient_email, :subject => alarm.title)
-    #mail call should always be at the end
+    subject = "#{@alarm.title}: #{@expected_event}"
+    mail(to: alarm.recipient_email, subject: subject)
   end
 end
