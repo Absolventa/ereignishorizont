@@ -20,7 +20,8 @@ class AlarmsController < ApplicationController
 
   def run
     @alarm = Alarm.find(params[:id])
-    @alarm.run
+    event = ExpectedEvent.new(title: 'Tested using a bogus event expectation')
+    @alarm.run event
     if @alarm.enters_email? or @alarm.enters_logger?
       flash[:notice] = "Alarm test successful"
     else
