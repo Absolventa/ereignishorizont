@@ -31,6 +31,7 @@ class AlarmsController < ApplicationController
 
   def create
     @alarm = Alarm.new(alarm_params)
+    @alarm.recipient_email = nil unless @alarm.action == 'Email'
     respond_to do |format|
       if @alarm.save
         format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully created'}

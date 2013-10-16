@@ -64,6 +64,12 @@ describe AlarmsController do
       end.to change { Alarm.count }
       expect(response).to redirect_to alarm_path(assigns(:alarm))
     end
+
+    it 'removes the email address unless selected action is Email' do
+      attributes = FactoryGirl.attributes_for(:alarm, action: 'Logger', recipient_email: 'foo@bar.com')
+      post :create, alarm: attributes
+      expect(assigns(:alarm).recipient_email).to be_nil
+    end
   end
 
   describe 'PATCH update' do
