@@ -4,7 +4,8 @@ describe AlarmMailer do
   describe '.event_expectation_matched' do
     it 'sends a mail for an alarm' do
       alarm = FactoryGirl.build(:alarm)
-      mailer = described_class.event_expectation_matched(alarm)
+      event = FactoryGirl.build(:expected_event)
+      mailer = described_class.event_expectation_matched(alarm, event)
       expect do
         mailer.deliver
       end.to change { ActionMailer::Base.deliveries.size }.by(1)

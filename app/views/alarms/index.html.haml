@@ -5,8 +5,7 @@
 %table.table.table-striped{"data-provides" => "rowlink"}
   %thead
     %tr
-      %th= sortable "title", "Title/Subject"
-      %th Expected Event
+      %th= sortable "alarms.title", "Title/Subject"
       %th Action
       %th
       %th
@@ -14,17 +13,16 @@
       %th
 
   %tbody
-    - @alarms.each do |alarm|
+    - alarms.each do |alarm|
       %tr.warning
-        %td.title= link_to alarm.title, [@expected_event, alarm]
-        %td.subtitle= alarm.expected_event.title if alarm.expected_event
+        %td.title= link_to alarm.title, alarm
         %td.action= alarm.action
-        %td.nolink.glyph= link_to icon_pencil, edit_expected_event_alarm_path(@expected_event, alarm)
-        %td.nolink.glyph= link_to icon_trash, [@expected_event, alarm], method: :delete, data: { confirm: 'Are you sure?' }
-        %td.nolink.glyph= link_to 'Test', run_expected_event_alarm_path(@expected_event, alarm), class: 'btn btn-mini btn-custom-show'
+        %td.nolink.glyph= link_to icon_pencil, [:edit, alarm]
+        %td.nolink.glyph= link_to icon_trash, alarm, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.nolink.glyph= link_to 'Test', [:run, alarm], class: 'btn btn-mini btn-custom-show'
 %br
 
-= will_paginate @alarms
+= will_paginate alarms
 
-= link_to 'New Alarm', new_expected_event_alarm_path(@expected_event) , class: 'btn btn-custom-success'
+= link_to 'New Alarm', new_alarm_path, class: 'btn btn-custom-success'
 = link_to 'Back to Expected Events', expected_events_path , class: 'btn btn-custom-back'

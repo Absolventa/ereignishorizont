@@ -12,11 +12,10 @@ EventGirl::Application.routes.draw do
   resources :welcome_pages
 
   resources :incoming_events
+  resources :expected_events
 
-  resources :expected_events do
-    resources :alarms do
-      get :run, :on => :member
-    end
+  resources :alarms do
+    get :run, :on => :member
   end
 
   post '/' => 'incoming_events#create'

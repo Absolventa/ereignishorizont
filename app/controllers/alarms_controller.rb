@@ -1,14 +1,11 @@
 class AlarmsController < ApplicationController
 
-  helper_method :sort_column, :sort_direction
-  before_action :set_expected_event
-  before_action :set_alarm, only: [:show, :edit, :update, :destroy]
+  helper_method :alarms, :sort_column, :sort_direction
+  before_action :set_alarm, only: [:show, :edit, :update, :destroyi, :run]
 
   respond_to :html
 
   def index
-    @alarms = @expected_event.alarms.order(sort_column + ' ' + sort_direction)
-      .page(params[:page]).per_page(10)
   end
 
   def show
@@ -22,21 +19,21 @@ class AlarmsController < ApplicationController
   end
 
   def run
-    @alarm = Alarm.find(params[:id])
-    @alarm.run
+    event = ExpectedEvent.new(title: 'Tested using a bogus event expectation')
+    @alarm.run event
     if @alarm.enters_email? or @alarm.enters_logger?
       flash[:notice] = "Alarm test successful"
     else
       flash[:error] = "Alarm test failed"
     end
-     redirect_to expected_event_alarms_path(@expected_event)
+     redirect_to alarms_path
   end
 
   def create
-    @alarm = @expected_event.alarms.build(alarm_params)
+    @alarm = Alarm.new(alarm_params)
     respond_to do |format|
       if @alarm.save
-        format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully created'}
+        format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully created'}
       else
         format.html { render action: 'new' }
       end
@@ -46,7 +43,7 @@ class AlarmsController < ApplicationController
   def update
     respond_to do |format|
       if @alarm.update(alarm_params)
-        format.html { redirect_to expected_event_alarm_path(@expected_event, @alarm), notice: 'Alarm was successfully updated' }
+        format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully updated' }
       else
         format.html { render action: 'edit' }
       end
@@ -63,23 +60,29 @@ class AlarmsController < ApplicationController
   protected
 
   def set_alarm
-    @alarm = @expected_event.alarms.find(params[:id])
+    @alarm = Alarm.find(params[:id])
   end
 
   def alarm_params
     params.require(:alarm).permit([:action, :title, :recipient_email, :message])
   end
 
-  def set_expected_event
-    @expected_event = ExpectedEvent.find(params[:expected_event_id])
-  end
-
   def sort_column
-    Alarm.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    Alarm.column_names.include?(params[:sort]) ? params[:sort] : "alarms.title"
   end
 
   def sort_direction
     %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def alarms
+    @alarms ||= begin
+                  scope = Alarm.order(sort_column + ' ' + sort_direction)
+                  if params[:expected_event_id]
+                    scope = scope.includes(:expected_events).where('expected_events.id' => params[:expected_event_id])
+                  end
+                  scope.page(params[:page]).per_page(10)
+                end
   end
 
 end

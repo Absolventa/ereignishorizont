@@ -52,7 +52,7 @@
         </table>
 
         <table class="table">
-          <td><%= link_to "This event has #{@expected_event.alarms.count} Alarms", expected_event_alarms_path(@expected_event), class: "btn btn-block btn-custom-show"%></td>
+          <td><%= link_to "This event has #{@expected_event.alarms.count} Alarms", alarms_path(expected_event_id: @expected_event.id), class: "btn btn-block btn-custom-show"%></td>
         </table>
 
     </div>

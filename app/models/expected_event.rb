@@ -3,7 +3,8 @@ class ExpectedEvent < ActiveRecord::Base
   validates :matching_direction, inclusion: { in: %w(backward forward) }
   validates_uniqueness_of :title
 
-  has_many :alarms, dependent: :destroy
+  has_many :alarm_mappings, dependent: :destroy
+  has_many :alarms, through: :alarm_mappings
   has_many :alarm_notifications, dependent: :destroy
   has_many :incoming_events
 

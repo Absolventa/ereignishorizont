@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011074330) do
+ActiveRecord::Schema.define(version: 20131011094445) do
+
+  create_table "alarm_mappings", force: true do |t|
+    t.integer  "alarm_id"
+    t.integer  "expected_event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "alarm_mappings", ["alarm_id"], name: "index_alarm_mappings_on_alarm_id", using: :btree
+  add_index "alarm_mappings", ["expected_event_id"], name: "index_alarm_mappings_on_expected_event_id", using: :btree
 
   create_table "alarm_notifications", force: true do |t|
     t.integer  "expected_event_id"
@@ -24,14 +34,11 @@ ActiveRecord::Schema.define(version: 20131011074330) do
   create_table "alarms", force: true do |t|
     t.string   "title"
     t.string   "action"
-    t.integer  "expected_event_id"
     t.string   "recipient_email"
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "alarms", ["expected_event_id"], name: "index_alarms_on_expected_event_id", using: :btree
 
   create_table "expected_events", force: true do |t|
     t.text     "title"
@@ -42,12 +49,12 @@ ActiveRecord::Schema.define(version: 20131011074330) do
     t.boolean  "weekday_4"
     t.boolean  "weekday_5"
     t.boolean  "weekday_6"
-    t.string   "matching_direction"
     t.integer  "final_hour"
     t.date     "started_at"
     t.date     "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "matching_direction"
   end
 
   create_table "incoming_events", force: true do |t|
