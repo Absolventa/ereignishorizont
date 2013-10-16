@@ -1,7 +1,7 @@
 class AlarmsController < ApplicationController
 
   helper_method :alarms, :sort_column, :sort_direction
-  before_action :set_alarm, only: [:show, :edit, :update, :destroy]
+  before_action :set_alarm, only: [:show, :edit, :update, :destroyi, :run]
 
   respond_to :html
 
@@ -19,7 +19,6 @@ class AlarmsController < ApplicationController
   end
 
   def run
-    @alarm = Alarm.find(params[:id])
     event = ExpectedEvent.new(title: 'Tested using a bogus event expectation')
     @alarm.run event
     if @alarm.enters_email? or @alarm.enters_logger?
