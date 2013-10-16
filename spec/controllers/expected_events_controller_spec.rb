@@ -18,9 +18,11 @@ describe ExpectedEventsController do
   end
 
   describe 'POST create' do
+    let(:valid_attributes) { FactoryGirl.attributes_for(:expected_event) }
+
     it 'creates a new record' do
       expect do
-        post :create, expected_event: FactoryGirl.attributes_for(:expected_event)
+        post :create, expected_event: valid_attributes
       end.to change { ExpectedEvent.count }.by(1)
       expect(flash[:notice]).not_to be_blank
       expect(response).to redirect_to expected_event_path(assigns(:expected_event))
@@ -32,12 +34,20 @@ describe ExpectedEventsController do
       end.not_to change { ExpectedEvent.count }
       expect(response).to render_template 'new'
     end
+
+    it 'accepts associating with alarms' do
+      alarm = FactoryGirl.create(:alarm)
+      post :create, expected_event: valid_attributes.merge("alarm_ids" => [alarm.id])
+      expect(assigns(:expected_event).alarms).to include alarm
+    end
   end
 
   describe 'PATCH update' do
+    let(:valid_attributes) { { title: 'Foobar' } }
+
     it 'creates a new record' do
       expect do
-        patch :update, id: expected_event.to_param, expected_event: { title: 'Foobar' }
+        patch :update, id: expected_event.to_param, expected_event: valid_attributes
       end.to change { expected_event.reload.title }
       expect(flash[:notice]).not_to be_blank
       expect(response).to redirect_to expected_event_path(assigns(:expected_event))
@@ -48,6 +58,12 @@ describe ExpectedEventsController do
         patch :update, id: expected_event.to_param, expected_event: { title: '' }
       end.not_to change { expected_event.reload.title }
       expect(response).to render_template 'edit'
+    end
+
+    it 'accepts associating with alarms' do
+      alarm = FactoryGirl.create(:alarm)
+      patch :update, id: expected_event.to_param, expected_event: { "alarm_ids" => [alarm.id] }
+      expect(assigns(:expected_event).alarms).to include alarm
     end
   end
 end

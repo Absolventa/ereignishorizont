@@ -60,6 +60,17 @@
       </div>
     </div>
 
+  <h4>Select Alarms</h4>
+  <div class="line-separator"></div>
+    <div class="row">
+      <div class="span1"></div>
+      <div class="span5">
+        <div class="control-group">
+          <%= select_tag "expected_event[alarm_ids][]", options_for_select(Alarm.all.map{|a| [a.title, a.id]}, f.object.alarms.map(&:id)), multiple: true %>
+        </div>
+      </div>
+    </div>
+
   <h4>Select Notification Type</h4>
     <div class="line-separator"></div>
     <div class="row">
