@@ -7,16 +7,6 @@
         <td><%= @alarm.title %></td>
       </tr>
       <tr>
-        <td><strong>Used By:</strong></td>
-        <td>
-          <ul>
-            <% @alarm.expected_events.each do |expected_event| %>
-              <li><%= link_to expected_event.title, expected_event %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
         <td><strong>Action:</strong></td>
         <td><%= @alarm.action %></td>
       </tr>
@@ -27,6 +17,16 @@
       <tr>
         <td><strong>Recipient Email:</strong></td>
         <td><%= @alarm.recipient_email %></td>
+      </tr>
+      <tr>
+        <th>Used by:</th>
+        <td>
+          <ul class="unstyled">
+            <% @alarm.expected_events.each do |expected_event| %>
+              <li><%= link_to expected_event.title, expected_event %></li>
+            <% end %>
+          </ul>
+        </td>
       </tr>
     </table>
   </div>
