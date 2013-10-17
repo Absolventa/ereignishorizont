@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011094445) do
+ActiveRecord::Schema.define(version: 20131017160908) do
 
   create_table "alarm_mappings", force: true do |t|
     t.integer  "alarm_id"
@@ -49,13 +49,16 @@ ActiveRecord::Schema.define(version: 20131011094445) do
     t.boolean  "weekday_4"
     t.boolean  "weekday_5"
     t.boolean  "weekday_6"
+    t.string   "matching_direction"
     t.integer  "final_hour"
     t.date     "started_at"
     t.date     "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "matching_direction"
+    t.integer  "remote_side_id"
   end
+
+  add_index "expected_events", ["remote_side_id"], name: "index_expected_events_on_remote_side_id", using: :btree
 
   create_table "incoming_events", force: true do |t|
     t.text     "title"
