@@ -30,6 +30,15 @@
       </div>
     </div>
 
+    <h4><%= RemoteSide.model_name.human %></h4>
+    <div class="line-separator"></div>
+    <div class="control-group">
+        <%= f.label :remote_side, "Watch incoming coming from:", :class => "control-label" %>
+      <div class="controls">
+        <%= f.select :remote_side_id, RemoteSide.all.map{|site| [site.name, site.id] }, prompt: '<Select One>' %>
+      </div>
+    </div>
+
   <h4>Select Weekday(s)</h4>
     <div class="line-separator"></div>
     <div class="row">
