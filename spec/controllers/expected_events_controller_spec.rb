@@ -18,11 +18,12 @@ describe ExpectedEventsController do
   end
 
   describe 'POST create' do
+    let(:remote_side) { FactoryGirl.create(:remote_side) }
     let(:valid_attributes) { FactoryGirl.attributes_for(:expected_event) }
 
     it 'creates a new record' do
       expect do
-        post :create, expected_event: valid_attributes
+        post :create, expected_event: valid_attributes.merge(remote_side_id: remote_side.id)
       end.to change { ExpectedEvent.count }.by(1)
       expect(flash[:notice]).not_to be_blank
       expect(response).to redirect_to expected_event_path(assigns(:expected_event))

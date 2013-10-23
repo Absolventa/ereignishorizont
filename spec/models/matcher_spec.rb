@@ -98,9 +98,21 @@ describe Matcher do
       active_backward_event_for_today.save
 
       incoming_event.title = active_backward_event_for_today.title
+      incoming_event.remote_side = active_backward_event_for_today.remote_side
       incoming_event.save
 
       expect(subject.incoming_events_for(active_backward_event_for_today)).to include incoming_event
+    end
+
+    it "finds only incoming events matching the expected event's remote side" do
+      active_backward_event_for_today.final_hour = Time.zone.now.hour + 1
+      active_backward_event_for_today.save
+
+      incoming_event.title = active_backward_event_for_today.title
+      incoming_event.remote_side = FactoryGirl.create(:remote_side)
+      incoming_event.save
+
+      expect(subject.incoming_events_for(active_backward_event_for_today)).not_to include incoming_event
     end
   end
 

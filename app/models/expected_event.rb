@@ -1,8 +1,6 @@
 class ExpectedEvent < ActiveRecord::Base
-  validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
-  validates :matching_direction, inclusion: { in: %w(backward forward) }
-  validates_uniqueness_of :title
 
+  belongs_to :remote_side, inverse_of: :expected_events
   has_many :alarm_mappings, dependent: :destroy
   has_many :alarms, through: :alarm_mappings
   has_many :alarm_notifications, dependent: :destroy
@@ -10,6 +8,10 @@ class ExpectedEvent < ActiveRecord::Base
 
   before_validation :delete_white_spaces_from_title
 
+  validates :remote_side, presence: true
+  validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
+  validates :matching_direction, inclusion: { in: %w(backward forward) }
+  validates_uniqueness_of :title, scope: :remote_side_id
   validates_inclusion_of :final_hour, in: 1..24
   # TODO not needed for forward matching?
 

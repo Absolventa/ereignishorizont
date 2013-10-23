@@ -57,7 +57,7 @@ class ExpectedEventsController < ApplicationController
     params.require(:expected_event).permit(:title, :weekday_0, :weekday_1, :weekday_2,
       :weekday_3, :weekday_4, :weekday_5, :weekday_6,
       :matching_direction, :started_at, :ended_at, :date_select,
-      :final_hour, "alarm_ids" => [])
+      :final_hour, :remote_side_id, "alarm_ids" => [])
   end
 
   def sort_column

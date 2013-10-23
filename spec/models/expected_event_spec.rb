@@ -7,6 +7,9 @@ describe ExpectedEvent do
   it { should have_many(:alarms).through(:alarm_mappings) }
   it { should have_many(:alarm_notifications).dependent(:destroy) }
   it { should have_many :incoming_events }
+  it { should belong_to :remote_side }
+
+  it { should validate_presence_of :remote_side }
   it { should validate_presence_of :title }
   it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
   it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
@@ -28,6 +31,22 @@ describe ExpectedEvent do
       expected_event = ExpectedEvent.new(title: ' bose    ')
       expected_event.save
       expected_event.title.should == 'bose'
+    end
+
+    it 'prevents same title for same remote sides' do
+      expected_event = FactoryGirl.create(:expected_event)
+      subject.title = expected_event.title
+      subject.remote_side = expected_event.remote_side
+      subject.valid?
+      expect(subject).to have(1).error_on(:title)
+    end
+
+    it 'allows same title for different remote sides' do
+      expected_event = FactoryGirl.create(:expected_event)
+      subject.title = expected_event.title
+      subject.remote_side = FactoryGirl.create(:remote_side)
+      subject.valid?
+      expect(subject).to have(0).errors_on(:title)
     end
   end
 

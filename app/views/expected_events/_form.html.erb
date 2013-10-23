@@ -1,4 +1,4 @@
-<%= form_for(@expected_event, :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
+<%= form_for @expected_event, html: { class: "form-horizontal" } do |f| %>
   <% if @expected_event.errors.any? %>
 
     <div id="error_explanation">
@@ -27,6 +27,15 @@
       <label for="available_incoming_event_titles" class="control-label">Choose available</label>
       <div class="controls">
       <%= select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true %>
+      </div>
+    </div>
+
+    <h4><%= RemoteSide.model_name.human %></h4>
+    <div class="line-separator"></div>
+    <div class="control-group">
+        <%= f.label :remote_side, "Watch incoming coming from:", :class => "control-label" %>
+      <div class="controls">
+        <%= f.select :remote_side_id, RemoteSide.all.map{|site| [site.name, site.id] }, prompt: '<Select One>' %>
       </div>
     </div>
 

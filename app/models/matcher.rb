@@ -13,6 +13,7 @@ class Matcher
 
     def incoming_events_for expected_event
       IncomingEvent.where(title: expected_event.title).
+        where(remote_side: expected_event.remote_side).
         created_today_before(expected_event.deadline)
     end
 
