@@ -1,6 +1,7 @@
 class RemoteSide < ActiveRecord::Base
 
-  has_many :expected_events, inverse_of: :remote_side, dependent: :nullify
+  has_many :alarm_notifications, inverse_of: :remote_side, dependent: :nullify
+  has_many :expected_events,     inverse_of: :remote_side, dependent: :nullify
   has_many :incoming_events
 
   validates :name, presence: true
