@@ -14,6 +14,7 @@ FactoryGirl.define do
   	title 'my event title'
     final_hour { 1.hour.from_now.hour }
     matching_direction 'forward'
+    remote_side
 
     factory :active_expected_event do
       started_at 2.days.ago

@@ -9,6 +9,7 @@ describe ExpectedEvent do
   it { should have_many :incoming_events }
   it { should belong_to :remote_side }
 
+  it { should validate_presence_of :remote_side }
   it { should validate_presence_of :title }
   it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
   it { should ensure_inclusion_of(:final_hour).in_range(1..24) }

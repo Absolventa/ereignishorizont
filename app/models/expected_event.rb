@@ -8,6 +8,7 @@ class ExpectedEvent < ActiveRecord::Base
 
   before_validation :delete_white_spaces_from_title
 
+  validates :remote_side, presence: true
   validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
   validates :matching_direction, inclusion: { in: %w(backward forward) }
   validates_uniqueness_of :title
