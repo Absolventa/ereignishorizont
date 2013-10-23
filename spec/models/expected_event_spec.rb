@@ -146,6 +146,8 @@ describe ExpectedEvent do
         subject.alarm!
       end.to change { AlarmNotification.count }.by(1)
       alarm_notification = AlarmNotification.last
+      expect(alarm_notification.remote_side).not_to be_nil
+      expect(alarm_notification.remote_side).to eql subject.remote_side
       expect(alarm_notification.expected_event).to eql subject
     end
   end
