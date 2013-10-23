@@ -68,9 +68,7 @@ describe Matcher do
     context 'with alarm notification check' do
       it 'excludes events with an alarm notification from today' do
         active_backward_event_for_today.save
-        FactoryGirl.create(
-          :alarm_notification, expected_event: active_backward_event_for_today
-        )
+        create_alarm_notification_for active_backward_event_for_today
         expect(subject.expected_events).not_to include active_backward_event_for_today
       end
 
@@ -78,13 +76,15 @@ describe Matcher do
         active_backward_event_for_today.save
         stub_deadline_exceeded!
 
-        Timecop.travel(1.day.ago)
-        FactoryGirl.create(
-          :alarm_notification, expected_event: active_backward_event_for_today
-        )
+        Timecop.travel(1.day.ago) do
+          create_alarm_notification_for active_backward_event_for_today
+        end
 
-        Timecop.return
         expect(subject.expected_events).to include active_backward_event_for_today
+      end
+
+      def create_alarm_notification_for event
+        FactoryGirl.create(:alarm_notification, expected_event: event)
       end
     end
   end
