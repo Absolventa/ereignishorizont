@@ -32,6 +32,22 @@ describe ExpectedEvent do
       expected_event.save
       expected_event.title.should == 'bose'
     end
+
+    it 'prevents same title for same remote sides' do
+      expected_event = FactoryGirl.create(:expected_event)
+      subject.title = expected_event.title
+      subject.remote_side = expected_event.remote_side
+      subject.valid?
+      expect(subject).to have(1).error_on(:title)
+    end
+
+    it 'allows same title for different remote sides' do
+      expected_event = FactoryGirl.create(:expected_event)
+      subject.title = expected_event.title
+      subject.remote_side = FactoryGirl.create(:remote_side)
+      subject.valid?
+      expect(subject).to have(0).errors_on(:title)
+    end
   end
 
   describe "#active?" do
