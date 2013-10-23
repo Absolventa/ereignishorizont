@@ -1,5 +1,6 @@
 class AlarmNotification < ActiveRecord::Base
   belongs_to :expected_event
+  belongs_to :remote_side
 
   validates :expected_event, presence: true
   validate  :expected_event_must_be_unique_for_today

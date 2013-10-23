@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe AlarmNotification do
   it { should belong_to :expected_event }
+  it { should belong_to :remote_side }
 
   let(:alarm_notification) { FactoryGirl.create(:alarm_notification) }
 
