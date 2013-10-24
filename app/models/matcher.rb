@@ -6,9 +6,7 @@ class Matcher
 
     def expected_events
       ExpectedEvent.active.today.backward.includes(:alarm_notifications).
-        select do |event|
-          not_alarmed_today?(event) && event.deadline_exceeded?
-        end
+        select { |event| not_alarmed_today?(event) && event.deadline_exceeded? }
     end
 
     def incoming_events_for expected_event
