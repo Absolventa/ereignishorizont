@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe RemoteSide do
 
+  it { should have_many(:alarm_notifications).dependent(:nullify) }
   it { should have_many(:expected_events).dependent(:nullify) }
-  it { should have_many :incoming_events }
+  it { should have_many(:incoming_events).dependent(:nullify) }
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }
 

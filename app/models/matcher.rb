@@ -5,10 +5,8 @@ class Matcher
     end
 
     def expected_events
-      ExpectedEvent.active.today.backward.
-        select do |event|
-          event.alarm_notifications.today.empty? && event.deadline_exceeded?
-        end
+      ExpectedEvent.active.today.backward.includes(:alarm_notifications).
+        select { |event| not_alarmed_today?(event) && event.deadline_exceeded? }
     end
 
     def incoming_events_for expected_event
@@ -18,6 +16,10 @@ class Matcher
     end
 
     private
+
+    def not_alarmed_today? event
+      event.alarm_notifications.today.where(remote_side: event.remote_side).empty?
+    end
 
     def run_alarms_for expected_event
       expected_event.alarm! if incoming_events_for(expected_event).empty?

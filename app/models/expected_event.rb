@@ -28,7 +28,7 @@ class ExpectedEvent < ActiveRecord::Base
 
   def alarm!
     alarms.each { |alarm| alarm.run }
-    AlarmNotification.create(expected_event: self)
+    AlarmNotification.create(expected_event: self, remote_side: remote_side)
   end
 
   def event_matching_direction
