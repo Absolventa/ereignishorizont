@@ -70,6 +70,20 @@ be found [here](https://github.com/Absolventa/event_girl_client))
 
 There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
+### Changelog
+#### *v1.2.0 // 2013-10-24
+* Allows alarms to be shared between expected events
+* Requires expected event to belong to a specific remote side
+* Minor bugfixes and refactorings
+
+#### *v1.1.0 // 2013-10-08
+* Accepts optional ``content`` attribute for incoming events
+* Heaved instance methods from Matcher onto class level
+* Minor bugfixes and refactorings
+
+#### *v1.0.0 // 2013-09-30
+* RGSoC final version
+
 ### Contributors
 
 - [Susanne Dewein](https://github.com/FrauBienenstich)
