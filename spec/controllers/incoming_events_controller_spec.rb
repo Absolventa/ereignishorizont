@@ -66,7 +66,7 @@ describe IncomingEventsController do
         end
 
         it 'runs alarms for matching forward event expectation' do
-          expect_any_instance_of(ExpectedEvent).to receive :alarm!
+          expect_any_instance_of(ExpectedEvent).to receive(:alarm!).and_call_original
           post :create, incoming_event: { title: existing_event_expectation.title }
         end
       end
