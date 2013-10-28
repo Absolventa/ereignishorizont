@@ -58,11 +58,16 @@ describe IncomingEventsController do
       end
 
       context 'with forward matching expected_event' do
+        let(:existing_event_expectation) { FactoryGirl.create(:expected_event) }
+
         it 'finds expected event by its title' do
-          existing_event_expectation = FactoryGirl.create(:expected_event)
           post :create, incoming_event: { title: existing_event_expectation.title }
-          assigns(:expected_event).should eql existing_event_expectation
-          pending "TODO run alarm triggers"
+          expect(assigns(:expected_event)).to eql existing_event_expectation
+        end
+
+        it 'runs alarms for matching forward event expectation' do
+          expect_any_instance_of(ExpectedEvent).to receive :alarm!
+          post :create, incoming_event: { title: existing_event_expectation.title }
         end
       end
     end
