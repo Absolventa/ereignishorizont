@@ -129,13 +129,14 @@ describe ExpectedEvent do
 
   describe '#alarm!' do
     it 'does nothing when no alarms exist' do
-      Alarm.any_instance.should_not_receive(:run)
-      subject.alarm!
+      allow_any_instance_of(Alarm).to receive(:run).
+        and_raise(ArgumentError.new 'Should not be called')
+      expect { subject.alarm! }.not_to raise_error
     end
 
     it 'calls the run method on each alarm' do
       alarm = Alarm.new
-      alarm.should_receive(:run)
+      expect(alarm).to receive(:run).and_call_original
       subject.alarms = [alarm]
       subject.alarm!
     end

@@ -27,7 +27,7 @@ class ExpectedEvent < ActiveRecord::Base
   scope :today,    -> { where("weekday_#{Date.today.wday}" => true) }
 
   def alarm!
-    alarms.each { |alarm| alarm.run }
+    alarms.each { |alarm| alarm.run self }
     AlarmNotification.create(expected_event: self, remote_side: remote_side)
   end
 
