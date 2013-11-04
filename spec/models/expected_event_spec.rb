@@ -48,6 +48,13 @@ describe ExpectedEvent do
         expect(subject).to have(0).errors_on(:title)
       end
     end
+
+    it 'does not allow weekdays and day of month selected at the same time' do
+      subject.weekday_1 = true
+      subject.day_of_month = 19
+      subject.valid?
+      expect(subject).to have(1).error_on(:base)
+    end
   end
 
   it "has a valid factory" do

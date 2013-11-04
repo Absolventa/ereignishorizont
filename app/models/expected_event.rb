@@ -15,6 +15,7 @@ class ExpectedEvent < ActiveRecord::Base
   validates_uniqueness_of :title, scope: :remote_side_id
   validates_inclusion_of :final_hour, in: 1..24
   # TODO not needed for forward matching?
+  validate :ensure_either_weekly_or_monthly_is_selected
 
   scope :active,   -> do
     where(<<-EOFSQL, q: Time.zone.now)
@@ -108,6 +109,12 @@ class ExpectedEvent < ActiveRecord::Base
 
   def delete_white_spaces_from_title
     self.title = self.title.strip if self.title
+  end
+
+  def ensure_either_weekly_or_monthly_is_selected
+    unless weekly? ^ monthly?
+      errors.add(:base, 'cannot select both day of month and weekday(s)')
+    end
   end
 
 end
