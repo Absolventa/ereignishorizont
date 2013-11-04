@@ -85,7 +85,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def monthly?
-    !!day_of_month
+    !!day_of_month && weekdays.none?
   end
 
   def weekdays
@@ -98,6 +98,10 @@ class ExpectedEvent < ActiveRecord::Base
     weekdays << !!self.weekday_5
     weekdays << !!self.weekday_6
     weekdays
+  end
+
+  def weekly?
+    day_of_month.blank?
   end
 
   private

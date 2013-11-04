@@ -287,5 +287,28 @@ describe ExpectedEvent do
       subject.day_of_month = 13
       expect(subject.monthly?).to eql true
     end
+
+    it 'returns false if day_of_month is set but weekdays are selected' do
+      subject.day_of_month = 13
+      subject.weekday_1 = true
+      expect(subject.monthly?).to eql false
+    end
+  end
+
+  describe '#weekly?' do
+    it 'returns true if no weekdays are selected as long as day of month is not set' do
+      expect(subject.weekly?).to eql true
+    end
+
+    it 'returns true if at least one weekday is set' do
+      subject.weekday_1 = true
+      expect(subject.weekly?).to eql true
+    end
+
+    it 'returns false if weekdays are selected when day_of_month is set' do
+      subject.weekday_1 = true
+      subject.day_of_month = 13
+      expect(subject.weekly?).to eql false
+    end
   end
 end
