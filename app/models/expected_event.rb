@@ -11,6 +11,7 @@ class ExpectedEvent < ActiveRecord::Base
   validates :remote_side, presence: true
   validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
   validates :matching_direction, inclusion: { in: %w(backward forward) }
+  validates :day_of_month, numericality: { only_integer: true, within: 1..31, allow_blank: true }
   validates_uniqueness_of :title, scope: :remote_side_id
   validates_inclusion_of :final_hour, in: 1..24
   # TODO not needed for forward matching?

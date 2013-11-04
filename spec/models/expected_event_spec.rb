@@ -17,6 +17,8 @@ describe ExpectedEvent do
 
     it { should_not allow_value(nil).for(:matching_direction) }
 
+    it { expect(subject).to validate_numericality_of(:day_of_month) }
+
     context 'validating title' do
       it 'complains about illegal characters' do
         expected_event = ExpectedEvent.new(title: 'bß€se')
