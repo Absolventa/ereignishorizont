@@ -273,4 +273,15 @@ describe ExpectedEvent do
       expect(expected_event.last_alarm_at.to_i).to eql last_alarm.created_at.to_i
     end
   end
+
+  describe '#monthly?' do
+    it 'returns false if day_of_month is not set' do
+      expect(subject.monthly?).to eql false
+    end
+
+    it 'returns true if day_of_month is set' do
+      subject.day_of_month = 13
+      expect(subject.monthly?).to eql true
+    end
+  end
 end

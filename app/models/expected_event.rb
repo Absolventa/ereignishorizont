@@ -83,6 +83,10 @@ class ExpectedEvent < ActiveRecord::Base
     last_alarm.created_at if last_alarm
   end
 
+  def monthly?
+    !!day_of_month
+  end
+
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans
