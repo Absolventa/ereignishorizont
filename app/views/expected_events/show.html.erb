@@ -29,10 +29,9 @@
         </tr>
         <tr>
           <td><strong>Notification:</strong></td>
-          <td><% if @expected_event.matching_direction%>
+          <td><% if @expected_event.matching_direction == 'forward' %>
                 alarm sent when found
-              <% end %>
-              <% if @expected_event.matching_direction == false %>
+              <% else %>
                 alarm sent when <strong>not</strong> found
               <% end %>
           </td>
