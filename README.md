@@ -71,6 +71,9 @@ be found [here](https://github.com/Absolventa/event_girl_client))
 There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
 ### Changelog
+*v1.3.0 // 2013-11-05
+* Supports event expectations for monthly tasks
+
 *v1.2.0 // 2013-10-24*
 * Allows alarms to be shared between expected events
 * Requires expected event to belong to a specific remote side

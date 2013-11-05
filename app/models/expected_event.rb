@@ -11,9 +11,11 @@ class ExpectedEvent < ActiveRecord::Base
   validates :remote_side, presence: true
   validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
   validates :matching_direction, inclusion: { in: %w(backward forward) }
+  validates :day_of_month, numericality: { only_integer: true, within: 1..31, allow_blank: true }
   validates_uniqueness_of :title, scope: :remote_side_id
   validates_inclusion_of :final_hour, in: 1..24
   # TODO not needed for forward matching?
+  validate :ensure_either_weekly_or_monthly_is_selected
 
   scope :active,   -> do
     where(<<-EOFSQL, q: Time.zone.now)
@@ -24,7 +26,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
   scope :forward,  -> { where(matching_direction: 'forward') }
   scope :backward, -> { where(matching_direction: 'backward') }
-  scope :today,    -> { where("weekday_#{Date.today.wday}" => true) }
+  scope :today,    -> { where("weekday_#{Date.today.wday} = :t OR day_of_month = :d", t: true, d: Date.today.day) }
 
   def alarm!
     alarms.each { |alarm| alarm.run self }
@@ -83,6 +85,10 @@ class ExpectedEvent < ActiveRecord::Base
     last_alarm.created_at if last_alarm
   end
 
+  def monthly?
+    !!day_of_month && weekdays.none?
+  end
+
   def weekdays
     weekdays = []
     weekdays << !!self.weekday_0 #bang bang, converts nil values into booleans
@@ -95,10 +101,20 @@ class ExpectedEvent < ActiveRecord::Base
     weekdays
   end
 
+  def weekly?
+    day_of_month.blank?
+  end
+
   private
 
   def delete_white_spaces_from_title
     self.title = self.title.strip if self.title
+  end
+
+  def ensure_either_weekly_or_monthly_is_selected
+    unless weekly? ^ monthly?
+      errors.add(:base, 'cannot select both day of month and weekday(s)')
+    end
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131023143906) do
+ActiveRecord::Schema.define(version: 20131104154726) do
 
   create_table "alarm_mappings", force: true do |t|
     t.integer  "alarm_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20131023143906) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "remote_side_id"
+    t.integer  "day_of_month"
   end
 
   add_index "expected_events", ["remote_side_id"], name: "index_expected_events_on_remote_side_id", using: :btree

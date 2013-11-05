@@ -9,45 +9,56 @@ describe ExpectedEvent do
   it { should have_many :incoming_events }
   it { should belong_to :remote_side }
 
-  it { should validate_presence_of :remote_side }
-  it { should validate_presence_of :title }
-  it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
-  it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
+  context 'with validations' do
+    it { should validate_presence_of :remote_side }
+    it { should validate_presence_of :title }
+    it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
+    it { should ensure_inclusion_of(:final_hour).in_range(1..24) }
 
-  it { should_not allow_value(nil).for(:matching_direction) }
+    it { should_not allow_value(nil).for(:matching_direction) }
+
+    it { expect(subject).to validate_numericality_of(:day_of_month) }
+
+    context 'validating title' do
+      it 'complains about illegal characters' do
+        expected_event = ExpectedEvent.new(title: 'bß€se')
+        expected_event.valid?
+        expected_event.should have(1).error_on(:title)
+      end
+
+      it 'removes trailing white spaces before save' do
+        expected_event = ExpectedEvent.new(title: ' bose    ')
+        expected_event.save
+        expected_event.title.should == 'bose'
+      end
+
+      it 'prevents same title for same remote sides' do
+        expected_event = FactoryGirl.create(:expected_event)
+        subject.title = expected_event.title
+        subject.remote_side = expected_event.remote_side
+        subject.valid?
+        expect(subject).to have(1).error_on(:title)
+      end
+
+      it 'allows same title for different remote sides' do
+        expected_event = FactoryGirl.create(:expected_event)
+        subject.title = expected_event.title
+        subject.remote_side = FactoryGirl.create(:remote_side)
+        subject.valid?
+        expect(subject).to have(0).errors_on(:title)
+      end
+    end
+
+    it 'does not allow weekdays and day of month selected at the same time' do
+      subject.weekday_1 = true
+      subject.day_of_month = 19
+      subject.valid?
+      expect(subject).to have(1).error_on(:base)
+    end
+  end
 
   it "has a valid factory" do
     FactoryGirl.build(:expected_event).should be_valid
-  end
-
-  context 'validating title' do
-    it 'complains about illegal characters' do
-      expected_event = ExpectedEvent.new(title: 'bß€se')
-      expected_event.valid?
-      expected_event.should have(1).error_on(:title)
-    end
-
-    it 'removes trailing white spaces before save' do
-      expected_event = ExpectedEvent.new(title: ' bose    ')
-      expected_event.save
-      expected_event.title.should == 'bose'
-    end
-
-    it 'prevents same title for same remote sides' do
-      expected_event = FactoryGirl.create(:expected_event)
-      subject.title = expected_event.title
-      subject.remote_side = expected_event.remote_side
-      subject.valid?
-      expect(subject).to have(1).error_on(:title)
-    end
-
-    it 'allows same title for different remote sides' do
-      expected_event = FactoryGirl.create(:expected_event)
-      subject.title = expected_event.title
-      subject.remote_side = FactoryGirl.create(:remote_side)
-      subject.valid?
-      expect(subject).to have(0).errors_on(:title)
-    end
   end
 
   describe "#active?" do
@@ -258,6 +269,11 @@ describe ExpectedEvent do
         expected_event = activate_current_weekday_for! expected_event
         expect(ExpectedEvent.today).to include expected_event
       end
+
+      it 'finds an expected event with current day of month' do
+        expected_event = FactoryGirl.create(:expected_event, day_of_month: Date.today.day)
+        expect(ExpectedEvent.today).to include expected_event
+      end
     end
   end
 
@@ -271,6 +287,40 @@ describe ExpectedEvent do
       last_alarm = expected_event.alarm_notifications.create
       # NOTE Travis keeps failing w/o #to_i
       expect(expected_event.last_alarm_at.to_i).to eql last_alarm.created_at.to_i
+    end
+  end
+
+  describe '#monthly?' do
+    it 'returns false if day_of_month is not set' do
+      expect(subject.monthly?).to eql false
+    end
+
+    it 'returns true if day_of_month is set' do
+      subject.day_of_month = 13
+      expect(subject.monthly?).to eql true
+    end
+
+    it 'returns false if day_of_month is set but weekdays are selected' do
+      subject.day_of_month = 13
+      subject.weekday_1 = true
+      expect(subject.monthly?).to eql false
+    end
+  end
+
+  describe '#weekly?' do
+    it 'returns true if no weekdays are selected as long as day of month is not set' do
+      expect(subject.weekly?).to eql true
+    end
+
+    it 'returns true if at least one weekday is set' do
+      subject.weekday_1 = true
+      expect(subject.weekly?).to eql true
+    end
+
+    it 'returns false if weekdays are selected when day_of_month is set' do
+      subject.weekday_1 = true
+      subject.day_of_month = 13
+      expect(subject.weekly?).to eql false
     end
   end
 end

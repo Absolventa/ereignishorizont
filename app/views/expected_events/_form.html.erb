@@ -39,10 +39,11 @@
       </div>
     </div>
 
-  <h4>Select Weekday(s)</h4>
+  <h4>Select Frequency</h4>
     <div class="line-separator"></div>
     <div class="row">
       <div class="control-group span3">
+        <h5>Weekly</h5>
         <button id="toggle_weekday_selection">Toggle all</button>
       </div>
     </div>
@@ -65,6 +66,18 @@
         <% end %>
         <div class="control-group span6 explanation">
           <em>(If no weekdays are checked, the event will be considered inactive)</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span3">
+        <h5>Monthly</h5>
+        <div class="control-group">
+          <%= f.label :day_of_month, class: 'control-label' %>
+          <div class="controls">
+            <%= f.select :day_of_month, (1..31), include_blank: true %>
+          </div>
         </div>
       </div>
     </div>
