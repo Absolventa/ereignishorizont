@@ -90,6 +90,15 @@ describe Matcher do
         expect(subject.expected_events).to include active_backward_event_for_today
       end
 
+      context 'with monthly event expectations' do
+        it 'finds a monthly event with day of month being spot on the current day' do
+          expected_event.matching_direction = 'backward'
+          expected_event.day_of_month = Date.today.day
+          expected_event.save
+          expect(subject.expected_events).to eql [expected_event]
+        end
+      end
+
       def create_alarm_notification_for event, remote_side = nil
         remote_side ||= event.remote_side
         FactoryGirl.create(:alarm_notification, expected_event: event, remote_side: remote_side)
