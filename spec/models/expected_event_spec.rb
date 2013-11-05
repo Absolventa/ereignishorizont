@@ -269,6 +269,11 @@ describe ExpectedEvent do
         expected_event = activate_current_weekday_for! expected_event
         expect(ExpectedEvent.today).to include expected_event
       end
+
+      it 'finds an expected event with current day of month' do
+        expected_event = FactoryGirl.create(:expected_event, day_of_month: Date.today.day)
+        expect(ExpectedEvent.today).to include expected_event
+      end
     end
   end
 

@@ -26,7 +26,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
   scope :forward,  -> { where(matching_direction: 'forward') }
   scope :backward, -> { where(matching_direction: 'backward') }
-  scope :today,    -> { where("weekday_#{Date.today.wday}" => true) }
+  scope :today,    -> { where("weekday_#{Date.today.wday} = :t OR day_of_month = :d", t: true, d: Date.today.day) }
 
   def alarm!
     alarms.each { |alarm| alarm.run self }
