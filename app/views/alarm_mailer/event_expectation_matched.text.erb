@@ -1,10 +1,10 @@
-<%= @alarm.title %>
-
-You have received a message from Event Girl about your expected event
-<%= @expected_event %>.
+Alarm............: <%= @alarm.title %>
+Origin...........: <%= @remote_side %>
 
 Your event was <%= @matched %>.
 
-Find your custom message below:
+Expected Event...: <%= @expected_event.title %>
+<%= "Deadline.........: #{@expected_event.final_hour}" if @expected_event.matching_direction == 'backward' -%>
 
-<%= @message %>
+
+Custom Message : <%= @message %>
