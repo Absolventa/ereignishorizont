@@ -3,9 +3,10 @@ require 'spec_helper'
 describe UsersController do
   render_views
 
+  let(:user) { FactoryGirl.create(:user, admin: false) }
+
   before do
-    @user = FactoryGirl.create(:user, admin: false)
-    controller.stub(:current_user).and_return(@user)
+    controller.stub(:current_user).and_return(user)
   end
 
   describe 'GET index' do
@@ -38,7 +39,7 @@ describe UsersController do
     context 'as normal user' do
       it 'redirects to users#show' do
         get :new
-        expect(response).to redirect_to user_path(@user)
+        expect(response).to redirect_to user_path(user)
         expect(flash[:alert]).to eql "Not authorized"
       end
     end
@@ -59,7 +60,7 @@ describe UsersController do
       it 'renders the current users "edit" template' do
         get :edit, id: 'nonexistent_id'
         expect(response).to render_template 'edit'
-        expect(assigns(:user)).to eql @user
+        expect(assigns(:user)).to eql user
       end
     end
   end
@@ -134,22 +135,22 @@ describe UsersController do
       it 'updates current user' do
         User.any_instance.stub(:valid?).and_return(true)
         expect do
-          patch :update, id: @user.to_param, user: { email: 'foo@bar.com' }
-        end.to change{ @user.reload.email }
+          patch :update, id: user.to_param, user: { email: 'foo@bar.com' }
+        end.to change{ user.reload.email }
         expect(flash[:notice]).not_to be_blank
-        expect(response).to redirect_to user_path(@user)
+        expect(response).to redirect_to user_path(user)
       end
 
       it 'tries to update other user but silently updates current user instead' do
         User.any_instance.stub(:valid?).and_return(true)
         expect do
           patch :update, id: 'does-not-matter', user: { email: 'foo@bar.com' }
-        end.to change{ @user.reload.email }
+        end.to change{ user.reload.email }
       end
 
       it "fails to update current user and renders 'edit' template" do
         User.any_instance.stub(:valid?).and_return(false)
-        patch :update, id: @user.to_param, user: { email: '' }
+        patch :update, id: user.to_param, user: { email: '' }
         expect(flash[:notice]).to be_blank
         expect(response).to render_template 'edit'
       end
