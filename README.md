@@ -71,10 +71,11 @@ be found [here](https://github.com/Absolventa/event_girl_client))
 There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
 ### Changelog
-*v1.3.1 // 2014-01-14
+
+*v1.3.1 // 2014-01-14*
 * Upgrade to Rails v4.0.2
 
-*v1.3.0 // 2013-11-05
+*v1.3.0 // 2013-11-05*
 * Supports event expectations for monthly tasks
 
 *v1.2.0 // 2013-10-24*
