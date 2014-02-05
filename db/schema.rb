@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104154726) do
+ActiveRecord::Schema.define(version: 20140205145606) do
 
   create_table "alarm_mappings", force: true do |t|
     t.integer  "alarm_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20131104154726) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.boolean  "admin"
+    t.string   "time_zone",              default: "UTC"
   end
 
 end
