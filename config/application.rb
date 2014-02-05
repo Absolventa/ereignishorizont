@@ -20,7 +20,6 @@ module EventGirl
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-    config.time_zone = 'Berlin'
 
     config.middleware.insert_after ActionDispatch::ParamsParser, ActionDispatch::XmlParamsParser
 
@@ -35,8 +34,10 @@ module EventGirl
     config.encoding = "utf-8"
 
     config.generators do |g|
-        g.test_framework :rspec #=> or whatever
+      g.test_framework :rspec #=> or whatever
     end
+
+    I18n.enforce_available_locales = false
   end
 end
 

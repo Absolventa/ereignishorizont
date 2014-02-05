@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       if params[:send_invitation] == '1'
         @user.password = @user.password_confirmation = SecureRandom.hex(16)
         @user.generate_token(:password_reset_token)
-        @user.password_reset_sent_at = Time.zone.now
+        @user.password_reset_sent_at = Time.now.utc
       end
 
       if @user.save
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :auth_token)
+      params.require(:user).permit(:email, :password, :password_confirmation, :auth_token, :time_zone)
     end
 
     def set_user

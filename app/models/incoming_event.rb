@@ -10,7 +10,7 @@ class IncomingEvent < ActiveRecord::Base
   before_save :delete_white_spaces_from_title
 
   scope :created_today_before, ->(deadline) do
-    where("created_at > ? AND created_at <= ?", Time.zone.now.beginning_of_day, deadline)
+    where("created_at > ? AND created_at <= ?", Time.now.utc.beginning_of_day, deadline)
   end
 
   private

@@ -25,7 +25,7 @@ describe Matcher do
     end
 
     it 'does not sound an alarm if matching incoming event was detected' do
-      Timecop.travel(Time.zone.now.beginning_of_day + 1.hour)
+      Timecop.travel(Time.now.utc.beginning_of_day + 1.hour)
 
       expected_event = active_backward_event_for_today
       expected_event.final_hour = 10
@@ -33,7 +33,7 @@ describe Matcher do
 
       ExpectedEvent.any_instance.should_not_receive(:alarm!)
 
-      Timecop.travel(Time.zone.now.beginning_of_day + 11.hours)
+      Timecop.travel(Time.now.utc.beginning_of_day + 11.hours)
       subject.run
     end
 
@@ -110,7 +110,7 @@ describe Matcher do
     it 'finds active incoming event whose title matches' do
       # FIXME Test should be independent of run time
       # This will break when run between 23:01 and midnight
-      active_backward_event_for_today.final_hour = Time.zone.now.hour + 1
+      active_backward_event_for_today.final_hour = Time.now.utc.hour + 1
       active_backward_event_for_today.save
 
       incoming_event.title = active_backward_event_for_today.title
@@ -121,7 +121,7 @@ describe Matcher do
     end
 
     it "finds only incoming events matching the expected event's remote side" do
-      active_backward_event_for_today.final_hour = Time.zone.now.hour + 1
+      active_backward_event_for_today.final_hour = Time.now.utc.hour + 1
       active_backward_event_for_today.save
 
       incoming_event.title = active_backward_event_for_today.title

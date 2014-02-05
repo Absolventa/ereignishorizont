@@ -18,7 +18,7 @@ class ExpectedEvent < ActiveRecord::Base
   validate :ensure_either_weekly_or_monthly_is_selected
 
   scope :active,   -> do
-    where(<<-EOFSQL, q: Time.zone.now)
+    where(<<-EOFSQL, q: Time.now.utc)
     (started_at < :q AND ended_at > :q)
       OR (started_at < :q AND ended_at IS NULL)
       OR (started_at IS NULL AND ended_at IS NULL)
@@ -26,7 +26,7 @@ class ExpectedEvent < ActiveRecord::Base
   end
   scope :forward,  -> { where(matching_direction: 'forward') }
   scope :backward, -> { where(matching_direction: 'backward') }
-  scope :today,    -> { where("weekday_#{Date.today.wday} = :t OR day_of_month = :d", t: true, d: Date.today.day) }
+  scope :today,    -> { where("weekday_#{Time.now.utc.wday} = :t OR day_of_month = :d", t: true, d: Time.now.utc.day) }
 
   def alarm!
     alarms.each { |alarm| alarm.run self }
@@ -52,7 +52,7 @@ class ExpectedEvent < ActiveRecord::Base
   def active?
     return false if started_at.nil? and ended_at
     return true if started_at.nil? and ended_at.nil?
-    started_at < Time.zone.now and (ended_at.nil? || Time.zone.now <= ended_at.end_of_day)
+    started_at.to_time(:utc) < Time.now.utc and (ended_at.nil? || Time.now.utc <= ended_at.to_time(:utc).end_of_day)
   end
 
   def activity_status
@@ -64,20 +64,20 @@ class ExpectedEvent < ActiveRecord::Base
   end
 
   def checked_today?
-    weekdays[Date.today.wday]
+    weekdays[Time.now.utc.wday]
   end
 
   def deadline
     if checked_today?
-      Time.zone.now.beginning_of_day + final_hour.hours
+      Time.now.utc.beginning_of_day + final_hour.hours
     else
-      Time.zone.now.beginning_of_day
+      Time.now.utc.beginning_of_day
     end
   end
 
   def deadline_exceeded?
     return false if matching_direction == 'forward'
-    Time.zone.now > deadline
+    Time.now.utc > deadline
   end
 
   def last_alarm_at

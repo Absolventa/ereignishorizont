@@ -63,26 +63,26 @@ describe ExpectedEvent do
 
   describe "#active?" do
     it 'returns true if current time is between start date and end date' do
-      subject.started_at = 1.day.ago
-      subject.ended_at 	 = 1.day.from_now
+      subject.started_at = 1.day.ago.utc
+      subject.ended_at 	 = 1.day.from_now.utc
       expect(subject).to be_active  # expect(subject).to be_active oder expect(subject.active?).to eql true
     end
 
     it 'returns false if current time is before start date' do
-      subject.started_at = 1.day.from_now
-      subject.ended_at = 2.days.from_now # ended_at was nil before we added it here, test failed
+      subject.started_at = 1.day.from_now.utc
+      subject.ended_at = 2.days.from_now.utc # ended_at was nil before we added it here, test failed
       expect(subject).not_to be_active
     end
 
     it 'returns false if current time is after end date' do
-      subject.started_at = 2.days.ago
-      subject.ended_at = 1.day.ago
+      subject.started_at = 2.days.ago.utc
+      subject.ended_at = 1.day.ago.utc
       expect(subject).not_to be_active
     end
 
     it 'returns true if both start and end date are set to today' do
-      subject.started_at = Date.today
-      subject.ended_at = Date.today
+      now = Time.now.utc.to_date
+      subject.started_at, subject.ended_at = now, now
       expect(subject).to be_active
     end
 
@@ -94,13 +94,13 @@ describe ExpectedEvent do
       end
 
       it 'returns true if current date is after start date' do
-        subject.started_at = 1.day.ago
+        subject.started_at = 1.day.ago.utc
         subject.ended_at = nil
         expect(subject).to be_active
       end
 
       it 'returns false if current date is before start date' do
-        subject.started_at = 1.day.from_now
+        subject.started_at = 1.day.from_now.utc
         subject.ended_at = nil
         expect(subject).not_to be_active
       end
@@ -108,7 +108,7 @@ describe ExpectedEvent do
 
     it 'handles semantically wrong input' do
       subject.started_at = nil
-      subject.ended_at = 1.day.from_now
+      subject.ended_at = 1.day.from_now.utc
       expect(subject).not_to be_active
     end
 
@@ -179,7 +179,7 @@ describe ExpectedEvent do
   describe '#deadline' do
     context 'with current weekday activated' do
       it 'returns a datetime representing today at noon' do
-        expected_date = Time.zone.now.beginning_of_day + 12.hours
+        expected_date = Time.now.utc.beginning_of_day + 12.hours
         subject.final_hour = 12
         subject.weekday_0 = true
         subject.weekday_1 = true
@@ -194,7 +194,7 @@ describe ExpectedEvent do
 
     context 'with current weekday deactivated' do
       it 'returns the beginning of the current day' do
-        expected_date = Time.zone.now.beginning_of_day
+        expected_date = Time.now.utc.beginning_of_day
         expect(subject.deadline).to eql expected_date
       end
     end
@@ -207,12 +207,12 @@ describe ExpectedEvent do
     end
 
     it 'returns true' do
-      subject.stub(:deadline).and_return(1.minute.ago)
+      subject.stub(:deadline).and_return(1.minute.ago.utc)
       expect(subject.deadline_exceeded?).to eql true
     end
 
     it 'returns false' do
-      subject.stub(:deadline).and_return(1.minute.from_now)
+      subject.stub(:deadline).and_return(1.minute.from_now.utc)
       expect(subject.deadline_exceeded?).to eql false
     end
   end
@@ -246,7 +246,7 @@ describe ExpectedEvent do
       end
 
       it 'includes record with a start date but without an end date' do
-        expected_event = FactoryGirl.create(:expected_event, started_at: 1.day.ago, ended_at: nil)
+        expected_event = FactoryGirl.create(:expected_event, started_at: 1.day.ago.utc, ended_at: nil)
         expect(described_class.active).to include expected_event
       end
     end

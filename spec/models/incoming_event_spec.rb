@@ -28,7 +28,7 @@ describe IncomingEvent do
       it 'returns an event created well before the deadline' do
         incoming_event
         expect(
-          described_class.created_today_before(Time.zone.now)
+          described_class.created_today_before(Time.now.utc)
         ).to include incoming_event
       end
     end
