@@ -9,7 +9,13 @@ class IncomingEventsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @incoming_events = IncomingEvent.order(sort_column + ' ' + sort_direction)
+    search_term = params.fetch(:query, {})[:title]
+    @incoming_events = if search_term
+                         IncomingEvent.where("title ILIKE :query", query: "%#{search_term}%")
+                       else
+                         IncomingEvent
+                       end
+    @incoming_events = @incoming_events.order(sort_column + ' ' + sort_direction)
       .page(params[:page]).per_page(10)
   end
 

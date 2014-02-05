@@ -4,12 +4,12 @@ Welcome to Event Girl!
 
 ## Description
 
-Event Girl is an open event-logging system 
-with triggers/hooks to run arbitrary tasks when an event is 
-matched or not matched.  
+Event Girl is an open event-logging system
+with triggers/hooks to run arbitrary tasks when an event is
+matched or not matched.
 
-It was proposed as a project for the [Rails Girls Summer of Code](http://railsgirlssummerofcode.org/). 
-Its two main contributors are the Rails Girls Susanne and Tam who 
+It was proposed as a project for the [Rails Girls Summer of Code](http://railsgirlssummerofcode.org/).
+Its two main contributors are the Rails Girls Susanne and Tam who
 worked on the project from July 2 - September 30, 2013
 at the [ABSOLVENTA](http://www.absolventa.de) offices in Berlin.
 
@@ -60,7 +60,7 @@ Example for registering an event using XML:
       -H 'Content-type: application/xml' \
       -d '<incoming_event><title>xml formatted</title></incoming_event>' \
       http://localhost:3000/incoming_events.xml?api_token=$API_TOKEN
-      
+
 To use the corresponding gem:
 
 `gem install event_girl_client`
@@ -71,6 +71,10 @@ be found [here](https://github.com/Absolventa/event_girl_client))
 There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
 ### Changelog
+
+*v1.3.2 // 2014-02-05*
+* Fixed issue with final hour rage (now a proper 0..23)
+* Supports serching for incoming events
 
 *v1.3.1 // 2014-01-14*
 * Upgrade to Rails v4.0.2
