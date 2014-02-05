@@ -5,7 +5,6 @@ describe Matcher do
   subject { described_class }
 
   let(:expected_event) { FactoryGirl.create(:active_expected_event) }
-  let(:incoming_event) { FactoryGirl.build(:incoming_event) }
   let(:incoming_event) { FactoryGirl.create(:incoming_event) }
 
   let(:active_backward_event_for_today) do
