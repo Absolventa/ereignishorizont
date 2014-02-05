@@ -74,7 +74,7 @@ There will also soon be a [python egg](https://github.com/berlintam/event_girl_c
 
 *v1.3.2 // 2014-02-05*
 * Fixed issue with final hour range (now a proper 0..23)
-* Supports serching for incoming events
+* Supports searching for incoming events
 
 *v1.3.1 // 2014-01-14*
 * Upgrade to Rails v4.0.2
