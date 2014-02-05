@@ -72,6 +72,10 @@ There will also soon be a [python egg](https://github.com/berlintam/event_girl_c
 
 ### Changelog
 
+*v1.4.0 // 2014-02-05*
+* All time values are now UTC
+* Allow per-user definition of local time zone
+
 *v1.3.2 // 2014-02-05*
 * Fixed issue with final hour range (now a proper 0..23)
 * Supports searching for incoming events
