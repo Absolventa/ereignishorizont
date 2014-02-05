@@ -73,7 +73,7 @@ There will also soon be a [python egg](https://github.com/berlintam/event_girl_c
 ### Changelog
 
 *v1.3.2 // 2014-02-05*
-* Fixed issue with final hour rage (now a proper 0..23)
+* Fixed issue with final hour range (now a proper 0..23)
 * Supports serching for incoming events
 
 *v1.3.1 // 2014-01-14*
