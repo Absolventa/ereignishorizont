@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :authorize
+  before_action :set_time_zone
 
   private
   def current_user
@@ -18,4 +19,7 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, alert: "Not authorized" unless logged_in?
   end
 
+  def set_time_zone
+    Time.zone = current_user.time_zone if current_user
+  end
 end
