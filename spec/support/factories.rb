@@ -12,7 +12,7 @@ FactoryGirl.define do
 
   factory :expected_event do
   	title 'my event title'
-    final_hour { 1.hour.from_now.hour }
+    final_hour { 1.hour.from_now.utc.hour }
     matching_direction 'forward'
     remote_side
 

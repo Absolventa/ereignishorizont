@@ -5,7 +5,7 @@ class AlarmNotification < ActiveRecord::Base
   validates :expected_event, presence: true
   validate  :expected_event_must_be_unique_for_today
 
-  scope :today, -> { where('created_at > ?', Time.zone.now.beginning_of_day) }
+  scope :today, -> { where('created_at > ?', Time.now.utc.beginning_of_day) }
 
   private
 
