@@ -34,8 +34,10 @@ module EventGirl
     config.encoding = "utf-8"
 
     config.generators do |g|
-        g.test_framework :rspec #=> or whatever
+      g.test_framework :rspec #=> or whatever
     end
+
+    I18n.enforce_available_locales = false
   end
 end
 
