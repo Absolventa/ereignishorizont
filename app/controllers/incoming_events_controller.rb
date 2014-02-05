@@ -100,7 +100,7 @@ class IncomingEventsController < ApplicationController
   end
 
   def remote_side
-    @remote_side ||= RemoteSide.find_by_api_token(params[:api_token])
+    @remote_side ||= RemoteSide.find_by(api_token: params[:api_token])
   end
 
 end
