@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   validates_uniqueness_of :email
-  validates :password, length: { minimum: 5 }
+  validates :password, length: { minimum: 5 }, if: lambda { |m| m.password.present? }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true
 
