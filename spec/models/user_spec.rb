@@ -36,7 +36,7 @@ require 'spec_helper'
       context 'on update' do
         context 'is valid if' do
           it 'has no password and no password confirmation set' do
-            user = create :user
+            user = FactoryGirl.create(:user)
             user = User.last
             user.password = ''
             user.password_confirmation = ''
@@ -45,7 +45,7 @@ require 'spec_helper'
           end
 
           it 'has no password and a password confirmation set' do
-            user = create :user
+            user = FactoryGirl.create(:user)
             user = User.last
             user.password = ''
             user.password_confirmation = 'forgot to enter password'
@@ -56,7 +56,7 @@ require 'spec_helper'
 
         context 'is invalid if' do
           it 'has an unconfirmed password' do
-            user = create :user
+            user = FactoryGirl.create(:user)
             user = User.last
             user.password = 'even more secret'
             user.password_confirmation = ''
@@ -65,7 +65,7 @@ require 'spec_helper'
           end
 
           it 'has different password and password confirmation set' do
-            user = create :user
+            user = FactoryGirl.create(:user)
             user = User.last
             user.password = 'more secret'
             user.password_confirmation = 'but with typo'
