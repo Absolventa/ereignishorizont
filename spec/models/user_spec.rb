@@ -61,7 +61,9 @@ require 'spec_helper'
             user.password = 'even more secret'
             user.password_confirmation = ''
 
-            expect(user).to be_invalid
+            expect(user).to have(2).errors_on(:password_confirmation)
+            expect(user.errors_on(:password_confirmation)).
+              to include("can't be blank", "doesn't match Password")
           end
 
           it 'has different password and password confirmation set' do
@@ -70,7 +72,9 @@ require 'spec_helper'
             user.password = 'more secret'
             user.password_confirmation = 'but with typo'
 
-            expect(user).to be_invalid
+            expect(user).to have(1).errors_on(:password_confirmation)
+            expect(user.errors_on(:password_confirmation)).
+              to include("doesn't match Password")
           end
         end
       end
