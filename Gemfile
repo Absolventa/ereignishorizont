@@ -56,4 +56,12 @@ group :test do
   gem 'simplecov'
   gem 'timecop'
   gem 'zonebie'
+
+  gem 'capybara'
+  gem 'launchy'
+end
+
+group :development, :test do
+  #gem 'debugger'# does not work with ruby >= 2
+  gem 'byebug'
 end
