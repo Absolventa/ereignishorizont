@@ -56,4 +56,7 @@ group :test do
   gem 'simplecov'
   gem 'timecop'
   gem 'zonebie'
+
+  gem 'capybara'
+  gem 'launchy'
 end

@@ -32,6 +32,52 @@ require 'spec_helper'
 			it "is invalid without a password confirmation" do
 				FactoryGirl.build(:user, password_confirmation: nil).should_not be_valid
 			end
+
+      context 'on update' do
+        context 'is valid if' do
+          it 'has no password and no password confirmation set' do
+            user = FactoryGirl.create(:user)
+            user = User.last
+            user.password = ''
+            user.password_confirmation = ''
+
+            expect(user).to be_valid
+          end
+
+          it 'has no password and a password confirmation set' do
+            user = FactoryGirl.create(:user)
+            user = User.last
+            user.password = ''
+            user.password_confirmation = 'forgot to enter password'
+
+            expect(user).to be_valid
+          end
+        end
+
+        context 'is invalid if' do
+          it 'has an unconfirmed password' do
+            user = FactoryGirl.create(:user)
+            user = User.last
+            user.password = 'even more secret'
+            user.password_confirmation = ''
+
+            expect(user).to have(2).errors_on(:password_confirmation)
+            expect(user.errors_on(:password_confirmation)).
+              to include("can't be blank", "doesn't match Password")
+          end
+
+          it 'has different password and password confirmation set' do
+            user = FactoryGirl.create(:user)
+            user = User.last
+            user.password = 'more secret'
+            user.password_confirmation = 'but with typo'
+
+            expect(user).to have(1).errors_on(:password_confirmation)
+            expect(user.errors_on(:password_confirmation)).
+              to include("doesn't match Password")
+          end
+        end
+      end
 		end
 
   describe '#send_password_reset' do
