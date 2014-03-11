@@ -54,7 +54,7 @@ describe SessionsController do
         end
       end
 
-      it "redirects to root URL and displays a success message" do
+      it "redirects to root URL" do
         post 'create', email: user.email, password: user.password
         expect(response).to redirect_to incoming_events_path
         expect(flash[:notice]).to eq 'Logged in!'
@@ -62,12 +62,23 @@ describe SessionsController do
     end
 
     context "not authenticated" do
-      it "redirects to root URL and displays an error message" do
-        post 'create', email: 'wrong', password: 'login'
-        expect(cookies[:auth_token]).to be_nil
-        expect(cookies.permanent[:auth_token]).to be_nil
-        expect(response).to redirect_to root_path
-        expect(flash[:error]).to eq 'Email or password is invalid.'
+      context "as guest" do
+        it "redirects to root URL" do
+          post 'create', email: 'wrong', password: 'login'
+          expect(cookies[:auth_token]).to be_nil
+          expect(cookies.permanent[:auth_token]).to be_nil
+          expect(response).to redirect_to root_path
+          expect(flash[:error]).to eq 'Email or password is invalid.'
+        end
+      end
+      context "as member" do
+        it "redirects to root URL" do
+          post 'create', email: user.email, password: 'password incorrect'
+          expect(cookies[:auth_token]).to be_nil
+          expect(cookies.permanent[:auth_token]).to be_nil
+          expect(response).to redirect_to root_path
+          expect(flash[:error]).to eq 'Email or password is invalid.'
+        end
       end
     end
   end
@@ -75,7 +86,7 @@ describe SessionsController do
   describe "DELETE 'destroy'" do
     before { cookies[:auth_token] = user.auth_token }
 
-    it "deletes the auth token from the cookies hash, redirects to root and displays a success message" do
+    it "destroys the session" do
       delete 'destroy'
       expect(cookies[:auth_token]).to be_nil
       expect(response).to redirect_to root_path
