@@ -4,17 +4,17 @@ describe SessionsController do
   let(:user) { FactoryGirl.create(:user, admin: false) }
 
   context "as logged in user" do
-		before do
-  		controller.stub(:current_user).and_return(user)
-		end
+    before do
+      controller.stub(:current_user).and_return(user)
+    end
 
-  	describe "GET 'new'" do
-    	it "redirects to root URL" do
-      	get 'new'
+    describe "GET 'new'" do
+      it "redirects to root URL" do
+        get 'new'
         expect(response).to be_redirect
         expect(response).to redirect_to root_path
-    	end
-  	end
+      end
+    end
 
     describe "POST 'create'" do
       it "redirects to root URL" do
@@ -22,7 +22,7 @@ describe SessionsController do
         expect(response).to redirect_to root_path
       end
     end
-	end
+  end
 
   context "as not logged in user" do
     before do

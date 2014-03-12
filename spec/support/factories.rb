@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :alarm do
     action 'Email'
-  	sequence(:recipient_email) { |n| "johndoe#{n}@example.com"}
+    sequence(:recipient_email) { |n| "johndoe#{n}@example.com"}
     title 'Title'
   end
 
@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
 
   factory :expected_event do
-  	title 'my event title'
+    title 'my event title'
     final_hour { 1.hour.from_now.utc.hour }
     matching_direction 'forward'
     remote_side
@@ -23,13 +23,13 @@ FactoryGirl.define do
   end
 
   factory :incoming_event do
-  	title 'my event title'
+    title 'my event title'
   end
 
   factory :user do
-  	sequence(:email) { |n| "johndoe#{n}@example.com"}
-  	password 'foobarbaz'
-  	password_confirmation { password }
+    sequence(:email) { |n| "johndoe#{n}@example.com"}
+    password 'foobarbaz'
+    password_confirmation { password }
   end
 
   factory :remote_side do
