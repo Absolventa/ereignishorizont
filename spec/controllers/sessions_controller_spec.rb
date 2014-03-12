@@ -62,22 +62,25 @@ describe SessionsController do
     end
 
     context "not authenticated" do
-      context "as guest" do
-        it "redirects to root URL" do
-          post 'create', email: 'wrong', password: 'login'
+      shared_examples 'nondescript login not granted message' do
+        it 'redirects to root URL' do
+          post 'create', email: email, password: 'wr0ng pa$$w0rd'
           expect(cookies[:auth_token]).to be_nil
           expect(cookies.permanent[:auth_token]).to be_nil
           expect(response).to redirect_to root_path
           expect(flash[:error]).to eq 'Email or password is invalid.'
         end
       end
+
+      context "as guest" do
+        it_behaves_like 'nondescript login not granted message' do
+          let(:email) { 'nonexistant@example.com' }
+        end
+      end
+
       context "as member" do
-        it "redirects to root URL" do
-          post 'create', email: user.email, password: 'password incorrect'
-          expect(cookies[:auth_token]).to be_nil
-          expect(cookies.permanent[:auth_token]).to be_nil
-          expect(response).to redirect_to root_path
-          expect(flash[:error]).to eq 'Email or password is invalid.'
+        it_behaves_like 'nondescript login not granted message' do
+          let(:email) { user.email }
         end
       end
     end
