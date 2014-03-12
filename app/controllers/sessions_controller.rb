@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
-skip_before_action :authorize 
-before_action :redirect_if_logged_in, :only => [:new, :create]  
+  skip_before_action :authorize
+  before_action :redirect_if_logged_in, :only => [:new, :create]
 
   def create
     user = User.find_by_email(params[:email])
@@ -23,7 +23,7 @@ before_action :redirect_if_logged_in, :only => [:new, :create]
     redirect_to root_url, notice: "Logged out!"
   end
 
-private
+  private
 
   def redirect_if_logged_in
     redirect_to(root_path) if current_user

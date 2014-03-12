@@ -46,7 +46,7 @@ class RemoteSidesController < ApplicationController
     end
   end
 
-private
+  private
 
   def set_remote_side
     @remote_side = RemoteSide.find(params[:id])

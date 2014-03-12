@@ -72,24 +72,24 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :auth_token, :time_zone)
-    end
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :auth_token, :time_zone)
+  end
 
-    def set_user
-      @user = if current_user.admin?
-                User.find(params[:id])
-              else
-                current_user
-              end
-    end
+  def set_user
+    @user = if current_user.admin?
+              User.find(params[:id])
+            else
+              current_user
+            end
+  end
 
-    def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : "email"
-    end
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "email"
+  end
 
-    def sort_direction
-      %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
-    end
+  def sort_direction
+    %w[asc desc]. include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end

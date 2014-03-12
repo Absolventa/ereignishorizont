@@ -26,7 +26,7 @@ class AlarmsController < ApplicationController
     else
       flash[:error] = "Alarm test failed"
     end
-     redirect_to alarms_path
+    redirect_to alarms_path
   end
 
   def create
