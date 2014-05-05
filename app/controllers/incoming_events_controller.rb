@@ -1,5 +1,7 @@
 class IncomingEventsController < ApplicationController
 
+  include SearchesByTitle
+
   skip_before_filter :verify_authenticity_token, if: :remote_side_request?
   skip_before_action :authorize,  only: :create
   before_action :restrict_access, only: :create
@@ -9,14 +11,6 @@ class IncomingEventsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    search_term = params.fetch(:query, {})[:title]
-    @incoming_events = if search_term
-                         IncomingEvent.where("title ILIKE :query", query: "%#{search_term}%")
-                       else
-                         IncomingEvent
-                       end
-    @incoming_events = @incoming_events.order(sort_column + ' ' + sort_direction)
-      .page(params[:page]).per_page(10)
   end
 
   def show

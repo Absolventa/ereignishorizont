@@ -1,18 +1,11 @@
 class ExpectedEventsController < ApplicationController
 
+  include SearchesByTitle
+
   helper_method :sort_column, :sort_direction
   before_action :set_expected_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    search_term = params.fetch(:query, {})[:title]
-    @expected_events = if search_term
-                         ExpectedEvent.where("title ILIKE :query", query: "%#{search_term}%")
-                       else
-                         ExpectedEvent
-                       end
-    @expected_events = @expected_events.includes(:incoming_events).
-      order(sort_column + ' ' + sort_direction).
-      page(params[:page]).per_page(10)
   end
 
   def show
