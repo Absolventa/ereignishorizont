@@ -1,6 +1,13 @@
 <h1>Expected Events <i class="icon-calendar icon-large"></i></h1>
 
-<%= link_to 'New event expectation', new_expected_event_path , class: 'btn btn-custom-success' %>
+<div class="input-append">
+  <%= form_tag expected_events_path, method: :get do %>
+    <%= text_field_tag 'query[title]', params.fetch(:query, {})[:title], placeholder: "Search for title", class: 'span4' %>
+    <%= button_tag 'Search', class: 'btn' %>
+  <% end %>
+</div>
+
+<p><%= link_to 'New event expectation', new_expected_event_path , class: 'btn btn-custom-success' %></p>
 
 <table class="table table-striped" data-provides="rowlink">
   <thead>
