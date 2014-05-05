@@ -1,0 +1,6 @@
+<div class="input-append">
+  <%= form_tag({ action: 'index' }, { method: :get }) do %>
+    <%= text_field_tag 'query[title]', params.fetch(:query, {})[:title], placeholder: "Search for title", class: 'span4' %>
+    <%= button_tag 'Search', class: 'btn' %>
+  <% end %>
+</div>
