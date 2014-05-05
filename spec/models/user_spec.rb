@@ -30,7 +30,8 @@ describe User do
     end
 
     it 'is invalid without a password confirmation' do
-      expect(FactoryGirl.build(:user, password_confirmation: nil)).not_to be_valid
+      user = FactoryGirl.build(:user, password_confirmation: '')
+      expect(user).not_to be_valid
     end
 
     context 'on update' do
@@ -61,9 +62,9 @@ describe User do
           user.password = 'even more secret'
           user.password_confirmation = ''
 
-          expect(user).to have(2).errors_on(:password_confirmation)
+          expect(user).to have(1).errors_on(:password_confirmation)
           expect(user.errors_on(:password_confirmation)).
-            to include("can't be blank", "doesn't match Password")
+            to include("doesn't match Password")
         end
 
         it 'has different password and password confirmation set' do
