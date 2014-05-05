@@ -17,14 +17,8 @@ describe IncomingEventsController do
         expect(assigns(:incoming_events).to_a).to eql [incoming_event]
       end
 
-      it 'searches within "title"' do
-        incoming_event = FactoryGirl.create(:incoming_event, title: "Hello World - how are things")
-        FactoryGirl.create(:incoming_event, title: 'Bar') # will not be found
-        get :index, query: { title: 'world' }
-        expect(response).to be_success
-        expect(response).to render_template 'index'
-        expect(assigns(:incoming_events).to_a).to eql [incoming_event]
-      end
+      it_behaves_like 'searches by title'
+
     end
 
     describe 'GET show' do

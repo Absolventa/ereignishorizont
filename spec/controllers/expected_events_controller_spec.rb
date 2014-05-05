@@ -16,14 +16,8 @@ describe ExpectedEventsController do
       expect(response).to render_template 'index'
     end
 
-    it 'searches within "title"' do
-      expected_event = FactoryGirl.create(:expected_event, title: "Hello World - how are things")
-      FactoryGirl.create(:expected_event, title: 'Bar') # will not be found
-      get :index, query: { title: 'world' }
-      expect(response).to be_success
-      expect(response).to render_template 'index'
-      expect(assigns(:expected_events).to_a).to eql [expected_event]
-    end
+    it_behaves_like 'searches by title'
+
   end
 
   describe 'POST create' do
