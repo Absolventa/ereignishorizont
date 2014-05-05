@@ -15,6 +15,9 @@ describe ExpectedEventsController do
       get :index
       expect(response).to render_template 'index'
     end
+
+    it_behaves_like 'searches by title'
+
   end
 
   describe 'POST create' do

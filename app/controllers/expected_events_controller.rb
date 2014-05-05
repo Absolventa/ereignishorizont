@@ -1,11 +1,11 @@
 class ExpectedEventsController < ApplicationController
 
+  include SearchesByTitle
+
   helper_method :sort_column, :sort_direction
   before_action :set_expected_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @expected_events = ExpectedEvent.includes(:incoming_events).order(sort_column + ' ' + sort_direction)
-      .page(params[:page]).per_page(10)
   end
 
   def show
