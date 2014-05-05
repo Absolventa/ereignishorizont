@@ -72,6 +72,11 @@ There will also soon be a [python egg](https://github.com/berlintam/event_girl_c
 
 ### Changelog
 
+*v1.5.0 // 2014-05-05*
+* Updated to Rails v4.1
+* Updated to MRI v2.1.1
+* Search through expected events' list
+
 *v1.4.0 // 2014-02-05*
 * All time values are now UTC
 * Allow per-user definition of local time zone
