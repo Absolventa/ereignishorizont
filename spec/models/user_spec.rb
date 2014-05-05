@@ -35,20 +35,16 @@ describe User do
     end
 
     context 'on update' do
+      let(:user) { FactoryGirl.create(:user); User.last }
+
       context 'is valid if' do
         it 'has no password and no password confirmation set' do
-          user = FactoryGirl.create(:user)
-          user = User.last
-          user.password = ''
           user.password_confirmation = ''
 
           expect(user).to be_valid
         end
 
         it 'has no password and a password confirmation set' do
-          user = FactoryGirl.create(:user)
-          user = User.last
-          user.password = ''
           user.password_confirmation = 'forgot to enter password'
 
           expect(user).to be_valid
@@ -57,8 +53,6 @@ describe User do
 
       context 'is invalid if' do
         it 'has an unconfirmed password' do
-          user = FactoryGirl.create(:user)
-          user = User.last
           user.password = 'even more secret'
           user.password_confirmation = ''
 
@@ -68,8 +62,6 @@ describe User do
         end
 
         it 'has different password and password confirmation set' do
-          user = FactoryGirl.create(:user)
-          user = User.last
           user.password = 'more secret'
           user.password_confirmation = 'but with typo'
 
