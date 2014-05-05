@@ -2,8 +2,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.0'
 
 gem 'pg'
 
@@ -52,6 +51,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'shoulda-matchers', '~> 2.6.1'
   gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'timecop'

@@ -2,52 +2,49 @@ require 'spec_helper'
 
 describe User do
 
-  it { should validate_presence_of :email }
-  it { should ensure_length_of(:password).is_at_least(5) }
-  it { should_not allow_value("blah").for(:email) }
-  it { should allow_value("a@b.com").for(:email) }
+  it { expect(subject).to validate_presence_of :email }
+  it { expect(subject).to ensure_length_of(:password).is_at_least(5) }
+  it { expect(subject).to_not allow_value("blah").for(:email) }
+  it { expect(subject).to allow_value("a@b.com").for(:email) }
 
-  it "has a valid factory" do
-    FactoryGirl.create(:user).should be_valid
+  it 'has a valid factory' do
+    expect(FactoryGirl.build(:user)).to be_valid
   end
 
   context 'validating email address' do
-    it "is invalid with a duplicate email address" do
-      FactoryGirl.create(:user, email: "tam@testemail.com")
-      FactoryGirl.build(:user, email: "tam@testemail.com").should_not be_valid
+    it 'is invalid with a duplicate email address' do
+      FactoryGirl.create(:user, email: 'tam@testemail.com')
+      expect(FactoryGirl.build(:user, email: 'tam@testemail.com')).not_to be_valid
     end
 
-    it "is valid when there is an email address" do
-      FactoryGirl.build(:user, email: "johndoe@example.com").should be_valid
+    it 'is valid when there is an email address' do
+      expect(FactoryGirl.build(:user, email: 'johndoe@example.com')).to be_valid
     end
   end
 
   # OPTIMIZE This does not not necessarily test the validations on #password.
   # The record could be invalid for many other reasons (CZ)
   context 'validating password' do
-    it "is invalid without a password" do
-      FactoryGirl.build(:user, password: nil).should_not be_valid
+    it 'is invalid without a password' do
+      expect(FactoryGirl.build(:user, password: nil)).not_to be_valid
     end
 
-    it "is invalid without a password confirmation" do
-      FactoryGirl.build(:user, password_confirmation: nil).should_not be_valid
+    it 'is invalid without a password confirmation' do
+      user = FactoryGirl.build(:user, password_confirmation: '')
+      expect(user).not_to be_valid
     end
 
     context 'on update' do
+      let(:user) { FactoryGirl.create(:user); User.last }
+
       context 'is valid if' do
         it 'has no password and no password confirmation set' do
-          user = FactoryGirl.create(:user)
-          user = User.last
-          user.password = ''
           user.password_confirmation = ''
 
           expect(user).to be_valid
         end
 
         it 'has no password and a password confirmation set' do
-          user = FactoryGirl.create(:user)
-          user = User.last
-          user.password = ''
           user.password_confirmation = 'forgot to enter password'
 
           expect(user).to be_valid
@@ -56,19 +53,15 @@ describe User do
 
       context 'is invalid if' do
         it 'has an unconfirmed password' do
-          user = FactoryGirl.create(:user)
-          user = User.last
           user.password = 'even more secret'
           user.password_confirmation = ''
 
-          expect(user).to have(2).errors_on(:password_confirmation)
+          expect(user).to have(1).errors_on(:password_confirmation)
           expect(user.errors_on(:password_confirmation)).
-            to include("can't be blank", "doesn't match Password")
+            to include("doesn't match Password")
         end
 
         it 'has different password and password confirmation set' do
-          user = FactoryGirl.create(:user)
-          user = User.last
           user.password = 'more secret'
           user.password_confirmation = 'but with typo'
 
@@ -84,7 +77,7 @@ describe User do
     let(:user) { FactoryGirl.build(:user) }
 
     it 'saves the record without validating it' do
-      user.should_receive(:save!).with(validate: false)
+      expect(user).to receive(:save!).with(validate: false)
       user.send_password_reset
     end
 
