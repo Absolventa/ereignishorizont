@@ -13,7 +13,7 @@ Its two main contributors are the Rails Girls Susanne and Tam who
 worked on the project from July 2 - September 30, 2013
 at the [ABSOLVENTA](http://www.absolventa.de) offices in Berlin.
 
-Also found on [event-girl.herokuapp.com](event-girl.herokuapp.com)
+Also found on [event-girl.herokuapp.com](https://event-girl.herokuapp.com)
 
 
 
