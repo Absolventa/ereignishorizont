@@ -19,7 +19,7 @@ deploy:
   provider: heroku
   api_key:
     secure: nXX3NIp/spivNhpt+GRPQuIp4+Jqvn1xKNl9WsAJQPV25LX90+TxTwdm4LBoNOzuUVvJ3GYxWjKYO1R//nf8qieUpLDkvmCdQLDNEQ+R8UI+O4tAubi5kIknjbAGDEEtZdPkcZQFMieP0El06YsNu356UusYLkl0G+Z9aoM+i7U=
-  app: event_girl
+  app: event-girl
   run:
     - 'rake db:migrate'
     - restart
