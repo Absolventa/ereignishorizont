@@ -48,8 +48,11 @@ group :production do
   gem 'rails_12factor', '0.0.2'
 end
 
-group :test do
+group :development, :test do
   gem 'rspec-rails'
+end
+
+group :test do
   gem 'shoulda'
   gem 'shoulda-matchers', '~> 2.6.1'
   gem 'factory_girl_rails'
