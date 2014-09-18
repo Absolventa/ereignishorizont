@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, :type => :controller do
   render_views
 
   let(:user) { FactoryGirl.create(:user, admin: false) }
 
   before do
-    controller.stub(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   describe 'GET index' do
     context 'as admin' do
       it 'renders a list of all users' do
-        User.any_instance.stub(:admin?).and_return(true)
+        allow_any_instance_of(User).to receive(:admin?).and_return(true)
         get :index
         expect(response).to render_template 'index'
       end
@@ -30,7 +30,7 @@ describe UsersController do
   describe 'GET new' do
     context 'as admin' do
       it "renders the 'new' template" do
-        User.any_instance.stub(:admin?).and_return(true)
+        allow_any_instance_of(User).to receive(:admin?).and_return(true)
         get :new
         expect(response).to render_template 'new'
       end
@@ -48,7 +48,7 @@ describe UsersController do
   describe 'GET edit' do
     context 'as admin' do
       it "renders the 'edit' template" do
-        User.any_instance.stub(:admin?).and_return(true)
+        allow_any_instance_of(User).to receive(:admin?).and_return(true)
         other_user = FactoryGirl.create(:user)
         get :edit, id: other_user.id
         expect(response).to render_template 'edit'
@@ -71,7 +71,7 @@ describe UsersController do
       let(:attributes) { FactoryGirl.attributes_for(:user) }
 
       before do
-        User.any_instance.stub(:admin?).and_return(true)
+        allow_any_instance_of(User).to receive(:admin?).and_return(true)
       end
 
       it 'creates a new record from valid params' do
@@ -111,12 +111,12 @@ describe UsersController do
   describe 'PATCH update' do
     context 'as admin' do
       before do
-        User.any_instance.stub(:admin?).and_return(true)
+        allow_any_instance_of(User).to receive(:admin?).and_return(true)
       end
 
       it 'successfully updates other user and redirects' do
         other_user = FactoryGirl.create(:user)
-        User.any_instance.stub(:valid?).and_return(true)
+        allow_any_instance_of(User).to receive(:valid?).and_return(true)
         patch :update, id: other_user.to_param, user: { email: '' }
         expect(flash[:notice]).not_to be_blank
         expect(response).to redirect_to user_path(other_user)
@@ -124,7 +124,7 @@ describe UsersController do
 
       it "fails to update other user and renders 'edit' template" do
         other_user = FactoryGirl.create(:user)
-        User.any_instance.stub(:valid?).and_return(false)
+        allow_any_instance_of(User).to receive(:valid?).and_return(false)
         patch :update, id: other_user.to_param, user: { email: '' }
         expect(flash[:notice]).to be_blank
         expect(response).to render_template 'edit'
@@ -133,7 +133,7 @@ describe UsersController do
 
     context 'as a normal user' do
       it 'updates current user' do
-        User.any_instance.stub(:valid?).and_return(true)
+        allow_any_instance_of(User).to receive(:valid?).and_return(true)
         expect do
           patch :update, id: user.to_param, user: { email: 'foo@bar.com' }
         end.to change{ user.reload.email }
@@ -142,14 +142,14 @@ describe UsersController do
       end
 
       it 'tries to update other user but silently updates current user instead' do
-        User.any_instance.stub(:valid?).and_return(true)
+        allow_any_instance_of(User).to receive(:valid?).and_return(true)
         expect do
           patch :update, id: 'does-not-matter', user: { email: 'foo@bar.com' }
         end.to change{ user.reload.email }
       end
 
       it "fails to update current user and renders 'edit' template" do
-        User.any_instance.stub(:valid?).and_return(false)
+        allow_any_instance_of(User).to receive(:valid?).and_return(false)
         patch :update, id: user.to_param, user: { email: '' }
         expect(flash[:notice]).to be_blank
         expect(response).to render_template 'edit'
@@ -161,7 +161,7 @@ describe UsersController do
     context 'as admin' do
       it 'destroys other user' do
         other_user = FactoryGirl.create(:user)
-        User.any_instance.stub(:admin?).and_return(true)
+        allow_any_instance_of(User).to receive(:admin?).and_return(true)
         expect do
           delete :destroy, id: other_user.to_param
         end.to change{User.count}.by(-1)
@@ -172,7 +172,7 @@ describe UsersController do
 
     context 'as normal user' do
       it 'redirects to users#index' do
-        User.any_instance.stub(:valid?).and_return(false)
+        allow_any_instance_of(User).to receive(:valid?).and_return(false)
         expect do
           delete :destroy, id: 'does-not-matter'
         end.not_to change{User.count}

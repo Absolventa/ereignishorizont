@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe IncomingEventsController do
+describe IncomingEventsController, :type => :controller do
   render_views
 
   context 'as html format' do
     before do
-      controller.stub(:logged_in?).and_return(true)
+      allow(controller).to receive(:logged_in?).and_return(true)
     end
 
     describe 'GET index' do
@@ -25,19 +25,19 @@ describe IncomingEventsController do
       it 'renders a single incoming event' do
         incoming_event = FactoryGirl.create(:incoming_event)
         get :show, id: incoming_event.id
-        response.should be_success
-        response.should render_template 'show'
-        assigns(:incoming_event).should eql incoming_event
+        expect(response).to be_success
+        expect(response).to render_template 'show'
+        expect(assigns(:incoming_event)).to eql incoming_event
       end
     end
 
     describe 'GET new' do
       it 'renders the new form' do
         get :new
-        response.should be_success
-        response.should render_template 'new'
-        response.should render_template '_form'
-        assigns(:incoming_event).should_not be_nil
+        expect(response).to be_success
+        expect(response).to render_template 'new'
+        expect(response).to render_template '_form'
+        expect(assigns(:incoming_event)).not_to be_nil
       end
     end
 
@@ -47,7 +47,7 @@ describe IncomingEventsController do
           expect do
             post :create, incoming_event: { title: '' }
           end.not_to change{ IncomingEvent.count }
-          response.should render_template 'new'
+          expect(response).to render_template 'new'
         end
       end
 
@@ -56,8 +56,8 @@ describe IncomingEventsController do
           expect do
             post :create, incoming_event: FactoryGirl.attributes_for(:incoming_event)
           end.to change{ IncomingEvent.count }.by(1)
-          response.should redirect_to incoming_event_path(assigns(:incoming_event))
-          flash[:notice].should_not be_blank
+          expect(response).to redirect_to incoming_event_path(assigns(:incoming_event))
+          expect(flash[:notice]).not_to be_blank
         end
       end
 
@@ -97,7 +97,7 @@ describe IncomingEventsController do
             let(:remote_side) { FactoryGirl.create(:remote_side) }
             it 'assigns corresponding remote side' do
               post :create, incoming_event: { title: "my title" }, api_token: remote_side.api_token, format: :xml
-              assigns(:incoming_event).reload.remote_side.should eql remote_side
+              expect(assigns(:incoming_event).reload.remote_side).to eql remote_side
             end
           end
         end

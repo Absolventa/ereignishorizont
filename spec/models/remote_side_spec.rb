@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe RemoteSide do
+describe RemoteSide, :type => :model do
 
-  it { should have_many(:alarm_notifications).dependent(:nullify) }
-  it { should have_many(:expected_events).dependent(:nullify) }
-  it { should have_many(:incoming_events).dependent(:nullify) }
-  it { should validate_presence_of :name }
-  it { should validate_uniqueness_of :name }
+  it { is_expected.to have_many(:alarm_notifications).dependent(:nullify) }
+  it { is_expected.to have_many(:expected_events).dependent(:nullify) }
+  it { is_expected.to have_many(:incoming_events).dependent(:nullify) }
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_uniqueness_of :name }
 
   it "has a valid factory" do
-    FactoryGirl.build(:remote_side).should be_valid
+    expect(FactoryGirl.build(:remote_side)).to be_valid
   end
 
   it 'generates an API token before validation' do
@@ -28,7 +28,7 @@ describe RemoteSide do
     existing = FactoryGirl.create(:remote_side)
     existing.update(api_token: 'abc')
 
-    SecureRandom.stub(:hex).and_return('abc', 'def')
+    allow(SecureRandom).to receive(:hex).and_return('abc', 'def')
     subject.valid?
     expect(subject.api_token).to eql 'def'
   end

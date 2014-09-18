@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe UserMailer do
+describe UserMailer, :type => :mailer do
   describe "password_reset" do
     let(:user) do
       FactoryGirl.create(:user).tap{|u| u.generate_token(:password_reset_token)}
@@ -19,7 +19,7 @@ describe UserMailer do
         host: APP_CONFIG[:host],
         protocol: APP_CONFIG[:url_scheme]
       )
-      mail.body.encoded.should match(url)
+      expect(mail.body.encoded).to match(url)
     end
   end
 end

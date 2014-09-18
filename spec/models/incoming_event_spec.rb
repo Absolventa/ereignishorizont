@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe IncomingEvent do
+describe IncomingEvent, :type => :model do
 
-  it { should validate_presence_of :title }
-  it { should belong_to :expected_event }
+  it { is_expected.to validate_presence_of :title }
+  it { is_expected.to belong_to :expected_event }
 
   let(:incoming_event) { FactoryGirl.create(:incoming_event) }
 
@@ -40,20 +40,20 @@ describe IncomingEvent do
   end
 
   it "has a valid factory" do
-    FactoryGirl.build(:incoming_event).should be_valid
+    expect(FactoryGirl.build(:incoming_event)).to be_valid
   end
 
   context 'validating title' do
     it 'complains about illegal characters' do
       incoming_event = IncomingEvent.new(title: 'bß€se')
       incoming_event.valid?
-      incoming_event.should have(1).error_on(:title)
+      expect(incoming_event).to have(1).error_on(:title)
     end
 
     it 'removes trailing white spaces before save' do
       incoming_event = IncomingEvent.new(title: ' bose    ')
       incoming_event.save
-      incoming_event.title.should == 'bose'
+      expect(incoming_event.title).to eq('bose')
     end
   end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Expected events" do
+describe "Expected events", :type => :request do
   context 'as an API consumer' do
     before do
       @api_token = FactoryGirl.create(:remote_side).api_token

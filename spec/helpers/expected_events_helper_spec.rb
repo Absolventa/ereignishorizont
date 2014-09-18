@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExpectedEventsHelper do
+describe ExpectedEventsHelper, :type => :helper do
   describe '#selected_weekdays' do
     let(:expected_event) { ExpectedEvent.new }
 

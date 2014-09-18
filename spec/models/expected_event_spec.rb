@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe ExpectedEvent do
+describe ExpectedEvent, :type => :model do
   let(:expected_event) { FactoryGirl.create(:expected_event) }
 
-  it { should have_many(:alarm_mappings).dependent(:destroy) }
-  it { should have_many(:alarms).through(:alarm_mappings) }
-  it { should have_many(:alarm_notifications).dependent(:destroy) }
-  it { should have_many :incoming_events }
-  it { should belong_to :remote_side }
+  it { is_expected.to have_many(:alarm_mappings).dependent(:destroy) }
+  it { is_expected.to have_many(:alarms).through(:alarm_mappings) }
+  it { is_expected.to have_many(:alarm_notifications).dependent(:destroy) }
+  it { is_expected.to have_many :incoming_events }
+  it { is_expected.to belong_to :remote_side }
 
   context 'with validations' do
-    it { should validate_presence_of :remote_side }
-    it { should validate_presence_of :title }
-    it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
-    it { should ensure_inclusion_of(:final_hour).in_range(0..23) }
+    it { is_expected.to validate_presence_of :remote_side }
+    it { is_expected.to validate_presence_of :title }
+    it { is_expected.to validate_inclusion_of(:matching_direction).in_array %w(backward forward) }
+    it { is_expected.to validate_inclusion_of(:final_hour).in_range(0..23) }
 
-    it { should_not allow_value(nil).for(:matching_direction) }
+    it { is_expected.not_to allow_value(nil).for(:matching_direction) }
 
     it { expect(subject).to validate_numericality_of(:day_of_month) }
 
@@ -23,13 +23,13 @@ describe ExpectedEvent do
       it 'complains about illegal characters' do
         expected_event = ExpectedEvent.new(title: 'bß€se')
         expected_event.valid?
-        expected_event.should have(1).error_on(:title)
+        expect(expected_event).to have(1).error_on(:title)
       end
 
       it 'removes trailing white spaces before save' do
         expected_event = ExpectedEvent.new(title: ' bose    ')
         expected_event.save
-        expected_event.title.should == 'bose'
+        expect(expected_event.title).to eq('bose')
       end
 
       it 'prevents same title for same remote sides' do
@@ -58,7 +58,7 @@ describe ExpectedEvent do
   end
 
   it "has a valid factory" do
-    FactoryGirl.build(:expected_event).should be_valid
+    expect(FactoryGirl.build(:expected_event)).to be_valid
   end
 
   describe "#active?" do
@@ -128,12 +128,12 @@ describe ExpectedEvent do
 
   describe "#activity_status" do
     it 'returns "active" if event is ongoing' do
-      subject.stub(active?: true) # alternative syntax
+      allow(subject).to receive(:active?).and_return(true)
       expect(subject.activity_status).to eql "active"
     end
 
     it 'returns "inactive" if event is not ongoing' do
-      subject.stub(:active?).and_return(false)
+      allow(subject).to receive(:active?).and_return(false)
       expect(subject.activity_status).to eql "inactive"
     end
   end
@@ -207,12 +207,12 @@ describe ExpectedEvent do
     end
 
     it 'returns true' do
-      subject.stub(:deadline).and_return(1.minute.ago.utc)
+      allow(subject).to receive(:deadline).and_return(1.minute.ago.utc)
       expect(subject.deadline_exceeded?).to eql true
     end
 
     it 'returns false' do
-      subject.stub(:deadline).and_return(1.minute.from_now.utc)
+      allow(subject).to receive(:deadline).and_return(1.minute.from_now.utc)
       expect(subject.deadline_exceeded?).to eql false
     end
   end

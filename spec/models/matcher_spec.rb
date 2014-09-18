@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Matcher do
+describe Matcher, :type => :model do
 
   subject { described_class }
 
@@ -17,10 +17,10 @@ describe Matcher do
   describe '.run' do
 
     it 'sends an alarm if an event is not matched' do
-      subject.stub(:incoming_events_for).and_return([])
-      subject.stub(:expected_events).and_return([expected_event])
+      allow(subject).to receive(:incoming_events_for).and_return([])
+      allow(subject).to receive(:expected_events).and_return([expected_event])
 
-      expected_event.should_receive(:alarm!)
+      expect(expected_event).to receive(:alarm!)
       subject.run
     end
 
@@ -31,7 +31,7 @@ describe Matcher do
       expected_event.final_hour = 10
       expected_event.title = incoming_event.title
 
-      ExpectedEvent.any_instance.should_not_receive(:alarm!)
+      expect_any_instance_of(ExpectedEvent).not_to receive(:alarm!)
 
       Timecop.travel(Time.now.utc.beginning_of_day + 11.hours)
       subject.run
@@ -133,6 +133,6 @@ describe Matcher do
   end
 
   def stub_deadline_exceeded!
-    ExpectedEvent.any_instance.stub(:deadline_exceeded?).and_return(true)
+    allow_any_instance_of(ExpectedEvent).to receive(:deadline_exceeded?).and_return(true)
   end
 end

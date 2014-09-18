@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PasswordResetsController do
+describe PasswordResetsController, :type => :controller do
   render_views
 
   describe 'GET new' do
@@ -85,7 +85,7 @@ describe PasswordResetsController do
       end
 
       it 'fails to update user and renders edit' do
-        User.any_instance.stub(:valid?).and_return(false)
+        allow_any_instance_of(User).to receive(:valid?).and_return(false)
         expect do
           patch :update, id: user.password_reset_token, user: passwords
         end.not_to change{ user.reload.password_digest }

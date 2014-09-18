@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ExpectedEventsController do
+describe ExpectedEventsController, :type => :controller do
   render_views
 
   before do
-    controller.stub(:logged_in?).and_return(true)
+    allow(controller).to receive(:logged_in?).and_return(true)
   end
 
   let(:expected_event) { FactoryGirl.create(:expected_event) }

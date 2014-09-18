@@ -48,12 +48,14 @@ group :production do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-activemodel-mocks'
 end
 
 group :test do
   gem 'shoulda'
-  gem 'shoulda-matchers', '~> 2.6.1'
+  gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'timecop'
