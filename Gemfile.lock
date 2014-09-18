@@ -111,6 +111,10 @@ GEM
     rake (10.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-collection_matchers (1.0.0)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.2)
@@ -196,6 +200,8 @@ DEPENDENCIES
   pg
   rails (~> 4.1.6)
   rails_12factor (= 0.0.2)
+  rspec-activemodel-mocks
+  rspec-collection_matchers
   rspec-rails (~> 2.99)
   sass-rails (~> 4.0.2)
   sdoc
