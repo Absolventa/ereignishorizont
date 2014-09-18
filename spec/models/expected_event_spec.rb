@@ -128,7 +128,7 @@ describe ExpectedEvent, :type => :model do
 
   describe "#activity_status" do
     it 'returns "active" if event is ongoing' do
-      subject.stub(active?: true) # alternative syntax
+      allow(subject).to receive(:active?).and_return(true)
       expect(subject.activity_status).to eql "active"
     end
 

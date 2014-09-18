@@ -48,7 +48,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.99'
+  gem 'rspec-rails', '~> 3.1'
   gem 'rspec-collection_matchers'
   gem 'rspec-activemodel-mocks'
 end
