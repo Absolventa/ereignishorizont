@@ -1,26 +1,26 @@
 require 'spec_helper'
 
-describe Alarm do
+describe Alarm, :type => :model do
 
   context "Validations" do
 
-    it { should have_many(:alarm_mappings).dependent(:destroy) }
-    it { should have_many(:expected_events).through :alarm_mappings}
-    it { should allow_value("a@b.com").for(:recipient_email) }
+    it { is_expected.to have_many(:alarm_mappings).dependent(:destroy) }
+    it { is_expected.to have_many(:expected_events).through :alarm_mappings}
+    it { is_expected.to allow_value("a@b.com").for(:recipient_email) }
 
     it "has a valid factory" do
-      FactoryGirl.build(:alarm).should be_valid
+      expect(FactoryGirl.build(:alarm)).to be_valid
     end
 
     it 'allows available values from the constant' do
       Alarm::ACTIONS.each do |v|
-        should allow_value(v).for(:action)
+        is_expected.to allow_value(v).for(:action)
       end
     end
 
     it 'does not allow other values than those in the constant' do
       Alarm::ACTIONS.each do |v|
-        should_not allow_value("other").for(:action)
+        is_expected.not_to allow_value("other").for(:action)
       end
     end
   end
@@ -56,15 +56,15 @@ describe Alarm do
 
     it 'sends an email when email is selected' do
       subject = FactoryGirl.build(:alarm)
-      subject.stub(:enters_email?).and_return(true)
+      allow(subject).to receive(:enters_email?).and_return(true)
       expect do
         subject.run expected_event
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
 
     it 'sends a logger message when logger is selected' do
-      Rails.logger.should_receive(:info)
-      subject.stub(:enters_logger?).and_return(true)
+      expect(Rails.logger).to receive(:info)
+      allow(subject).to receive(:enters_logger?).and_return(true)
       subject.run expected_event
     end
   end

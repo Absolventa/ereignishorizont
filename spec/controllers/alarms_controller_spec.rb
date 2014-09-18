@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe AlarmsController do
+describe AlarmsController, :type => :controller do
   render_views
 
   let(:user) { mock_model(User, admin?: false) }
 
   before do
-    controller.stub(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   let(:alarm) { FactoryGirl.create(:alarm) }

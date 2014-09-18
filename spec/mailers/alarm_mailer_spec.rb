@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe AlarmMailer do
+describe AlarmMailer, :type => :mailer do
   describe '.event_expectation_matched' do
     it 'sends a mail for an alarm' do
       alarm = FactoryGirl.build(:alarm)

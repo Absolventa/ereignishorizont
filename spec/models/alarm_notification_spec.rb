@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe AlarmNotification do
-  it { should belong_to :expected_event }
-  it { should belong_to :remote_side }
+describe AlarmNotification, :type => :model do
+  it { is_expected.to belong_to :expected_event }
+  it { is_expected.to belong_to :remote_side }
 
   let(:alarm_notification) { FactoryGirl.create(:alarm_notification) }
 
   context 'with validations' do
-    it { should validate_presence_of :expected_event }
+    it { is_expected.to validate_presence_of :expected_event }
 
     let(:conflicting_alarm_notification) do
       FactoryGirl.build(
@@ -34,7 +34,7 @@ describe AlarmNotification do
   end
 
   it "has a valid factory" do
-    FactoryGirl.build(:alarm_notification).should be_valid
+    expect(FactoryGirl.build(:alarm_notification)).to be_valid
   end
 
 end

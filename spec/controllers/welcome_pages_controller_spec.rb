@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe WelcomePagesController do
+describe WelcomePagesController, :type => :controller do
 
 end
