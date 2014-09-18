@@ -12,8 +12,8 @@ describe ExpectedEvent do
   context 'with validations' do
     it { should validate_presence_of :remote_side }
     it { should validate_presence_of :title }
-    it { should ensure_inclusion_of(:matching_direction).in_array %w(backward forward) }
-    it { should ensure_inclusion_of(:final_hour).in_range(0..23) }
+    it { should validate_inclusion_of(:matching_direction).in_array %w(backward forward) }
+    it { should validate_inclusion_of(:final_hour).in_range(0..23) }
 
     it { should_not allow_value(nil).for(:matching_direction) }
 
