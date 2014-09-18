@@ -34,6 +34,8 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+  config.infer_spec_type_from_file_location!
+
   config.after do
     Timecop.return
   end
