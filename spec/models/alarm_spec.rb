@@ -28,22 +28,22 @@ describe Alarm do
   context "the dropdown menu" do
     it 'assigns the value "Email" to action if Email is chosen' do
       subject.action = "Email"
-      expect(subject.enters_email?).to be_true
+      expect(subject.enters_email?).to be_truthy
     end
 
     it 'does not assign the value "Email" to action if Email is not chosen' do
       subject.action = "Logger"
-      expect(subject.enters_logger?).to be_true
+      expect(subject.enters_logger?).to be_truthy
     end
 
     it 'assigns the value "Logger" to action if Logger is chosen' do
       subject.action = "Logger"
-      expect(subject.enters_logger?).to be_true
+      expect(subject.enters_logger?).to be_truthy
     end
 
     it 'does not assigns the value "Logger" to action if Logger is not chosen' do
       subject.action = "Email"
-      expect(subject.enters_email?).to be_true
+      expect(subject.enters_email?).to be_truthy
     end
   end
 
