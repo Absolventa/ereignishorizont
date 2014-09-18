@@ -1,4 +1,4 @@
-EventGirl::Application.routes.draw do
+Rails.application.routes.draw do
   root 'incoming_events#index'
 
   get "password_resets/new"
