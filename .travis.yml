@@ -15,7 +15,7 @@ notifications:
   - carsten.zimmermann@absolventa.de
   - felix@mohnert.de
   slack:
-    secure: UtRa7E3tnS1Z9xz0ScvaXCcGE97Hc7vpuuZ3Uml+O35setwGHg5Vc5XPhs4ZajoH/QrAIlTer4MuNoDjv79VyXltKuVkaKuAGjFs/rRlAXpAr7WZ9jo81spU2lW9m1WYqEnzNZL/6i8VFBgtDzIBEDQV+3bJ/xRu0/Wo2HLNmLk=
+    secure: kKwUjgJR2oTgSPq/aQp2/KYJ7R6YroFNDcPKyEU3sf7CdcHx0npMhf8i3uX9nTYQTFyULW2IeoWl4MqAOfHVD2Yrs3q3HMWZrphhBSacN1pJrpSyxPD/37t6zH6kUzc2C2Pmk5OspKZWnKDPey24rAMEjQHKCuWaVZztDwMV618=
 deploy:
   provider: heroku
   api_key:
