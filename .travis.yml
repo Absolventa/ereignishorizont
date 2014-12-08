@@ -1,27 +1,26 @@
 language: ruby
 rvm:
-  - '2.1.5'
+- 2.1.5
 before_script:
-  - 'cp config/config.yml.example config/config.yml'
-  - 'cp config/database.yml.example config/database.yml'
-  - psql -c "CREATE USER your_username WITH PASSWORD '';" -U postgres
-  - psql -c 'create database event_girl_test' -U postgres
-  - 'bundle exec rake db:migrate RAILS_ENV=test'
-script: 'bundle exec rspec spec'
-
+- cp config/config.yml.example config/config.yml
+- cp config/database.yml.example config/database.yml
+- psql -c "CREATE USER your_username WITH PASSWORD '';" -U postgres
+- psql -c 'create database event_girl_test' -U postgres
+- bundle exec rake db:migrate RAILS_ENV=test
+script: bundle exec rspec spec
 notifications:
   email:
-    - tam.eastley@gmail.com
-    - susanne.dewein@gmail.com
-    - carsten.zimmermann@absolventa.de
-    - felix@mohnert.de
+  - tam.eastley@gmail.com
+  - susanne.dewein@gmail.com
+  - carsten.zimmermann@absolventa.de
+  - felix@mohnert.de
 deploy:
   provider: heroku
   api_key:
     secure: nXX3NIp/spivNhpt+GRPQuIp4+Jqvn1xKNl9WsAJQPV25LX90+TxTwdm4LBoNOzuUVvJ3GYxWjKYO1R//nf8qieUpLDkvmCdQLDNEQ+R8UI+O4tAubi5kIknjbAGDEEtZdPkcZQFMieP0El06YsNu356UusYLkl0G+Z9aoM+i7U=
   app: event-girl
   run:
-    - 'rake db:migrate'
-    - restart
+  - rake db:migrate
+  - restart
   on:
     repo: Absolventa/event_girl
