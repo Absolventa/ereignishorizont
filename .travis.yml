@@ -14,6 +14,8 @@ notifications:
   - susanne.dewein@gmail.com
   - carsten.zimmermann@absolventa.de
   - felix@mohnert.de
+  slack:
+    secure: UtRa7E3tnS1Z9xz0ScvaXCcGE97Hc7vpuuZ3Uml+O35setwGHg5Vc5XPhs4ZajoH/QrAIlTer4MuNoDjv79VyXltKuVkaKuAGjFs/rRlAXpAr7WZ9jo81spU2lW9m1WYqEnzNZL/6i8VFBgtDzIBEDQV+3bJ/xRu0/Wo2HLNmLk=
 deploy:
   provider: heroku
   api_key:
