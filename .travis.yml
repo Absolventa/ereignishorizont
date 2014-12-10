@@ -12,10 +12,9 @@ notifications:
   email:
   - tam.eastley@gmail.com
   - susanne.dewein@gmail.com
-  - carsten.zimmermann@absolventa.de
   - felix@mohnert.de
-  slack:
-    secure: kKwUjgJR2oTgSPq/aQp2/KYJ7R6YroFNDcPKyEU3sf7CdcHx0npMhf8i3uX9nTYQTFyULW2IeoWl4MqAOfHVD2Yrs3q3HMWZrphhBSacN1pJrpSyxPD/37t6zH6kUzc2C2Pmk5OspKZWnKDPey24rAMEjQHKCuWaVZztDwMV618=
+  webhooks:
+    secure: Z52QFyfZwrQbkfYfTexO/K+CiYtik4IskhUoLZHQctraIx32F78T63kJHaQcX2Glkmarw1Ak1FJwA6vjweNv0BHT9WUQEo1rHX7am79YNmmHrbdQwgrbdoh7fVSSnaJvL8+qfirxJEhSvT3n7tg0pEeyAT41WNa05ViETCRRZxY=
 deploy:
   provider: heroku
   api_key:
