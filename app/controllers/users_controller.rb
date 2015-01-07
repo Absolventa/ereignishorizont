@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       if @user.save
         redirect_to users_path
         if params[:send_invitation] == '1'
-          UserMailer.account_creation(@user).deliver
+          UserMailer.account_creation(@user).deliver_now
           flash[:notice] = "Invitation to user #{@user.email} sent."
         else
           flash[:notice] = "User #{@user.email} created."
