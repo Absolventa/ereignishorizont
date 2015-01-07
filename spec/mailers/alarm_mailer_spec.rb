@@ -7,7 +7,7 @@ describe AlarmMailer, :type => :mailer do
       event = FactoryGirl.build(:expected_event)
       mailer = described_class.event_expectation_matched(alarm, event)
       expect do
-        mailer.deliver
+        mailer.deliver_now
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
       mail = ActionMailer::Base.deliveries.last
       expect(mail.subject).to eql "[event_girl] #{event.remote_side.name} - #{alarm.title}: #{event.title}"

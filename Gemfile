@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.2.0'
-gem 'rails', '~> 4.1.6'
+gem 'rails', '~> 4.2.0'
 
 gem 'pg'
 
@@ -22,6 +22,7 @@ gem 'simple_form'
 gem 'select2-rails'
 gem 'haml'
 
+gem 'responders', '~> 2.0'
 gem 'will_paginate'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -48,6 +49,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'web-console', '~> 2.0'
   gem 'rspec-rails', '~> 3.1'
   gem 'rspec-collection_matchers'
   gem 'rspec-activemodel-mocks'
