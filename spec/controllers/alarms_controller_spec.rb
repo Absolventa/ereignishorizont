@@ -85,4 +85,17 @@ describe AlarmsController, :type => :controller do
       expect(response).to redirect_to alarm_path(assigns(:alarm))
     end
   end
+
+  describe 'DELETE destroy' do
+    before { alarm }
+
+    it 'destroys the record and redirects to index' do
+      expect {
+        delete :destroy, id: alarm.to_param
+      }.to change { Alarm.count }.by(-1)
+
+      expect(flash[:notice]).not_to be_blank
+      expect(response).to redirect_to alarms_path
+    end
+  end
 end
