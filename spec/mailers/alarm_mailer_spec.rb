@@ -3,8 +3,8 @@ require "spec_helper"
 describe AlarmMailer, :type => :mailer do
   describe '.event_expectation_matched' do
     it 'sends a mail for an alarm' do
-      alarm = FactoryGirl.build(:alarm)
-      event = FactoryGirl.build(:expected_event)
+      alarm = FactoryGirl.build_stubbed(:alarm)
+      event = FactoryGirl.build_stubbed(:expected_event)
       mailer = described_class.event_expectation_matched(alarm, event)
       expect do
         mailer.deliver_now
