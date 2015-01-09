@@ -74,10 +74,10 @@ describe User, :type => :model do
   end
 
   describe '#send_password_reset' do
-    let(:user) { FactoryGirl.build(:user) }
+    let(:user) { FactoryGirl.create(:user) }
 
     it 'saves the record without validating it' do
-      expect(user).to receive(:save!).with(validate: false)
+      expect(user).to receive(:save!).with(validate: false).and_call_original
       user.send_password_reset
     end
 
