@@ -55,7 +55,7 @@ describe Alarm, :type => :model do
     end
 
     it 'sends an email when email is selected' do
-      subject = FactoryGirl.build(:alarm)
+      subject = FactoryGirl.create(:alarm)
       allow(subject).to receive(:enters_email?).and_return(true)
       expect do
         subject.run expected_event
