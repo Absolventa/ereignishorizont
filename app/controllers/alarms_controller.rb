@@ -60,7 +60,7 @@ class AlarmsController < ApplicationController
   end
 
   def alarm_params
-    params.require(:alarm).permit([:action, :title, :email_recipient, :message])
+    params.require(:alarm).permit([:action, :title, :email_recipient, :slack_channel, :slack_url, :message])
   end
 
   def sort_column

@@ -14,15 +14,21 @@
         <td><strong>Message:</strong></td>
         <td><%= @alarm.message %></td>
       </tr>
-      <tr>
-        <% if @alarm.kind.email? %>
-          <td><strong>Recipient Email:</strong></td>
-          <td><%= @alarm.email_recipient %></td>
-        <% elsif @alarm.kind.slack? %>
+      <% if @alarm.kind.email? %>
+        <tr>
+            <td><strong>Recipient Email:</strong></td>
+            <td><%= @alarm.email_recipient %></td>
+        </tr>
+      <% elsif @alarm.kind.slack? %>
+        <tr>
           <td><strong>Slack Endpoint:</strong></td>
           <td><tt><%= @alarm.slack_url %></tt></td>
-        <% end %>
-      </tr>
+        </tr>
+        <tr>
+          <td><strong>Slack Channel:</strong></td>
+          <td><tt><%= @alarm.slack_channel %></tt></td>
+        </tr>
+      <% end %>
       <tr>
         <th>Used by:</th>
         <td>
