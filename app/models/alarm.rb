@@ -1,5 +1,5 @@
 class Alarm < ActiveRecord::Base
-  ACTIONS = %w(email logger webhook)
+  ACTIONS = %w(email logger webhook slack)
 
   has_many :alarm_mappings, dependent: :destroy
   has_many :expected_events, through: :alarm_mappings

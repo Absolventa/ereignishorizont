@@ -12,18 +12,6 @@ describe Alarm, :type => :model do
       expect(FactoryGirl.build(:alarm)).to be_valid
     end
 
-    it 'allows available values from the constant' do
-      Alarm::ACTIONS.each do |v|
-        is_expected.to allow_value(v).for(:action)
-      end
-    end
-
-    it 'does not allow other values than those in the constant' do
-      Alarm::ACTIONS.each do |v|
-        is_expected.not_to allow_value("other").for(:action)
-      end
-    end
-
     context 'as a webhook' do
       before { subject.action = 'webhook' }
 
@@ -34,6 +22,8 @@ describe Alarm, :type => :model do
   describe '#kind' do
     shared_examples_for 'action predicate' do |action|
       let(:predicate) { "be_#{action.downcase}" }
+
+      it { is_expected.to allow_value(action).for(:action) }
 
       describe "#kind.#{action}?" do
         it "returns true for matching action" do
