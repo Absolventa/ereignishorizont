@@ -21,7 +21,8 @@ describe Alarm, :type => :model do
     context 'with slack' do
       before { subject.action = 'slack' }
 
-      it { is_expected.to validate_presence_of :slack_url }
+      it { is_expected.to validate_presence_of :slack_token }
+      it { is_expected.to validate_presence_of :slack_channel }
     end
   end
 
