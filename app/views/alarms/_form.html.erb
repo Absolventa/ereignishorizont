@@ -43,6 +43,17 @@
     </div>
   </div>
 
+  <div class='control-group for-slack' style="<%= 'display:none' unless @alarm.kind.slack? %>">
+    <%= f.label 'Slack Token', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :slack_token %>
+    </div>
+    <%= f.label 'Slack Channel', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :slack_channel %>
+    </div>
+  </div>
+
   <div class="control-group">
     <%= f.label "Add some custom text!:", :class => "control-label" %>
     <div class="controls">
