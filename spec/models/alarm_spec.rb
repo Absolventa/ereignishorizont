@@ -53,6 +53,28 @@ describe Alarm, :type => :model do
     end
   end
 
+  describe '#kind' do
+    shared_examples_for 'action predicate' do |action|
+      let(:predicate) { "be_#{action.downcase}" }
+
+      describe "#kind.#{action}?" do
+        it "returns true for matching action" do
+          subject.action = action
+          expect(subject.kind).to send(predicate)
+        end
+
+        it "returns false" do
+          subject.action = Alarm::ACTIONS.reject{|a| a == action}.sample
+          expect(subject.kind).not_to send(predicate)
+        end
+      end
+    end
+
+    it_behaves_like 'action predicate', 'Logger'
+    it_behaves_like 'action predicate', 'Email'
+    it_behaves_like 'action predicate', 'Webhook'
+  end
+
   context "#run" do
     let(:expected_event) { FactoryGirl.build(:expected_event) }
 
