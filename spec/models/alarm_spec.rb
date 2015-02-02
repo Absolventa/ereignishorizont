@@ -92,7 +92,7 @@ describe Alarm, :type => :model do
 
     it 'sends a logger message when logger is selected' do
       expect(Rails.logger).to receive(:info)
-      allow(subject).to receive(:enters_logger?).and_return(true)
+      subject.action = 'Logger'
       subject.run expected_event
     end
   end

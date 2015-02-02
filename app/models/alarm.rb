@@ -6,9 +6,9 @@ class Alarm < ActiveRecord::Base
 
   validates :recipient_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true,
-                              if: :enters_email?
+                              if: ->(o) { o.kind.email? }
 
-  validates :target, presence: { if: ->(o) { o.action == 'Webhook' } }
+  validates :target, presence: { if: ->(o) { o.kind.webhook? } }
 
   validates_inclusion_of :action, in: ACTIONS
 
@@ -37,6 +37,6 @@ class Alarm < ActiveRecord::Base
   def run(expected_event)
     delivery_method = expected_event.persisted? ? :deliver_later : :deliver_now
     AlarmMailer.event_expectation_matched(self, expected_event).send(delivery_method) if enters_email?
-    logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if enters_logger?
+    logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if kind.logger?
   end
 end
