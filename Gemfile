@@ -65,4 +65,5 @@ group :test do
 
   gem 'capybara'
   gem 'launchy'
+  gem 'webmock'
 end
