@@ -25,7 +25,7 @@ describe Alarm, :type => :model do
     end
 
     context 'as a webhook' do
-      before { subject.action = 'Webhook' }
+      before { subject.action = 'webhook' }
 
       it { is_expected.to validate_presence_of :webhook_url }
     end
@@ -70,7 +70,7 @@ describe Alarm, :type => :model do
 
     it 'sends a logger message when logger is selected' do
       expect(Rails.logger).to receive(:info)
-      subject.action = 'Logger'
+      subject.action = 'logger'
       subject.run expected_event
     end
   end

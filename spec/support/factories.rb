@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :alarm do
-    action 'Email'
+    action 'email'
     sequence(:email_recipient) { |n| "johndoe#{n}@example.com"}
     title 'Title'
   end
