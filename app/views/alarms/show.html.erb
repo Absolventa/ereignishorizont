@@ -8,15 +8,20 @@
       </tr>
       <tr>
         <td><strong>Action:</strong></td>
-        <td><%= @alarm.action %></td>
+        <td><%= @alarm.action.titleize %></td>
       </tr>
       <tr>
         <td><strong>Message:</strong></td>
         <td><%= @alarm.message %></td>
       </tr>
       <tr>
-        <td><strong>Recipient Email:</strong></td>
-        <td><%= @alarm.email_recipient %></td>
+        <% if @alarm.kind.email? %>
+          <td><strong>Recipient Email:</strong></td>
+          <td><%= @alarm.email_recipient %></td>
+        <% elsif @alarm.kind.slack? %>
+          <td><strong>Slack Endpoint:</strong></td>
+          <td><tt><%= @alarm.slack_url %></tt></td>
+        <% end %>
       </tr>
       <tr>
         <th>Used by:</th>
