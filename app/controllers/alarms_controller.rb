@@ -12,26 +12,26 @@ class AlarmsController < ApplicationController
   end
 
   def new
-    @alarm = Alarm.new
+    @alarm = Alarm.new(action: 'logger')
   end
 
   def edit
   end
 
   def run
-    event = ExpectedEvent.new(title: 'Tested using a bogus event expectation', matching_direction: 'backward')
+    event = ExpectedEvent.new(
+      title: 'Tested using a bogus event expectation',
+      matching_direction: 'backward',
+      final_hour: 1.hour.ago.utc.hour,
+      "weekday_#{Time.now.utc.wday}" => true
+    )
     @alarm.run event
-    if @alarm.enters_email? or @alarm.enters_logger?
-      flash[:notice] = "Alarm test successful"
-    else
-      flash[:error] = "Alarm test failed"
-    end
-    redirect_to alarms_path
+    redirect_to alarms_path, notice: 'Alarm test sent.'
   end
 
   def create
     @alarm = Alarm.new(alarm_params)
-    @alarm.recipient_email = nil unless @alarm.action == 'Email'
+    @alarm.email_recipient = nil unless @alarm.kind.email?
     respond_to do |format|
       if @alarm.save
         format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully created'}
@@ -65,7 +65,7 @@ class AlarmsController < ApplicationController
   end
 
   def alarm_params
-    params.require(:alarm).permit([:action, :title, :recipient_email, :message])
+    params.require(:alarm).permit([:action, :title, :email_recipient, :slack_channel, :slack_url, :message])
   end
 
   def sort_column

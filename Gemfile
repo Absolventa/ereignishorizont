@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.
 gem 'actionpack-xml_parser', '~> 1.0.0'
 
 gem 'whenever', require: false
+gem 'slack-notifier'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -65,4 +66,5 @@ group :test do
 
   gem 'capybara'
   gem 'launchy'
+  gem 'webmock'
 end

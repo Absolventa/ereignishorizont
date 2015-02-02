@@ -41,6 +41,20 @@ describe AlarmsController, :type => :controller do
       get :run, id: alarm.to_param
       expect(response).to redirect_to alarms_path
     end
+
+    context 'for slack' do
+      let(:alarm) { FactoryGirl.create :alarm, :slack }
+
+      before do
+        stub_request(:post, alarm.slack_url)
+      end
+
+      it 'sounds an alarm and redirects' do
+        get :run, id: alarm.to_param
+        expect(response).to redirect_to alarms_path
+        expect(a_request(:post, alarm.slack_url)).to have_been_made
+      end
+    end
   end
 
   describe 'GET new' do
@@ -67,10 +81,10 @@ describe AlarmsController, :type => :controller do
       expect(response).to redirect_to alarm_path(assigns(:alarm))
     end
 
-    it 'removes the email address unless selected action is Email' do
-      attributes = FactoryGirl.attributes_for(:alarm, action: 'Logger', recipient_email: 'foo@bar.com')
+    it 'removes the email address unless selected action is email' do
+      attributes = FactoryGirl.attributes_for(:alarm, action: 'logger', email_recipient: 'foo@bar.com')
       post :create, alarm: attributes
-      expect(assigns(:alarm).recipient_email).to be_nil
+      expect(assigns(:alarm).email_recipient).to be_nil
     end
   end
 

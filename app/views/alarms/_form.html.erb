@@ -21,18 +21,36 @@
   <div class="control-group">
     <%= f.label "Action" " (* required):", :class => "control-label" %>
     <div class="controls">
-      <%= f.select :action, [['Logger', 'Logger'], ['Email', 'Email']] %>
+      <%= f.select :action, Alarm::ACTIONS.map{|action| [action.titleize, action]} %>
     </div>
   </div>
 
-  <div class="control-group for-email" style="<%= 'display:none' unless @alarm.enters_email? %>">
+  <div class="control-group for-email" style="<%= 'display:none' unless @alarm.kind.email? %>">
     <%= f.label "Is this the right email address?:", :class => "control-label" %>
     <div class="controls">
-      <% if @alarm.recipient_email %>
-        <%= f.text_field :recipient_email %>
+      <% if @alarm.email_recipient %>
+        <%= f.text_field :email_recipient %>
       <% else %>
-        <%= f.text_field :recipient_email, :value => current_user.email %>
+        <%= f.text_field :email_recipient, :value => current_user.email %>
       <% end %>
+    </div>
+  </div>
+
+  <div class='control-group for-webhook' style="<%= 'display:none' unless @alarm.kind.webhook? %>">
+    <%= f.label 'HTTP(S) endpoint to POST to', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :webhook_url %>
+    </div>
+  </div>
+
+  <div class='control-group for-slack' style="<%= 'display:none' unless @alarm.kind.slack? %>">
+    <%= f.label 'Slack Endpoint', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :slack_url %>
+    </div>
+    <%= f.label 'Slack Channel', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :slack_channel %>
     </div>
   </div>
 
