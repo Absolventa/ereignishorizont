@@ -21,7 +21,7 @@
   <div class="control-group">
     <%= f.label "Action" " (* required):", :class => "control-label" %>
     <div class="controls">
-      <%= f.select :action, [['Logger', 'Logger'], ['Email', 'Email']] %>
+      <%= f.select :action, Alarm::ACTIONS %>
     </div>
   </div>
 
@@ -33,6 +33,13 @@
       <% else %>
         <%= f.text_field :recipient_email, :value => current_user.email %>
       <% end %>
+    </div>
+  </div>
+
+  <div class='control-group for-webhook' style="<%= 'display:none' unless @alarm.kind.webhook? %>">
+    <%= f.label 'HTTP(S) endpoint to POST to', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :target %>
     </div>
   </div>
 

@@ -12,7 +12,7 @@ class AlarmsController < ApplicationController
   end
 
   def new
-    @alarm = Alarm.new
+    @alarm = Alarm.new(action: 'Logger')
   end
 
   def edit
