@@ -62,7 +62,7 @@ group :test do
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
-  gem 'simplecov'
+  gem "codeclimate-test-reporter", require: false
   gem 'timecop'
   gem 'zonebie'
 

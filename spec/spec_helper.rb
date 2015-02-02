@@ -1,19 +1,13 @@
+if ENV["CODECLIMATE_REPO_TOKEN"] # code coverage is set on CI-Server
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'webmock/rspec'
-
-# run with "COVERAGE=true bundle exec rake spec"
-if ENV["COVERAGE"]
-  SimpleCov.start 'rails' do
-    add_filter '/spec'
-    add_group "Models", "app/models"
-    add_group "Controllers", "app/controllers"
-    coverage_dir File.join("coverage", Time.now.strftime("%Y%m%d-%H%M%S"))
-    SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
-  end
-end
 
 Zonebie.set_random_timezone
 
