@@ -5,6 +5,8 @@ gem 'rails', '~> 4.2.0'
 
 gem 'pg'
 
+gem 'puma'
+
 gem 'sass-rails', '~> 4.0.2' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.0.0' # Use CoffeeScript for .js.coffee assets and views
