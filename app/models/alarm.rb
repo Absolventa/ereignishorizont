@@ -9,6 +9,7 @@ class Alarm < ActiveRecord::Base
                               if: ->(o) { o.kind.email? }
 
   validates :webhook_url, presence: { if: ->(o) { o.kind.webhook? } }
+  validates :slack_channel, :slack_token, presence: { if: ->(o) { o.kind.slack? } }
 
   validates_inclusion_of :action, in: ACTIONS
 
