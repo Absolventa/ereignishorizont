@@ -23,7 +23,7 @@ class Alarm < ActiveRecord::Base
     delivery_method = expected_event.persisted? ? :deliver_later : :deliver_now
     AlarmMailer.event_expectation_matched(self, expected_event).send(delivery_method) if kind.email?
     logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if kind.logger?
-    Alarm::SlackNotifier.new(self).call if kind.slack?
+    Alarm::SlackNotifier.new(self, expected_event).call if kind.slack?
   end
 
   private

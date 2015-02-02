@@ -19,7 +19,12 @@ class AlarmsController < ApplicationController
   end
 
   def run
-    event = ExpectedEvent.new(title: 'Tested using a bogus event expectation', matching_direction: 'backward')
+    event = ExpectedEvent.new(
+      title: 'Tested using a bogus event expectation',
+      matching_direction: 'backward',
+      final_hour: 1.hour.ago.utc.hour,
+      "weekday_#{Time.now.utc.wday}" => true
+    )
     @alarm.run event
     redirect_to alarms_path, notice: 'Alarm test sent.'
   end
