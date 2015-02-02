@@ -10,6 +10,14 @@ class Alarm < ActiveRecord::Base
 
   validates_inclusion_of :action, in: ACTIONS
 
+  def recipient_email=(value)
+    self.target = value
+  end
+
+  def recipient_email
+    target
+  end
+
   def enters_email?
     action == 'Email'
   end

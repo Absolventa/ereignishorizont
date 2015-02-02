@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205145606) do
+ActiveRecord::Schema.define(version: 20150202082301) do
 
   create_table "alarm_mappings", force: true do |t|
     t.integer  "alarm_id"
@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 20140205145606) do
   add_index "alarm_notifications", ["expected_event_id"], name: "index_alarm_notifications_on_expected_event_id", using: :btree
   add_index "alarm_notifications", ["remote_side_id"], name: "index_alarm_notifications_on_remote_side_id", using: :btree
 
-  create_table "alarms", force: true do |t|
-    t.string   "title"
-    t.string   "action"
-    t.string   "recipient_email"
+  create_table "alarms", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "action",     limit: 255
+    t.string   "target",     limit: 255
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
