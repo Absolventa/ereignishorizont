@@ -1,5 +1,5 @@
 class Alarm < ActiveRecord::Base
-  ACTIONS = ["Email", "Logger"]
+  ACTIONS = ["Email", "Logger", 'Webhook']
 
   has_many :alarm_mappings, dependent: :destroy
   has_many :expected_events, through: :alarm_mappings
@@ -7,6 +7,8 @@ class Alarm < ActiveRecord::Base
   validates :recipient_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true,
                               if: :enters_email?
+
+  validates :target, presence: { if: ->(o) { o.action == 'Webhook' } }
 
   validates_inclusion_of :action, in: ACTIONS
 

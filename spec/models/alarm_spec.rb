@@ -23,6 +23,12 @@ describe Alarm, :type => :model do
         is_expected.not_to allow_value("other").for(:action)
       end
     end
+
+    context 'as a webhook' do
+      before { subject.action = 'Webhook' }
+
+      it { is_expected.to validate_presence_of :target }
+    end
   end
 
   context "the dropdown menu" do
