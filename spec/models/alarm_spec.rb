@@ -64,15 +64,15 @@ describe Alarm, :type => :model do
         end
 
         it "returns false" do
-          subject.action = Alarm::ACTIONS.reject{|a| a == action}.sample
+          subject.action = Alarm::ACTIONS.select{|a| a != action}.sample
           expect(subject.kind).not_to send(predicate)
         end
       end
     end
 
-    it_behaves_like 'action predicate', 'Logger'
-    it_behaves_like 'action predicate', 'Email'
-    it_behaves_like 'action predicate', 'Webhook'
+    it_behaves_like 'action predicate', 'logger'
+    it_behaves_like 'action predicate', 'email'
+    it_behaves_like 'action predicate', 'webhook'
   end
 
   context "#run" do

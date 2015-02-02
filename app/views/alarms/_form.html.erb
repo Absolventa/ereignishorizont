@@ -21,7 +21,7 @@
   <div class="control-group">
     <%= f.label "Action" " (* required):", :class => "control-label" %>
     <div class="controls">
-      <%= f.select :action, Alarm::ACTIONS %>
+      <%= f.select :action, Alarm::ACTIONS.map{|action| [action.titleize, action]} %>
     </div>
   </div>
 
