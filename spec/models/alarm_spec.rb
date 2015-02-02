@@ -70,5 +70,17 @@ describe Alarm, :type => :model do
       subject.action = 'logger'
       subject.run expected_event
     end
+
+    context 'with slack' do
+      before do
+        subject.assign_attributes FactoryGirl.attributes_for(:alarm, :slack)
+        stub_request(:post, subject.slack_url)
+      end
+
+      it 'sends payload to slack' do
+        subject.run expected_event
+        expect(a_request(:post, subject.slack_url)).to have_been_made
+      end
+    end
   end
 end

@@ -4,6 +4,14 @@ FactoryGirl.define do
     action 'email'
     sequence(:email_recipient) { |n| "johndoe#{n}@example.com"}
     title 'Title'
+
+    trait :slack do
+      action 'slack'
+      email_recipient nil
+      slack_url { "http://www.example.org/services/#{SecureRandom.hex(8)}" }
+      slack_channel { '#event_grrl' }
+      title 'Slack Alarm'
+    end
   end
 
   factory :alarm_notification do

@@ -41,6 +41,20 @@ describe AlarmsController, :type => :controller do
       get :run, id: alarm.to_param
       expect(response).to redirect_to alarms_path
     end
+
+    context 'for slack' do
+      let(:alarm) { FactoryGirl.create :alarm, :slack }
+
+      before do
+        stub_request(:post, alarm.slack_url)
+      end
+
+      it 'sounds an alarm and redirects' do
+        get :run, id: alarm.to_param
+        expect(response).to redirect_to alarms_path
+        expect(a_request(:post, alarm.slack_url)).to have_been_made
+      end
+    end
   end
 
   describe 'GET new' do
