@@ -31,28 +31,6 @@ describe Alarm, :type => :model do
     end
   end
 
-  context "the dropdown menu" do
-    it 'assigns the value "Email" to action if Email is chosen' do
-      subject.action = "Email"
-      expect(subject.enters_email?).to be_truthy
-    end
-
-    it 'does not assign the value "Email" to action if Email is not chosen' do
-      subject.action = "Logger"
-      expect(subject.enters_logger?).to be_truthy
-    end
-
-    it 'assigns the value "Logger" to action if Logger is chosen' do
-      subject.action = "Logger"
-      expect(subject.enters_logger?).to be_truthy
-    end
-
-    it 'does not assigns the value "Logger" to action if Logger is not chosen' do
-      subject.action = "Email"
-      expect(subject.enters_email?).to be_truthy
-    end
-  end
-
   describe '#kind' do
     shared_examples_for 'action predicate' do |action|
       let(:predicate) { "be_#{action.downcase}" }
@@ -84,10 +62,9 @@ describe Alarm, :type => :model do
 
     it 'sends an email when email is selected' do
       subject = FactoryGirl.create(:alarm)
-      allow(subject).to receive(:enters_email?).and_return(true)
-      expect do
-        subject.run expected_event
-      end.to change { ActionMailer::Base.deliveries.size }.by(1)
+      subject.action = 'email'
+      expect { subject.run expected_event }.to \
+        change { ActionMailer::Base.deliveries.size }.by(1)
     end
 
     it 'sends a logger message when logger is selected' do

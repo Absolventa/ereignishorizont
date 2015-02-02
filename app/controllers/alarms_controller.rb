@@ -21,12 +21,7 @@ class AlarmsController < ApplicationController
   def run
     event = ExpectedEvent.new(title: 'Tested using a bogus event expectation', matching_direction: 'backward')
     @alarm.run event
-    if @alarm.enters_email? or @alarm.enters_logger?
-      flash[:notice] = "Alarm test successful"
-    else
-      flash[:error] = "Alarm test failed"
-    end
-    redirect_to alarms_path
+    redirect_to alarms_path, notice: 'Alarm test sent.'
   end
 
   def create

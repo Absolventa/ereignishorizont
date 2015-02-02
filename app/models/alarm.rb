@@ -26,19 +26,9 @@ class Alarm < ActiveRecord::Base
     target
   end
 
-  def enters_email?
-    ActiveSupport::Deprecation.warn 'use `Alarm#kind.email?`'
-    kind.email?
-  end
-
-  def enters_logger?
-    ActiveSupport::Deprecation.warn 'use `Alarm#kind.logger?`'
-    kind.logger?
-  end
-
   def run(expected_event)
     delivery_method = expected_event.persisted? ? :deliver_later : :deliver_now
-    AlarmMailer.event_expectation_matched(self, expected_event).send(delivery_method) if enters_email?
+    AlarmMailer.event_expectation_matched(self, expected_event).send(delivery_method) if kind.email?
     logger.info "THIS IS THE INFORMATION ABOUT YOUR EXPECTED EVENT ALARM" if kind.logger?
   end
 
