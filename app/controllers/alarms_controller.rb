@@ -26,7 +26,7 @@ class AlarmsController < ApplicationController
 
   def create
     @alarm = Alarm.new(alarm_params)
-    @alarm.recipient_email = nil unless @alarm.action == 'Email'
+    @alarm.email_recipient = nil unless @alarm.kind.email?
     respond_to do |format|
       if @alarm.save
         format.html { redirect_to alarm_path(@alarm), notice: 'Alarm was successfully created'}
@@ -60,7 +60,7 @@ class AlarmsController < ApplicationController
   end
 
   def alarm_params
-    params.require(:alarm).permit([:action, :title, :recipient_email, :message])
+    params.require(:alarm).permit([:action, :title, :email_recipient, :message])
   end
 
   def sort_column

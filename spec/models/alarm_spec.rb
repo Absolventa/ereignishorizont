@@ -6,7 +6,7 @@ describe Alarm, :type => :model do
 
     it { is_expected.to have_many(:alarm_mappings).dependent(:destroy) }
     it { is_expected.to have_many(:expected_events).through :alarm_mappings}
-    it { is_expected.to allow_value("a@b.com").for(:recipient_email) }
+    it { is_expected.to allow_value("a@b.com").for(:email_recipient) }
 
     it "has a valid factory" do
       expect(FactoryGirl.build(:alarm)).to be_valid
@@ -27,7 +27,7 @@ describe Alarm, :type => :model do
     context 'as a webhook' do
       before { subject.action = 'Webhook' }
 
-      it { is_expected.to validate_presence_of :target }
+      it { is_expected.to validate_presence_of :webhook_url }
     end
   end
 
@@ -51,6 +51,7 @@ describe Alarm, :type => :model do
     it_behaves_like 'action predicate', 'logger'
     it_behaves_like 'action predicate', 'email'
     it_behaves_like 'action predicate', 'webhook'
+    it_behaves_like 'action predicate', 'slack'
   end
 
   context "#run" do

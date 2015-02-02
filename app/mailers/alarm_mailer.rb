@@ -9,6 +9,6 @@ class AlarmMailer < ActionMailer::Base
     @matched = expected_event.event_matching_direction_for_email
     subject_infix = [@remote_side, @alarm.title].compact.join(' - ')
     subject = "[event_girl] #{subject_infix}: #{expected_event.title}"
-    mail(to: alarm.recipient_email, subject: subject)
+    mail(to: alarm.email_recipient, subject: subject)
   end
 end

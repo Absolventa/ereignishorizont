@@ -68,9 +68,9 @@ describe AlarmsController, :type => :controller do
     end
 
     it 'removes the email address unless selected action is Email' do
-      attributes = FactoryGirl.attributes_for(:alarm, action: 'Logger', recipient_email: 'foo@bar.com')
+      attributes = FactoryGirl.attributes_for(:alarm, action: 'Logger', email_recipient: 'foo@bar.com')
       post :create, alarm: attributes
-      expect(assigns(:alarm).recipient_email).to be_nil
+      expect(assigns(:alarm).email_recipient).to be_nil
     end
   end
 

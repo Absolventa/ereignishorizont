@@ -4,11 +4,11 @@ class Alarm < ActiveRecord::Base
   has_many :alarm_mappings, dependent: :destroy
   has_many :expected_events, through: :alarm_mappings
 
-  validates :recipient_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
+  validates :email_recipient, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true,
                               if: ->(o) { o.kind.email? }
 
-  validates :target, presence: { if: ->(o) { o.kind.webhook? } }
+  validates :webhook_url, presence: { if: ->(o) { o.kind.webhook? } }
 
   validates_inclusion_of :action, in: ACTIONS
 
@@ -16,14 +16,6 @@ class Alarm < ActiveRecord::Base
 
   def kind
     action.to_s.downcase.inquiry
-  end
-
-  def recipient_email=(value)
-    self.target = value
-  end
-
-  def recipient_email
-    target
   end
 
   def run(expected_event)
