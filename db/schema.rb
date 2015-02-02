@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150202102148) do
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slack_token"
+    t.string   "slack_url"
     t.string   "slack_channel"
     t.string   "webhook_url"
     t.string   "webhook_method"
