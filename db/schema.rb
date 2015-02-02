@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202082301) do
+ActiveRecord::Schema.define(version: 20150202102148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,17 @@ ActiveRecord::Schema.define(version: 20150202082301) do
   add_index "alarm_notifications", ["remote_side_id"], name: "index_alarm_notifications_on_remote_side_id", using: :btree
 
   create_table "alarms", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "action",     limit: 255
-    t.string   "target",     limit: 255
+    t.string   "title",           limit: 255
+    t.string   "action",          limit: 255
+    t.string   "email_recipient", limit: 255
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slack_token"
+    t.string   "slack_channel"
+    t.string   "webhook_url"
+    t.string   "webhook_method"
+    t.json     "webhook_payload"
   end
 
   create_table "expected_events", force: :cascade do |t|
