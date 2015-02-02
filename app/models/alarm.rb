@@ -25,11 +25,13 @@ class Alarm < ActiveRecord::Base
   end
 
   def enters_email?
-    action == 'Email'
+    ActiveSupport::Deprecation.warn 'use `Alarm#kind.email?`'
+    kind.email?
   end
 
   def enters_logger?
-    action == 'Logger'
+    ActiveSupport::Deprecation.warn 'use `Alarm#kind.logger?`'
+    kind.logger?
   end
 
   def run(expected_event)
