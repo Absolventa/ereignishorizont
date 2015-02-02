@@ -25,3 +25,5 @@ deploy:
   - restart
   on:
     repo: Absolventa/event_girl
+addons:
+  postgresql: '9.3'
