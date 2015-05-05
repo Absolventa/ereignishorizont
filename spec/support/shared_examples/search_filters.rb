@@ -1,4 +1,4 @@
-shared_examples_for 'searches by title' do
+RSpec.shared_examples_for 'searches by title' do
 
   describe 'GET index' do
     it 'searches within "title"' do
