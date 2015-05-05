@@ -72,6 +72,9 @@ There will also soon be a [python egg](https://github.com/berlintam/event_girl_c
 
 ### Changelog
 
+*v1.6.0 // 2015-05-05*
+* Allow filtering by remote side / origin
+
 *v1.5.0 // 2014-05-05*
 * Updated to Rails v4.1
 * Updated to MRI v2.1.1
