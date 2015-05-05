@@ -19,7 +19,7 @@ FactoryGirl.define do
   end
 
   factory :expected_event do
-    title 'my event title'
+    title "my event title #{SecureRandom.hex(6)}"
     final_hour { 1.hour.from_now.utc.hour }
     matching_direction 'forward'
     remote_side
@@ -31,7 +31,7 @@ FactoryGirl.define do
   end
 
   factory :incoming_event do
-    title 'my event title'
+    title "my event title #{SecureRandom.hex(6)}"
   end
 
   factory :user do
