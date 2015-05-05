@@ -18,6 +18,7 @@ describe IncomingEventsController, :type => :controller do
       end
 
       it_behaves_like 'searches by title'
+      it_behaves_like 'filters by remote'
 
     end
 
