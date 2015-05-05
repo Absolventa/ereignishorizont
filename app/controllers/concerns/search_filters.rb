@@ -1,4 +1,4 @@
-module SearchesByTitle
+module SearchFilters
   extend ActiveSupport::Concern
 
   included do

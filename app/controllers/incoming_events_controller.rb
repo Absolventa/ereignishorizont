@@ -1,6 +1,6 @@
 class IncomingEventsController < ApplicationController
 
-  include SearchesByTitle
+  include SearchFilters
 
   skip_before_filter :verify_authenticity_token, if: :remote_side_request?
   skip_before_action :authorize,  only: :create
