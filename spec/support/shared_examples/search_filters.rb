@@ -32,6 +32,13 @@ RSpec.shared_examples_for 'filters by remote' do
       expect(assigns(klass_symbol.pluralize).to_a).to eql [events.last]
     end
 
+    it 'ignores a blank remote_side_id param' do
+      get :index, query: { remote_side_id: '' }
+      expect(response).to be_success
+      expect(response).to render_template 'index'
+      expect(assigns(klass_symbol.pluralize).to_a).to match_array events
+    end
+
     def klass_symbol
       described_class.to_s.gsub('Controller', '').singularize.underscore
     end

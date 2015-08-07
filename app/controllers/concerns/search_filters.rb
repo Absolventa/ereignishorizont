@@ -32,7 +32,7 @@ module SearchFilters
   end
 
   def remote_side_id
-    @remote_side_id ||= params.fetch(:query, {})[:remote_side_id]
+    @remote_side_id ||= params.fetch(:query, {})[:remote_side_id].presence
   end
 
 end
