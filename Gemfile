@@ -53,7 +53,7 @@ end
 
 group :development, :test do
   gem 'web-console', '~> 2.0'
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-rails', '~> 3.3'
   gem 'rspec-collection_matchers'
   gem 'rspec-activemodel-mocks'
 end
