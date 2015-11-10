@@ -27,14 +27,16 @@ Download the code (or fork / clone locally). To host your instance
 on Heroku, you need:
 
 1. a database
-2. a scheduler that runs ``rake matcher`` once per hour
+2. a scheduler that runs `rake matcher` once per hour
+3. a scheduler that runs `rake cleanup` daily (optional, see Configuration below)
 
 ### Configuration
 
-The app can be configured using ``EVENT_GIRL_*`` environment variables
-or, alternatively, a ``config/config.yml`` file. See ``config/initializers/app_config.rb``
+The app can be configured using `EVENT_GIRL_*` environment variables
+or, alternatively, a `config/config.yml` file. See `config/initializers/app_config.rb`
 for details and default values.
 
+As of v1.7, a cleanup task to purge old incoming events is included. Add `rake cleanup` to your scheduler (see Installation) and set a `EVENT_GIRL_RETENTION_MONTHS` environment variable. For example, `EVENT_GIRL_RETENTION_MONTH=10` will delete all incoming events older than 10 months every time the rake task runs. 
 
 ### Client access
 
@@ -71,6 +73,11 @@ be found [here](https://github.com/Absolventa/event_girl_client))
 There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
 
 ### Changelog
+
+*v1.7.0 // 2015-11-10*
+* Updated to Rails v4.2
+* Updated to C-Ruby 2.2
+* Allow auto-purging of old incoming events
 
 *v1.6.0 // 2015-05-05*
 * Allow filtering by remote side / origin
