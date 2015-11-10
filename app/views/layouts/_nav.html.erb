@@ -3,7 +3,7 @@
     <div class="container">
       <%= link_to "Event Girl", welcome_pages_path, id: "logo" %>
       <nav>
-        <ul class="nav pull-right">
+        <ul class="nav">
           <% if current_user %>
             <li><%= link_to "Incoming Events", incoming_events_path %></li>
             <li><%= link_to "Expected Events", expected_events_path %></li>
