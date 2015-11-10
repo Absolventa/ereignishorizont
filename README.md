@@ -74,6 +74,11 @@ There will also soon be a [python egg](https://github.com/berlintam/event_girl_c
 
 ### Changelog
 
+*v1.7.0 // 2015-11-10*
+* Updated to Rails v4.2
+* Updated to C-Ruby 2.2
+* Allow auto-purging of old incoming events
+
 *v1.6.0 // 2015-05-05*
 * Allow filtering by remote side / origin
 
