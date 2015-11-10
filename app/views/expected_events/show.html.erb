@@ -20,10 +20,6 @@
           <td><tt><%= @expected_event.title %></tt></td>
         </tr>
         <tr>
-          <td><strong>Incoming Event:</strong></td>
-          <td><%= @expected_event.incoming_events.count if @expected_event.incoming_events %></td>
-        </tr>
-        <tr>
           <td><strong>Selected Weekday(s):</strong></td>
           <td><%= selected_weekdays(@expected_event) %></td>
         </tr>
