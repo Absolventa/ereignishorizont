@@ -7,9 +7,9 @@
 <table class="table table-striped" data-provides="rowlink">
   <thead>
     <tr>
+      <th>Remote</th>
       <th><%= sortable "title" %></th>
       <th><%= sortable 'final_hour', 'Hour' %></th>
-      <th>Remote</th>
       <th>Last&nbsp;Alarm</th>
       <th><%= sortable "matching_direction", "Notify when" %></th>
       <th>Activity</th>
@@ -22,12 +22,12 @@
   <tbody>
     <% @expected_events.each do |expected_event| %>
       <tr class ="success">
+        <td class="nolink"><%= expected_event.remote_side.try(:name) %></td>
         <td class="title">
           <tt><%= link_to expected_event.title, expected_event %></tt><br>
           <small>Weekdays: <%= selected_weekdays(expected_event) %></small>
         </td>
         <td class="final-hour"><%= expected_event.final_hour if expected_event.matching_direction == 'backward' %></td>
-        <td class="nolink"><%= expected_event.remote_side.try(:name) %></td>
         <td><%= l expected_event.last_alarm_at, format: :short if expected_event.last_alarm_at %></td>
         <td class="notification"><%= expected_event.event_matching_direction.gsub('when ', '') %></td>
         <td class="activity"><%= expected_event.activity_status.titleize %></td>

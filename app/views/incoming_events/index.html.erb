@@ -5,9 +5,9 @@
 <table class="table table-striped" data-provides="rowlink">
   <thead>
     <tr>
+      <th>Origin</th>
       <th><%= sortable "title" %></th>
       <th><%= sortable "created_at", "Created At" %></th>
-      <th>Origin</th>
       <th></th>
       <th></th>
     </tr>
@@ -16,9 +16,9 @@
   <tbody>
     <% @incoming_events.each do |incoming_event| %>
       <tr>
+        <td><%= incoming_event.remote_side.try(:name) %></td>
         <td class="title"><%= link_to incoming_event.title, incoming_event %></td>
         <td class="created-at"><%= incoming_event.created_at %></td>
-        <td><%= incoming_event.remote_side.try(:name) %></td>
         <td class="nolink glyph"><%= link_to icon_pencil, edit_incoming_event_path(incoming_event) %></td>
         <td class="nolink glyph"><%= link_to icon_trash, incoming_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
