@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-EventGirl::Application.load_tasks
+Ereignishorizont::Application.load_tasks

@@ -6,9 +6,9 @@ env_config  = if File.exists? config_file
                 (YAML.load(erb_config)[Rails.env] rescue {}).symbolize_keys
               else
                 {
-                  host:       ENV['EVENT_GIRL_HOST']       || 'eventgirl.example.com',
-                  url_scheme: ENV['EVENT_GIRL_URL_SCHEME'] || 'http',
-                  mail_from:  ENV['EVENT_GIRL_MAIL_FROM']  || 'event_girl@example.com'
+                  host:       ENV['EREIGNISHORIZONT_HOST']       || 'ereignishorizont.example.com',
+                  url_scheme: ENV['EREIGNISHORIZONT_URL_SCHEME'] || 'http',
+                  mail_from:  ENV['EREIGNISHORIZONT_MAIL_FROM']  || 'ereignishorizont@example.com'
                 }
               end
 APP_CONFIG = env_config.freeze
@@ -24,7 +24,7 @@ if Rails.env.production? or Rails.env.staging?
   }
   ActionMailer::Base.delivery_method = :smtp
 
-  EventGirl::Application.configure do
+  Ereignishorizont::Application.configure do
     config.force_ssl = APP_CONFIG[:url_scheme] == 'https'
   end
 
