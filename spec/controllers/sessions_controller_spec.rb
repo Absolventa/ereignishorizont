@@ -91,7 +91,7 @@ describe SessionsController, :type => :controller do
 
     it "destroys the session" do
       delete 'destroy'
-      expect(cookies[:auth_token]).to be_nil
+      expect(response.cookies[:auth_token]).to be_nil
       expect(response).to redirect_to root_path
       expect(flash[:notice]).to eq 'Logged out!'
     end
