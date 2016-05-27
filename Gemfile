@@ -32,6 +32,7 @@ gem 'turbolinks'
 
 gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'actionpack-xml_parser', '~> 1.0.0'
+gem 'activemodel-serializers-xml'
 
 gem 'whenever', require: false
 gem 'slack-notifier'
@@ -62,6 +63,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
