@@ -88,10 +88,11 @@ describe User, :type => :model do
     end
 
     it 'sends an email' do
-      expect do
-        user.send_password_reset
-      end.to change{ ActionMailer::Base.deliveries.size }.by(1)
-      expect(ActionMailer::Base.deliveries.last.to).to include user.email
+      perform_enqueued_jobs do
+        expect { user.send_password_reset }.to \
+          change{ ActionMailer::Base.deliveries.size }.by(1)
+        expect(ActionMailer::Base.deliveries.last.to).to include user.email
+      end
     end
 
     it 'tracks the time of the password reset request' do

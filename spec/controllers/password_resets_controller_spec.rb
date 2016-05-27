@@ -14,9 +14,10 @@ describe PasswordResetsController, :type => :controller do
   describe 'POST create' do
     it 'finds user by email and sends reset instructions' do
       user = FactoryGirl.create(:user)
-      expect do
-        post :create, email: user.email
-      end.to change{ ActionMailer::Base.deliveries.size }.by(1)
+      perform_enqueued_jobs do
+        expect { post :create, email: user.email }.to \
+          change{ ActionMailer::Base.deliveries.size }.by(1)
+      end
       expect(flash[:notice]).not_to be_blank
       expect(response).to redirect_to root_path
     end

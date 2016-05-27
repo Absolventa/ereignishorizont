@@ -90,9 +90,10 @@ describe UsersController, :type => :controller do
 
       it 'sends an email invitation if checked' do
         email = attributes[:email]
-        expect do
-          post :create, user: { email: email }, send_invitation: '1'
-        end.to change { ActionMailer::Base.deliveries.size }.by(1)
+        perform_enqueued_jobs do
+          expect { post :create, user: { email: email }, send_invitation: '1' }.to \
+            change { ActionMailer::Base.deliveries.size }.by(1)
+        end
         expect(assigns(:user).password_reset_token).not_to be_nil
         mail = ActionMailer::Base.deliveries.last
         expect(mail.to).to include email
