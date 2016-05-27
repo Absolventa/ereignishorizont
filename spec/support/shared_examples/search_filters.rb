@@ -4,7 +4,7 @@ RSpec.shared_examples_for 'searches by title' do
     it 'searches within "title"' do
       event = FactoryGirl.create(klass_symbol, title: "Hello World - how are things")
       FactoryGirl.create(klass_symbol, title: 'Bar') # will not be found
-      get :index, query: { title: 'world' }
+      get :index, params: { query: { title: 'world' } }
       expect(response).to be_success
       expect(response).to render_template 'index'
       expect(assigns(klass_symbol.pluralize).to_a).to eql [event]
@@ -26,14 +26,14 @@ RSpec.shared_examples_for 'filters by remote' do
     end
 
     it 'filters by remote' do
-      get :index, query: { remote_side_id: remote_side.id }
+      get :index, params: { query: { remote_side_id: remote_side.id } }
       expect(response).to be_success
       expect(response).to render_template 'index'
       expect(assigns(klass_symbol.pluralize).to_a).to eql [events.last]
     end
 
     it 'ignores a blank remote_side_id param' do
-      get :index, query: { remote_side_id: '' }
+      get :index, params: { query: { remote_side_id: '' } }
       expect(response).to be_success
       expect(response).to render_template 'index'
       expect(assigns(klass_symbol.pluralize).to_a).to match_array events

@@ -50,7 +50,7 @@ describe UsersController, :type => :controller do
       it "renders the 'edit' template" do
         allow_any_instance_of(User).to receive(:admin?).and_return(true)
         other_user = FactoryGirl.create(:user)
-        get :edit, id: other_user.id
+        get :edit, params: { id: other_user.id }
         expect(response).to render_template 'edit'
         expect(assigns(:user)).to eql other_user
       end
@@ -58,7 +58,7 @@ describe UsersController, :type => :controller do
 
     context 'as normal user' do
       it 'renders the current users "edit" template' do
-        get :edit, id: 'nonexistent_id'
+        get :edit, params: { id: 'nonexistent_id' }
         expect(response).to render_template 'edit'
         expect(assigns(:user)).to eql user
       end
@@ -76,14 +76,14 @@ describe UsersController, :type => :controller do
 
       it 'creates a new record from valid params' do
         expect do
-          post :create, user: attributes
+          post :create, params: { user: attributes }
         end.to change{User.count}.by(1)
         expect(response).to redirect_to users_path
       end
 
       it "renders 'new' template for invalid params" do
         expect do
-          post :create, user: {email:""}
+          post :create, params: { user: {email:""} }
         end.not_to change{User.count}
         expect(response).to render_template 'new'
       end
@@ -91,7 +91,7 @@ describe UsersController, :type => :controller do
       it 'sends an email invitation if checked' do
         email = attributes[:email]
         perform_enqueued_jobs do
-          expect { post :create, user: { email: email }, send_invitation: '1' }.to \
+          expect { post :create, params: { user: { email: email }, send_invitation: '1' } }.to \
             change { ActionMailer::Base.deliveries.size }.by(1)
         end
         expect(assigns(:user).password_reset_token).not_to be_nil
@@ -118,7 +118,7 @@ describe UsersController, :type => :controller do
       it 'successfully updates other user and redirects' do
         other_user = FactoryGirl.create(:user)
         allow_any_instance_of(User).to receive(:valid?).and_return(true)
-        patch :update, id: other_user.to_param, user: { email: '' }
+        patch :update, params: { id: other_user.to_param, user: { email: '' } }
         expect(flash[:notice]).not_to be_blank
         expect(response).to redirect_to user_path(other_user)
       end
@@ -126,7 +126,7 @@ describe UsersController, :type => :controller do
       it "fails to update other user and renders 'edit' template" do
         other_user = FactoryGirl.create(:user)
         allow_any_instance_of(User).to receive(:valid?).and_return(false)
-        patch :update, id: other_user.to_param, user: { email: '' }
+        patch :update, params: { id: other_user.to_param, user: { email: '' } }
         expect(flash[:notice]).to be_blank
         expect(response).to render_template 'edit'
       end
@@ -136,7 +136,7 @@ describe UsersController, :type => :controller do
       it 'updates current user' do
         allow_any_instance_of(User).to receive(:valid?).and_return(true)
         expect do
-          patch :update, id: user.to_param, user: { email: 'foo@bar.com' }
+          patch :update, params: { id: user.to_param, user: { email: 'foo@bar.com' } }
         end.to change{ user.reload.email }
         expect(flash[:notice]).not_to be_blank
         expect(response).to redirect_to user_path(user)
@@ -145,13 +145,13 @@ describe UsersController, :type => :controller do
       it 'tries to update other user but silently updates current user instead' do
         allow_any_instance_of(User).to receive(:valid?).and_return(true)
         expect do
-          patch :update, id: 'does-not-matter', user: { email: 'foo@bar.com' }
+          patch :update, params: { id: 'does-not-matter', user: { email: 'foo@bar.com' } }
         end.to change{ user.reload.email }
       end
 
       it "fails to update current user and renders 'edit' template" do
         allow_any_instance_of(User).to receive(:valid?).and_return(false)
-        patch :update, id: user.to_param, user: { email: '' }
+        patch :update, params: { id: user.to_param, user: { email: '' } }
         expect(flash[:notice]).to be_blank
         expect(response).to render_template 'edit'
       end
@@ -164,7 +164,7 @@ describe UsersController, :type => :controller do
         other_user = FactoryGirl.create(:user)
         allow_any_instance_of(User).to receive(:admin?).and_return(true)
         expect do
-          delete :destroy, id: other_user.to_param
+          delete :destroy, params: { id: other_user.to_param }
         end.to change{User.count}.by(-1)
         expect(flash[:notice]).not_to be_blank
         expect(response).to redirect_to users_path
@@ -175,7 +175,7 @@ describe UsersController, :type => :controller do
       it 'redirects to users#index' do
         allow_any_instance_of(User).to receive(:valid?).and_return(false)
         expect do
-          delete :destroy, id: 'does-not-matter'
+          delete :destroy, params: { id: 'does-not-matter' }
         end.not_to change{User.count}
         expect(flash[:alert]).to eql 'Not authorized'
         expect(response).to redirect_to users_path

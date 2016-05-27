@@ -25,7 +25,7 @@ describe IncomingEventsController, :type => :controller do
     describe 'GET show' do
       it 'renders a single incoming event' do
         incoming_event = FactoryGirl.create(:incoming_event)
-        get :show, id: incoming_event.id
+        get :show, params: { id: incoming_event.id }
         expect(response).to be_success
         expect(response).to render_template 'show'
         expect(assigns(:incoming_event)).to eql incoming_event
@@ -46,7 +46,7 @@ describe IncomingEventsController, :type => :controller do
       context 'with invalid data' do
         it 'renders the new template again' do
           expect do
-            post :create, incoming_event: { title: '' }
+            post :create, params: { incoming_event: { title: '' } }
           end.not_to change{ IncomingEvent.count }
           expect(response).to render_template 'new'
         end
@@ -55,7 +55,7 @@ describe IncomingEventsController, :type => :controller do
       context 'with valid data' do
         it 'creates a new record' do
           expect do
-            post :create, incoming_event: FactoryGirl.attributes_for(:incoming_event)
+            post :create, params: { incoming_event: FactoryGirl.attributes_for(:incoming_event) }
           end.to change{ IncomingEvent.count }.by(1)
           expect(response).to redirect_to incoming_event_path(assigns(:incoming_event))
           expect(flash[:notice]).not_to be_blank
@@ -66,13 +66,13 @@ describe IncomingEventsController, :type => :controller do
         let(:existing_event_expectation) { FactoryGirl.create(:expected_event) }
 
         it 'finds expected event by its title' do
-          post :create, incoming_event: { title: existing_event_expectation.title }
+          post :create, params: { incoming_event: { title: existing_event_expectation.title } }
           expect(assigns(:expected_event)).to eql existing_event_expectation
         end
 
         it 'runs alarms for matching forward event expectation' do
           expect_any_instance_of(ExpectedEvent).to receive(:alarm!).and_call_original
-          post :create, incoming_event: { title: existing_event_expectation.title }
+          post :create, params: { incoming_event: { title: existing_event_expectation.title } }
         end
       end
     end
@@ -82,7 +82,7 @@ describe IncomingEventsController, :type => :controller do
     describe 'POST create' do
       it 'requires log in' do
         expect do
-          post :create, incoming_event: FactoryGirl.attributes_for(:incoming_event)
+          post :create, params: { incoming_event: FactoryGirl.attributes_for(:incoming_event) }
         end.not_to change{ IncomingEvent.count }
         expect(response).to redirect_to login_path
         expect(flash[:alert]).to eql 'Not authorized'
@@ -97,7 +97,7 @@ describe IncomingEventsController, :type => :controller do
           context 'assigns remote side to incoming event' do
             let(:remote_side) { FactoryGirl.create(:remote_side) }
             it 'assigns corresponding remote side' do
-              post :create, incoming_event: { title: "my title" }, api_token: remote_side.api_token, format: :xml
+              post :create, params: { incoming_event: { title: "my title" }, api_token: remote_side.api_token, format: :xml }
               expect(assigns(:incoming_event).reload.remote_side).to eql remote_side
             end
           end
@@ -108,14 +108,14 @@ describe IncomingEventsController, :type => :controller do
 
           it 'creates a new record' do
             expect do
-              post :create, incoming_event: { title: "my title" }, api_token: api_token, format: format
+              post :create, params: { incoming_event: { title: "my title" }, api_token: api_token, format: format }
             end.to change{ IncomingEvent.count }.by(1)
             expect(response.code).to eql "201"
           end
 
           it 'fails to create record' do
             expect do
-              post :create, incoming_event: { title: " " }, api_token: api_token, format: format
+              post :create, params: { incoming_event: { title: " " }, api_token: api_token, format: format }
             end.not_to change{ IncomingEvent.count }
             expect(response.code).to eql "422"
           end
@@ -124,12 +124,12 @@ describe IncomingEventsController, :type => :controller do
 
       context 'with invalid api token' do
         it 'returns unauthorized (401) when an api token is not provided' do
-          post :create, format: format
+          post :create, params: { format: format }
           expect(response).to be_forbidden
         end
 
         it 'returns unauthorized (401) when an api token is incorrect' do
-          post :create, api_token: "asdfghjkl", format: format
+          post :create, params: { api_token: "asdfghjkl", format: format }
           expect(response).to be_forbidden
         end
       end
@@ -137,4 +137,3 @@ describe IncomingEventsController, :type => :controller do
   end
 
 end
-
