@@ -83,7 +83,7 @@ class IncomingEventsController < ApplicationController
 
   def restrict_access
     if remote_side_request?
-      render nothing: true, status: :forbidden unless remote_side
+      head :forbidden unless remote_side
     else
       authorize
     end
