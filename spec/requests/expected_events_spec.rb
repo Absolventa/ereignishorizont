@@ -12,7 +12,7 @@ describe "Expected events", :type => :request do
 
       it 'creates an incoming event' do
         json = authentication.merge(incoming_event: { title: 'Foo' }).to_json
-        post '/incoming_events.json', json, accept_headers
+        post '/incoming_events.json', params: json, headers: accept_headers
         expect(response.code).to eql "201"
       end
     end

@@ -18,7 +18,7 @@ describe SessionsController, :type => :controller do
 
     describe "POST 'create'" do
       it "redirects to root URL" do
-        post 'create', user: { email: user.email, password: user.password }
+        post 'create', params: { user: { email: user.email, password: user.password } }
         expect(response).to redirect_to root_path
       end
     end
@@ -41,21 +41,21 @@ describe SessionsController, :type => :controller do
       context "authenticated" do
         context "with remember me option" do
           it "sets cookies permanent" do
-            post 'create', email: user.email, password: user.password, remember_me: true
+            post 'create', params: { email: user.email, password: user.password, remember_me: true }
             expect(cookies.permanent[:auth_token]).to eq user.auth_token
           end
         end
 
         context "without remember me option" do
           it "sets cookies auth_token" do
-            post 'create', email: user.email, password: user.password
+            post 'create', params: { email: user.email, password: user.password }
             expect(cookies[:auth_token]).to eq user.auth_token
           end
         end
       end
 
       it "redirects to root URL" do
-        post 'create', email: user.email, password: user.password
+        post 'create', params: { email: user.email, password: user.password }
         expect(response).to redirect_to incoming_events_path
         expect(flash[:notice]).to eq 'Logged in!'
       end
@@ -64,7 +64,7 @@ describe SessionsController, :type => :controller do
     context "not authenticated" do
       shared_examples 'nondescript login not granted message' do
         it 'redirects to root URL' do
-          post 'create', email: email, password: 'wr0ng pa$$w0rd'
+          post 'create', params: { email: email, password: 'wr0ng pa$$w0rd' }
           expect(cookies[:auth_token]).to be_nil
           expect(cookies.permanent[:auth_token]).to be_nil
           expect(response).to redirect_to root_path
@@ -91,7 +91,7 @@ describe SessionsController, :type => :controller do
 
     it "destroys the session" do
       delete 'destroy'
-      expect(cookies[:auth_token]).to be_nil
+      expect(response.cookies[:auth_token]).to be_nil
       expect(response).to redirect_to root_path
       expect(flash[:notice]).to eq 'Logged out!'
     end
