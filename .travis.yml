@@ -19,7 +19,7 @@ notifications:
 deploy:
   provider: heroku
   api_key:
-    secure: ZXfOeFDrdA0WwhC0DMzHq/2TG6S6wtAxm+FOZR5r1MOuZzbgJMM1Wpw6OaV2lzdHfFe/sCxquw+qM+yeduJFPX9mLiN+zsmqgPnLa4hdb7WBcZjRbq7b4Vfypp7s4j6ySWe1L9iIJnTHjrSvOzMaM6BKRI1jDpkViD1RgYJTcM4=
+    secure: bpYIGNA+ovYYOXbx4tQnzqKuPDBYd92+/brHWpNDA2iOSanbxoNxzmuwsf8mmLh3OFWkcqxYuKrMuwk4vxfYBimkEQ8N170u75ZTTaC4a2nMzvNWS2aagNlHHgI1K9/u0+xk51guR5D2hzmY3SqlHM4mpgO31XeVeDdBRsFnv4I=
   app:
     master: event-girl
     refactoring/rename-app: ereignishorizont
