@@ -8,7 +8,7 @@ describe UserMailer, :type => :mailer do
     let(:mail) { UserMailer.password_reset(user) }
 
     it "renders the headers" do
-      expect(mail.subject).to eql "[event_girl] Password reset"
+      expect(mail.subject).to eql "[ereignishorizont] Password reset"
       expect(mail.to).to eql [user.email]
       expect(mail.from).to eql [APP_CONFIG[:mail_from]]
     end
