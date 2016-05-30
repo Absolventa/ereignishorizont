@@ -5,7 +5,7 @@ class Alarm::SlackNotifier
 
   def initialize(alarm, expected_event)
     @alarm, @expected_event = alarm, expected_event
-    @notifier = Slack::Notifier.new endpoint, username: 'Event Girl', channel: channel
+    @notifier = Slack::Notifier.new endpoint, username: 'Ereignishorizont', channel: channel
   end
 
   def endpoint
