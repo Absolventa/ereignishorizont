@@ -1,4 +1,4 @@
-## README [![Code Climate](https://codeclimate.com/github/Absolventa/event_girl.png)](https://codeclimate.com/github/Absolventa/event_girl) [![Build Status](https://travis-ci.org/Absolventa/event_girl.png?branch=master)](https://travis-ci.org/Absolventa/event_girl)
+## README [![Code Climate](https://codeclimate.com/github/Absolventa/ereignishorizont.png)](https://codeclimate.com/github/Absolventa/ereignishorizont) [![Build Status](https://travis-ci.org/Absolventa/ereignishorizont.png?branch=master)](https://travis-ci.org/Absolventa/ereignishorizont)
 
 Welcome to Ereignishorizont!
 
@@ -65,7 +65,7 @@ Example for registering an event using XML:
 
 To use the corresponding gem:
 
-`gem install event_girl_client`
+`gem install ereignishorizont-client`
 
 (More info about Ereignishorizont's corresponding gem can
 be found [here](https://github.com/Absolventa/ereignishorizont-client)).
