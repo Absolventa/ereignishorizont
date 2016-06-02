@@ -1,19 +1,19 @@
 ## README [![Code Climate](https://codeclimate.com/github/Absolventa/event_girl.png)](https://codeclimate.com/github/Absolventa/event_girl) [![Build Status](https://travis-ci.org/Absolventa/event_girl.png?branch=master)](https://travis-ci.org/Absolventa/event_girl)
 
-Welcome to Event Girl!
+Welcome to Ereignishorizont!
 
 ## Description
 
-Event Girl is an open event-logging system
+Ereignishorizont is an open event-logging system
 with triggers/hooks to run arbitrary tasks when an event is
 matched or not matched.
 
 It was proposed as a project for the [Rails Girls Summer of Code](http://railsgirlssummerofcode.org/).
 Its two main contributors are the Rails Girls Susanne and Tam who
 worked on the project from July 2 - September 30, 2013
-at the [ABSOLVENTA](http://www.absolventa.de) offices in Berlin.
+at the [ABSOLVENTA](https://www.absolventa.de) offices in Berlin.
 
-Also found on [event-girl.herokuapp.com](https://event-girl.herokuapp.com)
+Also found on [ereignishorizont.herokuapp.com](https://ereignishorizont.herokuapp.com)
 
 
 
@@ -32,11 +32,11 @@ on Heroku, you need:
 
 ### Configuration
 
-The app can be configured using `EVENT_GIRL_*` environment variables
+The app can be configured using `EREIGNISHORIZONT_*` environment variables
 or, alternatively, a `config/config.yml` file. See `config/initializers/app_config.rb`
 for details and default values.
 
-As of v1.7, a cleanup task to purge old incoming events is included. Add `rake cleanup` to your scheduler (see Installation) and set a `EVENT_GIRL_RETENTION_MONTHS` environment variable. For example, `EVENT_GIRL_RETENTION_MONTH=10` will delete all incoming events older than 10 months every time the rake task runs. 
+As of v1.7, a cleanup task to purge old incoming events is included. Add `rake cleanup` to your scheduler (see Installation) and set a `EREIGNISHORIZONT_RETENTION_MONTHS` environment variable. For example, `EREIGNISHORIZONT_RETENTION_MONTHS=10` will delete all incoming events older than 10 months every time the rake task runs.
 
 ### Client access
 
@@ -67,10 +67,8 @@ To use the corresponding gem:
 
 `gem install event_girl_client`
 
-(More info about Event Girl's corresponding gem can
-be found [here](https://github.com/Absolventa/event_girl_client))
-
-There will also soon be a [python egg](https://github.com/berlintam/event_girl_client_python) and other such things....
+(More info about Ereignishorizont's corresponding gem can
+be found [here](https://github.com/Absolventa/ereignishorizont-client)).
 
 ### Changelog
 

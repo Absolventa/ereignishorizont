@@ -6,7 +6,7 @@ before_script:
 - cp config/config.yml.example config/config.yml
 - cp config/database.yml.example config/database.yml
 - psql -c "CREATE USER your_username WITH PASSWORD '';" -U postgres
-- psql -c 'create database event_girl_test' -U postgres
+- psql -c 'create database ereignishorizont_test' -U postgres
 - bundle exec rake db:migrate RAILS_ENV=test
 script: bundle exec rspec spec
 notifications:
@@ -19,10 +19,9 @@ notifications:
 deploy:
   provider: heroku
   api_key:
-    secure: bpYIGNA+ovYYOXbx4tQnzqKuPDBYd92+/brHWpNDA2iOSanbxoNxzmuwsf8mmLh3OFWkcqxYuKrMuwk4vxfYBimkEQ8N170u75ZTTaC4a2nMzvNWS2aagNlHHgI1K9/u0+xk51guR5D2hzmY3SqlHM4mpgO31XeVeDdBRsFnv4I=
+    secure: nXX3NIp/spivNhpt+GRPQuIp4+Jqvn1xKNl9WsAJQPV25LX90+TxTwdm4LBoNOzuUVvJ3GYxWjKYO1R//nf8qieUpLDkvmCdQLDNEQ+R8UI+O4tAubi5kIknjbAGDEEtZdPkcZQFMieP0El06YsNu356UusYLkl0G+Z9aoM+i7U=
   app:
-    master: event-girl
-    refactoring/rename-app: ereignishorizont
+    master: ereignishorizont
   run:
   - rake db:migrate
   - restart

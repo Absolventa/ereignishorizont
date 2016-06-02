@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: event_girl_development
+  database: ereignishorizont_development
   pool: 5
   username: <%= ENV['USER'] %>
   password:
@@ -9,7 +9,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: event_girl_test
+  database: ereignishorizont_test
   pool: 5
   username: <%= ENV['USER'] %>
   password:
@@ -17,7 +17,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: event_girl_production
+  database: ereignishorizont_production
   pool: 5
   username: <%= ENV['USER'] %>
   password:

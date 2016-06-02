@@ -10,12 +10,12 @@ class UserMailer < ActionMailer::Base
   #
   def password_reset(user)
     @url = password_reset_url(user)
-    mail to: user.email, subject: "[event_girl] Password reset"
+    mail to: user.email, subject: "[ereignishorizont] Password reset"
   end
 
   def account_creation(user)
     @url = password_reset_url(user)
-    mail to: user.email, subject: "[event_girl] Account created"
+    mail to: user.email, subject: "[ereignishorizont] Account created"
   end
 
   private
