@@ -72,6 +72,9 @@ be found [here](https://github.com/Absolventa/ereignishorizont-client)).
 
 ### Changelog
 
+*v2.0.0 // 2016-06-02*
+* [Renamed app](https://github.com/Absolventa/ereignishorizont/commit/31370d88e0cf53bc1018cb7ab85f65406cdb8055)) from 'Event Girl' to 'Ereignishorizont'
+
 *v1.7.0 // 2015-11-10*
 * Updated to Rails v4.2
 * Updated to C-Ruby 2.2
