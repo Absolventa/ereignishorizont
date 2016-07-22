@@ -17,7 +17,7 @@
         %td.nolink.glyph= link_to icon_pencil, edit_remote_side_path(remote_side)
         %td.nolink.glyph= link_to icon_trash, remote_side, method: :delete, data: { confirm: 'Are you sure?' }
 
-= will_paginate @remote_sides
+= paginate @remote_sides
 
 = link_to 'New Remote Side', new_remote_side_path(@remote_side) , class: 'btn btn-custom-success'
 = link_to 'Back', remote_sides_path , class: 'btn btn-custom-back'
