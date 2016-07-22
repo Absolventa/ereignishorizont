@@ -198,7 +198,6 @@ GEM
     shoulda-context (1.2.1)
     shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
-    simple_form (1.4.1)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -267,7 +266,6 @@ DEPENDENCIES
   sass-rails
   shoulda
   shoulda-matchers
-  simple_form
   slack-notifier
   timecop
   turbolinks

@@ -14,7 +14,6 @@ gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
-gem 'simple_form'
 gem 'kaminari'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
