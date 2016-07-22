@@ -6,19 +6,14 @@ gem 'pg'
 gem 'puma'
 gem 'haml'
 
+# frontent gems
 gem 'sass-rails'
 gem 'uglifier' # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.0.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'bootstrap-sass', '~> 2.3.2.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
-
 gem 'simple_form'
 gem 'select2-rails'
 
