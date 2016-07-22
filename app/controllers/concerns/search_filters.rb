@@ -9,10 +9,9 @@ module SearchFilters
 
   def load_collection
     collection = klass_name
-    collection = collection.where("title ILIKE :query", query: "%#{search_term}%") if search_term
+    collection = collection.includes(:remote_side).where("title ILIKE :query", query: "%#{search_term}%") if search_term
     collection = collection.where(remote_side_id: remote_side_id) if remote_side_id
-    collection = collection.order(sort_column + ' ' + sort_direction).
-      page(params[:page]).per_page(10)
+    collection = collection.order(sort_column + ' ' + sort_direction).page(params[:page]).per_page(10)
 
     instance_variable_set instance_variable_name, collection
   end
