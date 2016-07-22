@@ -1,0 +1,38 @@
+= form_for(@user, :html => {:multipart => true, :class => "form-horizontal"}) do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :email, :class => "control-label"
+    .controls
+      = f.text_field :email
+
+  .control-group
+    = label_tag :send_invitation, 'Send invitation', class: 'control-label'
+    .controls
+      = check_box_tag :send_invitation, "1", params[:send_invitation] == '1'
+      .help-block Emails an invitation link and allows user to set their own password.
+
+  .control-group
+    = f.label :time_zone, class: 'control-label'
+    .controls
+      = f.time_zone_select :time_zone
+
+  .control-group.password
+    = f.label :password, :class => "control-label"
+    .controls
+      = f.password_field :password
+
+  .control-group.password
+    = f.label :password_confirmation, :class => "control-label"
+    .controls
+      = f.password_field :password_confirmation
+
+  .form-actions
+    = f.submit :class => "btn btn-custom-success"

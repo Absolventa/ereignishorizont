@@ -1,0 +1,15 @@
+.row
+  .span1
+  .span10.event-description
+    %table.table.table-striped
+      %tr
+        %td
+          %strong Name:
+        %td= @remote_side.name
+      %tr
+        %td
+          %strong API token:
+        %td= @remote_side.api_token
+  .span1
+= link_to 'Edit', edit_remote_side_path(@remote_side), class: "btn btn-custom-success"
+= link_to 'Back', remote_sides_path, class: "btn btn-custom-back"

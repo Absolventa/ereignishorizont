@@ -1,0 +1,41 @@
+.row
+  .span1
+  .span10.event-description
+    %table.table.table-striped
+      %tr
+        %td
+          %strong Title/Subject:
+        %td= @alarm.title
+      %tr
+        %td
+          %strong Action:
+        %td= @alarm.action.titleize
+      %tr
+        %td
+          %strong Message:
+        %td= @alarm.message
+      - if @alarm.kind.email?
+        %tr
+          %td
+            %strong Recipient Email:
+          %td= @alarm.email_recipient
+      - elsif @alarm.kind.slack?
+        %tr
+          %td
+            %strong Slack Endpoint:
+          %td
+            %tt= @alarm.slack_url
+        %tr
+          %td
+            %strong Slack Channel:
+          %td
+            %tt= @alarm.slack_channel
+      %tr
+        %th Used by:
+        %td
+          %ul.unstyled
+            - @alarm.expected_events.each do |expected_event|
+              %li= link_to expected_event.title, expected_event
+  .span1
+= link_to 'Edit', [:edit, @alarm], class: 'btn btn-custom-success'
+= link_to 'Back', alarms_path, class: 'btn btn-custom-back'

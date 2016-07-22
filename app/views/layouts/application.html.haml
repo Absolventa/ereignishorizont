@@ -1,0 +1,66 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Ereignishorizont
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    %link{href: "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css", rel: "stylesheet"}/
+
+  %body
+    %span#forkongithub
+      %a{href: "https://github.com/Absolventa/ereignishorizont", target: "_blank"} Fork me on GitHub
+    #wrap
+      %header.navbar.navbar-fixed-top.navbar-inverse
+        .navbar-inner
+          .container
+            = link_to "Ereignishorizont", root_path, id: "logo"
+            %nav
+              %ul.nav
+                - if current_user
+                  %li{class: controller_name == 'incoming_events' ? 'active' : nil}
+                    = link_to "Incoming Events", incoming_events_path
+                  %li{class: controller_name == 'expected_events' ? 'active' : nil}
+                    = link_to "Expected Events", expected_events_path
+                  %li{class: controller_name == 'alarms' ? 'active' : nil}
+                    = link_to "Alarms", alarms_path
+                  %li.dropdown{class: ['users', 'remote_sides'].include?(controller_name) ? 'active' : nil}
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Account
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to "Remote Side Application", remote_sides_path
+                      %li= link_to "Users", users_path if current_user.admin?
+                      %li= link_to "Profile", user_path(current_user)
+                      %li.divider
+                      %li= link_to "Log Out", logout_path
+              %ul.nav.pull-right
+                - if current_user
+                  %li
+                    %p.navbar-text.pull-right
+                      Logged in as
+                      = current_user.email
+
+      .container
+        - flash.each do |name, msg|
+          %div{class: "alert alert-#{name == :notice ? "success" : "error"}"}
+            %a.close{"data-dismiss" => "alert"} x
+            = msg
+
+        = yield
+
+    %footer.footer
+      .container
+        .footer-line-separator
+        %p.center
+          made with
+          %span.icon-heart
+          by
+          %a{href: "http://twitter.com/BibiBienenstich"} Susanne
+          and
+          %a{href: "http://twitter.com/travelingtamm"} Tam
+          as part of
+          %a{href: "http://www.railsgirlssummerofcode.org"} Rails Girls Summer of Code
+          \-
+          %a{href: "https://github.com/Absolventa/ereignishorizont", target: "_blank"} Fork this project on Github

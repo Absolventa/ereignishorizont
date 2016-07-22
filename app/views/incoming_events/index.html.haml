@@ -1,0 +1,25 @@
+%h1
+  Incoming Events
+  %i.icon-mail-forward.icon-large
+
+= render 'shared/search_filters'
+
+%table.table.table-striped{"data-provides" => "rowlink"}
+  %thead
+    %tr
+      %th Origin
+      %th= sortable "title"
+      %th= sortable "created_at", "Created At"
+      %th
+      %th
+  %tbody
+    - @incoming_events.each do |incoming_event|
+      %tr
+        %td= incoming_event.remote_side.try(:name)
+        %td.title= link_to incoming_event.title, incoming_event
+        %td.created-at= incoming_event.created_at
+        %td.nolink.glyph= link_to icon_pencil, edit_incoming_event_path(incoming_event)
+        %td.nolink.glyph= link_to icon_trash, incoming_event, method: :delete, data: { confirm: 'Are you sure?' }
+
+= paginate @incoming_events
+= link_to 'Test it out: create new incoming event', new_incoming_event_path, class: 'pull-right btn btn-link'

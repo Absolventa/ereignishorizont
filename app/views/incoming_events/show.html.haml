@@ -1,0 +1,18 @@
+.row
+  .span1
+  .span10.event-description
+    %table.table.table-striped
+      %tr
+        %th Title:
+        %td= @incoming_event.title
+      %tr
+        %th= IncomingEvent.human_attribute_name(:content)
+        %td= @incoming_event.content
+      %tr
+        %th Remote Side:
+        %td
+          - if @incoming_event.remote_side
+            = link_to @incoming_event.remote_side.name, @incoming_event.remote_side
+  .span1
+= link_to 'Edit', edit_incoming_event_path(@incoming_event), class: "btn btn-custom-success"
+= link_to 'Back', incoming_events_path, class: "btn btn-custom-back"

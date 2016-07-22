@@ -1,0 +1,24 @@
+%h1
+  Users
+  %i.icon-female.icon-large
+
+%table.table.table-striped{"data-provides" => "rowlink"}
+  %thead
+    %tr
+      %th User
+      %th= sortable "email"
+      %th= sortable "created_at", "Date created"
+      %th
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr.warning
+        %td.number= user.id
+        %td.title= link_to user.email, user
+        %td.created-at= user.created_at
+        %td.nolink.glyph= link_to icon_pencil, edit_user_path(user)
+        %td.nolink.glyph= link_to icon_trash, user, method: :delete, data: { confirm: 'Are you sure?' }
+
+= paginate @users
+
+= link_to 'New User', new_user_path, class: 'btn btn-custom-success'

@@ -1,0 +1,16 @@
+%h1 Profile
+
+.row
+  .span3
+  .span6.event-description
+    %dl.dl-horizontal
+      %dt
+        %strong Email:
+      %dd= @user.email
+      %dt
+        %strong Time zone:
+      %dd= @user.time_zone
+  .span3
+
+= link_to 'Edit', edit_user_path(@user), class: "btn btn-custom-success"
+= link_to 'Back', users_path, class: "btn btn-custom-back"

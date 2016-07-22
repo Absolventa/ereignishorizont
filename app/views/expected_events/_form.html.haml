@@ -1,0 +1,109 @@
+= form_for @expected_event, html: { class: "form-horizontal" } do |f|
+  - if @expected_event.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@expected_event.errors.count, "error")
+        prohibited this expected_event from being saved:
+      %ul
+        - @expected_event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    %h4 Incoming Event Matching
+    .line-separator
+    .row
+      .span6
+        = f.label :title, "Watch incoming event with name:", :class => "control-label"
+        .controls
+          = f.text_field :title
+      .span1
+        %h5 OR
+      .span5
+        %label.control-label{:for => "available_incoming_event_titles"} Choose available
+        .controls
+          = select_tag :available_incoming_event_titles, options_for_select(IncomingEvent.select('DISTINCT title').order('title').map(&:title)), include_blank: true
+
+  .control-group
+    %h4= RemoteSide.model_name.human
+    .line-separator
+    .control-group
+      = f.label :remote_side, "Watch incoming coming from:", :class => "control-label"
+      .controls
+        = f.select :remote_side_id, RemoteSide.all.map{|site| [site.name, site.id] }, prompt: '<Select One>'
+
+  .control-group
+    %h4 Select Frequency
+    .line-separator
+    .row
+      .control-group.span3
+        %h5 Weekly
+        %button#toggle_weekday_selection Toggle all
+    .control-group.weekday-selection
+      - 0.upto(6).each do |n|
+        %label.checkbox.inline
+          = f.check_box "weekday_#{n}"
+          = Date::DAYNAMES[n]
+    .control-group.span12.explanation
+      %em (If no weekdays are checked, the event will be considered inactive)
+    .row
+      .span3
+        %h5 Monthly
+        .control-group
+          = f.label :day_of_month, class: 'control-label'
+          .controls
+            = f.select :day_of_month, (1..31), include_blank: true
+
+  .control-group
+    %h4 Select Alarms
+    .line-separator
+    .row
+      .span1
+      .span5
+        .control-group
+          = select_tag "expected_event[alarm_ids][]", options_for_select(Alarm.all.map{|a| [a.title, a.id]}, f.object.alarms.map(&:id)), multiple: true
+
+  .control-group
+    %h4 Select Notification Type
+    .line-separator
+    .row
+      .span1
+      .span5
+        .control-group
+          %label.radio
+            = f.radio_button :matching_direction, 'backward'
+            Send an alarm when event is
+            %strong not
+            found
+      .span6
+        .control-group
+          %label.radio
+            = f.radio_button :matching_direction, 'forward'
+            Send an alarm when event is found
+
+  .control-group
+    %h4 Final Hour
+    .line-separator
+    .row
+      .span6
+        .control-group
+          = f.label :final_hour, :class => "control-label"
+          .controls
+            = f.select :final_hour, (1..24)
+      .span6.explanation
+        .control-group
+          %em (Denotes the latest possible hour the event is expected. Only required for backward matching events.)
+
+  .control-group
+    %h4 Select Dates
+    .line-separator
+    .control-group.span6
+      = f.label "Start Date", :class => "control-label"
+      .controls
+        = f.text_field :started_at
+    .control-group.span6
+      = f.label "End Date", :class => "control-label"
+      .controls
+        = f.text_field :ended_at
+
+  .form-actions
+    = f.submit :class => "btn btn-custom-success pull-right"

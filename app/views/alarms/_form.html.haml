@@ -1,0 +1,48 @@
+= form_for([@expected_event, @alarm], :html => {:multipart => true, :class => "form-horizontal"}) do |f|
+  - if @alarm.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@alarm.errors.count, "error")
+        prohibited this alarm from being saved:
+      %ul
+        - @alarm.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :title, "Title/Subject:", :class => "control-label"
+    .controls
+      = f.text_field :title
+
+  .control-group
+    = f.label "Action" " (* required):", :class => "control-label"
+    .controls
+      = f.select :action, Alarm::ACTIONS.map{|action| [action.titleize, action]}
+
+  .control-group.for-email{:style => "#{'display:none' unless @alarm.kind.email?}"}
+    = f.label "Is this the right email address?:", :class => "control-label"
+    .controls
+      - if @alarm.email_recipient
+        = f.text_field :email_recipient
+      - else
+        = f.text_field :email_recipient, :value => current_user.email
+
+  .control-group.for-webhook{:style => "#{'display:none' unless @alarm.kind.webhook?}"}
+    = f.label 'HTTP(S) endpoint to POST to', class: 'control-label'
+    .controls
+      = f.text_field :webhook_url
+
+  .control-group.for-slack{:style => "#{'display:none' unless @alarm.kind.slack?}"}
+    = f.label 'Slack Endpoint', class: 'control-label'
+    .controls
+      = f.text_field :slack_url
+    = f.label 'Slack Channel', class: 'control-label'
+    .controls
+      = f.text_field :slack_channel
+
+  .control-group
+    = f.label "Add some custom text!:", :class => "control-label"
+    .controls
+      = f.text_area :message, class: "input-xxlarge"
+
+  .form-actions
+    = f.submit :class => "btn btn-custom-success"

@@ -1,0 +1,5 @@
+.input-append
+  = form_tag nil, method: :get do
+    = text_field_tag 'query[title]', params.fetch(:query, {})[:title], placeholder: "Search for title", class: 'span4'
+    = collection_select :query, :remote_side_id, RemoteSide.order(:name), :id, :name, include_blank: "Filter by remote", selected: params.fetch(:query, {})[:remote_side_id], class: 'span4'
+    = submit_tag 'Search', class: 'btn', name: nil

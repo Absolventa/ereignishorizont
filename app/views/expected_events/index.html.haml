@@ -1,0 +1,34 @@
+%h1
+  Expected Events
+  %i.icon-calendar.icon-large
+= render 'shared/search_filters'
+%p= link_to 'New event expectation', new_expected_event_path , class: 'btn btn-custom-success'
+%table.table.table-striped{"data-provides" => "rowlink"}
+  %thead
+    %tr
+      %th Remote
+      %th= sortable "title"
+      %th= sortable 'final_hour', 'Hour'
+      %th Last Alarm
+      %th= sortable "matching_direction", "Notify when"
+      %th Activity
+      %th= sortable 'created_at', 'Created'
+      %th
+      %th
+  %tbody
+    - @expected_events.each do |expected_event|
+      %tr.success
+        %td.nolink= expected_event.remote_side.try(:name)
+        %td.title
+          %tt= link_to expected_event.title, expected_event
+          %br/
+          %small
+            Weekdays: #{selected_weekdays(expected_event)}
+        %td.final-hour= expected_event.final_hour if expected_event.matching_direction == 'backward'
+        %td= l expected_event.last_alarm_at, format: :short if expected_event.last_alarm_at
+        %td.notification= expected_event.event_matching_direction.gsub('when ', '')
+        %td.activity= expected_event.activity_status.titleize
+        %td.activity= l expected_event.created_at, format: :short
+        %td.nolink.glyph= link_to icon_pencil, edit_expected_event_path(expected_event)
+        %td.nolink.glyph= link_to icon_trash, expected_event, method: :delete, data: { confirm: 'Are you sure?' }
+= paginate @expected_events
