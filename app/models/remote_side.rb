@@ -1,14 +1,30 @@
 class RemoteSide < ActiveRecord::Base
 
+  # associations
+  #
+  #
+
   has_many :alarm_notifications, inverse_of: :remote_side, dependent: :nullify
   has_many :expected_events,     inverse_of: :remote_side, dependent: :nullify
   has_many :incoming_events,     inverse_of: :remote_side, dependent: :nullify
+
+  # validations
+  #
+  #
 
   validates :name, presence: true
   validates_uniqueness_of :name
   validates_presence_of :api_token
 
+  # callbakcs
+  #
+  #
+
   before_validation :generate_api_token, on: :create
+
+  # instance methods
+  #
+  #
 
   private
 

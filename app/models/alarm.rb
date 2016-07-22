@@ -1,8 +1,17 @@
 class Alarm < ActiveRecord::Base
+
   ACTIONS = %w(email logger webhook slack)
+
+  # associations
+  #
+  #
 
   has_many :alarm_mappings, dependent: :destroy
   has_many :expected_events, through: :alarm_mappings
+
+  # validations
+  #
+  #
 
   validates :email_recipient, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create },
                               presence: true,
@@ -13,7 +22,15 @@ class Alarm < ActiveRecord::Base
 
   validates_inclusion_of :action, in: ACTIONS
 
+  # callbacks
+  #
+  #
+
   before_validation :downcase_action
+
+  # instance methods
+  #
+  #
 
   def kind
     action.to_s.downcase.inquiry

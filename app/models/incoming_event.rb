@@ -2,16 +2,36 @@ class IncomingEvent < ActiveRecord::Base
 
   FORMAT = /\A[a-z0-9\s_\.-]+\Z/i
 
-  validates :title, presence: true, format: { with: FORMAT }
+  # associations
+  #
+  #
 
   belongs_to :expected_event
   belongs_to :remote_side
 
-  before_save :delete_white_spaces_from_title
+  # validations
+  #
+  #
+
+  validates :title, presence: true, format: { with: FORMAT }
+
+  # scopes
+  #
+  #
 
   scope :created_today_before, ->(deadline) do
     where("created_at > ? AND created_at <= ?", Time.now.utc.beginning_of_day, deadline)
   end
+
+  # callbacks
+  #
+  #
+
+  before_save :delete_white_spaces_from_title
+
+  # instance methods
+  #
+  #
 
   private
 

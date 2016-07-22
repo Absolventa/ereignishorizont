@@ -1,12 +1,19 @@
 class ExpectedEvent < ActiveRecord::Base
 
+  # associations
+  #
+  #
+
   belongs_to :remote_side, inverse_of: :expected_events
+
   has_many :alarm_mappings, dependent: :destroy
   has_many :alarms, through: :alarm_mappings
   has_many :alarm_notifications, dependent: :destroy
   has_many :incoming_events
 
-  before_validation :delete_white_spaces_from_title
+  # validations
+  #
+  #
 
   validates :remote_side, presence: true
   validates :title, presence: true, format: { with: IncomingEvent::FORMAT }
@@ -16,6 +23,10 @@ class ExpectedEvent < ActiveRecord::Base
   validates_inclusion_of :final_hour, in: 0..23
   # TODO not needed for forward matching?
   validate :ensure_either_weekly_or_monthly_is_selected
+
+  # scopes
+  #
+  #
 
   scope :active,   -> do
     where(<<-EOFSQL, q: Time.now.utc)
@@ -27,6 +38,16 @@ class ExpectedEvent < ActiveRecord::Base
   scope :forward,  -> { where(matching_direction: 'forward') }
   scope :backward, -> { where(matching_direction: 'backward') }
   scope :today,    -> { where("weekday_#{Time.now.utc.wday} = :t OR day_of_month = :d", t: true, d: Time.now.utc.day) }
+
+  # callbacks
+  #
+  #
+
+  before_validation :delete_white_spaces_from_title
+
+  # instance methods
+  #
+  #
 
   def alarm!
     alarms.each { |alarm| alarm.run self }
