@@ -266,42 +266,26 @@ a.rowlink {
 }
 
 /* pagination */
-
-.pagination {
-  background: #f1f1f1;
-  border: 1px solid #e5e5e5;
+//reset pagination for kamiari
+nav.pagination {
   text-align: center;
-  padding: 1em;
+}
+nav.pagination span {
+  float: left;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  position: relative;
+  line-height: 24px;
+}
+nav.pagination span a {
+  text-decoration: none;
+  background-color: #fff;
+}
+nav.pagination span.current {
+  background-color: whiteSmoke;
+  color: #999;
   cursor: default;
 }
-
-.pagination a, .pagination span {
-    padding: 0.2em 0.3em;
-}
-
-.pagination .disabled {
-  color: #aaaaaa;
-}
-
-.pagination .current {
-  font-style: normal;
-  font-weight: bold;
-  background-color: #bebebe;
-  display: inline-block;
-  width: 1.4em;
-  height: 1.4em;
-  line-height: 1.5;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
-  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
-}
-
-.pagination a {
-  text-decoration: none;
-  color: black;
-}
-
-.apple_pagination a:hover, .apple_pagination a:focus {
-  text-decoration: underline;
+nav.pagination span.gap {
+  padding: 6px 12px;
 }
