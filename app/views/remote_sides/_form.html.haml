@@ -1,4 +1,17 @@
-= simple_form_for(@remote_side) do |f|
-  = f.error_notification
-  = f.input :name
-  = f.button :submit, "Create Remote Side and Generate API Key", class: 'btn btn-custom-success'
+= form_for(@remote_side, :html => {:class => "form-horizontal"}) do |f|
+  - if @remote_side.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@remote_side.errors.count, "error")
+        prohibited this remote side from being saved:
+      %ul
+        - @remote_side.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :name, :class => "control-label"
+    .controls
+      = f.text_field :name
+
+  .form-actions
+    = f.submit "Create Remote Side and Generate API Key", :class => "btn btn-custom-success"

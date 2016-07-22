@@ -1,5 +1,22 @@
-= simple_form_for(@incoming_event) do |f|
-  = f.error_notification
-  = f.input :title
-  = f.input :content
-  = f.button :submit, class: 'btn btn-custom-success'
+= form_for(@incoming_event, :html => {:class => "form-horizontal"}) do |f|
+  - if @incoming_event.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@incoming_event.errors.count, "error")
+        prohibited this incoming event from being saved:
+      %ul
+        - @incoming_event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :title, :class => "control-label"
+    .controls
+      = f.text_area :title
+
+  .control-group
+    = f.label :content, :class => "control-label"
+    .controls
+      = f.text_area :content
+
+  .form-actions
+    = f.submit :class => "btn btn-custom-success"
