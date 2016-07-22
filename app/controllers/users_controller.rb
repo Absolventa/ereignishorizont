@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
-
   def index
     if current_user.admin?
       @users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)

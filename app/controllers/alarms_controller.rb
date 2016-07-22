@@ -3,8 +3,6 @@ class AlarmsController < ApplicationController
   helper_method :alarms, :sort_column, :sort_direction
   before_action :set_alarm, only: [:show, :edit, :update, :destroy, :run]
 
-  respond_to :html
-
   def index
   end
 
