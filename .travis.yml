@@ -13,7 +13,6 @@ notifications:
   email:
   - tam.eastley@gmail.com
   - susanne.dewein@gmail.com
-  - felix@mohnert.de
   webhooks:
     secure: Z52QFyfZwrQbkfYfTexO/K+CiYtik4IskhUoLZHQctraIx32F78T63kJHaQcX2Glkmarw1Ak1FJwA6vjweNv0BHT9WUQEo1rHX7am79YNmmHrbdQwgrbdoh7fVSSnaJvL8+qfirxJEhSvT3n7tg0pEeyAT41WNa05ViETCRRZxY=
 deploy:
