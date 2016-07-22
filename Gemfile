@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
-
 ruby '2.3.1'
+
 gem 'rails', '~> 5.0.0.rc1'
-
 gem 'pg'
-
 gem 'puma'
+gem 'haml'
 
 gem 'sass-rails'
 gem 'uglifier' # Use Uglifier as compressor for JavaScript assets
@@ -22,7 +21,7 @@ gem 'jquery-turbolinks'
 
 gem 'simple_form'
 gem 'select2-rails'
-gem 'haml'
+
 
 gem 'responders', '~> 2.0'
 gem 'will_paginate'
@@ -36,11 +35,6 @@ gem 'activemodel-serializers-xml'
 
 gem 'whenever', require: false
 gem 'slack-notifier'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.0'
