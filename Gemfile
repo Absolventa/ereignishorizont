@@ -24,7 +24,6 @@ gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.
 gem 'actionpack-xml_parser', '~> 1.0.0'
 gem 'activemodel-serializers-xml'
 
-gem 'whenever', require: false
 gem 'slack-notifier'
 
 # Use ActiveModel has_secure_password
