@@ -22,7 +22,7 @@
         %td.nolink.glyph= link_to 'Test', [:run, alarm], class: 'btn btn-mini btn-custom-show'
 %br
 
-= will_paginate alarms
+= paginate alarms
 
 = link_to 'New Alarm', new_alarm_path, class: 'btn btn-custom-success'
 = link_to 'Back to Expected Events', expected_events_path , class: 'btn btn-custom-back'

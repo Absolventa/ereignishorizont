@@ -19,7 +19,7 @@ gem 'select2-rails'
 
 
 gem 'responders', '~> 2.0'
-gem 'will_paginate'
+gem 'kaminari'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

@@ -82,7 +82,7 @@ class AlarmsController < ApplicationController
                   if params[:expected_event_id]
                     scope = scope.includes(:expected_events).where('expected_events.id' => params[:expected_event_id])
                   end
-                  scope.page(params[:page]).per_page(10)
+                  scope.page(params[:page]).per(10)
                 end
   end
 
