@@ -28,15 +28,19 @@ class Alarm::SlackNotifier
     end
   end
 
+  def possible_remote_side
+    expected_event.remote_side ? " on _#{expected_event.remote_side.name}_ " : " "
+  end
+
   def message_for_missed_event
     <<-EOMSG
-Your expected event *#{expected_event.title}* did not register before the set deadline #{expected_event.deadline.getlocal}.
+Your expected event *#{expected_event.title}*#{possible_remote_side}did not register before the set deadline #{expected_event.deadline.getlocal}.
 EOMSG
   end
 
   def message_for_caught_event
     <<-EOMSG
-Your alert on the event *#{expected_event.title}* has just been registered.
+Your alert on the event *#{expected_event.title}*#{possible_remote_side}has just been registered.
 EOMSG
   end
 
