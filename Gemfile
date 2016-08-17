@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
-gem 'rails', '~> 5.0.0.rc1'
+gem 'rails', '~> 5.0.0'
 gem 'pg'
 gem 'puma'
 gem 'haml'
@@ -15,7 +15,7 @@ gem 'bcrypt-ruby', '~> 3.1.0'
 # frontent gems
 gem 'sass-rails'
 gem 'uglifier'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -32,7 +32,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.5.0.beta3'
+  gem 'rspec-rails', '~> 3.5.0'
   gem 'rspec-collection_matchers'
   gem 'rspec-activemodel-mocks'
 end
