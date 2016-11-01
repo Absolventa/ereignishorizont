@@ -91,6 +91,8 @@ class ExpectedEvent < ActiveRecord::Base
   def deadline
     if checked_today?
       Time.now.utc.beginning_of_day + final_hour.hours
+    elsif monthly?
+      DateTime.new(Date.today.year, Date.today.month, day_of_month, final_hour).utc
     else
       Time.now.utc.beginning_of_day
     end

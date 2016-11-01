@@ -198,6 +198,45 @@ describe ExpectedEvent, :type => :model do
         expect(subject.deadline).to eql expected_date
       end
     end
+
+    context 'for a monthly task' do
+      let(:final_hour) { 13 }
+      subject { described_class.new day_of_month: day_of_month, final_hour: final_hour }
+
+      context 'with a day_of_month in the past' do
+        context 'spanning months' do
+          pending
+        end
+
+        context 'in the same month' do
+          let(:day_of_month) { 1 }
+
+          it 'creates a date for the next month' do
+            Timecop.travel Date.new(2016, 11, day_of_month + 1) do
+              expected_date = DateTime.new(2016, 11, day_of_month, final_hour).to_datetime.utc
+              expect(subject.deadline).to eql expected_date
+            end
+          end
+        end
+      end
+
+      context 'with a day_of_month in the future' do
+        context 'spanning months' do
+          pending
+        end
+
+        context 'in the same month' do
+          let(:day_of_month) { 20 }
+
+          it 'creates a date for the next month' do
+            Timecop.travel Date.new(2016, 11, day_of_month - 1) do
+              expected_date = DateTime.new(2016, 11, day_of_month, final_hour).to_datetime.utc
+              expect(subject.deadline).to eql expected_date
+            end
+          end
+        end
+      end
+    end
   end
 
   describe '#deadline_exceeded?' do
