@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Cleanup do
   let(:cutoff_date) { 2.months.ago.to_date }

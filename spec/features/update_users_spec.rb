@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Updating users' do
-  given(:user) { User.create(email: 'me@example.com', password: 'secret', password_confirmation: 'secret') }
+  let(:user) { User.create(email: 'me@example.com', password: 'secret', password_confirmation: 'secret') }
 
-  background do
+  before do
     # TODO refactor me into log_in_user-method support
     visit login_path
     fill_in 'Email', with: user.email

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ExpectedEvent, :type => :model do
   let(:expected_event) { FactoryGirl.create(:expected_event) }

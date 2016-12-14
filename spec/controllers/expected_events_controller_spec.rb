@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ExpectedEventsController, :type => :controller do
   render_views

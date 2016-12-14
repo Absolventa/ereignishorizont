@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe AlarmNotification, :type => :model do
   it { is_expected.to belong_to :expected_event }

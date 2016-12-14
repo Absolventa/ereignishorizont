@@ -1,8 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Authenticating users' do
 
-  given(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
 
   context 'As a signed up User' do
     scenario 'When I enter my credentials I am signed in' do

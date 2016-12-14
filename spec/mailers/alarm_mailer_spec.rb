@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe AlarmMailer, :type => :mailer do
   describe '.event_expectation_matched' do

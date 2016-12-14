@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Expected events", :type => :request do
   context 'as an API consumer' do
