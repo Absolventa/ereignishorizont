@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ExpectedEvent, :type => :model do
+RSpec.describe ExpectedEvent, type: :model do
   let(:expected_event) { FactoryGirl.create(:expected_event) }
 
   it { is_expected.to have_many(:alarm_mappings).dependent(:destroy) }
@@ -161,6 +161,22 @@ describe ExpectedEvent, :type => :model do
       expect(alarm_notification.remote_side).not_to be_nil
       expect(alarm_notification.remote_side).to eql subject.remote_side
       expect(alarm_notification.expected_event).to eql subject
+    end
+
+    context 'with an incoming event' do
+      let(:incoming_event) { build_stubbed(:incoming_event, content: 'I cannot let you do that, Dave') }
+      let(:alarm) { Alarm.new action: 'email', email_recipient: 'joe@example.com' }
+
+      subject { FactoryGirl.build(:expected_event) }
+      before { allow(subject).to receive(:alarms) { [alarm] } }
+
+      it 'attaches the incoming event to its alarms' do
+        expect { subject.alarm! incoming_event: incoming_event }
+          .to change { AlarmNotification.count }.by(1)
+
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail.body.to_s).to match 'I cannot let you do that, Dave'
+      end
     end
   end
 
