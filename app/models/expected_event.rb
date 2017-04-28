@@ -49,7 +49,7 @@ class ExpectedEvent < ActiveRecord::Base
   #
   #
 
-  def alarm!(incoming_event: incoming_events)
+  def alarm!(incoming_event: IncomingEvent.new)
     alarms.each { |alarm| alarm.with_incoming_event(incoming_event).run self }
     AlarmNotification.create(expected_event: self, remote_side: remote_side)
   end
