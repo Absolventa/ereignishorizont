@@ -1,6 +1,11 @@
 require 'rails_helper'
 
-describe Alarm, :type => :model do
+RSpec.describe Alarm, type: :model do
+
+  context 'with attributes' do
+    it { is_expected.to respond_to :incoming_event }
+    it { is_expected.to respond_to :incoming_event= }
+  end
 
   context "Validations" do
 

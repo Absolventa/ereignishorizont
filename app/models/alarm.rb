@@ -2,6 +2,8 @@ class Alarm < ActiveRecord::Base
 
   ACTIONS = %w(email logger webhook slack)
 
+  attr_accessor :incoming_event
+
   # associations
   #
   #
