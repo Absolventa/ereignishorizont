@@ -16,5 +16,18 @@ RSpec.describe AlarmMailer, type: :mailer do
       expect(last_mail.from).to eql [APP_CONFIG[:mail_from]]
       expect(last_mail.to).to eql [alarm.email_recipient]
     end
+
+    context 'with an alarm referencing an incoming event' do
+      let(:incoming_event) { double('Incoming Event', content: 'Wake up, Neo.') }
+
+      before { alarm.incoming_event = incoming_event }
+
+      it 'includes the incoming event\'s content in the mail body' do
+        expect { subject.deliver_now }.to \
+          change { ActionMailer::Base.deliveries.size }.by(1)
+        expect(last_mail.body.to_s).to match 'Wake up, Neo.'
+      end
+
+    end
   end
 end
