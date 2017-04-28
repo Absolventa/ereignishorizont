@@ -31,6 +31,19 @@ RSpec.describe Alarm, type: :model do
     end
   end
 
+  describe '#with_incoming_event' do
+    let(:object) { double }
+
+    it 'returns itself for your method chaining convenience' do
+      expect(subject.with_incoming_event(object)).to be == subject
+    end
+
+    it 'adds the incoming event' do
+      expect { subject.with_incoming_event(object) }
+        .to change { subject.incoming_event }.from(nil).to(object)
+    end
+  end
+
   describe '#kind' do
     shared_examples_for 'action predicate' do |action|
       let(:predicate) { "be_#{action.downcase}" }

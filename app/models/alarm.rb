@@ -38,6 +38,11 @@ class Alarm < ActiveRecord::Base
     action.to_s.downcase.inquiry
   end
 
+  def with_incoming_event(incoming_event)
+    self.incoming_event = incoming_event
+    self
+  end
+
   def run(expected_event)
     delivery_method = expected_event.persisted? ? :deliver_later : :deliver_now
     AlarmMailer.event_expectation_matched(self, expected_event).send(delivery_method) if kind.email?
