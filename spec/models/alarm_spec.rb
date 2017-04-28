@@ -1,6 +1,11 @@
 require 'rails_helper'
 
-describe Alarm, :type => :model do
+RSpec.describe Alarm, type: :model do
+
+  context 'with attributes' do
+    it { is_expected.to respond_to :incoming_event }
+    it { is_expected.to respond_to :incoming_event= }
+  end
 
   context "Validations" do
 
@@ -23,6 +28,19 @@ describe Alarm, :type => :model do
 
       it { is_expected.to validate_presence_of :slack_channel }
       it { is_expected.to validate_presence_of :slack_url }
+    end
+  end
+
+  describe '#with_incoming_event' do
+    let(:object) { double }
+
+    it 'returns itself for your method chaining convenience' do
+      expect(subject.with_incoming_event(object)).to be == subject
+    end
+
+    it 'adds the incoming event' do
+      expect { subject.with_incoming_event(object) }
+        .to change { subject.incoming_event }.from(nil).to(object)
     end
   end
 

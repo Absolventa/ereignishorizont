@@ -2,6 +2,8 @@ class Alarm < ActiveRecord::Base
 
   ACTIONS = %w(email logger webhook slack)
 
+  attr_accessor :incoming_event
+
   # associations
   #
   #
@@ -34,6 +36,11 @@ class Alarm < ActiveRecord::Base
 
   def kind
     action.to_s.downcase.inquiry
+  end
+
+  def with_incoming_event(incoming_event)
+    self.incoming_event = incoming_event
+    self
   end
 
   def run(expected_event)
