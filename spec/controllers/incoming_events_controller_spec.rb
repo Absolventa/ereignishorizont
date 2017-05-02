@@ -64,6 +64,11 @@ describe IncomingEventsController, :type => :controller do
 
       context 'with forward matching expected_event' do
         let(:existing_event_expectation) { FactoryGirl.create(:expected_event) }
+        let(:incoming_event_attributes)  { { title: existing_event_expectation.title } }
+
+        subject do
+          post :create, params: { incoming_event: incoming_event_attributes }
+        end
 
         it 'finds expected event by its title' do
           post :create, params: { incoming_event: { title: existing_event_expectation.title } }
@@ -73,6 +78,25 @@ describe IncomingEventsController, :type => :controller do
         it 'runs alarms for matching forward event expectation' do
           expect_any_instance_of(ExpectedEvent).to receive(:alarm!).and_call_original
           post :create, params: { incoming_event: { title: existing_event_expectation.title } }
+        end
+
+        context 'with a mail alarm' do
+          before do
+            incoming_event_attributes[:content] = 'I cannot let you do that, Dave'
+            existing_event_expectation.alarms << alarm
+          end
+
+          let(:alarm) { create :alarm, action: 'email' }
+
+          it 'passes the optional content to the mail' do
+            perform_enqueued_jobs do
+              expect { subject }.to change \
+                { ActionMailer::Base.deliveries.size }.by(1)
+            end
+
+            mail = ActionMailer::Base.deliveries.last
+            expect(mail.body.to_s).to match 'I cannot let you do that, Dave'
+          end
         end
       end
     end

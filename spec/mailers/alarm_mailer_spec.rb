@@ -20,7 +20,7 @@ RSpec.describe AlarmMailer, type: :mailer do
     context 'with an alarm referencing an incoming event' do
       let(:incoming_event) { double('Incoming Event', content: 'Wake up, Neo.') }
 
-      before { alarm.incoming_event = incoming_event }
+      subject { described_class.event_expectation_matched(alarm, event, incoming_event) }
 
       it 'includes the incoming event\'s content in the mail body' do
         expect { subject.deliver_now }.to \

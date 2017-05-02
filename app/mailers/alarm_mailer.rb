@@ -1,8 +1,12 @@
 class AlarmMailer < ActionMailer::Base
   default from: APP_CONFIG[:mail_from]
 
-  def event_expectation_matched(alarm, expected_event)
-    @alarm = alarm
+  # @param alarm [Alarm]
+  # @param expected_event [ExpectedEvent] the event that initiated the
+  # @param incoming_event [IncomingEvent] passed during »forward« matching.
+  #   Note: needs to be passed separately in order to work with ActiveJob.
+  def event_expectation_matched(alarm, expected_event, incoming_event = nil)
+    @alarm = alarm.with_incoming_event(incoming_event)
     @expected_event = expected_event
     @remote_side = expected_event.remote_side.try(:name)
     @message = alarm.message
