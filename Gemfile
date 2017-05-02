@@ -35,6 +35,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.0'
   gem 'rspec-collection_matchers'
   gem 'rspec-activemodel-mocks'
+  gem 'byebug'
 end
 
 group :test do

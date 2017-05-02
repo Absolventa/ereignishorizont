@@ -16,3 +16,4 @@ config/config.yml
 config/database.yml
 coverage/**/*
 .DS_Store
+.byebug_history
