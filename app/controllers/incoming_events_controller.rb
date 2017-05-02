@@ -33,7 +33,7 @@ class IncomingEventsController < ApplicationController
     respond_to do |format|
       if @incoming_event.save
         @expected_event = ExpectedEvent.forward.where(title: @incoming_event.title).first
-        @expected_event.alarm!(incoming_event: @incoming_incoming) if @expected_event
+        @expected_event.alarm!(incoming_event: @incoming_event) if @expected_event
 
         format.json { render json: @incoming_event.to_json, status: :created }
         format.xml  { render xml:  @incoming_event.to_xml,  status: :created }
