@@ -4,7 +4,7 @@ Origin...........: <%= @remote_side %>
 Your event was <%= @matched %>.
 
 Expected Event...: <%= @expected_event.title %>
-<%= "Deadline.........: #{@expected_event.final_hour}" if @expected_event.matching_direction == 'backward' -%>
+<%= "Deadline.........: #{@expected_event.final_hour}" if @expected_event.matching_direction == 'backward' %>
 <%= "Misc. Event Info.: #{@alarm&.incoming_event&.content&.inspect}" %>
 
 
