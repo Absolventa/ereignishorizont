@@ -1,4 +1,4 @@
-class RemoteSide < ActiveRecord::Base
+class RemoteSide < ApplicationRecord
 
   # associations
   #

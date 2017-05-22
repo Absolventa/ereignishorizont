@@ -1,4 +1,4 @@
-class AlarmNotification < ActiveRecord::Base
+class AlarmNotification < ApplicationRecord
 
   # associations
   #

@@ -1,4 +1,4 @@
-class IncomingEvent < ActiveRecord::Base
+class IncomingEvent < ApplicationRecord
 
   FORMAT = /\A[a-z0-9\s_\.-]+\Z/i
 

@@ -1,4 +1,4 @@
-class Alarm < ActiveRecord::Base
+class Alarm < ApplicationRecord
 
   ACTIONS = %w(email logger webhook slack)
 

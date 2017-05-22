@@ -1,4 +1,4 @@
-class ExpectedEvent < ActiveRecord::Base
+class ExpectedEvent < ApplicationRecord
 
   # associations
   #
