@@ -1,0 +1,64 @@
+title;final_hour;day_of_month;weekdays;platform
+CourseRegistrationsCron weekly_course_registration_report;11;;[1];Absolventa
+CourseRegistrationsCron associate_open_course_registrations;8;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+GoogleMetricsCron analyze_premium_job_offers;11;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+Sync with Absolventa Jobnet Portals;11;;[1, 2, 3, 4, 5];Insolventa
+JobApplicationsCron daily_status_email;19;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+JobApplicationsCron send_rejection_mails;19;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron expiration_warning;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron prolongate;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+JobOffersCron notify_for_prolongation;23;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+JobOffersCron rank_up;21;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+JobOffersCron automated_prolongation;21;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+JobOffersCron notify_for_prolongation;21;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+GoogleMetricsCron analyze_premium_job_offers;11;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+JobOffersCron rank_up;22;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+QueuedJobsCron queued_jobs;10;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron supervisor_reminder_company_profile_ending_in_4_weeks;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron supervisor_reminder_company_profile_ending_in_8_weeks;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron service_reminder_company_profile_ending_in_9_weeks;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron service_reminder_after_6_months;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron service_reminder_after_3_months;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron service_reminder_after_6_weeks;7;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ActivityReminderCron aktivitaet_lebenslauf;23;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron prolongate;7;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+WelcomeEmailCron welcome_users_after_one_week;23;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+VerificationReminderCron reminder_verification_one_week;21;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron expiration_warning;7;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron supervisor_reminder_company_profile_ending_in_4_weeks;9;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron supervisor_reminder_company_profile_ending_in_8_weeks;8;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron service_reminder_company_profile_ending_in_9_weeks;8;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron service_reminder_after_6_months;8;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron service_reminder_after_3_months;8;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron service_reminder_after_6_weeks;8;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+QueuedJobsCron queued_jobs;22;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+JobAlertsCron send_job_alerts;15;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+GeocodingCron retry;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ProductControllingsCron create_stats_for_pre_month;14;7;[];Insolventa
+DirectUploadsCron purge;5;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron service_reminder_after_6_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+QueuedJobsCron queued_jobs;22;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron service_reminder_after_3_months;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron service_reminder_after_6_months;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron prolongate;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron service_reminder_company_profile_ending_in_9_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron supervisor_reminder_company_profile_ending_in_8_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron supervisor_reminder_company_profile_ending_in_4_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron marketing_reminder_company_profile_ending_in_6_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Trainee-Geflüster
+ContractsCron marketing_reminder_company_profile_ending_in_6_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Praktikum.info
+ContractsCron marketing_reminder_company_profile_ending_in_6_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Absolventa
+ContractsCron service_reminder_after_6_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron service_reminder_after_3_months;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron service_reminder_after_6_months;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron service_reminder_company_profile_ending_in_9_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron supervisor_reminder_company_profile_ending_in_8_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron supervisor_reminder_company_profile_ending_in_4_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron marketing_reminder_company_profile_ending_in_6_weeks;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+ContractsCron prolongate;10;;[0, 1, 2, 3, 4, 5, 6];Azubi.de
+SalesReminderCron.monthly_notification;11;1;[];Insolventa
+CRLwatch - CRL will expire soon;23;;[];Balvenie
+CRLwatch - CRL checked;10;;[];Balvenie
+ProductControllingsCron create_stats_for_pre_month;13;1;[];Absolventa
+FeedsCron Sync failed;10;;[0, 1, 2, 3, 4, 5, 6];Apienta
+FunkeInvoicesCron.run;12;;[1];Insolventa
+DeferredRevenueMonthsCron.create_or_update_last_weeks_deferred_revenues;3;;[1, 2, 3, 4, 5];Insolventa

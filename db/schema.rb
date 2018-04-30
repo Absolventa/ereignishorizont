@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -35,9 +34,9 @@ ActiveRecord::Schema.define(version: 20150202102148) do
   end
 
   create_table "alarms", force: :cascade do |t|
-    t.string   "title"
-    t.string   "action"
-    t.string   "email_recipient"
+    t.string   "title",           limit: 255
+    t.string   "action",          limit: 255
+    t.string   "email_recipient", limit: 255
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -57,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150202102148) do
     t.boolean  "weekday_4"
     t.boolean  "weekday_5"
     t.boolean  "weekday_6"
-    t.string   "matching_direction"
+    t.string   "matching_direction", limit: 255
     t.integer  "final_hour"
     t.date     "started_at"
     t.date     "ended_at"
@@ -79,22 +78,22 @@ ActiveRecord::Schema.define(version: 20150202102148) do
   end
 
   create_table "remote_sides", force: :cascade do |t|
-    t.string   "name"
-    t.string   "api_token"
+    t.string   "name",       limit: 255
+    t.string   "api_token",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "password_digest"
+    t.string   "email",                  limit: 255
+    t.string   "password_digest",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "auth_token"
-    t.string   "password_reset_token"
+    t.string   "auth_token",             limit: 255
+    t.string   "password_reset_token",   limit: 255
     t.datetime "password_reset_sent_at"
     t.boolean  "admin"
-    t.string   "time_zone",              default: "UTC"
+    t.string   "time_zone",              limit: 255, default: "UTC"
   end
 
 end
