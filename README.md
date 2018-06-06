@@ -1,3 +1,7 @@
+## Deprecation
+
+Please note that Ereignishorizont is deprecated and therefore no longer actively maintained. 
+
 ## README [![Code Climate](https://codeclimate.com/github/Absolventa/ereignishorizont.png)](https://codeclimate.com/github/Absolventa/ereignishorizont) [![Build Status](https://travis-ci.org/Absolventa/ereignishorizont.png?branch=master)](https://travis-ci.org/Absolventa/ereignishorizont)
 
 Welcome to Ereignishorizont!
